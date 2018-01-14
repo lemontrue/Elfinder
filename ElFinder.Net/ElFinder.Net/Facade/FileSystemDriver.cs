@@ -160,15 +160,16 @@ namespace ElFinder
 
         public FileSystemDriver(string server, Guid token)
         {
-            //DirectoryInfo thumbsStorage = new DirectoryInfo(Server.MapPath("~/Files"));
-            //this.AddRoot(new Root(new DirectoryInfo(@"C:\Program Files"))
-            //{
-            //    IsLocked = true,
-            //    IsReadOnly = true,
-            //    IsShowOnly = true,
-            //    ThumbnailsStorage = thumbsStorage,
-            //    ThumbnailsUrl = "Thumbnails/"
-            //});
+            this.token = token;
+            DirectoryInfo thumbsStorage = new DirectoryInfo(Server.MapPath("~/Files"));
+            this.AddRoot(new Root(new DirectoryInfo(@"C:\Program Files"))
+            {
+                IsLocked = true,
+                IsReadOnly = true,
+                IsShowOnly = true,
+                ThumbnailsStorage = thumbsStorage,
+                ThumbnailsUrl = "Thumbnails/"
+            });
             //this.AddRoot(new Root(new DirectoryInfo(Server.MapPath("~/Files")), "/Files/")
             //{
             //    Alias = "My documents",
@@ -178,7 +179,7 @@ namespace ElFinder
             //    ThumbnailsUrl = "Thumbnails/"
             //});
 
-            //_roots = new List<Root>();
+            _roots = new List<Root>();
         }
 
         /// <summary>

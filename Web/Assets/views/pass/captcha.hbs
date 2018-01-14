@@ -1,0 +1,19 @@
+﻿<div class="hidden">
+    <div class="modal-window" id="captcha">
+        <div class="title">
+            Введите код с картинки
+        </div>
+        <div class="descr">
+            <img {{setimage}} style="cursor: pointer;" />
+        </div>
+
+        {{#if error}}
+        <div style="position: absolute;width: 100%;height: 20px;text-align: center;margin: -22px 0 0 0;font-size: 14px;color: red;">Неверный код</div>
+        {{/if}}
+
+        <div class="sbmt text-center">
+            <input {{focusEl}} class="codeValue1" can-value="codeValue" type="text" style="float: left;width: 165px;margin: 0 20px 0 0;" />
+            <input can-click="event.check" type="submit" value="Проверить" class="btn btn-green checkCode" style="float: left;margin: -4px 0 0 0;" />
+        </div>
+    </div>
+</div>

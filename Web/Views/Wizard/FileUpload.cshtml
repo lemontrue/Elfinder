@@ -1,0 +1,521 @@
+﻿@using CryptxOnline.Web.CryptxService
+@using CryptxOnline.Web.Models
+@model CryptxOnline.Web.Models.WizardModel
+@{
+    ViewBag.Title = Model.WizardName + " - " + Model.CustomWizardStep.StepText;
+    Layout = "~/Views/Shared/_LayoutWizardPage.cshtml";
+}
+<link href="@Url.Content("~/Content/CustomStyle.css")" rel="stylesheet" type="text/css" />
+
+@if (Request.QueryString["errorMsg"] != null)
+{
+    <script>
+        alert('@Request.QueryString["errorMsg"]');
+    </script>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.Hidden("wizardId")
+    <div class="wizard-right-top">
+        @if (Model.Type == OperationType.Encrypt || Model.Type == OperationType.Sign)
+        {
+            <input type="file" name="inputFile" id="inputFile" title="выберите файл" />
+        }
+        @if (Model.Type == OperationType.Decrypt)
+        {
+            <input type="file" name="inputFile" id="inputFile" accept=".enc" title="выберите файл" />
+        }
+        @if (Model.Type == OperationType.SignVerify)
+        {
+            <input type="file" name="inputFile" accept=".sig" id="inputFile" title="выберите файл" />
+        }
+        <div>
+            <a style="font-size: 10px; font-style: italic;">Документ будет загружен на сервер.Максимальный размер файла - 20 МБ.</a>
+            
+        </div>
+        <br/>
+        <div id="uplodedFileInfo" style="display: block; top: 300px; width: 100%; word-break: break-all;">
+            <table style="display: none; position: inherit; width: 100%;">
+                <tr>
+                    <td style="width: 15%">
+                        Вами загружен файл
+                    </td>
+                    <td style="font-style: italic; text-align: left">
+                        <a style="color: #28760b" id="uploadedFileName"></a>
+                    </td>
+                </tr>
+            </table>
+            <table border="1" style="width: 50%; word-break: break-all" id="resultTable">
+                <tr>
+                    <td>
+                        Имя файла
+                    </td>
+                    @if (Model.Type == OperationType.Decrypt)
+                    {
+                        <td>
+                            Сертификаты для расшифровки
+                        </td>
+                    }
+                    <td>
+                        Действие
+                    </td>
+                </tr>
+                @foreach (DownloadedFile file in Model.DownloadedFiles)
+                {
+                    <tr>
+                        <td>
+                            @file.Name
+                        </td>
+                        @if (Model.Type == OperationType.Decrypt)
+                        {
+                            <td>
+                                @if (file.DecryptCertificatesNames != null)
+                                {
+                                    <a>@String.Join(", ", file.DecryptCertificatesNames)</a>
+                                }
+                                @if (file.Exception != null)
+                                {
+                                    <a style="color: red">@file.Exception.Message</a>
+                                }
+                            </td>
+                        }
+                        <td style="text-align: center">
+                            @*@Html.ActionLink("Удалить","RemoveFile","Wizard",new {wizardId=Model.Id,deletingFileUri=file.Uri},new{})*@
+                            <img align="absmiddle"  style="cursor: pointer;" title="Удалить" name="delete" src="@Url.Content("~/Assets/i/old/remove_5729.png")" onclick=" location.href = '@Url.Action("RemoveFile", "Wizard", new {wizardId = Model.Id, deletingFileUri = file.Uri})' "/>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        
+    </div>
+    <div class="wizard-right-bottom">
+        <div class="buttons">
+            @if (string.IsNullOrEmpty(Model.CustomWizardStep.PreviousStep))
+            {
+                <input type="submit" name="backButton" class="button" value="Назад" disabled="true" />
+            }
+            else
+            {
+                <input type="submit" name="backButton" class="button" value="Назад" />
+            }
+            @if (string.IsNullOrEmpty(Model.CustomWizardStep.NextStep))
+            {
+                <input type="submit" name="nextButton" class="button" value="Вперед" disabled="true"/>
+            }
+            else
+            {
+                <input type="submit" name="nextButton" class="button" value="Вперед" disabled="true"/>
+            }
+            &nbsp&nbsp&nbsp&nbsp
+            @if (Model.CanmakeOperation)
+            {
+                if (Model.Type == OperationType.Sign || Model.Type == OperationType.Decrypt)
+                {
+                    <input type="button" class="button" name="makeOperation" value="@Model.MakeOperationText" onclick=" clickOpenModal() " />
+                }
+                if (Model.Type == OperationType.Encrypt || Model.Type == OperationType.SignVerify)
+                {
+                    <input type="submit" id="makeOperation" class="button" name="makeOperation" value="@Model.MakeOperationText" />
+                }
+            }
+            else
+            {
+                if (Model.Type == OperationType.Sign || Model.Type == OperationType.Decrypt)
+                {
+                    <input type="button" class="button" name="makeOperation" value="@Model.MakeOperationText" disabled="true" onclick=" clickOpenModal() " />
+                }
+                if (Model.Type == OperationType.Encrypt || Model.Type == OperationType.SignVerify)
+                {
+                    <input type="submit" id="makeOperation" class="button" name="makeOperation" disabled="true" value="@Model.MakeOperationText" />
+                }
+            }
+            <input type="submit" class="button" name="cancelButton" value="Отмена" onclick=" location = '@Url.Action("CloseWizard", "Wizard")    ' " />
+        </div>
+    </div>
+
+    <div id="boxes">
+        <div id="dialog" class="window"> 
+            <table width="100%">
+                <tr>
+                    <td>
+                        Пин-код ключа
+                    </td>
+                    <td style="text-align: right">
+                        <img href="#"class="close" src="@Url.Content("~/Assets/i/old/dialog-close_7593.png")" width="32" height="32" border="0" />
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2">
+                        @Html.Password("pinCode")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @if (Model.CanmakeOperation)
+                        {
+                            <input type="submit" onclick=" closeModal() " class="button" id="makeOperation" name="makeOperation" value="@Model.MakeOperationText" />
+                        }
+                        else
+                        {
+                            <input type="submit" onclick=" closeModal() " class="button" id="makeOperation" name="makeOperation" disabled="true" value="@Model.MakeOperationText" />
+                        }
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="fileAnalyzing" class="window" style="vertical-align: central"> 
+            <table width="100%" style="height: 100%">
+                <tr style="height: 50%">
+                    <td style="text-align: center">
+                        Файл загружен<br/>
+                        Идёт анализ файла
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center">
+                        <img href="#" src="@Url.Content("~/Assets/i/old/ajax-loader.gif")" width="220" height="20" border="0" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="mask"></div>
+}
+<script>
+    var wizarIdVal = $('wizardId').val();
+    //var globalFlag = true;
+    $(function() {
+        $("#inputFile").kendoUpload({
+            localization: {
+                select: "Выберите файл",
+                cancel: "Cancel",
+                retry: "Retry",
+                headerStatusUploading: "Загрузка...",
+                headerStatusUploaded: "Готово",
+                statusFailed: "Ошибка"
+            },
+            multiple: false,
+            async: {
+                saveUrl: '@Url.Action("GetFile", "Wizard")',
+                autoUpload: true
+            },
+            complete: function(e) {
+                location.href = location.href;
+            },
+            select: function(e) {
+                if (this.element[0].files == null) {
+                    alert("Ваш браузер не поддерживает HTML5, файл будет загружен полностью");
+                    //location.href = location.href;
+                } else {
+                    if ('@(Model.Type == OperationType.Decrypt)' == 'True') {
+                        if (arguments[0].files[0].extension != ".enc") {
+                            //alert('Не поддерживаемый тип файла для расшифровки');
+                            //e.preventDefault();
+                            ////location.href = location.href;
+                            //return false;
+                        }
+                    }
+                    if ('@(Model.Type == OperationType.Encrypt)' == 'True') {
+
+                    }
+                    if ('@(Model.Type == OperationType.SignVerify)' == 'True') {
+                        if (arguments[0].files[0].extension != ".sig") {
+                            //alert('Не поддерживаемый тип файла для проверки подписи');
+                            //e.preventDefault();
+                            ////location.href = location.href;
+                            //return false;
+                        }
+                    }
+                    if (arguments[0].files[0].size >= 20971520) {
+                        alert("Превышен максимальный размер файла");
+                        e.preventDefault();
+                        location.href = location.href;
+                        return false;
+                    }
+                    if (arguments[0].files[0].size == 0) {
+                        alert("Невозможно загрузить пустой файл");
+                        e.preventDefault();
+                        location.href = location.href;
+                        return false;
+                    }
+                }
+                //удаление нескольких строк загрузки
+                this.wrapper.find(".k-file-success").each(function() {
+                    $(this).parent().remove();
+                });
+                //$("#uplodedFileInfo").css("display", "block");
+            },
+            success: function(e) {
+                this.wrapper.find(".k-file-success").each(function() {
+                    $(this).parent().remove();
+                });
+
+                $('[name=nextButton]').removeAttr('disabled');
+                if ('@(Model.Type == OperationType.Encrypt)' == 'True') {
+                    if (e.response.canMakeOperationDisabled) {
+                        $('[name=makeOperation]').attr('disabled', 'true');
+                    } else {
+                        $('[name=makeOperation]').removeAttr('disabled');
+                    }
+                }
+                if ('@(string.IsNullOrEmpty(Model.SigningOptions.SignerCertificate1))' != 'True' && '@(Model.Type == OperationType.Sign)' == 'True') {
+                    $('[name=makeOperation]').removeAttr('disabled');
+                }
+                if ('@(Model.Type == OperationType.Decrypt)' == 'True') {
+                    clickOpenModal('@OperationType.Decrypt');
+                    //setTimeout(function() {
+                    $.ajax({
+                        url: '@Url.Action("SendFile")',
+                        async: true,
+                        type: "POST",
+                        data: { wizardId: $('#wizardId').val() },
+                        success: function(result) {
+                            if (result.canMakeOperationDisabled == null) {
+                                closeModal();
+
+                                alert(result.errMessage);
+                                //location.href = location.href;
+                                //var wnd = window.open("about:blank", "_blank", "height:100;width:100");
+                                //wnd.document.write(result);
+                            } else {
+                                if (result.canMakeOperationDisabled) {
+                                    $('[name=makeOperation]').attr('disabled', 'true');
+                                } else {
+                                    $('[name=makeOperation]').removeAttr('disabled');
+                                }
+                            }
+                            //location.href = location.href;
+                        },
+                        error: function(request, error, result) {
+                            closeModal();
+                            location.href = location.href;
+                            var wnd = window.open("about:blank", "_blank", "height:100;width:100");
+                            wnd.document.write(request.responseText);
+
+                            //alert('Ошибка при анализе файла');
+                            return false;
+                        }
+                    });
+
+                    //}, 1);
+                    @*                    var cert = '@Model.DecryptionOptions.DecryptCertificate';
+                    if (e.response.canMakeOperationDisabled == false) {
+                        $('[name=makeOperation]').removeAttr('disabled');
+                    } else {
+                        $('[name=makeOperation]').attr('disabled',true);
+                    }*@
+                }
+                if ('@(Model.Type == OperationType.SignVerify)' == 'True') {
+                    $('[name=nextButton]').attr('disabled', 'true');
+
+                    clickOpenModal('@OperationType.Decrypt');
+                    setTimeout(function() {
+                        $.ajax({
+                            url: '@Url.Action("SendFile")',
+                            async: true,
+                            type: "POST",
+                            data: { wizardId: $('#wizardId').val() },
+                            success: function(result) {
+                                closeModal();
+                                if (result.errorMsg != null) {
+                                    alert(result.errorMsg);
+                                    e.preventDefault();
+                                    location.href = location.href;
+                                    return false;
+                                }
+                                if (result.canMakeOperationDisabled) {
+                                    $('[name=makeOperation]').attr('disabled', 'true');
+                                } else {
+                                    $('[name=makeOperation]').removeAttr('disabled');
+                                }
+                                location.href = location.href;
+                            },
+                            error: function(request, error, result) {
+                                location.href = location.href;
+                                var wnd = window.open("about:blank", "_blank", "height:100;width:100");
+                                wnd.document.write(request.responseText);
+
+                                //alert('Ошибка при анализе файла');
+                                return false;
+                            }
+                        });
+
+                    }, 100);
+                }
+                //location.href = location.href;
+
+            },
+            error: function(request) {
+                var wnd = window.open("about:blank", "", "height:100;width:100");
+                wnd.document.write(request.XMLHttpRequest.responseText);
+                //alert('Не верное сочетание логина пароля');
+                return false;
+                //var text = $(".k-dropzone").innerHTML();
+                //alert("Превышен максимальный размер файла");
+            },
+            upload: function(e) {
+                e.data = { wizardId: $('#wizardId').val() };
+            },
+            onUpload: function(e) {
+                e.data = { inputFile: $('#inputFile').val() };
+            }
+        });
+        if ('@(Model.Type == OperationType.Decrypt)' == 'True') {
+            $('#inputFile').attr('accept', '.enc,.p7s');
+        }
+
+
+    });
+
+    $(document).ready(function() {
+        if ('@(Model.DownloadedFiles.Count == 0)' != 'True') {
+            $('[name=nextButton]').removeAttr('disabled');
+            $("#uplodedFileInfo").css("display", "block");
+
+            $("#uploadedFileName").text('@((Model.DownloadedFiles.Count == 0) ? "" : Model.DownloadedFiles[0].Name)');
+        }
+        if ('@(Model.Type == OperationType.SignVerify)' == 'True') {
+            $('[name=nextButton]').attr('disabled', 'true');
+        }
+    });
+
+
+    function FileSpan1(filename) {
+        var str = '<ul class="k-upload-files k-reset" style="word-break: break-all">' +
+            '<li class="k-file k-file-success">' +
+            '<span class="k-progress" style="width: 100%;"></span>' +
+            '<span class="k-icon k-i-xlsx">uploaded</span>' +
+            '<span title="' + filename + '" class="k-filename">' + 'Вами загружен файл <a class="k-filename" style="font-style: italic;color:#28760b">' + filename + '</a></span>' +
+            '<strong class="k-upload-status">' +
+            '<button class="k-button k-button-bare k-upload-action" style="display: none;" type="button"></button>' +
+            '</strong>' +
+            '</li>' +
+            '</ul>';
+        return str;
+    }
+</script>
+<script>
+    function closeModal() {
+        //$(".validation-summary-errors").remove();
+        $('#mask, .window').hide();
+        $(".validation-summary-errors").remove();
+    };
+
+    function clickOpenModal() {
+        globalRes = true;
+        $.ajax({
+            url: '@Url.Action("Requestpin", "Wizard")',
+            async: false,
+            type: 'POST',
+            data: { wizardId: $('#wizardId').val() },
+            success: function(result) {
+                if (result == 'False') {
+                    //closeModal();
+                    globalRes = false;
+                    $('#makeOperation').trigger('click');
+                }
+            },
+            error: function(request, error, result) {
+                location.href = location.href;
+                var wnd = window.open("about:blank", "_blank", "height:100;width:100");
+                wnd.document.write(request.responseText);
+
+                //alert('Ошибка при анализе файла');
+                return false;
+            }
+        });
+
+        if (globalRes) {
+            $("#pinCode").val("");
+            //Cancel the link behavior
+            //e.preventDefault();
+            //Get the A tag
+            var id = '#dialog';
+            if (arguments[0] != null)
+                id = '#fileAnalyzing';
+            //Get the screen height and width
+            var maskHeight = $(document).height();
+            var maskWidth = $(window).width();
+
+            //Set heigth and width to mask to fill up the whole screen
+            $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+            $('#mask').css({ 'position': 'fixed' });
+
+            //transition effect		
+            $('#mask').fadeIn(1000);
+            $('#mask').fadeTo("slow", 0.8);
+
+            //Get the window height and width
+            var winH = $(window).height();
+            var winW = $(window).width();
+
+            //Set the popup window to center
+            $(id).css('top', winH / 2 - $(id).height() / 2);
+            $(id).css('left', winW / 2 - $(id).width() / 2);
+
+            //transition effect
+            $(id).fadeIn(1000);
+            $("#pinCode").focus();
+        }
+    };
+
+    $(document).ready(function() {
+
+        $("#dialog").keydown(function(e) {
+            if (e.keyCode == 13) {
+                $("#makeOperation").trigger("click");
+                e.preventDefault();
+            }
+        });
+
+        //select all the a tag with name equal to modal
+        $('input[name=modal]').click(function(e) {
+            //Cancel the link behavior
+            e.preventDefault();
+            //Get the A tag
+            var id = $(this).attr('href');
+
+            //Get the screen height and width
+            var maskHeight = $(document).height();
+            var maskWidth = $(window).width();
+
+            //Set heigth and width to mask to fill up the whole screen
+            $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+
+            //transition effect		
+            $('#mask').fadeIn(1000);
+            $('#mask').fadeTo("slow", 0.8);
+
+            //Get the window height and width
+            var winH = $(window).height();
+            var winW = $(window).width();
+
+            //Set the popup window to center
+            $(id).css('top', winH / 2 - $(id).height() / 2);
+            $(id).css('left', winW / 2 - $(id).width() / 2);
+
+            //transition effect
+            $(id).fadeIn(2000);
+
+        });
+
+        //if close button is clicked
+        $('.window .close').click(function(e) {
+            //location.href = location.href;
+            //Cancel the link behavior
+            e.preventDefault();
+            $('#mask, .window').hide();
+        });
+
+        //if mask is clicked
+        $('#mask').click(function() {
+            //$(this).hide();
+            //$('.window').hide();
+        });
+
+    });
+</script>

@@ -1,0 +1,41 @@
+.sprite {
+    background-image: url(spritesheet.png);
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.sprite-cloud {
+    width: 38px;
+    height: 40px;
+    background-position: 0 0;
+}
+
+.sprite-docs {
+    width: 31px;
+    height: 38px;
+    background-position: -38px 0;
+}
+
+.sprite-mass {
+    width: 39px;
+    height: 28px;
+    background-position: -38px -38px;
+}
+
+.sprite-settings {
+    width: 43px;
+    height: 48px;
+    background-position: -77px 0;
+}
+
+.sprite-ssl {
+    width: 38px;
+    height: 39px;
+    background-position: 0 -48px;
+}
+
+.sprite-time {
+    width: 38px;
+    height: 38px;
+    background-position: -77px -48px;
+}

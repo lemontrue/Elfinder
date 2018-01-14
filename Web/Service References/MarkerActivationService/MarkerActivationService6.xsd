@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/DSS.Service.Response.MarkerActivation" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DSS.Service.Response.MarkerActivation" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://localhost:44301/MarkerActivationService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/System.IO" />
+  <xs:import schemaLocation="https://localhost:44301/MarkerActivationService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Error" />
+  <xs:import schemaLocation="https://localhost:44301/MarkerActivationService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="https://localhost:44301/MarkerActivationService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" />
+  <xs:complexType name="LogonResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:MarkerActivationResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="MarkerStatus" type="tns:MarkerStatus" />
+          <xs:element minOccurs="0" name="MaskedPhoneNumber" nillable="true" type="xs:string" />
+          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="SessionData" nillable="true" type="q1:MemoryStream" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="LogonResponse" nillable="true" type="tns:LogonResponse" />
+  <xs:complexType name="MarkerActivationResponse">
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DSS.Service.Error" minOccurs="0" name="Error" nillable="true" type="q2:MarkerActivationError" />
+      <xs:element minOccurs="0" name="Status" type="tns:MainStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MarkerActivationResponse" nillable="true" type="tns:MarkerActivationResponse" />
+  <xs:simpleType name="MainStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Success" />
+      <xs:enumeration value="NeedSmsConfirmation" />
+      <xs:enumeration value="Failed" />
+      <xs:enumeration value="NeedRelogin" />
+      <xs:enumeration value="WrongRequestId" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MainStatus" nillable="true" type="tns:MainStatus" />
+  <xs:simpleType name="MarkerStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotRecievedFromService" />
+      <xs:enumeration value="NOT_SEND" />
+      <xs:enumeration value="SEND" />
+      <xs:enumeration value="IN_PROCESS" />
+      <xs:enumeration value="APPROVED" />
+      <xs:enumeration value="REJECTED" />
+      <xs:enumeration value="CONFIRMED" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MarkerStatus" nillable="true" type="tns:MarkerStatus" />
+  <xs:complexType name="GetMarkerStatusResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:MarkerActivationResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="MarkerStatus" type="tns:MarkerStatus" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GetMarkerStatusResponse" nillable="true" type="tns:GetMarkerStatusResponse" />
+  <xs:complexType name="GetCertificateInfoResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:MarkerActivationResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CertInfoDictionary" nillable="true" type="tns:ArrayOfGetCertificateInfoResponse.CertInfo" />
+          <xs:element minOccurs="0" name="CertificateXML" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GetCertificateInfoResponse" nillable="true" type="tns:GetCertificateInfoResponse" />
+  <xs:complexType name="ArrayOfGetCertificateInfoResponse.CertInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GetCertificateInfoResponse.CertInfo" nillable="true" type="tns:GetCertificateInfoResponse.CertInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGetCertificateInfoResponse.CertInfo" nillable="true" type="tns:ArrayOfGetCertificateInfoResponse.CertInfo" />
+  <xs:complexType name="GetCertificateInfoResponse.CertInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FriendlyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetCertificateInfoResponse.CertInfo" nillable="true" type="tns:GetCertificateInfoResponse.CertInfo" />
+  <xs:complexType name="CreateRequestParams">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Pin" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Savepin" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SendEmail" type="xs:boolean" />
+      <xs:element minOccurs="0" name="SendSms" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateRequestParams" nillable="true" type="tns:CreateRequestParams" />
+  <xs:complexType name="CreateRequestResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:MarkerActivationResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AdditionalInformation" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="RequestId" type="ser:guid" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CreateRequestResponse" nillable="true" type="tns:CreateRequestResponse" />
+  <xs:simpleType name="GetMyCertificatesRequestsResponse.Sort">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NameASC" />
+      <xs:enumeration value="NameDESC" />
+      <xs:enumeration value="CreationDateASC" />
+      <xs:enumeration value="CreationDateDESC" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="GetMyCertificatesRequestsResponse.Sort" nillable="true" type="tns:GetMyCertificatesRequestsResponse.Sort" />
+  <xs:complexType name="GetMyCertificatesRequestsResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:MarkerActivationResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="MyCertificateRequests" nillable="true" type="tns:ArrayOfGetMyCertificatesRequestsResponse.MyCertificateRequest" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GetMyCertificatesRequestsResponse" nillable="true" type="tns:GetMyCertificatesRequestsResponse" />
+  <xs:complexType name="ArrayOfGetMyCertificatesRequestsResponse.MyCertificateRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GetMyCertificatesRequestsResponse.MyCertificateRequest" nillable="true" type="tns:GetMyCertificatesRequestsResponse.MyCertificateRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGetMyCertificatesRequestsResponse.MyCertificateRequest" nillable="true" type="tns:ArrayOfGetMyCertificatesRequestsResponse.MyCertificateRequest" />
+  <xs:complexType name="GetMyCertificatesRequestsResponse.MyCertificateRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreationTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="EGRUL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DSS.Service.Error" minOccurs="0" name="Error" nillable="true" type="q3:MarkerActivationError" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Passport" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PaymentID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SNILS" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetMyCertificatesRequestsResponse.MyCertificateRequest" nillable="true" type="tns:GetMyCertificatesRequestsResponse.MyCertificateRequest" />
+  <xs:complexType name="GetUserHtmlResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:MarkerActivationResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="UserHtml" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GetUserHtmlResponse" nillable="true" type="tns:GetUserHtmlResponse" />
+  <xs:complexType name="GetNSetCertificateResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:MarkerActivationResponse">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GetNSetCertificateResponse" nillable="true" type="tns:GetNSetCertificateResponse" />
+  <xs:complexType name="GetNSetTestCertificateResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:MarkerActivationResponse">
+        <xs:sequence>
+          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" minOccurs="0" name="TestCertificateInfo" nillable="true" type="q4:CertificateInfo" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="GetNSetTestCertificateResponse" nillable="true" type="tns:GetNSetTestCertificateResponse" />
+</xs:schema>

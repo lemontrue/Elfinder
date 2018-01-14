@@ -1,0 +1,122 @@
+{{#if result.length}}
+    <div class="result">
+        <h2>Результаты работы</h2>
+        <div class="box">
+            <div class="state {{#if error}}result{{else}}ready{{/if}}"></div>
+
+            <div class="body">
+                {{#if result.length}}
+                    <ul class="file-list">
+                        {{#each result.files}}
+                            <li class="item">
+                                <div class="file-info">
+                                    {{#if fileName}}
+                                        <div class="name" title="{{fileName}}">
+                                            {{#if isTest}}
+                                                <span class="test-certificate-icon no-padding js-test-file-tip" id="testTip-{{id}}"></span>
+                                            {{/if}}
+
+                                            {{#if hideView}}
+                                                {{aligningText fileName 47}}
+                                            {{else}}
+                                                <a can-click="event.view_file" href="#">{{aligningText fileName 47}}</a>
+                                            {{/if}}
+                                             <div can-click="event.view_file" class="visual {{#if hideView}} hidden {{/if}}" ></div>
+                                            {{#if error}}
+                                            {{else}}
+                                                <!--<div can-click="event.download_file" class="download"></div>
+                                                <div can-click="event.remove" class="delete"></div>-->
+                                            {{/if}}
+
+                                            <div can-click="event.download_data_file" class="download" title="Загрузить исходный файл"></div>
+                                            {{#if detached}}
+                                            {{else}}
+                                                <div can-click="event.delete_data_file" class="delete" title="Удалить исходный файл"></div>
+                                            {{/if}}
+                                        </div>
+                                    {{/if}}
+
+                                    <div class="sig">
+                                        {{#if detached}}Файл подписи{{else}}Подписанный файл{{/if}}:
+                                        <div class="name" title="{{sigName}}">{{aligningText sigName 47}}
+                                            <div can-click="event.download_sig" class="download" title="Загрузить подпись"></div>
+                                        </div>
+                                    </div>
+
+                                    <ul class="param list-inline">
+                                        <li can-click="event.more">Подробнее</li>
+                                    </ul>
+                                </div>
+
+                                <div class="actions status">
+                                    {{#if error}}
+                                        <span class="info error">При проверке подписи произошла ошибка</span>
+                                    {{else}}
+                                        <span class="info success">Ошибок не найдено</span>
+                                    {{/if}}
+                                </div>
+
+                                <div class="more {{#if isMoreShow}}show{{/if}}">
+                                    {{#if error}}
+                                        <div class="error">{{errorMessage}}</div>
+                                    {{else}}
+                                        {{#each info}}
+                                            <div>
+                                            <ul class="sig_info">
+                                                <li>
+                                                    <div class="key">Тип:</div>
+                                                    <div class="value">{{type}}</div>
+                                                </li>
+                                                <li>
+                                                    <div class="key">Отпечаток:</div>
+                                                    <div class="value">{{thumbprint}}</div>
+                                                </li>
+                                                <li>
+                                                    <div class="key">Владелец сертификата:</div>
+                                                    <div class="value">{{recipient}}</div>
+                                                </li>
+                                                <li>
+                                                    <div class="key">Издатель:</div>
+                                                    <div class="value">{{issureName}}</div>
+                                                </li>
+                                                <li>
+                                                    <div class="key">Действителен с:</div>
+                                                    <div class="value">{{notBefore}}</div>
+                                                </li>
+                                                <li>
+                                                    <div class="key">Действителен до:</div>
+                                                    <div class="value">{{notAfter}}</div>
+                                                    {{#if certError}}
+                                                        <div class="cert_time_error">Срок действия сертификата или одного из сертификатов в цепочке истек или не наступил</div>
+                                                    {{/if}}
+                                                </li>
+                                            </ul>
+                                            {{#if isTest}}
+                                                <div class="test-certificate"></div>
+                                            {{/if}}
+                                            </div>
+                                        {{/each}}
+                                    {{/if}}
+                                </div>
+                            </li>
+                        {{/each}}
+                    </ul>
+                {{else}}
+                    <div class="load">Обработка данных...</div>
+                {{/if}}
+
+            </div>
+        </div>
+    </div>
+{{else}}
+{{/if}}
+
+
+<div class="row footer">
+    <div class="c-500 a">
+        <span can-click="event.backFiles">Вернуться в каталог файлов</span>
+    </div>
+    <div class="c-500 b">
+        <span can-click="event.refiles">Повторить операцию с начала</span>
+    </div>
+</div>

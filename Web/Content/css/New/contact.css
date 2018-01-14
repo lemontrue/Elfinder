@@ -1,0 +1,203 @@
+.add-contact {
+    float: right;
+    min-width: 300px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.filter {
+    height: 70px;
+    padding: 0 25px;
+}
+
+.filter .check-all {
+    margin-right: 0 !important;
+    padding-top: 15px;
+    width: 30px;
+}
+
+.filter .form {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.filter .form .col {
+    margin-right: 20px;
+    position: relative;
+    width: 210px;
+}
+
+.filter .form .col .loop {
+    cursor: pointer;
+    display: block;
+    height: 28px;
+    position: absolute;
+    right: 0;
+    top: 18px;
+    width: 30px;
+}
+
+.filter .form .col label {
+    color: #161616;
+    display: block;
+    font-size: 11px;
+    height: 18px;
+}
+
+.filter .form .col input.search {
+    background: url(../../Images/search.png) right center no-repeat;
+    padding-right: 30px;
+}
+
+.filter .form .col:last-child { margin-right: 0; }
+
+.content {
+    -webkit-border-radius: 3px;
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+    padding: 20px 0;
+}
+
+.content .cert-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 25px 10px;
+}
+
+.contact-control { margin-top: 20px; }
+
+.contact-control .col { width: 35%; }
+
+.contact-control .backlink a {
+    background: #f3f3f3;
+    color: #373737;
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 20px;
+}
+
+.contact-control .delete {
+    text-align: center;
+    width: 30% !important;
+}
+
+.contact-control .delete a {
+    color: #838383;
+    line-height: 32px;
+    text-align: center;
+}
+
+.contact-control .controls .sbmt a.close {
+    color: #010101;
+    padding-right: 30px;
+}
+
+.add-certificate { padding: 0 25px 20px; }
+
+.contact input[type=text] { font-weight: 700; }
+
+.contact .data { width: 450px; }
+
+.contact .data .row { padding-bottom: 10px; }
+
+.contact .data .row .label {
+    line-height: 30px;
+    width: 60px;
+}
+
+.contact .data .row .value { width: 390px; }
+
+.contact .add-cert {
+    margin-left: 25px;
+    padding-top: 15px;
+}
+
+.contact .add-cert .btn-green {
+    text-align: center;
+    width: 220px;
+}
+
+.certificats-list .certificat:first-child { padding-top: 10px; }
+
+.certificats-list .certificat:first-child .actions {
+    top: 10px;
+    z-index: 99;
+}
+
+.certificats-list .certificat:hover { background: #edf4fa; }
+
+.certificats-list .certificat.selected { background: #fffdde !important; }
+
+.certificats-list .certificat {
+    padding: 10px 25px 0;
+    position: relative;
+}
+
+.certificats-list .certificat hr {
+    border: 0;
+    border-top: 1px solid #d9d9d9;
+    margin: 0;
+    margin-top: 20px;
+}
+
+.certificats-list .certificat .actions {
+    position: absolute;
+    right: 25px;
+    top: 15px;
+}
+
+.certificats-list .certificat .actions a.down {
+    color: #161616;
+    padding-right: 20px;
+}
+
+.certificats-list .certificat .actions a.remove { color: #727272 !important; }
+
+.certificats-list .certificat .checkbox {
+    padding-top: 28px;
+    width: 30px;
+}
+
+.certificats-list .certificat .col1 {
+    display: inline-block;
+    line-height: 20px;
+    vertical-align: top;
+    width: 220px;
+}
+
+.certificats-list .certificat .col1 .title {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 5px 0 18px 0;
+}
+
+.certificats-list .certificat .col1 .cert span.active { color: #161616; }
+
+.certificats-list .certificat .col1 .cert span.expire { color: #f4484a; }
+
+.certificats-list .certificat .col2 {
+    display: inline-block;
+    line-height: 20px;
+    position: relative;
+    vertical-align: top;
+    width: 440px;
+}
+
+.certificats-list .certificat .col2 .new-title {
+    padding: 5px 0 10px 0;
+    width: 300px;
+}
+
+.certificats-list .certificat .col2 .actions-title {
+    left: 310px;
+    position: absolute;
+    top: 8px;
+}
+
+.more-cert {
+    height: 75px;
+    padding-top: 28px;
+    text-align: center;
+}

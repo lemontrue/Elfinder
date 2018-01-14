@@ -1,0 +1,348 @@
+#content
+  margin-left: 205px
+  position: relative
+  .add-contact
+    float: right
+    min-width: 300px
+    position: absolute
+    right: 0
+    top: 0
+  .filter
+    .check-all
+      margin-right: 0 !important
+      padding-top: 15px
+      width: 30px
+    .form
+      display: inline-block
+      vertical-align: top
+      .col
+        margin-right: 20px
+        position: relative
+        width: 210px
+        .loop
+          top: 0 !important
+        input[type=text]
+          background: img('/old/search.png', 'right center no-repeat' ,'#fff')
+          padding-right: 30px
+        .loop
+          cursor: pointer
+          display: block
+          height: 28px
+          position: absolute
+          right: 0
+          top: 18px
+          width: 30px
+        label
+          /*display: block;
+          color: #161616
+          font-size: 11px
+          height: 18px
+        input.search
+          background: img('/old/search.png', 'right center no-repeat' ,'')
+          padding-right: 30px
+        &:last-child
+          margin-right: 0
+  .contacts-list .contact
+    &:first-child
+      padding-top: 0
+      .actions
+        top: 5px
+    &:hover
+      background: #fdfadd
+    padding: 20px 25px 0
+    position: relative
+    hr
+      border: 1px solid #d9d9d9
+      border-top: 0
+      margin: 25px 0 0
+    .actions
+      position: absolute
+      right: 25px
+      top: 20px
+      a
+        &.edit
+          color: #161616
+          padding-right: 20px
+        &.remove
+          color: #727272
+    .title
+      font-size: 14px
+      font-weight: 700
+      line-height: 36px
+    .email
+      height: 20px
+      .label
+        color: #161616
+        width: 60px
+    .cert
+      padding-top: 8px
+      .cert-title
+        font-weight: 700
+        height: 20px
+      table.list
+        width: 100%
+        tbody tr
+          height: 22px
+          td
+            span
+              &.active
+                color: #161616
+              &.expire
+                color: #f4484a
+            a
+              &.download
+                background: img('/old/download.png', ' no-repeat' ,'')
+                display: inline-block
+                height: 13px
+                margin-right: 10px
+                width: 14px
+              &.remove
+                background: img('/old/remove.png', ' no-repeat' ,'')
+                display: inline-block
+                height: 12px
+                width: 13px
+  .certificats-list
+    .certificat
+      &:first-child
+        padding-top: 0
+        .actions
+          top: 0
+      border-bottom: 1px solid #d9d9d9
+      margin: 0 25px
+      padding: 20px 0 25px
+      position: relative
+      .actions
+        position: absolute
+        right: 0
+        top: 20px
+        a
+          &.down
+            color: #161616
+            padding-right: 20px
+          &.remove
+            color: #727272
+      .checkbox
+        padding-top: 28px
+        width: 30px
+      .col1
+        display: inline-block
+        line-height: 20px
+        vertical-align: top
+        width: 32%
+        .title
+          font-size: 14px
+          font-weight: 700
+          padding: 5px 0 18px 0
+        .cert span
+          &.active
+            color: #161616
+          &.expire
+            color: #f4484a
+      .col2
+        display: inline-block
+        line-height: 20px
+        vertical-align: top
+        .new-title
+          padding: 5px 0 10px 0
+          width: 250px
+    .request
+      border-bottom: 1px solid #d9d9d9
+      padding: 20px 25px 20px 30px !important
+      position: relative
+      margin: 0 10px
+      &:first-child
+        padding-top: 0
+      .col1
+        display: inline-block
+        line-height: 20px
+        vertical-align: top
+        width: 39%
+        .name
+          font-size: 14px
+          font-weight: 700
+        .email
+          margin-top: 15px
+        .request-data
+          width: 230px
+          li
+            &:nth-child(odd)
+              display: inline-block
+              vertical-align: top
+              width: 125px
+              color: #161616
+            &:nth-child(even)
+              display: inline-block
+              vertical-align: top
+              width: 100px
+              color: #d7d5d5
+        .download
+          margin-top: 20px
+          .description
+            margin-left: 5px
+          .download-request
+            vertical-align: middle
+            i
+              vertical-align: middle
+              margin-left: 5px
+      .col2
+        display: inline-block
+        line-height: 20px
+        vertical-align: top
+        width: 59%
+        .request-status-data
+          text-align: right
+          .field
+            display: inline-block
+            vertical-align: middle
+            line-height: 23px
+            width: 120px
+            color: #bcbcbc
+            margin-bottom: 10px
+          .value
+            margin-bottom: 10px
+            display: inline-block
+            vertical-align: middle
+            line-height: 23px
+            .label
+              display: inline-block
+              height: 23px
+              line-height: 23px
+              padding: 0 8px
+              border-radius: 2px
+              &.waiting
+                background: #fff6b8
+              &.info
+                background: #d6eaf8
+              &.active
+                background: #bfeebe
+              &.wrong
+                color: #fff
+                background: #f83548
+              .small
+                font-size: 10px
+                margin-left: 12px
+          .actions
+            .btn-confirm
+              border-radius: 3px
+              text-decoration: none
+              height: 26px
+              line-height: 26px
+              padding: 0 23px
+              color: #fff
+              display: inline-block
+              background: #1ac316
+              &:hover
+                background: #1dda19
+            .btn-resend
+              border-radius: 3px
+              text-decoration: none
+              height: 26px
+              line-height: 26px
+              padding: 0 23px
+              color: #fff
+              display: inline-block
+              background: #3598db
+              &:hover
+                background: #3276b1
+            .btn-cancel
+              height: 26px
+              line-height: 26px
+              color: #f83548
+              padding-left: 20px
+              background: img('/cancel.png', 'no-repeat', '')
+      .complete-request
+        position: absolute
+        bottom: 0
+        right: 9px
+        width: 48px
+        height: 49px
+        background: img('/complete-request.png', 'no-repeat', '')
+  .more-cert, .more-cont
+    height: 75px
+    padding-top: 28px
+    text-align: center
+  .cert-control
+    position: relative
+    .controls
+      bottom: -70px
+      position: absolute
+      right: 0
+    .backlink
+      bottom: -70px
+      left: 0
+      position: absolute
+      a
+        background: #f3f3f3
+        color: #373737
+        display: inline-block
+        height: 32px
+        line-height: 32px
+        padding: 0 20px
+    .controls .sbmt a.close
+      color: #131313
+      padding-right: 15px
+  .content
+    -webkit-border-radius: 3px
+    border: 1px solid #d5d5d5
+    border-radius: 3px
+    padding: 20px 0
+    .cert-title
+      font-size: 14px
+      font-weight: 700
+      margin: 0 25px 10px
+  .contact-control
+    margin-top: 20px
+    .col
+      width: 35%
+    .backlink a
+      background: #f3f3f3
+      color: #373737
+      display: inline-block
+      height: 32px
+      line-height: 32px
+      padding: 0 20px
+    .delete
+      text-align: center
+      a
+        color: #838383
+        line-height: 32px
+        text-align: center
+    .controls .sbmt a.close
+      color: #131313
+      padding-right: 15px
+  .add-certificate
+    padding: 0 25px 20px
+    form.contact
+      input[type=text]
+        font-weight: 700
+      .data
+        width: 450px
+        .row
+          padding-bottom: 10px
+          .label
+            width: 60px
+          .value
+            width: 390px
+      .add-cert
+        margin-left: 25px
+        padding-top: 15px
+
+
+
+.error-mess
+  background: img('/old/warning.png', '10px center no-repeat' ,'#f3d2d2')
+  color: #c12a2b
+  height: 37px
+  line-height: 37px
+  margin-top: 13px
+  padding: 0 10px 0 50px
+
+.helpLink
+  margin-top: 38px
+  position: absolute
+  z-index: 999
+  a
+    background: img('/old/mainHelp.png', 'no-repeat' ,'')
+    display: inline-block
+    height: 32px
+    width: 156px

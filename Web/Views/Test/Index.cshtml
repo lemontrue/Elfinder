@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <script src="/Assets/libjs/jquery-2.1.0.js"></script>
+
+        <title>Index</title>
+    </head>
+    <body>
+        <div>
+            @using (Html.BeginForm())
+            {
+                @Html.Hidden("settingsJSON")
+                <input type="submit" value="send"/>
+            }
+        </div>
+    </body>
+</html>
+<script>
+    var myObj = { "ExtensionData": {}, "Id": "2b1e91b4-fc62-4ece-947b-f52486d2c0b1", "Silent": true, "Version": 1, "_CertificateVerificationSettings": { "ExtensionData": {}, "UrlRetrievalTimeout": 5000, "VerifyFlags": 0, "_RevocationFlag": 2, "_RevocationMode": 2 }, "_DecryptionSettings": { "ExtensionData": {}, "DecryptCertificate": "E69A8C9162A6CDC32FC09F218F118D39D5AE90F9", "KeysetPassword": null }, "_EncryptionSettings": { "ExtensionData": {}, "KeysetPassword": null, "RecipientCertificates1": [], "RecipientCertificates2": [], "ZipType": 0, "_CertificateVerificationSettings": { "ExtensionData": {}, "UrlRetrievalTimeout": 5000, "VerifyFlags": 0, "_RevocationFlag": 2, "_RevocationMode": 2 }, "_EncodingType": 3 }, "_MainSettings": { "ExtensionData": {}, "Description": null, "Email": null, "IsDefault": true, "Name": "! Для расшифровки" }, "_SignatureSettings": { "ExtensionData": {}, "CertificateVerificationSettings": { "ExtensionData": {}, "UrlRetrievalTimeout": 5000, "VerifyFlags": 0, "_RevocationFlag": 2, "_RevocationMode": 2 }, "Detached": false, "IncludeSignerCertificate": true, "IncludeTimestamp": false, "KeysetPassword": null, "SignerCertificate1": "E69A8C9162A6CDC32FC09F218F118D39D5AE90F9", "ZipType": 0, "_EncodingType": 3 }, "_SignatureVerificationSettings": { "ExtensionData": {}, "CertificateVerifyDateTime": 1, "CertificateVerifySettings": { "ExtensionData": {}, "UrlRetrievalTimeout": 5000, "VerifyFlags": 0, "_RevocationFlag": 2, "_RevocationMode": 2 }, "TimestampRequired": false, "VerifyFlag": 2 }, "_TimestampSettings": { "ExtensionData": {}, "IncludeTsaCertificate": true, "TsaAddress": [], "UseNonce": true, "VerifyOnReceive": true, "_EncodingType": 3 }, "_TimestampVerificationSettings": { "ExtensionData": {}, "VerifyFlag": 2, "_CertificateVerificationSettings": { "ExtensionData": {}, "UrlRetrievalTimeout": 5000, "VerifyFlags": 0, "_RevocationFlag": 2, "_RevocationMode": 2 } } };
+    $(document).ready(function() {
+        $('#settingsJSON').val(JSON.stringify(myObj));
+    });
+
+</script>

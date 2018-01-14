@@ -1,0 +1,101 @@
+﻿#modal {
+    background: rgba(0, 0, 0, 0.5);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1000
+}
+
+#modal .window {
+    background: #fff;
+    border: 3px solid #595959;
+    border-radius: 5px;
+    left: 50%;
+    margin-left: -467.5px;
+    min-height: 100px;
+    padding: 7px 23px 17px !important;
+    position: absolute;
+    top: 130px;
+    width: 935px;
+    z-index: 1001
+}
+
+#modal .window > .body {
+    background: #fff;
+    height: calc(100% - 6px - 7px - 7px);
+    padding: 7px 10px 7px 22px;
+    position: absolute;
+    width: calc(100% - 6px - 10px - 22px)
+}
+
+#modal .window > .header {
+    border-bottom: 1px solid #e5e5e5;
+    height: 48px;
+    margin-bottom: 10px
+}
+
+#modal .window > .header h2 {
+    color: #111;
+    float: left;
+    font-weight: 700;
+    margin-top: 14px
+}
+
+#modal .window > .header .close {
+    background: url(../../images/close.png) no-repeat;
+    cursor: pointer;
+    height: 16px;
+    position: absolute;
+    right: 7px;
+    top: 8px;
+    width: 16px
+}
+
+#modal .window > .content {
+    margin: 0;
+    position: relative;
+    width: 100%
+}
+
+#modal > .window.alert {
+    margin-left: -295px;
+    width: 590px
+}
+
+#modal #message-panel .content-group {
+    margin: 0 0 10px;
+    min-height: 50px;
+    position: relative
+}
+
+#modal #message-panel .icon {
+    float: left;
+    height: 50px;
+    width: 60px
+}
+
+#modal #message-panel .icon.warning { background: url(../image/warning.png) no-repeat center center }
+
+#modal #message-panel .text {
+    float: left;
+    font-size: 13px;
+    padding-left: 15px;
+    width: 435px
+}
+
+#modal #message-panel .btn-group {
+    float: right;
+    margin: 0 10px 10px 0
+}
+
+#modal .modal-window .title .close {
+    background: url(/Content/Images/close.png) no-repeat !important;
+    cursor: pointer;
+    height: 16px;
+    position: absolute;
+    right: 7px;
+    top: 8px;
+    width: 16px
+}

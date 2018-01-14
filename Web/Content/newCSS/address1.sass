@@ -1,0 +1,84 @@
+.add-contact
+  float: right
+  min-width: 300px
+  position: absolute
+  top: 0
+  right: 0
+.filter
+  padding: 0 25px
+  height: 70px
+  .check-all
+    padding-top: 15px
+    width: 30px
+    margin-right: 0 !important
+  .form
+    display: inline-block
+    vertical-align: top
+    .col
+      width: 210px
+      margin-right: 20px
+      label
+        display: block
+        color: #161616
+        font-size: 11px
+        height: 18px
+      input.search
+        background: url(../img/search.png) right center no-repeat
+        padding-right: 30px
+    .col:last-child
+      margin-right: 0
+.contacts-list
+  padding-bottom: 80px
+  .contact:first-child
+    padding-top: 0
+    .actions
+      top: 5px
+  .contact:hover
+    background: #edf4fa
+  .contact
+    position: relative
+    padding: 20px 25px 0
+    hr
+      margin: 25px 0 0 0
+      border: 1px solid #d9d9d9
+      border-top: 0
+    .actions
+      position: absolute
+      top: 20px
+      right: 25px
+      a.edit
+        padding-right: 20px
+        color: #161616
+      a.remove
+        color: #727272
+    .title
+      font-size: 14px
+      line-height: 36px
+      font-weight: 700
+    .email
+      height: 20px
+      .label
+        color: #161616
+        width: 60px
+    .cert
+      padding-top: 8px
+      .cert-title
+        font-weight: 700
+        height: 20px
+      table.list
+        width: 100%
+        tbody
+          tr
+            height: 22px
+            td.text-right
+              a
+                text-decoration: none
+            td
+              span.active
+                color: #161616
+              span.expire
+                color: #f4484a
+.more-cont
+  height: 75px
+  text-align: center
+  padding-top: 28px

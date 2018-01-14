@@ -1,0 +1,529 @@
+.app-landing
+  min-width: 1000px
+  position: relative
+  .scrollUp
+    transition: opacity .3s linear
+    width: 80px
+    height: 80px
+    border-radius: 40px
+    position: fixed
+    top: 50%
+    left: 50px
+    background: #fff
+    box-shadow: 0 0 5px rgba(0,0,0,.25)
+    text-align: center
+    padding: 21px 0
+    opacity: 0
+    cursor: pointer
+    z-index: -1
+    div
+      display: inline-block
+      width: 45px
+      height: 38px
+      background: img('/landing/scroll-up.png', 'top center no-repeat' ,'')
+    &:hover
+      div
+        background-position: center
+    &:focus,&:active
+      div
+        background-position: bottom center
+    &.show
+      opacity: 1
+      z-index: 999
+  .float-feedback
+    transition: opacity .3s linear
+    width: 80px
+    height: 80px
+    border-radius: 40px
+    position: fixed
+    top: 50%
+    right: 50px
+    background: #fff
+    box-shadow: 0 0 5px rgba(0,0,0,.25)
+    text-align: center
+    opacity: 0
+    cursor: pointer
+    z-index: -1
+    .img
+      position: relative
+      background: #fff
+      width: 80px
+      height: 80px
+      padding: 28px 23px
+      border-radius: 40px
+      z-index: 11
+      div
+        display: inline-block
+        width: 34px
+        height: 24px
+        background: img('/landing/float-feedback.png', 'top center no-repeat' ,'')
+    .tip
+      transition: opacity .1s linear
+      opacity: 0
+      background: #3c454a
+      border-radius: 3px
+      height: 38px
+      line-height: 38px
+      color: #fff
+      padding: 0 25px 0 20px
+      position: absolute
+      right: 70px
+      top: 21px
+      width: 175px
+      z-index: 10
+      font-size: 12px
+      text-transform: uppercase
+
+    &:hover
+      .img
+        div
+          background-position: center
+      .tip
+        opacity: 1
+    &:focus,&:active
+      .img
+        div
+          background-position: bottom center
+    &.show
+      opacity: 1
+      z-index: 999
+  #header
+    height: 105px
+    border-bottom: 1px solid #f5f5f5
+    transition: box-shadow .1s linear
+    position: absolute
+    top: 0
+    background: #fff
+    width: 100%
+    min-width: 1000px
+    z-index: 999
+    &.i-top
+      left: 0 !important
+    &.i-fixed
+      position: fixed
+      z-index: 200
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6)
+    .main-icon
+      padding-top: 22px
+      width: 255px
+      float: left
+      .logo
+        background: img('/logo-large.png', 'no-repeat center bottom' ,'')
+        height: 65px
+        width: 255px
+        padding: 0
+        a
+          display: block
+          height: 65px
+          width: 255px
+          text-decoration: none
+    .links
+      padding-top: 35px
+      width: 520px
+      float: right
+      text-align: right
+      a
+        line-height: 38px
+        color: #1f2224
+        margin: 0 40px 0 0
+        font-size: 12px
+        text-transform: uppercase
+        text-decoration: none
+        &:hover
+          color: #1f2224
+          text-decoration: underline
+        &:active, &:focus
+          color: #1799ec
+          text-decoration: none
+        &.btn
+          margin: 0
+          font-weight: 400
+        &:last-child
+          margin-right: 0
+  #content
+    padding-top: 105px
+    #slider
+      height: 750px
+      .grid
+        padding: 0 !important
+      h2
+        font-family: $fontDiffLight
+        font-size: 30px
+        font-weight: normal
+        text-align: center
+        margin: 25px 0 35px
+        padding: 0
+      .nav
+        text-align: center
+        li
+          list-style: none
+          display: inline-block
+          margin-right: 25px
+          width: 200px
+          border: 1px solid #dfdfdf
+          border-radius: 5px
+          color: #1f2224
+          height: 46px
+          line-height: 44px
+          font-weight: 700
+          cursor: pointer
+          font-size: 13px
+          opacity: .7
+          &.active
+            border: 1px solid #1799ec
+            background: #1799ec
+            color: #fff
+            opacity: 1
+          &:last-child
+            margin-right: 0
+          &:hover
+            opacity: 1
+      .tabs
+        width: 100%
+
+        margin: 50px auto 0
+        .tab:first-child
+          .pic
+            img
+              margin: 25px 0 0 -20px
+          .terms
+            margin-top: 0
+        .tab
+          text-align: left
+          padding: 0 65px
+          .pic
+            width: 410px
+            float: left
+            position: relative
+            img
+              margin: 0
+            .balloon
+              padding: 20px 29px 32px 22px
+              background: img('/landing/balloon.png', 'no-repeat' ,'')
+              width: 315px
+              height: 147px
+              position: absolute
+              left: -35px
+              top: 0
+              text-align: center
+              font-size: 15px
+              color: #fff
+              .man
+                background: img('/landing/man.png', 'no-repeat' ,'')
+                display: inline-block
+                width: 41px
+                height: 41px
+                margin-right: 13px
+                margin-bottom: 15px
+                vertical-align: top
+              .large
+                display: inline-block
+                font-family: $fontDiffMedium
+                font-size: 46px
+                height: 41px
+                margin-bottom: 15px
+                vertical-align: top
+              .text
+                line-height: 1.4
+          .terms
+            margin-top: 10px
+            width: 460px
+            float: left
+            .title
+              font-size: 18px
+              font-weight: 700
+              padding-bottom: 30px
+            .term
+              min-height: 40px
+              margin-bottom: 40px
+              text-align: left
+              .sprite
+                float: left
+              .name
+                margin-left: 60px
+                font-size: 16px
+                font-weight: 700
+                padding-bottom: 5px
+              .text
+                margin-left: 60px
+                font-size: 14px
+                line-height: 1.4
+            .btn
+              width: 340px
+              font-family: $fontDiffBold
+              font-size: 16px
+    #security
+      text-align: center
+      height: 675px
+      background: img('/landing/blue-bg.jpg', 'no-repeat' ,'#00c9ee')
+      padding-top: 80px
+      .security-biz
+        .pic
+        h2
+          font-size: 30px
+          color: #fff
+          font-weight: 400
+          margin: 55px 0 20px
+          padding: 0
+        .description
+          font-size: 16px
+          color: #fff
+          line-height: 1.6
+
+      .security-fiz
+        h2
+          font-size: 30px
+          color: #fff
+          font-weight: 400
+          margin: 0 0 80px
+          padding: 0
+        .row
+          .col
+            width: 325px
+            float: left
+            text-align: center
+            color: #fff
+            .pic
+              height: 285px
+              background: img('/landing/shadow.png', 'no-repeat' ,'')
+              background-position: 100px 220px
+              img
+
+            span
+              line-height: 1.4
+              font-size: 18px
+              display: block
+    #mobile
+      text-align: center
+      background: img('/landing/green-bg.jpg', 'top center no-repeat' ,'#51d477')
+      height: 675px
+      padding-top: 170px
+      color: #fff
+      img
+        margin-bottom: 95px
+      h2
+        font-size: 30px
+        font-weight: 400
+        margin: 0 0 10px
+        padding: 0
+      span
+        font-size: 18px
+
+    #legal
+      text-align: center
+      background: #00c38f
+      height: 670px
+      padding-top: 75px
+      color: #fff
+      img
+        margin-bottom: 40px
+      .title
+        font-size: 30px
+        font-weight: 400
+        margin: 0 0 15px
+        padding: 0
+      .stamp
+        background: img('/landing/stamp.png', 'no-repeat' ,'')
+        width: 480px
+        height: 104px
+        margin: 0 auto
+    #form
+      position: relative
+      background: #1799ec
+      height: 465px
+      padding-top: 80px
+      .icons
+        position: absolute
+        &.icons-left
+          background: img('/landing/regarea-bg-left.png', 'no-repeat' ,'')
+          width: 201px
+          height: 381px
+          left: 50%
+          top: 72px
+          margin-left: -443px
+        &.icons-right
+          background: img('/landing/regarea-bg-right.png', 'no-repeat' ,'')
+          width: 258px
+          height: 307px
+          left: 50%
+          top: 105px
+          margin-left: 235px
+        &.icons-top
+          background: img('/landing/regarea-bg-top.png', 'no-repeat' ,'')
+          width: 77px
+          height: 72px
+          left: 50%
+          top: 50px
+          margin-left: -175px
+          z-index: 99
+        &.icons-left-bottom
+          background: img('/landing/regarea-bg-left-bottom.png', 'no-repeat' ,'')
+          width: 63px
+          height: 76px
+          left: 50%
+          top: 410px
+          margin-left: -471px
+        &.icons-right-bottom
+          background: img('/landing/regarea-bg-right-bottom.png', 'no-repeat' ,'')
+          width: 105px
+          height: 102px
+          left: 50%
+          top: 390px
+          margin-left: 265px
+      input[type=email], input[type=password], input[type=text]
+        -webkit-border-radius: 3px
+        border: 1px solid #dfe2e4
+        border-radius: 3px
+        height: 28px
+        padding: 0 5px
+        width: 100%
+      input[type=text]::-webkit-input-placeholder,input[type=password]::-webkit-input-placeholder
+        color: #86898d
+        font-size: 11px
+        font-style: normal
+      input[name=City]
+        outline: none
+      .registration-box
+        margin: 0 auto 0
+        width: 440px
+        padding: 30px 60px
+        height: 410px
+        border-radius: 3px
+        position: relative
+        z-index: 1
+        box-shadow: 0 2px 4px rgba(0,0,0,.3)
+        background: img('/landing/registration-bg.png', 'top center no-repeat' ,'#ffffff')
+        i.icon.description
+          background:  img('/landing/descr-icon-grey.png', 'center no-repeat' ,'')
+          display: inline-block
+          height: 16px
+          vertical-align: middle
+          width: 16px
+          position: absolute
+          top: 8px
+          left: 330px
+          display: none
+        h2
+          font-size: 18px
+          font-weight: 700
+          color: #1f2224
+          margin: 0 auto 25px
+          text-align: center
+        .row
+          margin-bottom: 19px
+          position: relative
+          label
+            color: #ff2424
+          .eye
+            position: absolute
+            top: 11px
+            right: 10px
+            display: block
+            width: 19px
+            height: 11px
+            background: img('/landing/eye.png', 'bottom center no-repeat' ,'')
+            cursor: pointer
+            &.active
+              background-position: top center
+          .value
+            position: relative
+            width: 440px
+          input[type=text], input[type=password]
+            height: 33px
+            line-height: 33px
+            font: 13px Verdana
+            font-style: normal
+            text-align: center
+            color: #000
+            &.error
+              background: #fcd9df
+              border: 1px solid #f3aab7
+          &.row-submit
+            padding-top: 13px
+            text-align: center
+            .btn
+              margin: 0 auto
+              width: 230px
+              background: #8dc63f
+              color: #fff
+              &.disabled
+                background: #aab8c0
+          label
+            &.error
+              position: absolute
+              left: 340px
+              top: 0
+              min-width: 240px
+              min-height: 30px
+              text-align: center
+              color: #000
+              padding: 8px 10px
+              font-size: 11px
+              border-radius: 4px
+              background: #fff5d2
+              border: 1px solid #ffdf8b
+              box-shadow: 1px 1px 5px rgba(0,0,0,.4)
+            &:before
+              background: img('/landing/arrow-left.png', 'left bottom no-repeat' ,'')
+              width: 5px
+              height: 20px
+              position: absolute
+              left: -5px
+              top: -1px
+              content: ''
+    #footer
+      background: #3c454a
+      height: 140px
+      padding-top: 55px
+      .copy
+        color: #79878e
+        font-size: 11px
+        float: left
+        img
+          margin-bottom: 15px
+      .contacts
+        float: right
+        .phone
+          margin-bottom: 10px
+          font-family: $fontDiffMedium
+          font-size: 18px
+          color: #ffffff
+          span
+            font-family: $fontDiffLight
+        .email
+          float: right
+          font-size: 13px
+          color: #ffffff
+          a
+            color: inherit
+            &:focus, &:active
+              color: #8dc63f
+
+//@media (max-width: 1020px)
+//  .app-landing
+//    #header
+//      width: 1020px
+
+.autocomplete-suggestions
+  overflow: auto
+  margin-top: -1px
+  padding: 7px 2px
+  background: #fff
+  border: 1px solid #dfe2e4
+  border-radius: 1px
+  border-top: 0
+  width: 320px !important
+  .autocomplete-suggestion
+    background: #FFF
+    font-size: 12px
+    padding: 0 10px
+    white-space: nowrap
+    overflow: hidden
+    height: 20px
+    line-height: 20px
+    &:hover
+      color: #0d81cb
+      cursor: pointer
+  .autocomplete-suggestions strong
+    font-weight: normal
+

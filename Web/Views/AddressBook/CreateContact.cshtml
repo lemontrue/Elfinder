@@ -1,0 +1,472 @@
+﻿@using System.Web.Optimization
+@model CryptxOnline.Web.CryptxService.Contact
+
+@{
+    Layout = null;
+}
+@if (ViewBag.refresh != null)
+{
+    <script>
+        parent.$('#ContactListFrame')[0].contentWindow.Refresh();
+        parent.$("#createContactFrameDiv").dialog("close");
+    </script>
+}
+@if (ViewBag.login != null)
+{
+    <script>
+        parent.location.href = '@Url.Action("Login", "Default")'
+    </script>
+}
+<!DOCTYPE html>
+
+<html style="; height: auto; padding: 4px 18px 10px; width: auto;">
+    <head>
+        <meta charset="UTF-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+
+
+        <link href="../../Content/CSS/New/common.css" rel="stylesheet" />
+        <link href="../../Content/CSS/New/normalize.css" rel="stylesheet" />
+        <link href="../../Content/CSS/New/icons.css" rel="stylesheet" />
+        @*<link href="../../Content/CSS/New/style.css" rel="stylesheet" />*@
+        <link href="../../Content/CSS/New/ContactListStyle.css" rel="stylesheet" />
+        <link href="../../Content/CSS/New/jquery.fancybox.css" rel="stylesheet" />
+        <link href="../../Content/opentip.css" rel="stylesheet" />
+        @Scripts.Render("~/bundles/New")
+        <style>
+            .error { color: red; }
+        </style>
+    </head>
+    @using (Html.BeginForm())
+    {
+        @Html.Hidden("userId", (Guid) ViewBag.UserId)
+        @Html.Hidden("certificates")
+
+        <body style="margin: 0px; min-height: 100%; padding: 0px;">
+            <div style="height: 100%">
+                <div style="cursor: pointer; position: absolute; right: 0px; top: 0px;">
+                    <a title="закрыть" class="fancybox-item fancybox-close" onclick=" closeFrame() "></a>
+                </div>
+                <div class="modal-window" id="new-contact">
+                    <div class="title">
+                        Введите данные нового контакта
+                    </div>
+                    <div style="padding-top: 30px">
+                        <div class="row">
+                            <label class="col">
+                                Имя:
+                            </label>
+                            <div class="value col">
+                                @Html.TextBoxFor(m => m.Name, new {@maxlength = 24, @type = "text", @id = "name"})
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col">
+                                E-mail:
+                            </label>
+                            <div class="value col">
+                                @Html.TextBoxFor(m => m.Email, new {@type = "text", required = "required"})
+                                <small id="emailNotif">
+                                    Для записи нескольких адресов, введите их через запятую
+                                </small>
+                                <span id="wrongEmail" style="color: red; display: none; position: absolute;">Адрес электронной почты введен неверно</span>
+                            </div>
+                        </div>
+                        <input id="file" type="file" style="opacity: 0;width: 0;height:0" accept=".cer" multiple />
+                        <div class="row cert-toggle">
+                            @*
+                            <div class="btn btn-blue pull-right">
+                                Добавить сертификат
+                            </div>
+                        *@
+                            <div class="dropdown pull-right">
+                                <div class="btn btn-blue pull-right" data-toggle="dropdown">
+                                    Добавить сертификат
+                                    <i class="icon dd-arrow">
+
+                                    </i>
+                                </div>
+                                <div style="width: 210px" class="dropdown-menu">
+                                    <div class="arrow-top">
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <a style="cursor: pointer" id="btn-load">
+                                                <i class="ico-7-1-download ib-ico ico">
+                                                </i>  Загрузить из файла
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a style="cursor: pointer" onclick=" findInCryptogramm_click() ">
+                                                <i class="ico-7-1-search ib-ico ico">
+                                                </i>  Найти в Cryptogramm
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="cert-list">
+                            <div class="block-title">
+                                <div class="text">
+                                    Список сертификатов
+                                </div>
+                            </div>
+                            <div class="scroll-wrap">
+                                <div class="scroller">
+                                    <div class="certificats-list-modal">
+                                        <table id="certificates_tbl" style="background-color: seashell; width: 100%">
+                                            <tbody></tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div class="scroller__bar-wrapper">
+                                    <div class="scroller__bar"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row sbmt text-right">
+                            <a class="close" href="#" onclick=" closeFrame() ">Отмена</a>
+                            <input id="sbmt" class="btn btn-green" type="submit" value="Сохранить" onclick=" return submit_click(); " />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </body>
+    }
+
+</html>
+<script type="text/javascript">
+    function addCertificate(retrievedData) {
+        if (scroll.update)
+            scroll.update();
+        var hasCert = false;
+        $.each(window.certificates, function() {
+            if (this.Thumbprint == retrievedData.Thumbprint) {
+                hasCert = true;
+            }
+        });
+        //$("#certificatesDiv").css("display", "block");
+        //$(this).parent().siblings('.cert-list').toggle();
+        if (hasCert) {
+            parent.infoModal('Выбранный сертификат уже присутствует в списке');
+            return;
+        }
+        window.certificates.push(retrievedData);
+        var oldDataString = '<tr id=\'' + retrievedData.Thumbprint + '\'>' +
+            '<td>' +
+            '<b>Название сертификата:</b>' +
+            '</td>' +
+            '<td>' +
+            '<input type="text" value="' + retrievedData.FriendlyName + '" onblur="chckbox_change()"/>' +
+            '</td>' +
+            '<td>' +
+            '<input type="button" onclick="deleteCert(this)" value="X"/>' +
+            '</td>' +
+            '</rt>' +
+            '<tr>' +
+            '<td>' +
+            '<a href=\'' + '@Url.Action("GetCertificate", "Default")' + '?thumbprint=' + retrievedData.Thumbprint + '\'>' + retrievedData.SubjectName + '</a>' +
+            '</td>' +
+            '<td>' +
+            retrievedData.TimeMessage +
+            '</td>' +
+            '<td>' +
+            '</td>' +
+            '<tr/>';
+        var istest =  retrievedData.IsTest ? '<span class="test-certificate-icon  js-test-certificate-tip" id="testTip-' + retrievedData.Thumbprint + '"></span>' : '';
+        var newStyleDiv = '<div id=\'' + retrievedData.Thumbprint + '\' class="certificat">' +
+            '<div class="name col">' +
+            '<div class="cert-title">' +
+            'Название сертификата:' +
+            '</div>' +
+            istest +
+            '<a href="#"\'>' + retrievedData.SubjectName + '</a>' +
+            '</div>' +
+            '<div class="sert col">' +
+            '<input type="text"  value="' + (retrievedData.FriendlyName == null ? "" : retrievedData.FriendlyName) + '" onblur="chckbox_change()"/>' +
+            '<small>' + retrievedData.TimeMessage + '</small>' +
+            '</div>' +
+            '<div class="action col">' +
+            '<a class="down" href=\'' + '@Url.Action("GetCertificate", "Default")' + '?thumbprint=' + retrievedData.Thumbprint + '\'>' +
+            '</a>' +
+            '<a class="remove" onclick="deleteCert(this)" style="cursor:pointer"></a>' +
+            '</div>' +
+            '</div>';
+
+        $('.certificats-list-modal').append(
+            newStyleDiv
+        );
+        var regTipOptions = {
+            tipJoint: "left",
+            background: '#fff5d2',
+            borderRadius: 4,
+            borderWidth: 1,
+            borderColor: '#fee8ae'
+        };
+        $(".js-test-certificate-tip").each(function(i,el){
+            new Opentip($(el), 'Сертификат выпущен без участия<br>аккредитованного Удостоверяющего<br>Центра и не имеет юридической силы.', '', regTipOptions);
+        });
+    }
+</script>
+<script type="text/javascript">
+    window.certificates = [];
+
+    function test() {
+        parent.$('#ContactListFrame')[0].contentWindow.test();
+    }
+
+    function findInCryptogramm_click() {
+        $("#addCertificateDiv").css("display", "none");
+        parent.findCertClick();
+        parent.hideFoundedCerts();
+    }
+
+    function chckbox_change() {
+        var div = $(event.srcElement).parents('div[id]:first');
+        var value = $(event.srcElement).val();
+        var id = div.attr('id');
+
+        $.each(window.certificates, function() {
+            if (this.Thumbprint == id) {
+                this.FriendlyName = value;
+            }
+        });
+
+    }
+
+    function submit_click() {
+        var email = $('#Email');
+        if (checkEmail("", email.val())) {
+            //debugger;
+            $('#save').val('val');
+            $('#certificates').val(JSON.stringify(window.certificates));
+            setTimeout(disableSbmt, 1000);
+            return true;
+        } else {
+            email.attr('class', 'error');
+            var we = $('#wrongEmail');
+            we.css('display', 'block');
+            return false;
+        }
+    }
+
+    function disableSbmt() {
+        $('#sbmt').attr('disabled', true);
+        $('#sbmt').css('background-image', '@Url.Content("../../Content/Images/ajax-loaderRound.gif")');
+        $('#sbmt').css('background-color', '');
+
+    }
+
+    function deleteCert(el) {
+        var div = $(el).parents('div[id]:first');
+        var id = div.attr('id');
+        window.certificates = jQuery.grep(window.certificates, function(value) {
+            return value.Thumbprint != id;
+        });
+        var fileUpl = $('#file');
+        fileUpl.replaceWith(fileUpl = fileUpl.val('').clone(true));
+        div.remove();
+    }
+
+    function closeFrame() {
+        parent.disposeCreateContactFrame();
+    }
+
+    function checkEmail(regexp, value) {
+        var re;
+        if (regexp == "")
+            re = /^([A-Za-z0-9]+\.{0,1})+([A-Za-z0-9_-]+\.)*[A-Za-z0-9_-]*[A-Za-z0-9]+@@[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*\.[A-Za-z0-9]{2,6}$/;
+        else
+            re = regexp;
+        var emails = value;
+        var emailArr = emails.split(',');
+        if (emails == null || emails == "") {
+            return false;
+        }
+
+        for (var i = 0; i < emailArr.length; i++) {
+            if (emailArr[i] == "" || !re.test(emailArr[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //function checkEmail(regexp,value) {
+    //    var re = regexp;
+    //    var emails = value;
+    //    var emailArr = emails.split(',');
+    //    if (emails == null || emails == "") {
+    //        return false;
+    //    }
+
+    //    for (var i = 0; i < emailArr.length; i++) {
+    //        if (emailArr[i] == "" || !re.test(emailArr[i])) {
+    //            return false;
+    //        }
+    //    }
+    //    return true;
+    //}
+
+    $(document).ready(function() {
+        $('#name').blur(function(e) {
+            var charArr = ($('#name').val().split(''));
+            var newStr = "";
+            $.each(charArr, function() {
+                var keyCode = this.charCodeAt(0);
+                if (keyCode == 1061 || keyCode == 1066 || keyCode == 33 || keyCode == 34 || keyCode == 37 || keyCode == 8470 || keyCode == 59 || keyCode == 58 || keyCode == 63 || keyCode == 42 || keyCode == 126 || keyCode == 34 || keyCode == 60 || keyCode == 62 || keyCode == 44 || keyCode == 46 || keyCode == 61 || keyCode == 45 || keyCode == 43 || keyCode == 123 || keyCode == 125 || keyCode == 39 || keyCode == 93 || keyCode == 64 || keyCode == 39 || keyCode == 96 || keyCode == 35 || keyCode == 36 || keyCode == 94 || keyCode == 38 || keyCode == 91 || keyCode == 47 || keyCode == 92) {
+
+                } else {
+                    newStr += this;
+                }
+            });
+            $('#name').val(newStr);
+        });
+        $('#name').keypress(function(key) {
+            var keyCode = key.charCode;
+            if (keyCode == 1061 || keyCode == 1066 || keyCode == 33 || keyCode == 34 || keyCode == 37 || keyCode == 8470 || keyCode == 59 || keyCode == 58 || keyCode == 63 || keyCode == 42 || keyCode == 126 || keyCode == 34 || keyCode == 60 || keyCode == 62 || keyCode == 44 || keyCode == 46 || keyCode == 61 || keyCode == 45 || keyCode == 43 || keyCode == 123 || keyCode == 125 || keyCode == 39 || keyCode == 93 || keyCode == 64 || keyCode == 39 || keyCode == 96 || keyCode == 35 || keyCode == 36 || keyCode == 94 || keyCode == 38 || keyCode == 91 || keyCode == 47 || keyCode == 92)
+                return false;
+        });
+
+        $('.dropdown-menu').mouseleave(function(e) {
+            $('[data-toggle="dropdown"]').parent().removeClass('open');
+        });
+        $('#Email').keyup(function() {
+            var email = $('#Email');
+            var we = $('#wrongEmail');
+            var emailNotif = $('#emailNotif');
+            if (checkEmail("", email.val())) {
+                email.attr('class', '');
+                we.css('display', 'none');
+                emailNotif.css('display', 'block');
+
+            } else {
+                email.attr('class', 'error');
+                we.css('display', 'block');
+                emailNotif.css('display', 'none');
+            }
+
+        });
+        $('#Email').blur(function() {
+            var email = $('#Email');
+            var we = $('#wrongEmail');
+
+            if (checkEmail("", email.val())) {
+                email.attr('class', '');
+                we.css('display', 'none');
+
+            } else {
+                email.attr('class', 'error');
+                we.css('display', 'block');
+            }
+
+        });
+        if ($.isArray(parent.window.certificates)) {
+            var certs = parent.window.certificates;
+            $.each(certs, function() {
+                addCertificate(this);
+            });
+            parent.window.certificates = [];
+        }
+
+        if ('@(ViewBag.cert != null)' == 'True') {
+            var obj = $.parseJSON('@Html.Raw(ViewBag.cert)');
+            addCertificate(obj);
+        }
+
+
+        //jQuery.validator.addMethod(
+        //    'regexp',
+        //    function(value, element, regexp) {
+        //        return this.optional(element) || checkEmail(regexp,value);
+        //    },
+        //    "Please check your input."
+        //);
+        //$('form').validate({
+        //    rules: {
+        //        Name: {
+        //            required: true,
+        //            minlength:3
+        //        },
+        //        Email: {
+        //            regexp: /^([a-z0-9_-]+\.)*[a-z0-9_-]+@@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/
+        //        }
+        //    },
+        //    messages: {
+        //        Name: {
+        //            required: "Это поле обязательно для заполнения",
+        //            minlength: "Имя должно быть минимум 3 символа"
+        //        },
+        //        Email: {
+        //            regexp:"Не верный E-mail"
+        //        }
+        //    }
+        //});
+
+        $('#certificates_tbl').find('input[type="text"]').click(function(event) {
+        });
+
+
+        $('#file').change(function(e) {
+            //$('.dropdown-menu').dropdown('toggle');
+            var fileInput = document.getElementById('file');
+            var files = fileInput.files;
+            for (var i = 0; i < files.length; i++) {
+                if (files[i].size < 1048576) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', '@Url.Action("AddCertificateToContact")', false);
+                    xhr.setRequestHeader('Content-type', 'multipart/form-data');
+                    //Appending file information in Http headers
+                    //xhr.setRequestHeader('X-File-Name', files[i].name);
+                    xhr.setRequestHeader('X-File-Type', files[i].type);
+                    xhr.setRequestHeader('X-File-Size', files[i].size);
+                    xhr.addEventListener("load", function(evt) { UploadComplete(evt); }, false);
+                    //Sending file in XMLHttpRequest
+                    xhr.send(fileInput.files[i]);
+                    var retrievedData = "";
+                } else {
+                    parent.infoModal("Файл не соответствует требованиям к сертификатам, используемым в Cryptogramm. Загрузка невозможна.");
+
+                }
+            }
+
+            function UploadComplete(evt) {
+                if (evt.target.status == 200) {
+                    var control = $("#file");
+                    control.replaceWith(control = control.clone(true));
+                    retrievedData = jQuery.parseJSON(xhr.responseText);
+                    if (retrievedData.Status == "ok") {
+                        addCertificate(retrievedData);
+                    } else {
+                        parent.errorModal(retrievedData.Status);
+                    }
+
+                } else
+                    alert("Файл не соответствует требованиям к сертификатам, используемым в Cryptogramm. Загрузка невозможна.");
+            }
+
+        });
+
+
+        $('#btn-load').click(function() {
+            //$('.dropdown-menu').css('display','none');
+            $('#file').click();
+        });
+
+        $("#addCertificate").click(function() {
+            var divC = $("#addCertificateDiv");
+            if (divC.css("display") == "none") {
+                divC.css("display", "block");
+            } else {
+                divC.css("display", "none");
+            }
+        });
+    });
+
+
+</script>

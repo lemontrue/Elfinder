@@ -1,0 +1,37 @@
+﻿<div id="restore">
+    <h1>
+        Восстановление пароля
+    </h1>
+    <div class="box">
+        <div class="restore-area">
+            <div class="form">
+                <div class="row message"></div>
+                <div class="row info">
+                    Укажите телефон, который вы используете для авторизации в системе.
+                </div>
+                <div class="row">
+                    <label class="col">
+                        Телефон:
+                    </label>
+                    <div class="value col">
+                        <input {{focusEl}} can-value="emailValue" class="js-phone-mask" type="text" autocomplete="on" maxlength="50" name="emailRecovery" />
+                    </div>
+                </div>
+                <div class="row sbmt">
+                    <a class="btn btn-cancel" href="#"></a>
+                    <input can-click="event.enter" class="btn btn-blue" type="submit" value="Далее" />
+                </div>
+            </div>
+        </div>
+        <div class="row bottom text-right">
+            <a href="#">
+                Техническая поддержка
+            </a>
+        </div>
+    </div>
+    {{#if error}}
+        <div class="error-mess">
+            {{error.message}}
+        </div>
+    {{/if}}
+</div>

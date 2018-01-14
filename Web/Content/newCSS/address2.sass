@@ -1,0 +1,96 @@
+.add-contact
+  float: right
+  min-width: 300px
+  position: absolute
+  top: 0
+  right: 0
+.filter
+  padding: 0 25px
+  height: 70px
+  .check-all
+    padding-top: 15px
+    width: 30px
+    margin-right: 0 !important
+  .form
+    display: inline-block
+    vertical-align: top
+    .col
+      width: 210px
+      margin-right: 15px
+      label
+        display: block
+        color: #161616
+        font-size: 11px
+        height: 18px
+      input.search
+        background: url(../img/search.png) right center no-repeat
+        padding-right: 30px
+    .col:last-child
+      margin-right: 0
+.certificats-list
+  .certificat:first-child
+    padding-top: 10px
+    .actions
+      top: 10px
+  .certificat:hover
+      background: #edf4fa
+  .certificat.selected
+      background: #fffdde !important
+  .certificat
+    position: relative
+    padding: 20px 25px 0
+    hr
+      margin: 25px 0 0 0
+      border: 1px solid #d9d9d9
+      border-top: 0
+    .checkbox
+      padding-top: 28px
+      width: 30px
+    .col1
+      width: 220px
+      display: inline-block
+      vertical-align: top
+      line-height: 20px
+      .title
+        font-size: 14px
+        padding: 5px 0 18px 0
+        font-weight: 700
+      .cert
+        span.active
+          color: #161616
+        span.expire
+          color: #f4484a
+    .col2
+      display: inline-block
+      vertical-align: top
+      line-height: 20px
+      .new-title
+        padding: 5px 0 10px 0
+        width: 350px
+        .box
+          width: 250px
+          margin-right: 10px
+          input[type=text]:disabled
+            background: #f9f9f9
+        a.action
+          line-height: 25px
+.cert-control
+  padding-top: 20px
+  .backlink
+    float: left
+    a
+      display: inline-block
+      padding: 0 20px
+      height: 32px
+      line-height: 32px
+      background: #f3f3f3
+      color: #373737
+  .controls
+    .sbmt
+      a.close
+        padding-right: 15px
+        color: #131313
+.more-cert
+  height: 75px
+  text-align: center
+  padding-top: 28px

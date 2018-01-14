@@ -1,0 +1,393 @@
+﻿@using System.Web.Optimization
+@using CryptxOnline.Web.Helpers
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Авторизация</title>
+
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <link href="/Assets/i/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+        <link href="/Assets/css/common.css?v=@AssetsVersion" rel="stylesheet"/>
+        <link href="/Assets/css/login.css?v=@AssetsVersion" rel="stylesheet"/>
+
+        <!--[if IE 8]>
+            <link href="/Assets/css/ie.css?v=@AssetsVersion" rel="stylesheet"/>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body class="app-login">
+
+        <div id="container-login">
+            @Html.Hidden("retUrl", (string)ViewBag.retUrl)
+            <div id="login-content">
+                <input type="hidden" id="timerField" name="timerField" value="ZzZzZZ" />
+                <header id="header">
+                    <div class="wrap center">
+                        <a class="logotype" href="@Url.Action("Landing", "Helper")">
+                            <img src="@Url.Content("~/Assets/i/login/logo.png")" alt="http://cryptogramm.ru" />
+                            <span>CRYPTOGRAMM</span>
+                        </a>
+                        <div class="slogan">
+                            <span>Облачный сервис для защищенного хранения и обмена информацией <br /> с возможностью удаленного проведения криптоопераций.</span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </header>
+                <div class="wrap center login-form">
+                    <div id="login">
+                        <div class="titles">
+                            <div class="title active js-show-normal-login" data-tab="login">
+                                Телефон и E-mail
+                            </div>
+                            <div class="title js-show-kobil-login" data-tab="taxnet">
+                                Taxnet Identification
+                            </div>
+                        </div>
+                        <div class="box">
+                            <div class="login-area" id="normalLogin">
+                                <div class="row">
+                                    <label class="col">Телефон или E-mail:</label>
+                                    <div class="value col">
+                                        @Html.TextBox("login1", null, new { required = "required" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label class="col">Пароль:</label>
+                                    <div class="value col">
+                                        @Html.TextBox("password", null, new { @class = "checkCaps", required = "required", type = "password" })
+                                        <div class="checkBubble hidden">
+                                            Отключите CapsLock
+                                        </div>
+
+                                        <div class="restore text-right">
+                                            <a href="@Url.Action("Index", "PassRecovery")" target="_blank">Восстановить пароль</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row sbmt">
+                                    <label>@Html.CheckBox("saveEmailNormal", false, new { @class = "col" })Запомнить телефон / E-mail</label>
+                                    <input class="btn btn-blue pull-right" type="button" value="Войти" id="clickButton" />
+                                    <input type="submit" style="display: none" class="button" id="submit" value="Войти" />
+                                </div>
+                            </div>
+                            <div class="login-area tab-taxnet" id="TaxnetId" style="display: none">
+                                <div class="row info">
+                                    Для входа в систему введите номер телефона или E-mail и подтвердите свои данные с помощью приложения на вашем мобильном устройстве
+                                </div>
+                                <div class="row">
+                                    <label class="col">Телефон или E-mail:</label>
+                                    <div class="value col">
+                                        @Html.TextBox("kobilLogin", null, new { required = "required" })
+                                    </div>
+                                </div>
+                                <div class="row sbmt">
+                                    <label>@Html.CheckBox("saveEmailKobil", false, new { @class = "col" })Запомнить телефон / E-mail</label>
+                                    <input class="btn btn-blue pull-right" type="button" value="Войти" id="kobilButton" />
+                                    <input type="submit" style="display: none" class="button" id="submit" value="Войти" />
+                                </div>
+                            </div>
+                            <div class="row bottom text-right">
+                                <a href="/" class="pull-left js-show-registration">Регистрация</a>
+                                <a href="@Url.Content("~/Assets/files/autorization.pdf")" target="_blank">Помощь</a>
+                            </div>
+                        </div>
+                        @if (Html.ViewData.ModelState.Count != 0)
+                        {
+                            <div class="error-mess" style="height: auto !important;">
+                                @Html.ValidationSummary(true)
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="error-mess" style="display: none">
+                                <div class="validation-summary-errors">
+                                    <ul>
+                                        <li>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div id="errDiv" style="left: 100px; position: fixed; top: 200px"></div>
+                </div>
+            </div>
+            <div id="information" class="wrap center">
+                <div class="mobile-app">
+                    <div class="title">Мобильное приложение для iOS и Android</div>
+                    <div class="desc">
+                        <span>
+                            Используйте современные технологии аутентификации,<br />
+                            чтобы быть уверенным в том, что ваш бизнес не<br />
+                            только максимально мобилен и эффективен, но<br />
+                            также и максимально защищен от внешних угроз.
+                        </span>
+                    </div>
+                    <div class="store">
+                        <a class="i-ios-app" href="@Helper.IOSDownloadUri()" alt="Apple AppStore" title="Apple AppStore" ></a>
+                        <a class="i-gplus-app" href="@Helper.AndroidDownloadUri()" alt="Google play" title="Google play"></a>
+                    </div>
+                    <div class="activation">
+                        <a href="@Url.Action("GetTaxnetIdActivation", "Helper")">
+                            Получить код активации мобильного приложения
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+<div class="hidden">
+	<script id="tpl-blankCentered" type="text/html">
+		<div class="modal-blankCentered">
+			<div class="modal-title js-dialog-title">
+				<div class="title">
+					<%- title %>
+				</div>
+			</div>
+			<div class="modal-body js-dialog-body">
+				<div class="row text-center"><%= text %></div>
+				<div class="row sbmt text-center">
+					<input class="btn btn-green" type="button" value="OK" onclick=" $.fancybox.close(); " />
+				</div>
+
+			</div>
+		</div>
+	</script>
+	<script id="tpl-blankError" type="text/html">
+		<div class="modal-blankError">
+			<div class="modal-title js-dialog-title">
+				<div class="title">Внимание!</div>
+			</div>
+			<div class="modal-body js-dialog-body">
+
+				<div class="row">
+					<div class="mess-box">
+						<div class="error js-error"><span><%= text %></span></div>
+					</div>
+				</div>
+
+				<div class="row sbmt pull-right">
+					<input class="btn btn-green" type="button" value="Закрыть" onclick=" $.fancybox.close(); " />
+				</div>
+
+			</div>
+		</div>
+	</script>
+
+
+    <script id="tpl-regPhone" type="text/html">
+        <div class="modal-regPhone">
+            <div class="modal-title js-dialog-title">
+                <div class="title">Подтверждение номера телефона</div>
+                <div class="time js-time">00:00</div>
+            </div>
+            <div class="modal-body js-dialog-body">
+
+                <form action="" method="post" autocomplete="off">
+
+                    <div class="row">
+                        <div class="value-row success-mess text-center">
+                            На мобильный телефон, указанный Вами в форме, выслано <br /> SMS-сообщение с кодом подтверждения
+                        </div>
+                    </div>
+
+                    <div class="row text-center row-condensed">
+                        Если сообщение не было получено в течение минуты, нажмите на кнопку "Запросить код повторно".
+                    </div>
+
+                    <div class="row row-condensed row-padded text-center">
+                        <label class="col" style="cursor: default"> Полученный код: </label>
+                        <div class="value col">
+                            @Html.TextBox("pinCode2", null, new { maxlength = 10, @class = "js-pin" })
+                            <span class="error js-error"></span>
+                        </div>
+                    </div>
+
+                    <div class="row sbmt">
+                        <div class="action text-right">
+                            <a class="close js-close" href="#">Отмена</a>
+                            <input class="btn btn-blue js-resend" type="button" value="Запросить код повторно" disabled="disabled" />
+                            <input class="btn btn-blue js-submit" type="button" value="Продолжить" />
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </script>
+
+	<script id="tpl-login" type="text/html">
+		<div class="modal-login">
+			<div class="modal-title js-dialog-title">
+				<div class="title">Подтверждение через смс</div>
+				<div class="time js-time">00:00</div>
+			</div>
+			<div class="modal-body js-dialog-body">
+
+				<form action="" method="post" autocomplete="off">
+
+					<div class="row">
+						<div class="value-row success-mess text-center">
+							На мобильный телефон, указанный Вами в форме, выслано <br /> SMS-сообщение с кодом подтверждения
+						</div>
+					</div>
+
+					<div class="row text-center row-condensed">
+						Если сообщение не было получено в течение минуты, нажмите на кнопку "Запросить код повторно".
+					</div>
+
+					<div class="row row-condensed row-padded text-center">
+						<label class="col" style="cursor: default"> Полученный код: </label>
+						<div class="value col">
+							@Html.TextBox("pinCode2", null, new { maxlength = 10, @class = "js-pin" })
+							<span class="error js-error"></span>
+						</div>
+					</div>
+
+					<div class="row sbmt">
+						<div class="action text-right">
+							<a class="close js-close" href="#">Отмена</a>
+							<input class="btn btn-blue js-resend" type="button" value="Запросить код повторно" disabled="disabled" />
+							<input class="btn btn-blue js-submit" type="button" value="Продолжить" />
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</script>
+	<div class="modal-window" id="sms" style="display: none;">
+		<div class="modal-title js-dialog-title">
+			<div class="title">Подтверждение через смс</div>
+			<div class="time js-time">00:00</div>
+		</div>
+		<div class="modal-body js-dialog-body">
+			<form action="" method="post" autocomplete="off">
+
+				<div class="row">
+					<div class="value-row success-mess text-center">
+						На указанный вами мобильный номер<br />отправлено sms-сообщение с кодом, который необходимо ввести в форму ниже.<br />По истечении трех минут отправленный код становится неактивным
+					</div>
+				</div>
+
+				<div class="row text-center row-condensed">
+					Если сообщение не было получено в течение минуты, нажмите на кнопку "Запросить код повторно".
+				</div>
+
+				<div class="row row-condensed row-padded text-center">
+					<label class="col" style="cursor: default"> Полученный код: </label>
+					<div class="value col">
+						@Html.TextBox("pinCode", null, new { maxlength = 10, @class = "js-pin" })
+						<span class="error js-error"></span>
+					</div>
+				</div>
+
+				<div class="row sbmt">
+					<div class="action text-right">
+						<a class="close js-close" href="#">Отмена</a>
+						<input class="btn btn-blue js-resend" type="button" value="Запросить код повторно" disabled="disabled" />
+						<input class="btn btn-blue js-submit" type="button" value="Продолжить" />
+					</div>
+				</div>
+
+			</form>
+				<div class="row row-condensed">
+                    <div class="default-mess text-center">
+                        Если сообщение не было получено в течение одной минуты, нажмите на кнопку "Запросить код повторно".
+                    </div>
+					<div class="row">
+						<label class="col" style="cursor: default">
+							Полученный код:
+						</label>
+						<div class="value col">
+							@Html.TextBox("pinCode", null, new { maxlength = 10, @class = "js-pin" })
+							<span class="error js-error"></span>
+						</div>
+						<span class="info error js-sms-limit" style="display: none"></span>
+					</div>
+				</div>
+				<div class="row sbmt">
+					<div class="result col">
+						<div class="process">
+							<span class="img" style="display: none;"></span>
+						</div>
+					</div>
+					<div class="action col pull-right">
+						<a class="close" id="close-pin" href="#">Отмена</a>
+						<input class="btn btn-blue" id="resend" type="button" value="Запросить код повторно" disabled="disabled" />
+						<input id="send-pin" class="btn btn-blue" type="button" value="Продолжить" />
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="modal-window" id="kobil" style="display: none; width: 600px">
+		<div class="title">
+			Система Taxnet Identification
+		</div>
+		<div class="time">
+			00:59
+		</div>
+		<div class="row">
+			<div class="value-row text-center">
+				С помощью приложения на вашем мобильном устройстве
+				<br />
+				подтвердите авторизацию в системе.
+				<br />
+                <span class="js-hideOnTime">Успейте подтвердить свои данные в течение 3х минут!</span>
+			</div>
+		</div>
+		<div class="row row-loader js-hideOnTime"></div>
+		<div class="text-center js-hideOnTime" style="display: none" id="close-text">
+			<a class="close" href="#">Закрыть</a>
+		</div>
+		<div class="row sbmt text-center js-hideOnTime">
+			<a class="close" href="#">Отмена</a>
+		</div>
+		<div class="row text-center error" style="display: none">
+			<span>Данные не были подтверждены!</span>
+		</div>
+	</div>
+	<div class="modal-window" id="info">
+		<div class="title">
+			Внимание!
+		</div>
+		<form action="" autocomplete="off" method="post">
+			<div class="row">
+				<div class="mess-box">
+					<div class="attention" id="infoPlacer">
+						Срок действия кода подтверждения истек.
+						В целях безопасности окно было закрыто.
+						Повторите авторизацию сначала.
+					</div>
+				</div>
+			</div>
+
+			<div class="row sbmt pull-right">
+				<input class="btn btn-green" type="button" value="Закрыть" onclick=" $.fancybox.close(); " />
+			</div>
+		</form>
+	</div>
+</div>
+
+@Html.Partial("/Views/Shared/JsGlobal.cshtml")
+
+<script>
+Crypt.Urls.retUrl = '@ViewBag.retUrl';
+</script>
+
+@Html.Partial("/Views/Shared/jQuery.cshtml")
+
+@Scripts.Render("~/bundles/Global")
+@Scripts.Render("~/bundles/Login")
+
+</body>
+</html>

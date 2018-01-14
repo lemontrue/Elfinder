@@ -1,0 +1,155 @@
+{{#if pool.files.length}}
+    <h2 class="main-title">Мастер работы с документами</h2>
+
+    <div id="select-files">
+        <h3 class="files-change">Обрабатываемые файлы</h3>
+
+        <div class="box">
+            <div class="state {{#if event.result}}ready{{else}}change{{/if}}"></div>
+
+            {{#if event.result}}
+                <div class="result_bg"></div>
+            {{/if}}
+
+            <div class="body">
+                <ul class="file-list">
+                    {{#each pool.files}}
+                        <li>
+                            <div class="file-info">
+                                <a href="javascript:void(0);" class="name"><span>{{actionIndex @index}}.</span>{{path}}</a>
+                                {{#if isHade}}
+                                    <div class="deleted">Файл исключен из списка</div>
+                                {{else}}
+                                    {{#if attachedFile.attached}}
+                                        {{#if attachedFile.error}}
+                                            <div class="attached error">
+                                                <span class="name">{{attachedFile.errorMessage}}</span>
+                                                <div class="link">
+                                                    <span can-click="openSelectFileDialog">выбрать</span>
+                                                    <span id="{{id}}">загрузить новый</span>
+                                                </div>
+                                            </div>
+                                            {{upload_file_attached_reg id}}
+                                        {{else}}
+                                            <div class="attached">
+                                                <span class="name">{{attachedFile.path}}</span>
+                                                <div class="link">
+                                                    <span can-click="openSelectFileDialog">выбрать другой</span>
+                                                    <span id="{{id}}">загрузить новый</span>
+                                                </div>
+                                            </div>
+
+                                            {{upload_file_attached_reg id}}
+                                        {{/if}}
+                                    {{else}}
+                                        <div class="last_change">Файл изменен: {{lastDate}}</div>
+                                    {{/if}}
+                                {{/if}}
+                            </div>
+                            <div class="actions">
+                                {{#if error}}
+                                    <div class="error">{{errorMessage}}</div>
+                                {{else}}
+                                    {{#if action}}{{else}}
+                                        {{#if uploaded}}
+                                            {{#if isHade}}
+                                                <div class="deleted">
+                                                    <a can-click="event.show_for_list" href="javascript:void(0);">Восстановить</a> |
+                                                    <a can-click="event.delete_for_list" href="javascript:void(0);">Скрыть</a>
+                                                </div>
+                                            {{else}}
+                                                <a can-click="event.hide_for_list" href="javascript:void(0);" class="delete">Убрать из списка</a>
+                                            {{/if}}
+
+                                        {{else}}
+                                            <div class="progress">
+                                                <div class="bar" style="width: {{upPercen}}%"></div>
+                                            </div>
+                                            <div can-click="event.upload_exit" class="upload_exit" title="Отменить"></div>
+                                        {{/if}}
+                                    {{/if}}
+
+                                {{/if}}
+                            </div>
+                        </li>
+                    {{/each}}
+                </ul>
+
+
+            </div>
+            <div class="controls">
+            {{#if event.result}}
+                <div class="file-edit-control">
+                    <div can-click="event.refiles" class="btn change_file_list">Изменить состав файлов</div>
+                </div>
+            {{else}}
+                <div class="file-edit-control">
+                    <a href="javascript:void(0);" id="newFile">Загрузить новые файлы</a>
+                    <a class="add_upload_files" href="javascript:void(0);" can-click="event.file_list_open">Добавить файлы из загруженных</a>
+                </div>
+            {{/if}}
+
+            </div>
+        </div>
+
+        {{#if action}}{{else}}
+            <div class="action-change">
+                <div class="title">Выберите действие, которое необходимо осуществить:</div>
+                <div class="row">
+                    <div class="c-500">
+                        <select can-value="event.action_value" id="selectAction">
+                            <option value="0">-- выберите действие --</option>
+                            <option value="subscribe">Подписать</option>
+                            <option value="encrypt">Зашифровать</option>
+                            <option value="subscribe_and_encrypt">Подписать и зашифровать</option>
+                            <option value="check_signature">Проверить подпись</option>
+                            <option value="decipher">Расшифровать</option>
+                            <option value="decipher_check_signature">Расшифровать и проверить подпись</option>
+                        </select>
+                        {{#if actionReady}}
+                        {{else}}
+                            <span class="error">Выберите действие</span>
+                        {{/if}}
+                    </div>
+                    <div class="c-500">
+                        <div class="btn-group pull-right" style="position:relative">
+                            <div can-click="event.cancel" class="btn">Отмена</div>
+
+                            {{#if masterReady}}
+                                <button can-click="event.action_run" class="btn btn-big btn-green">Продолжить</button>
+                            {{else}}
+                                <button disabled class="btn btn-big btn-green">Продолжить</button>
+                                <img src="/Scripts/master/v/image/bliue_loader_min.GIF" style="position: absolute;right: 173px;top: 9px;">
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+
+
+    </div>
+
+    <!-- Контейнер для действий -->
+    <div action></div>
+
+    {{activeUploader}}
+{{else}}
+    <h2 class="main-title">Мастер работы с документами</h2>
+
+    <div id="select-files">
+        <div class="select">
+            <div class="upload" id="newFile">
+                <div class="drag"></div>
+                <div class="title">Загрузить новые файлы</div>
+                <div class="info">Вы можете также перетащить файлы в область загрузки.</div>
+            </div>
+            <div class="my-files" can-click="event.file_list_open">
+                <div class="title">Выберите файлы из ранее загруженных</div>
+            </div>
+            <div class="or">или</div>
+        </div>
+        <div class="selected" style="display: none"></div>
+    </div>
+    {{activeUploader}}
+{{/if}}

@@ -1,0 +1,471 @@
+﻿html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section { display: block; }
+
+body { line-height: 1; }
+
+ol, ul { list-style: none; }
+
+blockquote, q { quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+* { outline: none !important; }
+
+.scroll-wrap {
+    height: 320px;
+    overflow: hidden;
+    position: relative;
+}
+
+.scroller {
+    -webkit-overflow-scrolling: touch;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.scroller::-webkit-scrollbar { width: 0; }
+
+.scroller__bar-wrapper {
+    background: #eaeaea;
+    bottom: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 5px;
+    top: 0;
+    width: 4px;
+    z-index: 3;
+}
+
+.scroller__bar {
+    -webkit-transition: opacity .2s linear;
+    background: #989898;
+    opacity: 0;
+    pointer-events: auto;
+    position: absolute;
+    transition: opacity .2s linear;
+    width: 4px;
+    z-index: 1;
+}
+
+.scroller__bar:hover { opacity: .8; }
+
+.baron .scroller__bar { opacity: .6; }
+
+.baron_h .scroller__bar_h {
+    bottom: 30px;
+    opacity: .6;
+}
+
+.wrapper_iphone .header__title_state_fixed { position: relative; }
+
+.wrapper_iphone .header__title_position_top {
+    position: absolute;
+    top: 0;
+}
+
+.wrapper_iphone .header__title_position_bottom {
+    bottom: 0;
+    position: absolute;
+}
+
+#container { width: expression(document.body.clientWidth > 1280? "1280px": "auto" ) }
+
+.dropdown {
+    float: left;
+    position: relative
+}
+
+.dropdown a.dropdown-toggle { cursor: pointer; }
+
+.dropdown.open a.dropdown-toggle { background-color: #f5f5f5; }
+
+.dropdown.open .dropdown-menu { display: block; }
+
+.dropdown .dropdown-menu {
+    display: none;
+    min-width: 0;
+}
+
+.dropdown .dropdown-menu.pull-right {
+    left: auto;
+    margin-top: 1px;
+    right: 0;
+}
+
+.dropdown .dropdown-menu li { line-height: 20px; }
+
+.user-settings .dropdown-menu li { background-image: none !important }
+
+.dropdown .dropdown-menu li a:hover {
+    background: #3498db;
+    color: #fff
+}
+
+.dropdown .dropdown-menu li a {
+    border-style: none;
+    color: #131313;
+    display: block;
+    float: none;
+    font-size: 12px;
+    line-height: 22px;
+    padding: 2px 20px;
+    text-decoration: none;
+}
+
+.dropdown .dropdown-menu li a .ico { margin-right: 5px }
+
+.dropdown-menu, .popup-menu {
+    background-clip: padding-box;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    *border-bottom-width: 2px;
+    border-radius: 3px;
+    *border-right-width: 2px;
+    display: none;
+    float: left;
+    list-style: none;
+    margin: 7px 0 0;
+    min-width: 160px;
+    padding: 7px 0;
+    position: absolute;
+    right: 10px;
+    top: 100%;
+    z-index: 1000;
+}
+
+.dropdown-menu .arrow-top {
+    background: url(../../Images/arrow-top.png);
+    height: 7px;
+    position: absolute;
+    right: 30px;
+    top: -7px;
+    width: 19px;
+}
+
+.organization-menu { padding: 10px 0 }
+
+.organization-menu ul {
+    color: #1e1e1e;
+    font-size: 12px;
+}
+
+.organization-menu ul li { padding: 0 17px !important }
+
+.organization-menu ul li:hover {
+    background: #5898f1 !important;
+    color: #fff !important;
+}
+
+.organization-menu ul li:hover a { color: #fff !important; }
+
+.cusel,
+.cuselFrameRight,
+.jScrollPaneDrag,
+.jScrollArrowUp,
+.jScrollArrowDown { background-image: url(../../Images/qs/select-bg.png) !important; }
+
+.cusel,
+.cuselFrameRight,
+.jScrollPaneDrag,
+.jScrollArrowUp,
+.jScrollArrowDown { }
+
+.cusel {
+    background-position: left top;
+    cursor: pointer;
+    display: inline-block;
+    /* общий вид селекта включая стрелку справа */
+    height: 28px;
+    position: relative;
+    width: 100% !important;
+    z-index: 1;
+}
+
+.cuselFrameRight {
+    background-position: right top;
+    height: 100%;
+    /* левая чсть селект. обыно скругление и левая граница */
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 42px;
+    z-index: 2;
+}
+
+.cuselText {
+    cursor: pointer;
+    /* контейнер для отображенного текста селект */
+    height: 28px;
+    left: 0;
+    line-height: 28px;
+    overflow: hidden;
+    padding: 0 7px; /* подбираем отступы и высоту для видимого текста в селекте */
+    position: relative;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+
+.cusel span {
+    cursor: pointer;
+    /* оформление оптиона */
+    display: block;
+    height: 24px;
+    line-height: 24px;
+    padding: 0 13px;
+    white-space: nowrap;
+    zoom: 1;
+}
+
+.cusel span:hover,
+.cusel .cuselOptHover {
+    background: #1899f4;
+    color: #fff;
+    cursor: default;
+}
+
+.cusel .cuselActive { }
+
+/*
+	styles for focus and hover
+*/
+
+.cusel:hover,
+.cusel:hover .cuselFrameRight,
+.cusel:focus,
+.cusel:focus .cuselFrameRight,
+.cuselFocus,
+.cuselFocus .cuselFrameRight { background-image: url(../../Images/qs/selects-focus.png); }
+
+.cuselOpen { z-index: 999; }
+
+/*
+	styles for disabled select
+*/
+
+.classDisCusel,
+.classDisCusel .cuselFrameRight {
+    background-image: url(../../Images/qs/selects-2-dis.png) !important;
+    color: #ccc;
+    cursor: default;
+}
+
+.classDisCusel .cuselText { cursor: default; }
+
+/*
+	styles for scrollbar
+*/
+
+.cusel .cusel-scroll-wrap {
+    background: #fff;
+    border: 1px solid #C9C9C9;
+    border-radius: 3px;
+    display: block;
+    left: 0;
+    min-width: 100%;
+    padding: 7px 0;
+    position: absolute;
+    top: 30px;
+    visibility: hidden;
+    width: auto;
+}
+
+.cusel .jScrollPaneContainer {
+    background-color: #fff;
+    border: solid 1px #c9c9c9;
+    border-radius: 3px;
+    overflow: hidden;
+    z-index: 5;
+}
+
+.cusel .jScrollPaneTrack {
+    background: #ccc;
+    height: 100%;
+    position: absolute;
+    right: 4px;
+    top: 0;
+    width: 7px !important;
+}
+
+.cusel .jScrollPaneDrag {
+    background-position: -40px -26px;
+    cursor: pointer;
+    height: 27px !important;
+    position: absolute;
+    right: -4px;
+    width: 15px !important;
+}
+
+.cusel .jScrollPaneDragTop {
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+}
+
+.cusel .jScrollPaneDragBottom {
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+}
+
+.cusel .jScrollArrowUp {
+    background-position: -2px -26px;
+    cursor: pointer;
+    height: 12px;
+    overflow: hidden;
+    position: absolute;
+    right: 2px;
+    top: 0;
+    width: 26px;
+}
+
+.cusel .jScrollArrowDown {
+    background-position: -21px -26px;
+    bottom: 0;
+    cursor: pointer;
+    height: 12px;
+    overflow: hidden;
+    position: absolute;
+    right: 3px;
+    top: auto;
+    /* стрелка вниз */
+    width: 25px;
+}
+
+/* ===========================================================
+ * bootstrap-checkbox - v.1.0.0
+ * ========================================================== */
+
+@CHARSET "ISO-8859-1";
+
+.bootstrap-checkbox > button.btn {
+    padding: 7px 0 4px 2px;
+    width: 28px;
+}
+
+.bootstrap-checkbox > button.btn.displayAsButton { width: auto; }
+
+.bootstrap-checkbox > button.btn.displayAsButton > span.label-checkbox { padding: 0 8px 0 4px; }
+
+.bootstrap-checkbox > button.btn.displayAsButton > span.icon { margin: 2px 4px; }
+
+.bootstrap-checkbox > button.btn.displayAsButton > span.label-prepend-checkbox { padding: 0 4px 0 8px; }
+
+.bootstrap-checkbox > button.btn.btn-large {
+    padding: 10px 0 6px 2px;
+    width: 36px;
+}
+
+.bootstrap-checkbox > button.btn.btn-small {
+    padding: 5px 0 3px 1px;
+    width: 24px;
+}
+
+.bootstrap-checkbox > button.btn.btn-mini {
+    padding: 4px 0 1px 1px;
+    width: 20px;
+}
+
+.bootstrap-checkbox > .btn.btn-link { text-decoration: none; }
+
+label.bootstrap-checkbox.disabled {
+    color: #666;
+    cursor: default;
+}
+
+.bootstrap-checkbox > .label-prepend-checkbox { padding-right: 4px; }
+
+.bootstrap-checkbox > .label-checkbox { padding-left: 4px; }
+
+.bootstrap-checkbox.disabled > [class^="label-"],
+.bootstrap-checkbox > .btn[disabled] { cursor: not-allowed; }
+
+[class^="cb-icon-"],
+[class*=" cb-icon-"] {
+    background: url("../../Images/checkbox-sheet.png") no-repeat 14px 14px;
+    display: inline-block;
+    height: 14px;
+    line-height: 14px;
+    *margin-right: .3em;
+    margin-top: 1px;
+    vertical-align: text-top;
+    width: 14px;
+}
+
+.bootstrap-checkbox button.btn > span.cb-icon-check,
+.bootstrap-checkbox.disabled button.btn:hover > span.cb-icon-check,
+.bootstrap-checkbox.disabled button.btn:active > span.cb-icon-check { background-position: 0 -1px; }
+
+.bootstrap-checkbox button.btn:hover > span.cb-icon-check,
+.bootstrap-checkbox button.btn:focus > span.cb-icon-check,
+.bootstrap-checkbox button.btn:active > span.cb-icon-check { background-position: 0 -25px; }
+
+.bootstrap-checkbox button.btn > span.cb-icon-check-empty,
+.bootstrap-checkbox.disabled button.btn:hover > span.cb-icon-check-empty,
+.bootstrap-checkbox.disabled button.btn:active > span.cb-icon-check-empty { background-position: -24px -1px; }
+
+.bootstrap-checkbox button.btn:hover > span.cb-icon-check-empty,
+.bootstrap-checkbox button.btn:focus > span.cb-icon-check-empty,
+.bootstrap-checkbox button.btn:active > span.cb-icon-check-empty { background-position: -24px -25px; }
+
+.bootstrap-checkbox button.btn > span.cb-icon-check-indeterminate,
+.bootstrap-checkbox.disabled button.btn:hover > span.cb-icon-check-indeterminate,
+.bootstrap-checkbox.disabled button.btn:active > span.cb-icon-check-indeterminate { background-position: -48px -1px; }
+
+.bootstrap-checkbox button.btn:hover > span.cb-icon-check-indeterminate,
+.bootstrap-checkbox button.btn:focus > span.cb-icon-check-indeterminate,
+.bootstrap-checkbox button.btn:active > span.cb-icon-check-indeterminate { background-position: -48px -25px; }
+
+input[type=text]::-webkit-input-placeholder {
+    font-size: 11px;
+    font-style: italic;
+}
+
+.text-placeholder {
+    font-size: 11px !important;
+    font-style: italic !important;
+}
+
+input[type=text]::-o-input-placeholder {
+    font-size: 11px;
+    font-style: italic;
+}
+
+input[type=text]::-moz-placeholder {
+    font-size: 11px;
+    font-style: italic;
+}

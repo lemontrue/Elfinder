@@ -1,0 +1,460 @@
+.blank-modal
+  .modal-regPhone
+    width: 550px
+
+  .modal-window
+    color: #161616
+    line-height: normal
+    width: 500px
+    .modal-title
+      margin-bottom: 20px
+    .modal-body
+      .success-mess
+        background: #daf5da
+        border: 1px solid #c1efc0
+        color: black
+        padding: 7px 15px
+        text-align: center
+        border-radius: 5px
+        -webkit-border-radius: 5px
+      .row
+        margin: 20px 0 0
+      .row-condensed
+        padding: 0 30px 10px
+      .row-padded
+
+      .error
+        color: #f00
+        display: block
+        font-size: 12px
+        padding-top: 10px
+        text-align: right
+        height: 20px
+    .time
+      display: inline-block
+      font-size: 13px
+      height: 15px
+      line-height: 15px
+      overflow: hidden
+      padding: 0 1px
+      position: absolute
+      right: 15px
+      top: 3px
+    .descr
+      font-size: 13px
+      margin: 15px 0 30px
+    label
+      line-height: 26px
+      margin-right: 3px
+      text-align: left
+    .value
+      position: relative
+      width: 370px
+    .sbmt
+      margin-top: 20px
+      .action
+        input
+          margin-left: 15px
+          max-width: 200px
+          min-width: 130px
+          padding-left: 10px
+          padding-right: 10px
+          text-align: center
+        .close
+          color: #010101
+
+.blank-centered
+  .modal-blankCentered
+    width: 610px
+  .modal-window
+    color: #161616
+    line-height: normal
+    width: 1000px
+    .modal-title
+      .title
+        border-bottom: 0
+        height: 50px
+        padding-top: 10px
+        text-align: center
+      margin-bottom: 20px
+    .modal-body
+      font-size: 13px
+      .row
+        margin-bottom: 50px
+        &.sbmt
+          margin-bottom: 0px
+
+.modal-blankError
+  width: 465px
+.error-modal
+  line-height: normal
+  width: 465px
+  .row.sbmt
+    margin-bottom: 0
+  .mess-box
+    margin: 26px 0
+    .warning
+      background: url("../../Images/message-error.png") no-repeat scroll left center rgba(0, 0, 0, 0)
+      color: #161616
+      min-height: 45px
+      padding-left: 70px
+    .error
+      background: url(../../Images/message-error.png) left no-repeat
+      color: #161616
+      min-height: 38px
+      padding: 0 0 0 70px
+    .warning span, .attention span, .info span
+      display: table-cell
+      height: 45px
+      line-height: normal
+      vertical-align: middle
+    .warning span, .error span, .attention span
+      display: table-cell
+      height: 38px
+      min-height: 80px
+      vertical-align: middle
+.modal-blankInfo
+  width: 465px
+.info-modal
+  line-height: normal
+  width: 465px
+  .row.sbmt
+    margin-bottom: 0
+  .mess-box
+    margin: 26px 0
+    .warning
+      background: url("../../Images/message-error.png") no-repeat scroll left center rgba(0, 0, 0, 0)
+      color: #161616
+      min-height: 45px
+      padding-left: 70px
+    .info
+      background: url(../../Images/message-info.png) left no-repeat
+      color: #161616
+      min-height: 38px
+      padding: 0 0 0 70px
+    .warning span, .attention span, .info span
+      display: table-cell
+      height: 45px
+      line-height: normal
+      vertical-align: middle
+    .warning span, .error span, .attention span
+      display: table-cell
+      height: 38px
+      min-height: 80px
+      vertical-align: middle
+
+.styled-modal
+  .fancybox-skin
+    padding: 0 !important
+    margin: 0 !important
+    border: 0 !important
+    border-radius: 5px
+    overflow: hidden
+    .fancybox-close
+      background: url(/Content/i/fb-close.png) no-repeat
+.modal-welcomeModal
+  width: 680px
+  position: relative
+  height: 600px
+  .modal-title
+    border-radius: 2px
+    height: 224px
+    background: url(/Content/i/styled-modal-header.png) no-repeat
+    color: #fff
+    padding-top: 60px
+    .title
+      color: #fff
+      font-weight: 700
+      font-size: 20px
+      border: 0
+    .description
+      line-height: normal
+  .sbmt
+    clear: left
+    position: absolute
+    bottom: 0
+    width: 100%
+    height: 90px
+    background: #f9f9f9
+    border-top: 1px solid #e5e5e5
+    padding: 25px 25px 0
+    .hideModal
+      width: 180px
+      label
+        width: 300px
+        display: inline-block
+        padding-top: 7px
+    .btn
+      width: 170px
+  .modal-body
+    padding-top: 35px
+    position: relative
+    .step-box
+      width: 50%
+      float: left
+      padding: 90px 0 70px
+      position: relative
+      text-align: center
+      .step-title
+        font-weight: 700
+        font-size: 14px
+        margin-bottom: 20px
+      .step-text
+        font-size: 13px
+        line-height: normal
+      .step-num
+        position: absolute
+        top: 0
+        left: 30%
+        background: #1799ec
+        color: #fff
+        font-size: 12px
+        width: 24px
+        height: 24px
+        border-radius: 12px
+        line-height: 24px
+        text-align: center
+      &.email
+        background: url(/Content/i/welcome-send-email.png) top center no-repeat
+      &.cert
+        background: url(/Content/i/welcome-cert.png) top center no-repeat
+    .need
+      position: absolute
+      top: 60px
+      width: 100%
+      text-align: center
+    &.i-single
+      .step-box
+        float: none
+        margin: 0 auto
+        .step-num
+          display: none
+      .need
+        display: none
+.modal-newCertificateCongratulations
+  width: 680px
+  position: relative
+  .modal-title
+    border-radius: 2px
+    height: 224px
+    background: url(/Content/i/styled-modal-header.png) no-repeat
+    color: #fff
+    padding-top: 60px
+    .title
+      color: #fff
+      font-weight: 700
+      font-size: 20px
+      border: 0
+    .description
+      line-height: 1.5
+  .sbmt
+    height: 90px
+    background: #f9f9f9
+    border-top: 1px solid #e5e5e5
+    padding: 25px 25px 0
+    .btn
+      width: 170px
+  .modal-body
+    padding-top: 70px
+    position: relative
+    .info
+      height: 225px
+      text-align: center
+      line-height: 1.6
+      font-size: 14px
+
+
+.thin-modal
+  .fancybox-skin
+    border: 0 !important
+    padding: 20px 35px !important
+    border-radius: 5px
+    overflow: hidden
+
+.modal-newTestCertificateModal
+  width: 260px
+  position: relative
+  .modal-title
+    .title
+      font-size: 14px
+      font-weight: 400
+      border-bottom: 0
+      height: auto
+      line-height: 1.4
+  .modal-body
+    padding-top: 20px
+    .field
+      height: 70px
+      position: relative
+      ::-webkit-input-placeholder
+        color: #a0a0a0 !important
+        font-style: normal !important
+        font: 13px/33px Verdana !important
+      ::-moz-placeholder
+        color: #a0a0a0 !important
+        font-style: normal !important
+        font: 13px/33px Verdana !important
+      \:-moz-placeholder
+        color: #a0a0a0 !important
+        font-style: normal !important
+        font: 13px/33px Verdana !important
+      \:-ms-input-placeholder
+        color: #a0a0a0 !important
+        font-style: normal !important
+        font: 13px/33px Verdana !important
+      input
+        height: 32px
+        line-height: 30px
+        text-align: center
+      .eye
+        background: url(/Content/i/eye.png) top center no-repeat
+        position: absolute
+        top: 11px
+        right: 10px
+        width: 18px
+        height: 10px
+        cursor: pointer
+        &.i-visible
+          background-position: bottom center
+      .error
+        line-height: 38px
+        color: #ff2841
+        text-align: center
+    .info
+      text-align: center
+      line-height: 1.4
+      padding-bottom: 25px
+
+.modal-newCertificateLoader
+  width: 260px
+  height: 110px
+  position: relative
+  text-align: center
+  .modal-body
+    .info
+      height: 40px
+    .loader
+      width: 260px
+      height: 25px
+      .block
+        height: 22px
+        border: 1px solid #1ac316
+        background: url(/Content/i/new-cert-loader.png) repeat-x
+    .timer
+      font-size: 11px
+      margin-bottom: 20px
+  .sbmt
+    a
+      color: #000
+
+
+.modern-modal
+  .fancybox-skin
+    border: 0 !important
+    padding: 0 !important
+    border-radius: 5px
+    .fancybox-close
+      background: url(/Content/i/fb-close-black.png) no-repeat
+      width: 11px
+      height: 11px
+      top: 10px
+      right: 10px
+  .fancybox-inner
+    overflow: visible !important
+
+
+.modal-feedback
+  width: 440px
+  height: 480px
+  position: relative
+  text-align: center
+  background: url(/Content/i/landing/registration-bg.png) no-repeat
+  padding: 20px 45px 25px
+  .title
+    font-size: 18px
+    border: 0
+    height: 55px
+  .modal-body
+    line-height: 1.4
+    .info
+      margin-bottom: 30px
+    .row-padded
+      width: 320px
+      margin: 0 auto 15px
+      position: relative
+      input
+        width: 100%
+        height: 35px
+        line-height: 33px
+        font: 13px Verdana
+        text-align: left
+        color: #000
+        border: 1px solid #c9c9c9
+        border-radius: 3px
+        padding: 0 15px
+        &.error
+          background: #ffeef1
+          border: 1px solid #f3aab7
+      label.error
+        position: absolute
+        left: 410px
+        top: 0
+        min-width: 240px
+        min-height: 30px
+        text-align: center
+        color: #ff002a
+        padding: 8px
+        font-size: 11px
+        background: #fff
+        border-radius: 2px
+        &:before
+          background: url(/Content/img/arrow-left.png) left bottom no-repeat
+          width: 5px
+          height: 20px
+          position: absolute
+          left: -5px
+          top: -1px
+          content: ""
+      textarea
+        width: 100%
+        height: 95px
+        line-height: 1.3
+        font: 13px Verdana
+        text-align: left
+        color: #000
+        border: 1px solid #c9c9c9
+        border-radius: 3px
+        padding: 10px 15px
+        &.error
+          background: #ffeef1
+          border: 1px solid #f3aab7
+      ::-webkit-input-placeholder,input[type=password]::-webkit-input-placeholder
+        color: #86898d
+        font-size: 13px
+        font-style: normal
+        line-height: 1.2
+
+  .sbmt
+    padding-top: 15px
+    .btn
+      font-size: 14px
+      border: 0
+      border-radius: 3px
+      color: #fff !important
+      cursor: pointer
+      display: inline-block
+      font-weight: 700
+      height: 38px
+      line-height: 36px
+      text-decoration: none
+      background: #8dc63f
+      width: 230px
+      text-align: center
+      &.i-disabled
+        background: #aab8c0
+
+.modal-baseTemporary
+  width: 300px
+  font-size: 14px
+  .row
+    margin: 20px 0 !important

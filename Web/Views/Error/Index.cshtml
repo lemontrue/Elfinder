@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Ошибка";
+    Layout = "~/Views/Shared/_LayoutCryptogramm.cshtml";
+    <link href="../../Content/CSS/New/404.css" rel="stylesheet" />
+}
+<br/>
+<div id="error_wrapper">
+    @if (ViewBag.HttpCode != null)
+    {
+        <div class="block">
+        
+            <div id="error">
+                404
+            </div>
+            
+            <h1>Нам очень жаль, но<br />
+                страница куда-то подевалась =(</h1>
+        </div>
+    }
+    else
+    {
+        <div class="block">
+        
+            <div id="error">
+                500
+            </div>
+
+            <h1>Произошла ошибка</h1>
+        </div>
+    }
+    <div class="info">
+        <div class="descr">
+            <h2>Описание ошибки:</h2>
+            <span class="info-short">@ViewBag.Error.Message</span>
+            
+            <span class="info-full">
+                <br/>
+                @if (((Exception) ViewBag.Error).StackTrace != null)
+                {
+                    @Html.Raw(((Exception) ViewBag.Error).ToString())@*<a>@((Exception) ViewBag.Error).StackTrace</a>*@
+                }
+            </span>
+
+            <div class="expand">
+                <a href="#">Подробнее</a>
+            </div>
+        </div>
+        <div class="backlink">
+            Вы можете <a href="@Url.Action("WebDavBrowser", "Default")">вернуться на главную страницу</a>
+        </div>
+    </div>
+
+    <div class="about">
+        
+    </div>
+</div>

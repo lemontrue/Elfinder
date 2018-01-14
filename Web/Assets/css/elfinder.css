@@ -1,0 +1,4827 @@
+@charset "UTF-8";
+html, body {
+  font-family: Verdana;
+  font-size: 12px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 100%; }
+
+body {
+  overflow-y: scroll; }
+
+ul, li, h1, h2, h3, h4, h5 {
+  margin: 0;
+  padding: 0; }
+
+ul, li {
+  list-style: none; }
+
+.unselect {
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  user-select: none; }
+
+.pull-left {
+  float: left; }
+
+.pull-right {
+  float: right; }
+
+.content {
+  margin: 0 auto;
+  position: relative; }
+
+.topheader {
+  height: 120px;
+  padding-top: 20px;
+  width: 100%; }
+
+.topheader .logo {
+  background: url(../image/logo.png) no-repeat left bottom;
+  float: left;
+  font-size: 16px;
+  height: 45px;
+  margin-top: 6px;
+  width: 174px; }
+
+.topheader .user {
+  background: url(../image/gear.png) no-repeat left bottom;
+  color: #3b3b3b;
+  float: left;
+  font-family: Verdana;
+  font-size: 13px;
+  margin-left: 60px;
+  padding: 46px 0 0 15px;
+  text-decoration: underline; }
+
+.topheader .prev {
+  background: url(../image/prev.png) no-repeat left 52px;
+  color: #343434;
+  float: right;
+  font-family: Verdana;
+  font-size: 12px;
+  padding: 46px 0 0 15px; }
+
+.topheader .templates {
+  color: #323232;
+  float: right;
+  font-family: Verdana;
+  font-size: 12px;
+  margin-left: 44px;
+  padding: 46px 0 0; }
+
+.topheader .templates a {
+  border-bottom: 1px dotted;
+  color: #3498db;
+  text-decoration: none; }
+
+.main-title {
+  font-family: Verdana;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 25px; }
+
+.row {
+  width: 100%; }
+
+.row .c-500 {
+  float: left;
+  width: 500px; }
+
+.row .c-700 {
+  float: left;
+  width: 700px; }
+
+.row .c-300 {
+  float: left;
+  width: 300px; }
+
+.btn-group {
+  display: table; }
+
+.btn-group.glue div:first-child {
+  border-radius: 3px 0 0 3px; }
+
+.btn-group.glue div:last-child {
+  border-radius: 0 3px 3px 0; }
+
+.btn-group.glue div {
+  float: left;
+  margin: 0; }
+
+.btn-group div {
+  float: left;
+  margin-right: 5px; }
+
+.btn-group div:last-child {
+  margin: 0; }
+
+.btn {
+  border-radius: 3px;
+  color: #010101;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 13px;
+  min-height: 18px;
+  min-width: 100px;
+  padding: 7px 15px;
+  text-align: center;
+  text-decoration: underline; }
+
+div[disabled].btn, button[disabled].btn, div[disabled].btn:hover, button[disabled].btn:hover {
+  background: #d3d3d3;
+  cursor: default; }
+
+.btn-big {
+  border-radius: 2px;
+  font-family: Verdana;
+  font-weight: 700;
+  width: 167px; }
+
+.btn.btn-green {
+  background: #1ac316;
+  color: #fff;
+  text-decoration: none; }
+
+.modal .btn-green {
+  font-weight: 700; }
+
+.btn.btn-green:hover {
+  background: #21D81D; }
+
+.btn.btn-green:active {
+  background: #18B114; }
+
+.btn.btn-blue {
+  background: #3498db;
+  color: #fff;
+  text-decoration: none; }
+
+.btn.btn-blue:active {
+  background: #2A87C5; }
+
+.btn.btn-blue:hover {
+  background: #3BA3E9; }
+
+#modal {
+  background: rgba(0, 0, 0, 0.5);
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1000; }
+
+#modal .window {
+  background: #fff;
+  border: 3px solid #595959;
+  border-radius: 5px;
+  left: 50%;
+  margin-left: -467.5px;
+  min-height: 100px;
+  position: absolute;
+  top: 100px;
+  width: 935px;
+  z-index: 1001; }
+
+#modal .window.received-popup {
+  padding: 7px 23px; }
+
+#modal .window.elfinder-dialog {
+  padding: 7px 23px; }
+
+body > .send-popup, body > .emails-popup {
+  padding: 7px 23px; }
+
+body > .send-popup-master, body > .emails-popup-master {
+  padding: 0 !important; }
+
+.send-popup .btn-big, .emails-popup .btn-big {
+  margin-right: 0;
+  width: 130px; }
+
+#modal .window > .body {
+  background: #fff;
+  height: calc(100% - 6px - 7px - 7px);
+  padding: 7px 10px 7px 22px;
+  position: absolute;
+  width: calc(100% - 6px - 22px - 22px); }
+
+#modal .window > .header {
+  border-bottom: 1px solid #e5e5e5;
+  height: 41px;
+  margin-bottom: 10px; }
+
+#modal .window > .buttons {
+  margin-bottom: 15px; }
+
+#modal .window > .header h2 {
+  color: #111;
+  float: left;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 34px;
+  margin-top: 0; }
+
+#modal .window > .header .close {
+  background: url(../image/close.png) no-repeat;
+  cursor: pointer;
+  float: right;
+  height: 16px;
+  position: absolute;
+  right: 7px;
+  top: 8px;
+  width: 16px; }
+
+#modal .window > .content {
+  margin: 0;
+  position: relative;
+  width: 100%; }
+
+#modal > .window.alert {
+  margin-left: -255px;
+  width: 510px; }
+
+#modal #message-panel {
+  min-height: 90px;
+  padding: 0; }
+
+#modal #message-panel .content-group {
+  margin: 0 0 10px;
+  min-height: 38px;
+  position: relative; }
+
+#modal #message-panel .icon {
+  float: left;
+  height: 50px;
+  width: 60px; }
+
+#modal #message-panel .icon.warning {
+  background: url(/Assets/i/old/warning.png) no-repeat center center; }
+
+#modal #message-panel .text {
+  float: left;
+  font-size: 13px;
+  margin-bottom: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-left: 15px;
+  width: 400px;
+  word-wrap: break-word; }
+
+#modal #message-panel .btn-group {
+  float: right;
+  margin: 0 0 10px; }
+
+#modal #message-panel .mess-box {
+  margin: 26px 0; }
+
+#modal #message-panel .mess-box .warning {
+  background: url(/Assets/i/old/warning2.png) left top no-repeat;
+  min-height: 38px;
+  padding-left: 70px; }
+
+#modal #message-panel .mess-box .info {
+  background: url(/Assets/i/old/message-info.png) left no-repeat;
+  line-height: 20px;
+  min-height: 45px;
+  padding-left: 70px; }
+
+#modal #message-panel .mess-box .error {
+  background: url(/Scripts/master/v/image/error-g.png) left top no-repeat;
+  max-height: 200px;
+  min-height: 38px;
+  overflow-y: auto;
+  padding-left: 70px;
+  padding-right: 10px; }
+
+#modal #message-panel .mess-box .error span, #modal #message-panel .mess-box .warning span, #modal #message-panel .mess-box .info span {
+  display: table-cell;
+  height: 38px;
+  vertical-align: middle; }
+
+#modal #message-panel .mess-box .error span b, #modal #message-panel .mess-box .warning span b {
+  display: inline-block;
+  word-break: break-all; }
+
+#modal .btn {
+  border: none;
+  border-radius: 3px;
+  color: #010101;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 13px;
+  min-height: 18px;
+  min-width: 100px;
+  padding: 7px 15px;
+  text-align: center;
+  text-decoration: underline; }
+
+#modal .btn:hover {
+  text-decoration: none; }
+
+#modal .btn-green {
+  background: #1ac316;
+  color: #fff;
+  font-weight: 700;
+  min-width: 130px;
+  text-decoration: none; }
+
+#modal .btn-green:nth-child(3) {
+  margin-left: 25px; }
+
+#modal .btn-green:hover {
+  background: #21D81D; }
+
+.test-certificate-icon {
+  cursor: pointer;
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  background: url(/Assets/i/test-sertificate-icon.png) top center no-repeat;
+  vertical-align: middle;
+  position: absolute;
+  left: -50px; }
+
+.test-certificate-icon.no-padding {
+  margin-left: 0; }
+
+.test-certificate-icon.float {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  margin: 0; }
+
+.fake-test-certificate-icon {
+  width: 13px;
+  height: 13px;
+  margin: 0 4px 0 -20px; }
+
+.fake-test-certificate-icon.no-padding {
+  width: 13px;
+  height: 30px;
+  display: inline-block;
+  float: left;
+  margin-left: 0; }
+
+.fake-test-certificate-icon.float {
+  position: absolute;
+  left: 0;
+  top: 6px;
+  margin: 0; }
+
+.test-certificate-icon:hover {
+  background-position: bottom center; }
+
+/*********************************************/
+/*            COMMON ELFINDER STUFFS         */
+/*********************************************/
+/* common container */
+.elfinder {
+  display: block;
+  padding: 0;
+  position: relative; }
+
+/* right to left enviroment */
+.elfinder-rtl {
+  direction: rtl;
+  text-align: right; }
+
+/* nav and cwd container */
+.elfinder-workzone {
+  margin-bottom: 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative; }
+
+/* dir/file permissions and symlink markers */
+.elfinder-perms,
+.elfinder-symlink {
+  background: url(/Assets/i/elfinder/toolbar.png) no-repeat 0 -528px;
+  height: 16px;
+  position: absolute;
+  width: 16px; }
+
+/* noaccess */
+.elfinder-na .elfinder-perms {
+  background-position: 0 -96px; }
+
+/* read only */
+.elfinder-ro .elfinder-perms {
+  background-position: 0 -64px; }
+
+/* write only */
+.elfinder-wo .elfinder-perms {
+  background-position: 0 -80px; }
+
+/* drag helper */
+.elfinder-drag-helper {
+  height: 50px;
+  padding: 0 0 0 25px;
+  width: 60px;
+  z-index: 100000; }
+
+/* drag helper "plus" icon */
+.elfinder-drag-helper-icon-plus {
+  background: url("/Assets/i/elfinder/toolbar.png") 0 -544px no-repeat;
+  display: none;
+  height: 16px;
+  left: 43px;
+  position: absolute;
+  top: 55px;
+  width: 16px; }
+
+/* show "plus" icon when ctrl/shift pressed */
+.elfinder-drag-helper-plus .elfinder-drag-helper-icon-plus {
+  display: block; }
+
+/* files num in drag helper */
+.elfinder-drag-num {
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  background-color: red;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  height: 14px;
+  left: 0;
+  padding-top: 2px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 16px; }
+
+/* icon in drag helper */
+.elfinder-drag-helper .elfinder-cwd-icon {
+  float: left;
+  margin: 0 0 0 -24px; }
+
+/* transparent overlay >_< */
+.elfinder-overlay {
+  filter: Alpha(Opacity=0);
+  opacity: 0; }
+
+/* panels under/below cwd (for search field etc) */
+.elfinder .elfinder-panel {
+  background-image: none;
+  padding: 7px 12px;
+  position: relative; }
+
+/*********************************************/
+/*                DIALOGS STYLES             */
+/*********************************************/
+/* common dialogs class */
+.std42-dialog {
+  left: auto;
+  padding: 0;
+  position: absolute;
+  right: auto; }
+
+/* titlebar */
+.std42-dialog .ui-dialog-titlebar {
+  -moz-border-radius-bottomleft: 0;
+  -moz-border-radius-bottomright: 0;
+  -webkit-border-bottom-left-radius: 0;
+  -webkit-border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-left: 0 solid transparent;
+  border-right: 0 solid transparent;
+  border-top: 0 solid transparent;
+  font-weight: normal;
+  padding: .2em 1em; }
+
+.std42-dialog .ui-dialog-titlebar-close,
+.std42-dialog .ui-dialog-titlebar-close:hover {
+  padding: 1px; }
+
+.elfinder-rtl .elfinder-dialog .ui-dialog-titlebar {
+  text-align: right; }
+
+.elfinder-rtl .elfinder-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close {
+  left: .3em;
+  right: auto; }
+
+/* content */
+.std42-dialog .ui-dialog-content {
+  padding: .3em .5em; }
+
+/* buttons */
+.std42-dialog .ui-dialog-buttonpane {
+  border: 0 solid;
+  margin: 0;
+  padding: .5em .7em; }
+
+.std42-dialog .ui-dialog-buttonpane button {
+  margin: 0 0 0 .4em;
+  outline: 0px solid;
+  padding: 0; }
+
+.std42-dialog .ui-dialog-buttonpane button span {
+  padding: 2px 9px; }
+
+.elfinder-dialog .ui-resizable-e,
+.elfinder-dialog .ui-resizable-s {
+  height: 0;
+  width: 0; }
+
+.std42-dialog .ui-button input {
+  cursor: pointer; }
+
+/* error/notify/confirm dialogs icon */
+.elfinder-dialog-icon {
+  background: url("/Assets/i/old/message-info.png");
+  height: 45px;
+  left: 12px;
+  margin-top: -23px;
+  position: absolute;
+  top: 50%;
+  width: 45px; }
+
+.elfinder-rtl .elfinder-dialog-icon {
+  left: auto;
+  right: 12px; }
+
+/*********************** ERROR DIALOG **************************/
+.elfinder-dialog-error .ui-dialog-content,
+.elfinder-dialog-confirm .ui-dialog-content {
+  min-height: 35px;
+  padding-left: 56px; }
+
+.elfinder-rtl .elfinder-dialog-error .ui-dialog-content,
+.elfinder-rtl .elfinder-dialog-confirm .ui-dialog-content {
+  padding-left: 0;
+  padding-right: 56px; }
+
+/*********************** NOTIFY DIALOG **************************/
+.elfinder-dialog-notify .ui-dialog-titlebar-close {
+  display: none; }
+
+.elfinder-dialog-notify .ui-dialog-content {
+  padding: 0; }
+
+/* one notification container */
+.elfinder-notify {
+  border-bottom: 1px solid #ccc;
+  overflow: hidden;
+  padding: 1em;
+  position: relative;
+  text-align: center; }
+
+.elfinder-ltr .elfinder-notify {
+  padding-left: 30px; }
+
+.elfinder-rtl .elfinder-notify {
+  padding-right: 30px; }
+
+.elfinder-notify:last-child {
+  border: 0 solid; }
+
+/* progressbar */
+.elfinder-notify-progressbar {
+  background: #f5f5f5;
+  border: 1px solid #aaa;
+  height: 8px;
+  margin: 5px auto;
+  overflow: hidden;
+  width: 180px; }
+
+.elfinder-notify-progress {
+  background: url(/Assets/i/elfinder/progress.gif) center center repeat-x;
+  height: 8px;
+  width: 100%; }
+
+.elfinder-notify-progressbar, .elfinder-notify-progress {
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px; }
+
+/* icons */
+.elfinder-dialog-icon-open,
+.elfinder-dialog-icon-file {
+  background-position: 0 -225px; }
+
+.elfinder-dialog-icon-reload {
+  background-position: 0 -225px; }
+
+.elfinder-dialog-icon-mkdir {
+  background-position: 0 -64px; }
+
+.elfinder-dialog-icon-mkfile {
+  background-position: 0 -96px; }
+
+.elfinder-dialog-icon-copy,
+.elfinder-dialog-icon-prepare,
+.elfinder-dialog-icon-move {
+  background-position: 0 -128px; }
+
+.elfinder-dialog-icon-upload {
+  background-position: 0 -160px; }
+
+.elfinder-dialog-icon-rm {
+  background-position: 0 -192px; }
+
+.elfinder-dialog-icon-download {
+  background-position: 0 -260px; }
+
+.elfinder-dialog-icon-save {
+  background-position: 0 -295px; }
+
+.elfinder-dialog-icon-rename {
+  background-position: 0 -330px; }
+
+.elfinder-dialog-icon-archive,
+.elfinder-dialog-icon-extract {
+  background-position: 0 -365px; }
+
+.elfinder-dialog-icon-search {
+  background-position: 0 -402px; }
+
+.elfinder-dialog-icon-resize,
+.elfinder-dialog-icon-loadimg,
+.elfinder-dialog-icon-netmount,
+.elfinder-dialog-icon-netunmount,
+.elfinder-dialog-icon-dim {
+  background-position: 0 -434px; }
+
+/*********************** CONFIRM DIALOG **************************/
+.elfinder-dialog-confirm-applyall {
+  padding-top: 3px; }
+
+.elfinder-dialog-confirm .elfinder-dialog-icon {
+  background-position: 0 -32px; }
+
+/*********************** FILE INFO DIALOG **************************/
+.elfinder-info-title .elfinder-cwd-icon {
+  float: left;
+  height: 48px;
+  margin-right: 1em;
+  width: 48px; }
+
+.elfinder-info-title strong {
+  display: block;
+  padding: .3em 0 .5em 0; }
+
+.elfinder-info-tb {
+  border: 0 solid;
+  margin: 1em .2em 1em .2em;
+  min-width: 200px; }
+
+.elfinder-info-tb td {
+  padding: 2px;
+  white-space: nowrap; }
+
+.elfinder-info-tb tr td:first-child {
+  text-align: right; }
+
+.elfinder-info-tb span {
+  float: left; }
+
+.elfinder-info-tb a {
+  outline: none;
+  text-decoration: underline; }
+
+.elfinder-info-tb a:hover {
+  text-decoration: none; }
+
+.elfinder-info-spinner {
+  background: url("/Assets/i/elfinder//imgspinner-mini.gif") center center no-repeat;
+  float: left;
+  height: 14px;
+  margin: 0 5px;
+  width: 14px; }
+
+.elfinder-netmount-tb {
+  margin: 0 auto; }
+
+.elfinder-netmount-tb input {
+  border: 1px solid #ccc; }
+
+/*********************** UPLOAD DIALOG **************************/
+.elfinder-upload-dropbox {
+  border: 3px dashed #aaa;
+  padding: 2em 0;
+  text-align: center; }
+
+.elfinder-upload-dropbox.ui-state-hover {
+  background: #dfdfdf;
+  border: 3px dashed #555; }
+
+.elfinder-upload-dialog-or {
+  margin: .3em 0;
+  text-align: center; }
+
+.elfinder-upload-dialog-wrapper {
+  text-align: center; }
+
+.elfinder-upload-dialog-wrapper .ui-button {
+  overflow: hidden;
+  position: relative; }
+
+.elfinder-upload-dialog-wrapper .ui-button form {
+  filter: Alpha(Opacity=0);
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0; }
+
+.elfinder-upload-dialog-wrapper .ui-button form input {
+  font-size: 3em;
+  padding: 0 20px; }
+
+/* dialog for elFinder itself */
+.dialogelfinder .dialogelfinder-drag {
+  border-left: 0 solid;
+  border-right: 0 solid;
+  border-top: 0 solid;
+  cursor: move;
+  font-weight: normal;
+  padding: 2px 12px;
+  position: relative;
+  text-align: left; }
+
+.elfinder-rtl .dialogelfinder-drag {
+  text-align: right; }
+
+.dialogelfinder-drag-close {
+  margin-top: -8px;
+  position: absolute;
+  top: 50%; }
+
+.elfinder-ltr .dialogelfinder-drag-close {
+  right: 12px; }
+
+.elfinder-rtl .dialogelfinder-drag-close {
+  left: 12px; }
+
+/*********************************************/
+/*               TOOLBAR STYLES              */
+/*********************************************/
+/* toolbar container */
+.elfinder-toolbar {
+  border-left: 0 solid transparent;
+  border-right: 0 solid transparent;
+  border-top: 0 solid transparent;
+  height: 63px !important;
+  padding: 4px 0 3px 0; }
+
+/* container for button's group */
+.elfinder-buttonset {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  background: transparent;
+  border-radius: 4px;
+  float: left;
+  padding: 0; }
+
+.elfinder-buttonset:nth-child(2) {
+  padding-right: 10px; }
+
+.ui-widget-header .buttons .elfinder-buttonset:nth-child(2) {
+  font-size: 12px;
+  margin: 0; }
+
+.elfinder-toolbar .elfinder-buttonset:nth-child(2) .elfinder-button {
+  height: 29px; }
+
+/* button */
+.elfinder .elfinder-button {
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  border: 0 solid;
+  box-sizing: content-box;
+  float: left;
+  height: 16px;
+  margin: 0;
+  padding: 4px;
+  position: relative;
+  text-align: center;
+  width: 16px; }
+
+.elfinder .ui-icon-search {
+  cursor: pointer; }
+
+.elfinder-button:first-child {
+  -moz-border-radius-bottomleft: 4px;
+  -moz-border-radius-topleft: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  -webkit-border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px; }
+
+.elfinder-button:last-child {
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-topright: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  -webkit-border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px; }
+
+/* separator between buttons, required for berder between button with ui color */
+.elfinder-toolbar-button-separator {
+  border-bottom: 0 solid;
+  border-right: 0 solid;
+  border-top: 0 solid;
+  float: left;
+  height: 24px;
+  padding: 0;
+  width: 0; }
+
+/* change icon opacity^ not button */
+/*.elfinder .elfinder-button.ui-state-disabled { opacity:1; filter:Alpha(Opacity=100);}
+.elfinder .elfinder-button.ui-state-disabled .elfinder-button-icon { opacity:.4; filter:Alpha(Opacity=40);}*/
+/* rtl enviroment */
+.elfinder-rtl .elfinder-buttonset {
+  float: right; }
+
+/* icon inside button */
+.elfinder-button-icon {
+  background: url("/Assets/i/elfinder/toolbar.png") no-repeat;
+  display: block;
+  height: 16px;
+  width: 16px; }
+
+/* buttons icons */
+.elfinder-button-icon-home {
+  background-position: 0 0; }
+
+.elfinder-button-icon-back {
+  background-position: 0 -112px; }
+
+.elfinder-button-icon-forward {
+  background-position: 0 -128px; }
+
+.elfinder-button-icon-up {
+  background-position: 0 -144px; }
+
+.elfinder-button-icon-reload {
+  background-position: 0 -160px; }
+
+.elfinder-button-icon-open {
+  background-position: 0 -176px; }
+
+.elfinder-button-icon-mkdir {
+  background-position: 0 -192px; }
+
+.elfinder-button-icon-mkfile {
+  background-position: 0 -208px; }
+
+.elfinder-button-icon-rm {
+  background-position: 0 -224px; }
+
+.elfinder-button-icon-copy {
+  background-position: 0 -240px; }
+
+.elfinder-button-icon-cut {
+  background-position: 0 -256px; }
+
+.elfinder-button-icon-paste {
+  background-position: 0 -272px; }
+
+.elfinder-button-icon-getfile {
+  background-position: 0 -288px; }
+
+.elfinder-button-icon-duplicate {
+  background-position: 0 -304px; }
+
+.elfinder-button-icon-rename {
+  background-position: 0 -320px; }
+
+.elfinder-button-icon-edit {
+  background-position: 0 -336px; }
+
+.elfinder-button-icon-quicklook {
+  background-position: 0 -352px; }
+
+.elfinder-button-icon-upload {
+  background-position: 0 -368px; }
+
+.elfinder-button-icon-download {
+  background-position: 0 -384px; }
+
+.elfinder-button-icon-info {
+  background-position: 0 -400px; }
+
+.elfinder-button-icon-extract {
+  background-position: 0 -416px; }
+
+.elfinder-button-icon-archive {
+  background-position: 0 -432px; }
+
+.elfinder-button-icon-view {
+  background-position: 0 -448px; }
+
+.elfinder-button-icon-view-list {
+  background-position: 0 -464px; }
+
+.elfinder-button-icon-help {
+  background-position: 0 -480px; }
+
+.elfinder-button-icon-resize {
+  background-position: 0 -512px; }
+
+.elfinder-button-icon-search {
+  background-position: 0 -561px; }
+
+.elfinder-button-icon-sort {
+  background-position: 0 -577px; }
+
+.elfinder-button-icon-rotate-r {
+  background-position: 0 -625px; }
+
+.elfinder-button-icon-rotate-l {
+  background-position: 0 -641px; }
+
+/* button with dropdown menu*/
+.elfinder .elfinder-menubutton {
+  overflow: visible; }
+
+/* menu */
+.elfinder-button-menu {
+  left: 0;
+  padding: 3px 0;
+  position: absolute;
+  top: 25px; }
+
+/* menu item */
+.elfinder-button-menu-item {
+  cursor: default;
+  padding: 5px 19px;
+  position: relative;
+  white-space: nowrap; }
+
+/* fix hover ui class */
+.elfinder-button-menu .ui-state-hover {
+  border: 0 solid; }
+
+.elfinder-button-menu-item-separated {
+  border-top: 1px solid #ccc; }
+
+.elfinder-button-menu-item .ui-icon {
+  display: none;
+  height: 16px;
+  left: 2px;
+  margin-top: -8px;
+  position: absolute;
+  top: 50%;
+  width: 16px; }
+
+.elfinder-button-menu-item-selected .ui-icon {
+  display: block; }
+
+.elfinder-button-menu-item-selected-asc .ui-icon-arrowthick-1-n {
+  display: none; }
+
+.elfinder-button-menu-item-selected-desc .ui-icon-arrowthick-1-s {
+  display: none; }
+
+/* hack for upload button */
+.elfinder-button form {
+  cursor: pointer;
+  filter: Alpha(Opacity=0);
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0; }
+
+.elfinder .elfinder-button form input {
+  background: transparent;
+  cursor: default; }
+
+/* search "button" */
+.elfinder .elfinder-button-search {
+  background: transparent;
+  border: 0 solid;
+  float: right;
+  height: auto;
+  margin: 1px 4px;
+  min-height: 26px;
+  padding: 0;
+  width: 202px; }
+
+/* ltr/rte enviroment */
+.elfinder-ltr .elfinder-button-search {
+  float: right;
+  margin-right: 10px; }
+
+.elfinder-rtl .elfinder-button-search {
+  float: left;
+  margin-left: 10px; }
+
+/* search text field */
+.elfinder-button-search input {
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border: 1px solid #aaa;
+  border-radius: 12px;
+  height: 22px;
+  line-height: 22px;
+  outline: 0 solid;
+  padding: 0 20px;
+  width: 160px; }
+
+.elfinder-rtl .elfinder-button-search input {
+  direction: rtl; }
+
+/* icons */
+.elfinder-button-search .ui-icon {
+  filter: Alpha(Opacity=60);
+  height: 18px;
+  margin: -9px 4px 0 4px;
+  opacity: .6;
+  position: absolute;
+  top: 50%; }
+
+/* search/close icons */
+.elfinder-ltr .elfinder-button-search .ui-icon-search {
+  left: 0; }
+
+.elfinder-rtl .elfinder-button-search .ui-icon-search {
+  right: 0; }
+
+.elfinder-ltr .elfinder-button-search .ui-icon-close {
+  right: 0; }
+
+.elfinder-rtl .elfinder-button-search .ui-icon-close {
+  left: 0; }
+
+/*********************************************/
+/*              NAVIGATION PANEL             */
+/*********************************************/
+/* container */
+.elfinder .elfinder-navbar {
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  background-image: none;
+  border-bottom: 0 solid;
+  border-top: 0 solid;
+  display: none;
+  overflow: auto;
+  padding: 3px 0;
+  position: relative;
+  user-select: none;
+  width: 220px; }
+
+/* ltr/rtl enviroment */
+.elfinder-ltr .elfinder-navbar {
+  border-left: 0 solid;
+  float: left;
+  overflow: hidden; }
+
+.elfinder-rtl .elfinder-navbar {
+  border-right: 0 solid;
+  float: right; }
+
+.elfinder-ltr .ui-resizable-e {
+  margin-left: 10px; }
+
+/* folders tree container */
+.elfinder-tree {
+  display: table;
+  margin: 0 0 .5em 0;
+  width: 100%; }
+
+/* one folder wrapper */
+/* folder */
+.elfinder-navbar-dir {
+  border: 1px solid transparent;
+  cursor: default;
+  display: block;
+  margin: 0;
+  outline: 0 solid;
+  overflow: hidden;
+  padding: 3px 12px;
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 195px; }
+
+/* ltr/rtl enviroment */
+.elfinder-ltr .elfinder-navbar-dir {
+  padding-left: 35px; }
+
+.elfinder-rtl .elfinder-navbar-dir {
+  padding-right: 35px; }
+
+/* arrow before icon */
+.elfinder-navbar-arrow {
+  background-image: url("/Assets/i/elfinder/arrows-normal.png");
+  background-repeat: no-repeat;
+  display: none;
+  height: 14px;
+  margin-top: -8px;
+  position: absolute;
+  top: 50%;
+  width: 12px; }
+
+.ui-state-active .elfinder-navbar-arrow {
+  background-image: url("/Assets/i/elfinder/arrows-active.png"); }
+
+/* collapsed/expanded arrow view */
+.elfinder-navbar-collapsed .elfinder-navbar-arrow {
+  display: block; }
+
+/* arrow ltr/rtl enviroment */
+.elfinder-ltr .elfinder-navbar-collapsed .elfinder-navbar-arrow {
+  background-position: 0 4px;
+  left: 0; }
+
+.elfinder-rtl .elfinder-navbar-collapsed .elfinder-navbar-arrow {
+  background-position: 0 -10px;
+  right: 0; }
+
+.elfinder-ltr .elfinder-navbar-expanded .elfinder-navbar-arrow,
+.elfinder-rtl .elfinder-navbar-expanded .elfinder-navbar-arrow {
+  background-position: 0 -21px; }
+
+/* folder icon */
+.elfinder-navbar-icon {
+  background: url("/Assets/i/elfinder/toolbar.png") no-repeat 0 -16px;
+  height: 16px;
+  margin-top: -8px;
+  position: absolute;
+  top: 50%;
+  width: 16px; }
+
+/* ltr/rtl enviroment */
+.elfinder-ltr .elfinder-navbar-icon {
+  left: 14px; }
+
+.elfinder-rtl .elfinder-navbar-icon {
+  right: 14px; }
+
+/* root folder */
+.elfinder-tree .elfinder-navbar-root .elfinder-navbar-icon {
+  background-position: 0 0; }
+
+.elfinder-places .elfinder-navbar-root .elfinder-navbar-icon {
+  background-position: 0 -48px; }
+
+/* icon in active/hove/dropactive state */
+.ui-state-active .elfinder-navbar-icon,
+.elfinder-droppable-active .elfinder-navbar-icon,
+.ui-state-hover .elfinder-navbar-icon {
+  background-position: 0 -32px; }
+
+/* subdirs tree */
+.elfinder-navbar-subtree {
+  display: none; }
+
+/* ltr/rtl enviroment */
+.elfinder-ltr .elfinder-navbar-subtree {
+  margin-left: 12px; }
+
+.elfinder-rtl .elfinder-navbar-subtree {
+  margin-right: 12px; }
+
+/* spinner */
+.elfinder-navbar-spinner {
+  background: url("/Assets/i/elfinder/spinner-mini.gif") center center no-repeat;
+  display: block;
+  height: 14px;
+  margin-top: -7px;
+  position: absolute;
+  top: 50%;
+  width: 14px; }
+
+/* spinner ltr/rtl enviroment */
+.elfinder-ltr .elfinder-navbar-spinner {
+  left: 0;
+  margin-left: -2px; }
+
+.elfinder-rtl .elfinder-navbar-spinner {
+  margin-right: -2px;
+  right: 0; }
+
+/* permissions marker */
+.elfinder-navbar .elfinder-perms {
+  margin-top: -8px;
+  top: 50%; }
+
+/* permissions/symlink markers ltr/rtl enviroment */
+.elfinder-ltr .elfinder-navbar .elfinder-perms {
+  left: 18px; }
+
+.elfinder-rtl .elfinder-navbar .elfinder-perms {
+  right: 18px; }
+
+.elfinder-ltr .elfinder-navbar .elfinder-symlink {
+  left: 8px; }
+
+.elfinder-rtl .elfinder-navbar .elfinder-symlink {
+  right: 8px; }
+
+/* resizable */
+.elfinder-navbar .ui-resizable-handle {
+  background: transparent url("/Assets/i/elfinder/resize.png") center center no-repeat;
+  left: 0;
+  width: 12px; }
+
+.elfinder-nav-handle-icon {
+  filter: Alpha(Opacity=50);
+  margin: -8px 2px 0 2px;
+  opacity: .5;
+  position: absolute;
+  top: 50%; }
+
+.elfinder-places {
+  border: 1px solid transparent; }
+
+.elfinder-places.elfinder-droppable-active {
+  border: 1px solid #8cafed; }
+
+/******************************************************************/
+/*                           STATUSBAR STYLES                     */
+/******************************************************************/
+/* statusbar container */
+.elfinder-statusbar {
+  border-bottom: 0 solid transparent;
+  border-left: 0 solid transparent;
+  border-right: 0 solid transparent;
+  font-weight: normal;
+  padding: .2em .5em;
+  text-align: center; }
+
+.elfinder-statusbar a {
+  text-decoration: none; }
+
+/* path in statusbar */
+.elfinder-path {
+  -o-text-overflow: ellipsis;
+  max-width: 30%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+.elfinder-ltr .elfinder-path {
+  float: left; }
+
+.elfinder-rtl .elfinder-path {
+  float: right; }
+
+/* total/selected size in statusbar */
+.elfinder-stat-size {
+  white-space: nowrap; }
+
+.elfinder-ltr .elfinder-stat-size {
+  float: right; }
+
+.elfinder-rtl .elfinder-stat-size {
+  float: left; }
+
+.elfinder-stat-selected {
+  overflow: hidden;
+  white-space: nowrap; }
+
+/* menu and submenu */
+.elfinder-contextmenu,
+.elfinder-contextmenu-sub {
+  background: #fff;
+  border: 1px solid #aaa;
+  color: #555;
+  display: none;
+  padding: 4px 0;
+  position: absolute; }
+
+/* submenu */
+.elfinder-contextmenu-sub {
+  top: 5px; }
+
+/* submenu in rtl/ltr enviroment */
+.elfinder-contextmenu-ltr .elfinder-contextmenu-sub {
+  margin-left: -5px; }
+
+.elfinder-contextmenu-rtl .elfinder-contextmenu-sub {
+  margin-right: -5px; }
+
+/* menu item */
+.elfinder-contextmenu-item {
+  cursor: default;
+  display: block;
+  padding: 4px 30px;
+  position: relative;
+  text-decoration: none;
+  white-space: nowrap; }
+
+/* text in item */
+.elfinder-contextmenu .elfinder-contextmenu-item span {
+  display: block; }
+
+/* submenu item in rtl/ltr enviroment */
+.elfinder-contextmenu-ltr .elfinder-contextmenu-item {
+  text-align: left; }
+
+.elfinder-contextmenu-rtl .elfinder-contextmenu-item {
+  text-align: right; }
+
+.elfinder-contextmenu-ltr .elfinder-contextmenu-sub .elfinder-contextmenu-item {
+  padding-left: 12px; }
+
+.elfinder-contextmenu-rtl .elfinder-contextmenu-sub .elfinder-contextmenu-item {
+  padding-right: 12px; }
+
+/* command/submenu icon */
+.elfinder-contextmenu-arrow,
+.elfinder-contextmenu-icon {
+  margin-top: -8px;
+  position: absolute;
+  top: 50%; }
+
+/* command icon in rtl/ltr enviroment */
+.elfinder-contextmenu-ltr .elfinder-contextmenu-icon {
+  left: 8px;
+  top: 5px; }
+
+.elfinder-contextmenu-rtl .elfinder-contextmenu-icon {
+  right: 8px;
+  top: 5px; }
+
+/* arrow icon */
+.elfinder-contextmenu-arrow {
+  background: url("/Assets/i/elfinder/arrows-normal.png") 5px 4px no-repeat;
+  height: 16px;
+  width: 16px; }
+
+/* arrow icon in rtl/ltr enviroment */
+.elfinder-contextmenu-ltr .elfinder-contextmenu-arrow {
+  right: 5px; }
+
+.elfinder-contextmenu-rtl .elfinder-contextmenu-arrow {
+  background-position: 0 -10px;
+  left: 5px; }
+
+/* disable ui border/bg image on hover */
+.elfinder-contextmenu .ui-state-hover {
+  background-image: none;
+  border: 0 solid; }
+
+/* separator */
+.elfinder-contextmenu-separator {
+  border-top: 1px solid #ccc;
+  height: 0;
+  margin: 0 1px; }
+
+/******************************************************************/
+/*                     CURRENT DIRECTORY STYLES                   */
+/******************************************************************/
+/* cwd container to avoid selectable on scrollbar */
+.elfinder-cwd-wrapper {
+  margin: 0;
+  overflow: auto;
+  padding: 0 2px 2px;
+  position: relative; }
+
+.elfinder-cwd-wrapper-list {
+  padding: 0; }
+
+/* container */
+.elfinder-cwd {
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  cursor: default;
+  margin: 0;
+  min-height: 288px;
+  padding: 0;
+  position: relative;
+  user-select: none; }
+
+/* container active on dropenter */
+.elfinder .elfinder-cwd-wrapper.elfinder-droppable-active {
+  border: 2px solid #8cafed;
+  padding: 0; }
+
+/************************** ICONS VIEW ********************************/
+/* file container */
+.elfinder-cwd-view-icons .elfinder-cwd-file {
+  border: none;
+  cursor: default;
+  height: 80px;
+  padding-bottom: 2px;
+  width: 120px;
+  /*	overflow:hidden;*/
+  /*	position:relative;*/ }
+
+/* ltr/rtl enviroment */
+.elfinder-ltr .elfinder-cwd-view-icons .elfinder-cwd-file {
+  float: left;
+  margin: 0 3px 12px 0; }
+
+.elfinder-rtl .elfinder-cwd-view-icons .elfinder-cwd-file {
+  float: right;
+  margin: 0 0 5px 3px; }
+
+/* remove ui hover class border */
+.elfinder-cwd-view-icons .elfinder-cwd-file .ui-state-hover {
+  border: 0 solid; }
+
+/* icon wrapper to create selected highlight around icon */
+.elfinder-cwd-view-icons .elfinder-cwd-file-wrapper {
+  height: 52px;
+  margin: 1px auto 1px auto;
+  padding: 2px;
+  position: relative;
+  width: 52px; }
+
+/* file name place */
+.elfinder-cwd-view-icons .elfinder-cwd-filename {
+  -moz-border-radius: 8px;
+  -o-text-overflow: ellipsis;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  margin: 3px 1px 0 1px;
+  overflow: hidden;
+  padding: 1px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: pre; }
+
+/* permissions/symlink markers */
+.elfinder-cwd-view-icons .elfinder-perms {
+  bottom: 4px;
+  right: 2px; }
+
+.elfinder-cwd-view-icons .elfinder-symlink {
+  bottom: 6px;
+  left: 0px; }
+
+/* icon/thumbnail */
+.elfinder-cwd-icon {
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box; }
+
+/* "opened folder" icon on dragover */
+.elfinder-cwd .elfinder-droppable-active .elfinder-cwd-icon {
+  background-position: 0 -100px; }
+
+/* mimetypes icons */
+.elfinder-cwd-icon-directory {
+  background-position: 0 -50px; }
+
+.elfinder-cwd-icon-application {
+  background-position: 0 -150px; }
+
+.elfinder-cwd-icon-x-empty,
+.elfinder-cwd-icon-text {
+  background-position: 0 -200px; }
+
+.elfinder-cwd-icon-image,
+.elfinder-cwd-icon-vnd-adobe-photoshop,
+.elfinder-cwd-icon-postscript {
+  background-position: 0 -250px; }
+
+.elfinder-cwd-icon-audio {
+  background-position: 0 -300px; }
+
+.elfinder-cwd-icon-video,
+.elfinder-cwd-icon-flash-video {
+  background-position: 0 -350px; }
+
+.elfinder-cwd-icon-rtf,
+.elfinder-cwd-icon-rtfd {
+  background-position: 0 -401px; }
+
+.elfinder-cwd-icon-pdf {
+  background-position: 0 -450px; }
+
+.elfinder-cwd-icon-ms-excel,
+.elfinder-cwd-icon-msword,
+.elfinder-cwd-icon-vnd-ms-excel,
+.elfinder-cwd-icon-vnd-ms-excel-addin-macroEnabled-12,
+.elfinder-cwd-icon-vnd-ms-excel-sheet-binary-macroEnabled-12,
+.elfinder-cwd-icon-vnd-ms-excel-sheet-macroEnabled-12,
+.elfinder-cwd-icon-vnd-ms-excel-template-macroEnabled-12,
+.elfinder-cwd-icon-vnd-ms-office,
+.elfinder-cwd-icon-vnd-ms-powerpoint,
+.elfinder-cwd-icon-vnd-ms-powerpoint-addin-macroEnabled-12,
+.elfinder-cwd-icon-vnd-ms-powerpoint-presentation-macroEnabled-12,
+.elfinder-cwd-icon-vnd-ms-powerpoint-slide-macroEnabled-12,
+.elfinder-cwd-icon-vnd-ms-powerpoint-slideshow-macroEnabled-12,
+.elfinder-cwd-icon-vnd-ms-powerpoint-template-macroEnabled-12,
+.elfinder-cwd-icon-vnd-ms-word,
+.elfinder-cwd-icon-vnd-ms-word-document-macroEnabled-12,
+.elfinder-cwd-icon-vnd-ms-word-template-macroEnabled-12,
+.elfinder-cwd-icon-vnd-oasis-opendocument-chart,
+.elfinder-cwd-icon-vnd-oasis-opendocument-database,
+.elfinder-cwd-icon-vnd-oasis-opendocument-formula,
+.elfinder-cwd-icon-vnd-oasis-opendocument-graphics,
+.elfinder-cwd-icon-vnd-oasis-opendocument-graphics-template,
+.elfinder-cwd-icon-vnd-oasis-opendocument-image,
+.elfinder-cwd-icon-vnd-oasis-opendocument-presentation,
+.elfinder-cwd-icon-vnd-oasis-opendocument-presentation-template,
+.elfinder-cwd-icon-vnd-oasis-opendocument-spreadsheet,
+.elfinder-cwd-icon-vnd-oasis-opendocument-spreadsheet-template,
+.elfinder-cwd-icon-vnd-oasis-opendocument-text,
+.elfinder-cwd-icon-vnd-oasis-opendocument-text-master,
+.elfinder-cwd-icon-vnd-oasis-opendocument-text-template,
+.elfinder-cwd-icon-vnd-oasis-opendocument-text-web,
+.elfinder-cwd-icon-vnd-openofficeorg-extension,
+.elfinder-cwd-icon-vnd-openxmlformats-officedocument-presentationml-presentation,
+.elfinder-cwd-icon-vnd-openxmlformats-officedocument-presentationml-slide,
+.elfinder-cwd-icon-vnd-openxmlformats-officedocument-presentationml-slideshow,
+.elfinder-cwd-icon-vnd-openxmlformats-officedocument-presentationml-template,
+.elfinder-cwd-icon-vnd-openxmlformats-officedocument-spreadsheetml-sheet,
+.elfinder-cwd-icon-vnd-openxmlformats-officedocument-spreadsheetml-template,
+.elfinder-cwd-icon-vnd-openxmlformats-officedocument-wordprocessingml-document,
+.elfinder-cwd-icon-vnd-openxmlformats-officedocument-wordprocessingml-template {
+  background-position: 0 -500px; }
+
+.elfinder-cwd-icon-html {
+  background-position: 0 -550px; }
+
+.elfinder-cwd-icon-css {
+  background-position: 0 -600px; }
+
+.elfinder-cwd-icon-javascript,
+.elfinder-cwd-icon-x-javascript {
+  background-position: 0 -650px; }
+
+.elfinder-cwd-icon-x-perl {
+  background-position: 0 -700px; }
+
+.elfinder-cwd-icon-x-python {
+  background-position: 0 -750px; }
+
+.elfinder-cwd-icon-x-ruby {
+  background-position: 0 -800px; }
+
+.elfinder-cwd-icon-x-sh,
+.elfinder-cwd-icon-x-shellscript {
+  background-position: 0 -850px; }
+
+.elfinder-cwd-icon-x-c,
+.elfinder-cwd-icon-x-csrc,
+.elfinder-cwd-icon-x-chdr,
+.elfinder-cwd-icon-x-c--,
+.elfinder-cwd-icon-x-c--src,
+.elfinder-cwd-icon-x-c--hdr,
+.elfinder-cwd-icon-x-java,
+.elfinder-cwd-icon-x-java-source {
+  background-position: 0 -900px; }
+
+.elfinder-cwd-icon-x-php {
+  background-position: 0 -950px; }
+
+.elfinder-cwd-icon-xml {
+  background-position: 0 -1000px; }
+
+.elfinder-cwd-icon-zip,
+.elfinder-cwd-icon-x-zip,
+.elfinder-cwd-icon-x-7z-compressed {
+  background-position: 0 -1050px; }
+
+.elfinder-cwd-icon-x-gzip,
+.elfinder-cwd-icon-x-tar {
+  background-position: 0 -1100px; }
+
+.elfinder-cwd-icon-x-bzip,
+.elfinder-cwd-icon-x-bzip2 {
+  background-position: 0 -1150px; }
+
+.elfinder-cwd-icon-x-rar,
+.elfinder-cwd-icon-x-rar-compressed {
+  background-position: 0 -1200px; }
+
+.elfinder-cwd-icon-x-shockwave-flash {
+  background-position: 0 -1250px; }
+
+.elfinder-cwd-icon-group {
+  background-position: 0 -1300px; }
+
+/* textfield inside icon */
+.elfinder-cwd input {
+  border: 0px solid;
+  margin: 0;
+  padding: 0;
+  width: 100%; }
+
+.elfinder-cwd-view-icons input {
+  text-align: center; }
+
+.elfinder-cwd-view-icons {
+  text-align: center; }
+
+/************************************  LIST VIEW ************************************/
+/*.elfinder-cwd-view-list { padding:0 0 4px 0; }*/
+.elfinder-cwd table {
+  border: 0 solid;
+  border-collapse: collapse;
+  margin: 0 0 10px 0;
+  width: 100%; }
+
+.elfinder .elfinder-cwd table thead tr {
+  border-left: 0 solid;
+  border-right: 0 solid;
+  border-top: 0 solid; }
+
+.elfinder .elfinder-cwd table td {
+  border: 0 solid;
+  cursor: default;
+  overflow: hidden;
+  padding: 4px 12px 0;
+  text-align: right;
+  white-space: pre; }
+
+.elfinder-ltr .elfinder-cwd table td {
+  /*text-align:right;*/
+  text-align: left; }
+
+.elfinder-ltr .elfinder-cwd table td:first-child {
+  text-align: left; }
+
+.elfinder-rtl .elfinder-cwd table td {
+  text-align: left; }
+
+.elfinder-rtl .elfinder-cwd table td:first-child {
+  text-align: right; }
+
+.elfinder-odd-row {
+  background: #eee; }
+
+/* filename container */
+.elfinder-cwd-view-list .elfinder-cwd-file-wrapper {
+  position: relative;
+  /*width:97%;*/
+  width: 340px; }
+
+/* filename container in ltr/rtl enviroment */
+.elfinder-ltr .elfinder-cwd-view-list .elfinder-cwd-file-wrapper {
+  /*padding-left:23px;*/
+  padding-left: 35px; }
+
+.elfinder-rtl .elfinder-cwd-view-list .elfinder-cwd-file-wrapper {
+  padding-right: 23px; }
+
+/* premissions/symlink marker */
+.elfinder-cwd-view-list .elfinder-perms,
+.elfinder-cwd-view-list .elfinder-symlink {
+  margin-top: -6px;
+  top: 50%; }
+
+/* markers in ltr/rtl enviroment */
+.elfinder-ltr .elfinder-cwd-view-list .elfinder-perms {
+  left: 7px; }
+
+.elfinder-ltr .elfinder-cwd-view-list .elfinder-symlink {
+  left: -7px; }
+
+/* icon in ltr/rtl enviroment */
+.elfinder-ltr .elfinder-cwd-view-list .elfinder-cwd-icon {
+  left: 0; }
+
+.elfinder-rtl .elfinder-cwd-view-list .elfinder-cwd-icon {
+  right: 0; }
+
+/* quicklook window */
+.elfinder-quicklook {
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  background: url("/Assets/i/elfinder/quicklook-bg.png");
+  border-radius: 7px;
+  display: none;
+  overflow: hidden;
+  padding: 20px 0 40px;
+  position: absolute; }
+
+.elfinder-quicklook .ui-resizable-se {
+  background: url("/Assets/i/elfinder/toolbar.png") 0 -496px no-repeat;
+  bottom: 3px;
+  height: 14px;
+  right: 5px;
+  width: 14px; }
+
+/* quicklook fullscreen window */
+.elfinder-quicklook-fullscreen {
+  -moz-border-radius: 0;
+  -webkit-background-clip: padding-box;
+  -webkit-border-radius: 0;
+  background: #000;
+  border-radius: 0;
+  display: block;
+  padding: 0;
+  z-index: 90000; }
+
+/* hide titlebar in fullscreen mode */
+.elfinder-quicklook-fullscreen .elfinder-quicklook-titlebar {
+  display: none; }
+
+/* hide preview border in fullscreen mode */
+.elfinder-quicklook-fullscreen .elfinder-quicklook-preview {
+  border: 0 solid; }
+
+/* quicklook titlebar */
+.elfinder-quicklook-titlebar {
+  -moz-border-radius-topleft: 7px;
+  -moz-border-radius-topright: 7px;
+  -webkit-border-top-left-radius: 7px;
+  -webkit-border-top-right-radius: 7px;
+  background: #777;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  cursor: move;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 100%; }
+
+/* window title */
+.elfinder-quicklook-title {
+  color: #fff;
+  overflow: hidden;
+  padding: 2px 0;
+  white-space: nowrap; }
+
+/* icon "close" in titlebar */
+.elfinder-quicklook-titlebar .ui-icon {
+  cursor: default;
+  height: 16px;
+  left: 4px;
+  margin-top: -8px;
+  position: absolute;
+  top: 50%;
+  width: 16px; }
+
+/* main part of quicklook window */
+.elfinder-quicklook-preview {
+  border: 0 solid;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  height: 100%;
+  overflow: hidden;
+  position: relative; }
+
+/* wrapper for file info/icon */
+.elfinder-quicklook-info-wrapper {
+  left: 0;
+  margin-top: -50px;
+  position: absolute;
+  top: 50%;
+  width: 100%; }
+
+/* file info */
+.elfinder-quicklook-info {
+  padding: 0 12px 0 112px; }
+
+/* file name in info */
+.elfinder-quicklook-info .elfinder-quicklook-info-data:first-child {
+  color: #fff;
+  font-weight: bold;
+  padding-bottom: .5em; }
+
+/* other data in info */
+.elfinder-quicklook-info-data {
+  color: #fff;
+  padding-bottom: .2em; }
+
+/* file icon */
+.elfinder-quicklook .elfinder-cwd-icon {
+  left: 32px;
+  margin-top: -20px;
+  position: absolute;
+  top: 50%; }
+
+/* image in preview */
+.elfinder-quicklook-preview img {
+  display: block;
+  margin: 0 auto; }
+
+/* navigation bar on quicklook window bottom */
+.elfinder-quicklook-navbar {
+  -moz-border-radius: 19px;
+  -webkit-border-radius: 19px;
+  border: 1px solid transparent;
+  border-radius: 19px;
+  bottom: 4px;
+  height: 32px;
+  left: 50%;
+  margin-left: -70px;
+  padding: 0;
+  position: absolute;
+  width: 140px; }
+
+/* navigation bar in fullscreen mode */
+.elfinder-quicklook-fullscreen .elfinder-quicklook-navbar {
+  background: #000;
+  border: 1px solid #eee;
+  margin-left: -94px;
+  padding: 5px;
+  width: 188px; }
+
+/* show close icon in fullscreen mode */
+.elfinder-quicklook-fullscreen .elfinder-quicklook-navbar-icon-close,
+.elfinder-quicklook-fullscreen .elfinder-quicklook-navbar-separator {
+  display: inline; }
+
+/* icons in navbar */
+.elfinder-quicklook-navbar-icon {
+  background: url("/Assets/i/elfinder/quicklook-icons.png") 0 0 no-repeat;
+  float: left;
+  height: 32px;
+  margin: 0 7px;
+  width: 32px; }
+
+/* fullscreen icon */
+.elfinder-quicklook-navbar-icon-fullscreen {
+  background-position: 0 -64px; }
+
+/* exit fullscreen icon */
+.elfinder-quicklook-navbar-icon-fullscreen-off {
+  background-position: 0 -96px; }
+
+/* prev file icon */
+.elfinder-quicklook-navbar-icon-prev {
+  background-position: 0 0; }
+
+/* next file icon */
+.elfinder-quicklook-navbar-icon-next {
+  background-position: 0 -32px; }
+
+/* close icon */
+.elfinder-quicklook-navbar-icon-close {
+  background-position: 0 -128px;
+  display: none; }
+
+/* icons separator */
+.elfinder-quicklook-navbar-separator {
+  border-left: 1px solid #fff;
+  display: none;
+  float: left;
+  height: 32px;
+  width: 1px; }
+
+/* text files preview wrapper */
+.elfinder-quicklook-preview-text-wrapper {
+  background: #fff;
+  color: #222;
+  height: 100%;
+  overflow: auto;
+  width: 100%; }
+
+/* text preview */
+pre.elfinder-quicklook-preview-text {
+  margin: 0;
+  padding: 3px 9px; }
+
+/* html/pdf preview */
+.elfinder-quicklook-preview-html,
+.elfinder-quicklook-preview-pdf {
+  background: #fff;
+  border: 0 solid;
+  height: 100%;
+  margin: 0;
+  width: 100%; }
+
+/* swf preview container */
+.elfinder-quicklook-preview-flash {
+  height: 100%;
+  width: 100%; }
+
+/* audio preview container */
+.elfinder-quicklook-preview-audio {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  width: 100%; }
+
+/* audio preview using embed */
+embed.elfinder-quicklook-preview-audio {
+  background: transparent;
+  height: 30px; }
+
+/* video preview container */
+.elfinder-quicklook-preview-video {
+  height: 100%;
+  width: 100%; }
+
+/******************************************************************/
+/*                          COMMANDS STYLES                       */
+/******************************************************************/
+/********************** COMMAND "RESIZE" ****************************/
+.elfinder-dialog-resize {
+  margin-top: .3em; }
+
+.elfinder-resize-type {
+  float: left;
+  margin-bottom: .4em; }
+
+.elfinder-resize-control {
+  padding-top: 3em; }
+
+.elfinder-resize-control input[type=text] {
+  border: 1px solid #aaa;
+  text-align: right; }
+
+.elfinder-resize-preview {
+  background: #fff;
+  border: 1px solid #aaa;
+  float: right;
+  height: 400px;
+  overflow: auto;
+  padding: 10px;
+  position: relative;
+  width: 400px; }
+
+.elfinder-resize-handle {
+  position: relative; }
+
+.elfinder-resize-handle-hline,
+.elfinder-resize-handle-vline {
+  background-image: url("/Assets/i/elfinder/crop.gif");
+  position: absolute; }
+
+.elfinder-resize-handle-hline {
+  background-repeat: repeat-x;
+  height: 1px !important;
+  width: 100%; }
+
+.elfinder-resize-handle-vline {
+  background-repeat: repeat-y;
+  height: 100%;
+  width: 1px !important; }
+
+.elfinder-resize-handle-hline-top {
+  left: 0;
+  top: 0; }
+
+.elfinder-resize-handle-hline-bottom {
+  bottom: 0;
+  left: 0; }
+
+.elfinder-resize-handle-vline-left {
+  left: 0;
+  top: 0; }
+
+.elfinder-resize-handle-vline-right {
+  right: 0;
+  top: 0; }
+
+.elfinder-resize-handle-point {
+  background: transparent;
+  border: 1px solid #777;
+  height: 8px;
+  position: absolute;
+  width: 8px; }
+
+.elfinder-resize-handle-point-n {
+  left: 50%;
+  margin-left: -5px;
+  margin-top: -5px;
+  top: 0; }
+
+.elfinder-resize-handle-point-ne {
+  margin-right: -5px;
+  margin-top: -5px;
+  right: 0;
+  top: 0; }
+
+.elfinder-resize-handle-point-e {
+  margin-right: -5px;
+  margin-top: -5px;
+  right: 0;
+  top: 50%; }
+
+.elfinder-resize-handle-point-se {
+  bottom: 0;
+  margin-bottom: -5px;
+  margin-right: -5px;
+  right: 0; }
+
+.elfinder-resize-handle-point-s {
+  bottom: 0;
+  left: 50%;
+  margin-bottom: -5px;
+  margin-left: -5px; }
+
+.elfinder-resize-handle-point-sw {
+  bottom: 0;
+  left: 0;
+  margin-bottom: -5px;
+  margin-left: -5px; }
+
+.elfinder-resize-handle-point-w {
+  left: 0;
+  margin-left: -5px;
+  margin-top: -5px;
+  top: 50%; }
+
+.elfinder-resize-handle-point-nw {
+  left: 0;
+  margin-left: -5px;
+  margin-top: -5px;
+  top: 0; }
+
+.elfinder-resize-spinner {
+  background: url(/Assets/i/elfinder/progress.gif) center bottom repeat-x;
+  height: 30px;
+  left: 50%;
+  margin-left: -100px;
+  margin-top: -25px;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  width: 200px; }
+
+.elfinder-resize-row {
+  margin-bottom: 7px;
+  position: relative; }
+
+.elfinder-resize-label {
+  float: left;
+  padding-top: 3px;
+  width: 80px; }
+
+.elfinder-resize-reset {
+  height: 16px;
+  margin-top: -8px;
+  position: absolute;
+  width: 16px; }
+
+.elfinder-dialog .elfinder-dialog-resize .ui-resizable-e {
+  height: 100%;
+  width: 10px; }
+
+.elfinder-dialog .elfinder-dialog-resize .ui-resizable-s {
+  height: 10px;
+  width: 100%; }
+
+.elfinder-dialog .elfinder-dialog-resize .ui-resizable-se {
+  background: transparent;
+  bottom: 0;
+  margin-bottom: -7px;
+  margin-right: -7px;
+  right: 0; }
+
+.elfinder-dialog-resize .ui-icon-grip-solid-vertical {
+  margin-right: -11px;
+  margin-top: -8px;
+  position: absolute;
+  right: 0;
+  top: 50%; }
+
+.elfinder-dialog-resize .ui-icon-grip-solid-horizontal {
+  bottom: 0;
+  left: 50%;
+  margin-bottom: -11px;
+  margin-left: -8px;
+  position: absolute; }
+
+.elfinder-resize-row .elfinder-buttonset {
+  float: right; }
+
+.elfinder-resize-rotate-slider {
+  float: left;
+  margin: 7px 7px 0;
+  width: 195px; }
+
+/********************** COMMAND "EDIT" ****************************/
+/* edit text file textarea */
+.elfinder-file-edit {
+  border: 1px solid #ccc;
+  height: 99%;
+  margin: 0;
+  padding: 2px;
+  width: 99%; }
+
+/********************** COMMAND "HELP" ****************************/
+/* help dialog */
+.elfinder-help {
+  margin-bottom: .5em; }
+
+/* fix tabs */
+.elfinder-help .ui-tabs-panel {
+  padding: .5em; }
+
+.elfinder-dialog .ui-tabs .ui-tabs-nav li a {
+  padding: .2em 1em; }
+
+.elfinder-help-shortcuts {
+  height: 300px;
+  margin: .5em 0;
+  overflow: auto;
+  padding: 1em; }
+
+.elfinder-help-shortcut {
+  clear: both;
+  white-space: nowrap; }
+
+.elfinder-help-shortcut-pattern {
+  float: left;
+  width: 160px; }
+
+.elfinder-help-logo {
+  background: url("/Assets/i/elfinder/logo.png") center center no-repeat;
+  float: left;
+  height: 96px;
+  margin-right: 1em;
+  width: 100px; }
+
+.elfinder-help h3 {
+  font-size: 1.5em;
+  margin: .2em 0 .3em 0; }
+
+.elfinder-help-separator {
+  clear: both;
+  padding: .5em; }
+
+.elfinder-help-link {
+  padding: 2px; }
+
+.elfinder-help .ui-priority-secondary {
+  font-size: .9em; }
+
+.elfinder-help .ui-priority-primary {
+  margin-bottom: 7px; }
+
+.elfinder-help-team {
+  border-bottom: 1px solid #ccc;
+  clear: both;
+  font-size: .9em;
+  margin: .5em 0;
+  text-align: right; }
+
+.elfinder-help-team div {
+  float: left; }
+
+.elfinder-help-license {
+  font-size: .9em; }
+
+.elfinder-help-disabled {
+  font-weight: bold;
+  margin: 90px 0;
+  text-align: center; }
+
+.elfinder-help .elfinder-dont-panic {
+  -moz-border-radius: 100px;
+  -moz-box-shadow: 5px 5px 9px #111;
+  -webkit-border-radius: 100px;
+  -webkit-box-shadow: 5px 5px 9px #111;
+  background: #d90004;
+  background: -moz-radial-gradient(80px 80px, circle farthest-corner, #d90004 35%, #960004 100%);
+  background: -webkit-gradient(radial, 80 80, 60, 80 80, 120, from(#d90004), to(#960004));
+  border: 1px solid transparent;
+  border-radius: 100px;
+  box-shadow: 5px 5px 9px #111;
+  display: block;
+  height: 200px;
+  margin: 30px auto;
+  outline: none;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  width: 200px; }
+
+.elfinder-help .elfinder-dont-panic span {
+  color: #fff;
+  font-size: 3em;
+  font-weight: bold;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 45px; }
+
+@font-face {
+  font-family: mp-bold;
+  src: url("../fonts/MyriadPro-Bold.otf"); }
+
+@font-face {
+  font-family: mp-bold-cond;
+  src: url("../fonts/MyriadPro-BoldCond.otf"); }
+
+@font-face {
+  font-family: mp-bold-cond-it;
+  src: url("../fonts/MyriadPro-BoldCondIt.otf"); }
+
+@font-face {
+  font-family: mp-it;
+  src: url("../fonts/MyriadPro-It.otf"); }
+
+@font-face {
+  font-family: mp-bold-it;
+  src: url("../fonts/MyriadPro-BoldIt.otf"); }
+
+@font-face {
+  font-family: mp-regular;
+  src: url("../fonts/MyriadPro-Regular.otf"); }
+
+@font-face {
+  font-family: mp-semibold;
+  src: url("../fonts/MyriadPro-Semibold.otf"); }
+
+@font-face {
+  font-family: mp-semibold-it;
+  src: url("../fonts/MyriadPro-SemiboldIt.otf"); }
+
+.elfinder-contextmenu .elfinder-contextmenu-item span {
+  font-size: .76em; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-filename {
+  font-size: .7em; }
+
+.elfinder-cwd-view-list td {
+  font-size: .7em; }
+
+.std42-dialog .ui-dialog-titlebar {
+  font-size: .82em; }
+
+.std42-dialog .ui-dialog-content {
+  font-size: .72em; }
+
+.std42-dialog .ui-dialog-buttonpane {
+  font-size: .76em; }
+
+.elfinder-info-tb {
+  font-size: .9em; }
+
+.elfinder-upload-dropbox {
+  font-size: 1.2em; }
+
+.elfinder-upload-dialog-or {
+  font-size: 1.2em; }
+
+.dialogelfinder .dialogelfinder-drag {
+  font-size: .9em; }
+
+.elfinder .elfinder-navbar {
+  font-size: .72em; }
+
+.elfinder-place-drag .elfinder-navbar-dir {
+  font-size: .9em; }
+
+.elfinder-quicklook-title {
+  font-size: .7em; }
+
+.elfinder-quicklook-info-data {
+  font-size: .72em; }
+
+.elfinder-quicklook-preview-text-wrapper {
+  font-size: .9em; }
+
+.elfinder-button-menu-item {
+  font-size: .72em; }
+
+.elfinder-button-search input {
+  font-size: .8em; }
+
+.elfinder-statusbar div {
+  font-size: .7em; }
+
+.elfinder-drag-num {
+  font-size: 12px; }
+
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%; }
+
+.elfinder .elfinder-button.elfinder-link-button {
+  padding: 0;
+  height: 15px !important;
+  /*height: auto !important;*/
+  max-width: none;
+  width: auto !important; }
+
+.btn.btn-green.ui-state-disabled {
+  background: #d3d3d3;
+  cursor: default; }
+
+.btn.btn-green.ui-state-disabled:hover {
+  background: #d3d3d3; }
+
+.right {
+  float: right; }
+
+.left {
+  float: left; }
+
+/*.elfinder-link-button a, .ui-elfinder-toolbar-path a {*/
+a {
+  color: #3498db;
+  text-decoration: underline;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  margin: 0; }
+
+/*.elfinder-link-button a:hover, .ui-elfinder-toolbar-path a:hover, .ui-state-hover a {*/
+a:hover, .ui-state-hover a {
+  text-decoration: none;
+  color: #ff6600;
+  -webkit-transition: all 0.1s ease-out;
+  -moz-transition: all 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out; }
+
+.ui-elfinder-toolbar-path a.last, .ui-elfinder-toolbar-path a.last:hover {
+  text-decoration: none;
+  color: black; }
+
+/*--------------*/
+/*TOOLBAR*/
+/*--------------*/
+.elfinder .elfinder-button.elfiner-button-filter {
+  font-size: 12px;
+  max-width: 350px; }
+
+.elfiner-button-filter label {
+  margin-right: 10px;
+  padding-top: 2px; }
+
+.elfiner-button-filter .elfinder-button-menu {
+  top: 25px;
+  left: -65px; }
+
+.btn-group a.filter {
+  text-decoration: none;
+  border-bottom: 1px dashed; }
+
+.elfinder-buttonset {
+  margin-top: 0px; }
+
+.elfinder-buttonset.ui-elfinder-button-first {
+  margin-top: 0px;
+  margin-right: 10px; }
+
+.elfinder-buttonset.ui-elfinder-button-first .btn {
+  padding: 6px 0px; }
+
+.ui-elfinder-button-first .elfinder-button-menu-item {
+  text-align: left; }
+
+.elfinder-buttonset.ui-elfinder-button-first .btn.ui-state-disabled {
+  background: #1ac316 !important;
+  cursor: pointer; }
+
+.elfinder-buttonset.ui-elfinder-button-first .btn .elfinder-button-text {
+  font-size: 16px;
+  font-weight: bold; }
+
+.elfinder-buttonset.ui-elfinder-button-first .elfinder-button-menu {
+  top: 53px;
+  left: -13px;
+  color: black; }
+
+.elfinder-toolbar .elfinder-buttonset .elfinder-button.btn.btn-blue {
+  min-width: 30px;
+  width: 40px; }
+
+.elfinder-toolbar .elfinder-buttonset .elfinder-button.btn.btn-blue.ui-state-disabled {
+  opacity: 0.0;
+  filter: Alpha(Opacity=0); }
+
+.elfinder-toolbar .elfinder-buttonset .elfinder-button.btn.btn-blue .elfinder-button-icon-paste {
+  background-position: -718px -440px;
+  width: 35px;
+  height: 25px;
+  margin-top: 5px; }
+
+.elfinder-toolbar .elfinder-buttonset .elfinder-button.btn.btn-blue .elfinder-button-icon-paste {
+  background-position: -718px -440px;
+  width: 35px;
+  height: 25px;
+  margin-top: 5px; }
+
+.elfinder-button.ui-elfinder-button-last {
+  position: absolute !important;
+  right: 0;
+  width: auto !important; }
+
+.caret {
+  display: inline-block;
+  width: 10px;
+  height: 12px;
+  margin-left: 2px;
+  background: url("/Assets/i/elfinder/icons.png") no-repeat;
+  background-position: -645px -324px;
+  margin-top: 4px;
+  /*vertical-align: middle;
+    border-top: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;*/ }
+
+.caret.up {
+  /*border-bottom: 4px solid;
+    border-top: 0;*/
+  background: url("/Assets/i/elfinder/up.png") no-repeat;
+  height: 6px; }
+
+.elfinder-button .caret {
+  width: 7px;
+  height: 5px;
+  background: url("/Assets/i/elfinder/downblack.png") no-repeat; }
+
+.ui-elfinder-button-green .elfinder-button {
+  background: #1ac316;
+  display: inline-block;
+  text-align: center;
+  /*padding: 10px 20px;*/
+  padding: 10px 20px 0 20px;
+  color: #fff;
+  text-decoration: none;
+  /*height: 18px !important;*/
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.ui-elfinder-button-green .elfinder-button.ui-state-hover {
+  background: #1dda19;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.ui-elfinder-button-green .elfinder-button:active {
+  transform: scale(0.8);
+  -webkit-transform: scale(0.8);
+  -o-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+.ui-elfinder-button-green .elfinder-button-text {
+  font-size: 14px; }
+
+.ui-elfinder-button-green .elfinder-button-icon {
+  display: none; }
+
+.ui-elfinder-button-first .elfinder-button {
+  margin-right: 65px;
+  font-weight: bold; }
+
+.ui-elfinder-button-first .elfinder-button form input {
+  cursor: pointer;
+  height: 40px; }
+
+.elfinder-link-button form input {
+  /*cursor: pointer !important;*/ }
+
+.elfinder .elfinder-button {
+  /*max-width: 135px;*/
+  /*width: 125px;*/
+  min-width: 90px;
+  height: 44px;
+  cursor: pointer; }
+
+.funcbuttons .elfinder-button {
+  min-width: 20px; }
+
+.elfinder .elfinder-button.ui-state-disabled {
+  cursor: default; }
+
+.elfinder-button-menu-item {
+  text-align: left; }
+
+.elfinder-button-menu-item .elfinder-button-icon {
+  float: left; }
+
+/* icon inside button */
+.elfinder-button-icon {
+  /*float: left;*/
+  margin: 0 auto;
+  width: 15px;
+  height: 15px;
+  display: block;
+  background: url("/Assets/i/elfinder/icons.png") no-repeat; }
+
+.elfinder-button-text {
+  font-size: 11px; }
+
+.ui-state-disabled .elfinder-button-text {
+  color: #666666; }
+
+.ui-elfinder-button-first .ui-state-disabled .elfinder-button-text {
+  color: #ffffff; }
+
+.ui-state-disabled.elfinder-button-menu-item {
+  opacity: .4;
+  filter: Alpha(Opacity=40); }
+
+/* buttons icons */
+.elfinder-button-icon-sign {
+  background-position: 0 -301px; }
+
+.elfinder-button-icon-encrypt {
+  width: 11px;
+  height: 15px;
+  background-position: -35px -301px; }
+
+.elfinder-button-icon-decrypt {
+  width: 12px;
+  height: 15px;
+  background-position: -111px -301px; }
+
+.elfinder-button-icon-checksign {
+  width: 19px;
+  height: 15px;
+  background-position: -146px -301px; }
+
+.elfinder-button-icon-signandencrypt {
+  width: 18px;
+  height: 15px;
+  background-position: -69px -301px; }
+
+.elfinder-button-icon-decryptandchecksign {
+  width: 22px;
+  height: 15px;
+  background-position: -182px -301px; }
+
+.elfinder-button-icon-rm {
+  width: 18px;
+  height: 18px;
+  background-position: -120px -353px; }
+
+.elfinder-button-icon-rename {
+  width: 22px;
+  height: 18px;
+  background-position: -401px -351px; }
+
+.elfinder-button-icon-paste {
+  width: 18px;
+  height: 18px;
+  background-position: -274px -462px; }
+
+.elfinder-button-icon-copy {
+  width: 18px;
+  height: 18px;
+  background-position: -316px -462px; }
+
+.ui-state-disabled .elfinder-button-icon-copy {
+  background-position: -316px -417px; }
+
+.ui-state-disabled .elfinder-button-icon-paste {
+  background-position: -274px -417px; }
+
+.ui-state-disabled .elfinder-button-icon-rename {
+  background-position: -426px -351px; }
+
+.ui-state-hover .elfinder-button-icon-sign {
+  background-position: 0 -321px; }
+
+.ui-state-hover .elfinder-button-icon-encrypt {
+  background-position: -35px -321px; }
+
+.ui-state-hover .elfinder-button-icon-decrypt {
+  background-position: -111px -321px; }
+
+.ui-state-hover .elfinder-button-icon-checksign {
+  background-position: -146px -321px; }
+
+.ui-state-hover .elfinder-button-icon-signandencrypt {
+  background-position: -69px -321px; }
+
+.ui-state-hover .elfinder-button-icon-decryptandchecksign {
+  background-position: -182px -321px; }
+
+.ui-state-hover .elfinder-button-icon-rm {
+  background-position: -120px -373px; }
+
+.ui-state-hover .elfinder-button-icon-rename {
+  /*background-position: -127px -443px;*/
+  background-position: -426px -351px; }
+
+.ui-state-hover .elfinder-button-icon-paste {
+  background-position: -274px -483px; }
+
+.ui-state-hover .elfinder-button-icon-copy {
+  background-position: -316px -482px; }
+
+/*.elfinder-button-icon-folder {background-position: 0 -16px; }
+.elfinder-button-icon-send      { background-position: 0 -416px; }*/
+.elfinder-button-menu-item .elfinder-button-icon {
+  width: 12px;
+  height: 12px; }
+
+.elfinder-button-menu-item .elfinder-button-icon-directory {
+  width: 28px;
+  height: 21px;
+  background-position: 0 -253px; }
+
+.elfinder-button-menu-item .elfinder-button-icon-copy {
+  background-position: -750px -301px; }
+
+.elfinder-button-menu-item .elfinder-button-icon-paste {
+  background-position: -767px -301px; }
+
+.elfinder-button-menu-item .elfinder-button-icon-rm {
+  background-position: -405px -301px; }
+
+.elfinder-button-menu-item .elfinder-button-icon-download {
+  background-position: -422px -301px; }
+
+.elfinder-button-menu-item .elfinder-button-icon-rename {
+  width: 13px;
+  height: 13px;
+  background-position: -455px -300px; }
+
+.elfinder-button-menu-item .elfinder-button-icon-opensendpopup {
+  width: 13px;
+  height: 12px;
+  background-position: -439px -299px; }
+
+.elfinder-buttonset.ui-elfinder-button-first .elfinder-button-menu .elfinder-button-icon {
+  width: 18px;
+  height: 18px; }
+
+.elfinder-button-menu-item .elfinder-button-icon-upload {
+  background-position: -434px -464px; }
+
+.elfinder-button-menu-item .elfinder-button-icon-mkdir {
+  background-position: -410px -464px; }
+
+.ui-elfinder-button-first .elfinder-button-menu-item .elfinder-button-icon-paste {
+  background-position: -274px -462px; }
+
+.ui-state-hover.elfinder-button-menu-item .elfinder-button-icon-copy {
+  background-position: -750px -320px; }
+
+.ui-state-hover.elfinder-button-menu-item .elfinder-button-icon-paste {
+  background-position: -767px -320px; }
+
+.ui-state-hover.elfinder-button-menu-item .elfinder-button-icon-upload {
+  background-position: -434px -440px; }
+
+.ui-state-hover.elfinder-button-menu-item .elfinder-button-icon-mkdir {
+  background-position: -410px -440px; }
+
+.ui-elfinder-button-first .ui-state-hover.elfinder-button-menu-item .elfinder-button-icon-paste {
+  background-position: -274px -440px; }
+
+.ui-state-hover.elfinder-button-menu-item .elfinder-button-icon-rm {
+  background-position: -405px -321px; }
+
+.ui-state-hover.elfinder-button-menu-item .elfinder-button-icon-download {
+  background-position: -422px -321px; }
+
+.ui-state-hover.elfinder-button-menu-item .elfinder-button-icon-rename {
+  background-position: -455px -321px; }
+
+.ui-state-hover.elfinder-button-menu-item .elfinder-button-icon-opensendpopup {
+  background-position: -439px -319px; }
+
+.elfinder .infobar-buttons .elfinder-button {
+  height: 16px;
+  width: 16px; }
+
+.elfinder .infobar-buttons .elfinder-link-button {
+  width: 100px; }
+
+/*--------------*/
+/*CWD*/
+/*--------------*/
+.elfinder-cwd-view-list .elfinder-cwd-file-wrapper {
+  /*width: 400px;*/ }
+
+.modal .elfinder-cwd-view-list .elfinder-cwd-file-wrapper {
+  width: 210px; }
+
+.elfinder-cwd-view-list .elfinder-cwd-file-wrapper .elfinder-cwd-filename {
+  /*width: 490px;*/
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.modal .elfinder-cwd-view-list .elfinder-cwd-file-wrapper .elfinder-cwd-filename {
+  width: 270px; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-filename {
+  font-size: .7em;
+  width: 130px; }
+
+table.icons-table thead td {
+  font-size: 12px; }
+
+table.icons-table thead td .button-checkbox {
+  margin-right: 0px;
+  left: 0;
+  top: 7px;
+  float: left; }
+
+table.icons-table thead td .selectalltext {
+  line-height: 34px; }
+
+.elfinder-ltr .elfinder-cwd-view-icons .elfinder-cwd-file {
+  margin: 0;
+  position: relative;
+  font-size: 16px; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-file {
+  width: 133px; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-file.ui-state-hover {
+  cursor: pointer; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-file.ui-state-hover {
+  background: #edf4fa; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-file.ui-state-disabled {
+  /*opacity: 0.9;
+    filter:Alpha(Opacity=90);*/
+  background-color: #FFDDDD; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-file.ui-selected {
+  background: #fffdde; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-file.elfinder-cwd-file-tmp {
+  background: #fffdde; }
+
+.elfinder-cwd-view-icons .ui-state-hover .elfinder-cwd-filename {
+  /*color: #3498db;*/ }
+
+.elfinder-cwd-view-icons .ui-selected .elfinder-cwd-filename {
+  color: #3498db; }
+
+.elfinder .elfinder-cwd-wrapper table thead tr {
+  border-left: 0 solid;
+  border-top: 0 solid;
+  border-right: 0 solid; }
+
+table.thead {
+  width: 100%; }
+
+table.thead thead tr td.name, table.thead thead tr td.date, table.thead thead tr td.kind {
+  cursor: pointer; }
+
+.elfinder-cwd-wrapper table tr {
+  border: none;
+  vertical-align: middle !important;
+  line-height: 23px;
+  border-bottom: 1px solid #e5e5e5;
+  height: 37px; }
+
+.elfinder-cwd-wrapper > table {
+  position: absolute;
+  /*width: 100%;*/
+  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  font-size: 1em; }
+
+.elfinder-cwd-wrapper > table.icons-table {
+  border-bottom: 1px solid #dddddd;
+  width: 100%; }
+
+.elfinder-cwd-wrapper > table.icons-table td {
+  padding-left: 5px; }
+
+.elfinder-cwd-wrapper > table.icons-table .selectalltext {
+  cursor: pointer; }
+
+.elfinder-cwd-wrapper table td {
+  text-align: left; }
+
+.elfinder-cwd-wrapper table td {
+  padding: 3px 12px;
+  white-space: pre;
+  overflow: hidden;
+  text-align: right;
+  cursor: default;
+  border: 0 solid; }
+
+.elfinder-cwd-wrapper table thead td {
+  background: none !important;
+  color: #999999;
+  font-weight: normal;
+  border: none; }
+
+.elfinder-cwd-wrapper table td {
+  text-align: left; }
+
+.elfinder-cwd-wrapper table thead td.chb {
+  width: 15px;
+  padding-left: 11px; }
+
+.elfinder-cwd-wrapper table thead td.name {
+  /*width: 515px;*/ }
+
+.elfinder-cwd-wrapper table thead td.date {
+  width: 125px;
+  text-align: right; }
+
+.elfinder-cwd-wrapper table thead td.kind {
+  width: 215px; }
+
+.content.modal .elfinder-cwd-wrapper table thead td.name {
+  width: 300px; }
+
+.content.modal .elfinder-cwd-wrapper table td.name {
+  /*width: 435px;*/ }
+
+.elfinder-cwd-wrapper table td.chb {
+  width: 20px; }
+
+.elfinder-cwd-wrapper table td.name {
+  min-width: 360px; }
+
+.elfinder-cwd-wrapper table td.date {
+  width: 130px;
+  text-align: left; }
+
+.elfinder-cwd-wrapper table td.kind {
+  word-wrap: break-word;
+  padding: 9px 12px;
+  width: 204px;
+  white-space: nowrap;
+  display: block;
+  text-overflow: ellipsis; }
+
+.elfinder-cwd-wrapper-list .elfinder-cwd {
+  margin-top: 47px;
+  height: 396px !important;
+  overflow-y: auto; }
+
+.elfinder-cwd {
+  margin-top: 47px;
+  height: 411px !important;
+  overflow-y: auto; }
+
+.documents-list.elfinder-cwd {
+  margin-top: 0;
+  height: auto !important; }
+
+.documents-list.elfinder-cwd tr td {
+  cursor: pointer !important; }
+
+.documents-list.elfinder-cwd tr td.kind {
+  font-size: 12px;
+  color: #1ac316; }
+
+.documents-list.elfinder-cwd tr td.right {
+  float: none; }
+
+.received-popup .buttons .btn-big {
+  font-weight: 700;
+  width: 180px; }
+
+.documents-list.elfinder-cwd tr:hover {
+  background: #edf4fa; }
+
+.received-popup .scroll-wrap {
+  margin-left: 0;
+  margin-bottom: 20px; }
+
+.elfinder-cwd-view-icons {
+  padding-top: 15px; }
+
+.content.modal .elfinder-cwd {
+  height: 308px !important;
+  overflow-x: hidden; }
+
+.elfinder-cwd-wrapper {
+  overflow: hidden; }
+
+.elfinder-cwd table {
+  border: none;
+  border-top: 0px solid #dddddd;
+  font-size: 1em;
+  width: 100%; }
+
+.elfinder-cwd table tr {
+  border: none;
+  vertical-align: middle !important;
+  line-height: 25px;
+  border-bottom: 1px solid #e5e5e5;
+  height: 41px; }
+
+.elfinder-cwd table tr.ui-state-hover {
+  background: #edf4fa !important; }
+
+.elfinder-cwd table tr.ui-state-disabled {
+  /*opacity: 0.9;
+            filter:Alpha(Opacity=90);*/
+  background-color: #FFDDDD !important; }
+
+.elfinder-cwd table tr.ui-selected {
+  background: #fffdde !important; }
+
+.elfinder-cwd table tr.elfinder-cwd-file-tmp {
+  background: #fffdde !important; }
+
+.elfinder-cwd table tr:nth-child(2n-1) {
+  background-color: transparent; }
+
+.elfinder-cwd table tr:nth-child(2n) {
+  background-color: #f9f9f9; }
+
+.elfinder-cwd table thead td {
+  background: none !important;
+  color: #999999;
+  font-weight: normal;
+  border: none; }
+
+.elfinder-cwd table {
+  font-size: 18px; }
+
+.elfinder-cwd-icon {
+  background-image: url("/Assets/i/elfinder/icons.png");
+  background-repeat: no-repeat; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-file .elfinder-cwd-icon {
+  width: 39px;
+  height: 43px;
+  margin-left: 7px;
+  background-position: -719px -200px; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-application.elfinder-cwd-icon-pgp-signature {
+  background-position: -272px -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-application.elfinder-cwd-icon-crypt {
+  background-position: -311px -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-application.elfinder-cwd-icon-signcrypt {
+  background-position: -350px -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-application.elfinder-cwd-icon-x-x509-ca-cert {
+  background-position: -680px -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-unknown {
+  background-position: -719px -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-directory {
+  width: 57px !important;
+  height: 43px !important;
+  background-position: -623px -200px !important;
+  margin-left: 0 !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-empty {
+  background-position: -116px -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-text {
+  background-position: -389px -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-image,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-adobe-photoshop,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-postscript {
+  background-position: -233px -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-audio {
+  background-position: -39px -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-video,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-flash-video {
+  background-position: 0 -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-pdf {
+  background-position: -194px -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-ms-excel,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-ms-excel,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-ms-excel-addin-macroEnabled-12,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-ms-excel-sheet-binary-macroEnabled-12,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-ms-excel-sheet-macroEnabled-12,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-ms-excel-template-macroEnabled-12,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-ms-office,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-ms-powerpoint,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-ms-powerpoint-addin-macroEnabled-12,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-ms-powerpoint-presentation-macroEnabled-12,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-ms-powerpoint-slide-macroEnabled-12,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-ms-powerpoint-slideshow-macroEnabled-12,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-openxmlformats-officedocument-spreadsheetml-sheet,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-ms-powerpoint-template-macroEnabled-12 {
+  background-position: -116px -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-msword,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-ms-word,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-ms-word-document-macroEnabled-12,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-ms-word-template-macroEnabled-12,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-oasis-opendocument-chart,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-oasis-opendocument-database,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-oasis-opendocument-formula,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-oasis-opendocument-graphics,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-oasis-opendocument-graphics-template,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-oasis-opendocument-image,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-oasis-opendocument-presentation-template,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-oasis-opendocument-spreadsheet-template,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-oasis-opendocument-text-master,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-oasis-opendocument-text-template,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-oasis-opendocument-text-web,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-openofficeorg-extension,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-openxmlformats-officedocument-presentationml-presentation,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-openxmlformats-officedocument-presentationml-slide,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-openxmlformats-officedocument-presentationml-slideshow,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-openxmlformats-officedocument-presentationml-template,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-openxmlformats-officedocument-spreadsheetml-template,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-openxmlformats-officedocument-wordprocessingml-document,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-openxmlformats-officedocument-wordprocessingml-template {
+  background-position: -428px -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-docx {
+  background-position: -467px -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-html {
+  background-position: -272px -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-css,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-oasis-opendocument-text,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-oasis-opendocument-presentation,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-oasis-opendocument-spreadsheet,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-javascript,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-javascript,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-perl,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-python,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-ruby,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-sh,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-shellscript,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-c,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-csrc,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-chdr,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-c--,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-c--src,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-c--hdr,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-java,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-java-source,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-rtf,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-rtfd,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-vnd-sun-xml-writer-template,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-php {
+  background-position: -116px -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-xml {
+  background-position: -584px -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-zip,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-zip {
+  background-position: -545px -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-7z-compressed,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-compressed-tar,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-archive,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-gzip,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-tar,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-bzip,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-bzip2 {
+  background-position: -155px -200px !important; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-rar,
+.elfinder-cwd-view-icons .elfinder-cwd-icon-x-rar-compressed {
+  background-position: -506px -200px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon {
+  background: url("/Assets/i/elfinder/icons.png") -402px -250px;
+  background-repeat: no-repeat;
+  position: absolute;
+  display: block;
+  margin-top: 0;
+  width: 22px;
+  height: 24px; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-application.elfinder-cwd-icon-pgp-signature {
+  background-position: -138px -250px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-application.elfinder-cwd-icon-crypt {
+  background-position: -160px -250px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-application.elfinder-cwd-icon-signcrypt {
+  background-position: -182px -250px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-application.elfinder-cwd-icon-x-x509-ca-cert {
+  background-position: -380px -250px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-directory {
+  width: 28px !important;
+  height: 21px !important;
+  background-position: 0 -253px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-empty {
+  background-position: -50px -250px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-text {
+  background-position: -204px -250px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-image,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-adobe-photoshop,
+.elfinder-cwd-view-list .elfinder-cwd-icon-postscript {
+  background-position: -116px -250px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-audio {
+  background-position: -336px -250px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-video,
+.elfinder-cwd-view-list .elfinder-cwd-icon-flash-video {
+  background-position: -314px -250px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-pdf {
+  background-position: -94px -250px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-ms-excel,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-ms-excel,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-ms-excel-addin-macroEnabled-12,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-ms-excel-sheet-binary-macroEnabled-12,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-ms-excel-sheet-macroEnabled-12,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-ms-excel-template-macroEnabled-12,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-ms-office,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-ms-powerpoint,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-ms-powerpoint-addin-macroEnabled-12,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-ms-powerpoint-presentation-macroEnabled-12,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-ms-powerpoint-slide-macroEnabled-12,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-ms-powerpoint-slideshow-macroEnabled-12,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-openxmlformats-officedocument-spreadsheetml-sheet,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-ms-powerpoint-template-macroEnabled-12 {
+  background-position: -50px -250px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-msword,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-ms-word,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-ms-word-document-macroEnabled-12,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-ms-word-template-macroEnabled-12,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-oasis-opendocument-chart,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-oasis-opendocument-database,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-oasis-opendocument-formula,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-oasis-opendocument-graphics,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-oasis-opendocument-graphics-template,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-oasis-opendocument-image,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-oasis-opendocument-presentation-template,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-oasis-opendocument-spreadsheet-template,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-oasis-opendocument-text-master,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-oasis-opendocument-text-template,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-oasis-opendocument-text-web,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-openofficeorg-extension,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-openxmlformats-officedocument-presentationml-presentation,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-openxmlformats-officedocument-presentationml-slide,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-openxmlformats-officedocument-presentationml-slideshow,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-openxmlformats-officedocument-presentationml-template,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-openxmlformats-officedocument-spreadsheetml-template,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-openxmlformats-officedocument-wordprocessingml-document,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-openxmlformats-officedocument-wordprocessingml-template {
+  background-position: -226px -250px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-docx {
+  background-position: -248px -250px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-html {
+  background-position: -117px -250px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-css,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-oasis-opendocument-presentation,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-oasis-opendocument-text,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-oasis-opendocument-spreadsheet,
+.elfinder-cwd-view-list .elfinder-cwd-icon-javascript,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-javascript,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-perl,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-python,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-ruby,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-sh,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-shellscript,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-c,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-csrc,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-chdr,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-c--,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-c--src,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-c--hdr,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-java,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-java-source,
+.elfinder-cwd-view-list .elfinder-cwd-icon-rtf,
+.elfinder-cwd-view-list .elfinder-cwd-icon-rtfd,
+.elfinder-cwd-view-list .elfinder-cwd-icon-vnd-sun-xml-writer-template,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-php {
+  background-position: -50px -250px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-xml {
+  background-position: -358px -250px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-zip,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-zip {
+  background-position: -292px -250px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-7z-compressed,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-compressed-tar,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-archive,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-gzip,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-tar,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-bzip,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-bzip2 {
+  background-position: -72px -250px !important; }
+
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-rar,
+.elfinder-cwd-view-list .elfinder-cwd-icon-x-rar-compressed {
+  background-position: -270px -250px !important; }
+
+.elfinder-cwd-icon-group {
+  background-position: 0 -1300px; }
+
+/*--------------*/
+/*tree*/
+/*--------------*/
+.elfinder-ltr .elfinder-navbar-collapsed .elfinder-navbar-arrow {
+  background-image: url("/Assets/i/elfinder/plus.png");
+  background-position: 0; }
+
+.elfinder-ltr .elfinder-navbar-expanded .elfinder-navbar-arrow, .elfinder-rtl .elfinder-navbar-expanded .elfinder-navbar-arrow {
+  background-image: url("/Assets/i/elfinder/minus.png");
+  background-position: 0; }
+
+.ui-state-active .elfinder-navbar-arrow {
+  background-image: url("/Assets/i/elfinder/plus.png");
+  background-position: 0; }
+
+.elfinder-navbar-wrapper .ui-state-active {
+  font-weight: bold; }
+
+.elfinder-ltr .elfinder-navbar-dir {
+  cursor: pointer; }
+
+.elfinder-tree .elfinder-navbar-root .elfinder-navbar-icon {
+  display: none; }
+
+.elfinder-navbar-root {
+  padding-left: 15px !important; }
+
+.elfinder-navbar-icon {
+  width: 10px;
+  height: 9px;
+  background: url("/Assets/i/elfinder/icons.png") -548px -326px; }
+
+.ui-state-active .elfinder-navbar-icon, .elfinder-droppable-active .elfinder-navbar-icon, .ui-state-hover .elfinder-navbar-icon {
+  background-position: -548px -326px; }
+
+.elfinder-ltr .elfinder-navbar-icon {
+  left: 18px;
+  top: 14px; }
+
+.elfinder-tree {
+  font-size: 14px; }
+
+/*INFOBLOCK*/
+.link .elfinder-button.ui-state-disabled {
+  display: none; }
+
+.funcbuttons .elfinder-button {
+  width: auto !important; }
+
+.funcbuttons .elfinder-button-text {
+  display: none; }
+
+.funcbuttons .elfinder-button-icon {
+  display: block;
+  width: 20px;
+  height: 18px; }
+
+.funcbuttons .ui-state-disabled {
+  opacity: .4;
+  filter: Alpha(Opacity=40); }
+
+.funcbuttons .elfinder-button-icon-opensendpopup {
+  background-position: -194px -353px; }
+
+.funcbuttons .elfinder-button-icon-download {
+  background-position: -169px -353px; }
+
+.funcbuttons .elfinder-button-icon-download:hover {
+  /*background-position: -169px -373px;*/ }
+
+.funcbuttons .elfinder-button-icon-download:active, .funcbuttons .elfinder-button-icon-download:focus {
+  /*background-position: -169px -353px;*/ }
+
+.funcbuttons .elfinder-button-icon-rm {
+  background-position: -119px -353px; }
+
+.funcbuttons .ui-state-hover .elfinder-button-icon-opensendpopup {
+  background-position: -194px -373px; }
+
+.funcbuttons .ui-state-hover .elfinder-button-icon-download {
+  background-position: -169px -373px; }
+
+.funcbuttons .ui-state-hover .elfinder-button-icon-rm {
+  background-position: -119px -373px; }
+
+.selectblock {
+  margin-left: 200px;
+  overflow: hidden;
+  padding: 20px 0px;
+  border-bottom: #e6e6e6 1px solid; }
+
+.selectblock .selectico {
+  float: left;
+  width: 85px; }
+
+.selectblock .selectinfo {
+  padding: 0px 20px;
+  float: left;
+  width: 420px; }
+
+.selectblock .selectinfo .titleblock {
+  overflow: hidden; }
+
+.selectblock .selectinfo .titleblock .title {
+  float: left;
+  font-weight: bold;
+  margin-right: 10px;
+  word-wrap: break-word;
+  max-height: 90px; }
+
+.selectblock .selectinfo .titleblock .rename {
+  float: right;
+  font-size: 0.9em; }
+
+.selectblock .selectinfo .dateblock {
+  padding: 10px 0px;
+  margin-bottom: 10px;
+  border-bottom: #666 1px dotted;
+  color: #666;
+  font-size: 14px; }
+
+.selectblock .selectinfo .dateblock span {
+  color: #000; }
+
+.selectblock .selectinfo .dateblock span:after {
+  display: block; }
+
+.selectblock .selectinfo .dateblock .link {
+  text-align: left;
+  margin-top: 5px;
+  height: 18px; }
+
+.selectblock .selectinfo .dateblock .link div {
+  text-align: left; }
+
+.selectblock .selectinfo .dateblock .link .elfinder-button-text {
+  font-size: 12px; }
+
+.selectblock .selectinfo .selectfunc {
+  overflow: hidden; }
+
+.selectblock .selectinfo .funcbuttons {
+  padding: 7px 0px 0px; }
+
+.elfinder .selectblock .selectinfo .dateblock .link .elfinder-button.elfinder-link-button {
+  height: 17px !important; }
+
+.selectblock .signature {
+  /*float: right;*/
+  width: 260px;
+  text-align: right;
+  position: absolute;
+  right: 0; }
+
+.selectblock .signature h3 {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin: 0px;
+  text-align: left; }
+
+.selectblock .signature .havesig {
+  margin-bottom: 10px; }
+
+.selectblock .signature .havesig .icoblock {
+  float: left;
+  width: 25px;
+  padding-top: 10px; }
+
+.selectblock .signature .havesig .textblock {
+  float: left;
+  text-align: left;
+  width: 85%; }
+
+.selectblock .signature .havesig .textblock .top .actiontitle {
+  overflow: hidden; }
+
+.selectblock .signature .cert-list .elfinder-button-icon {
+  width: 16px; }
+
+.selectblock .signature .cert-list.ui-state-hover .elfinder-button-icon-sign {
+  background-position: 0 -301px; }
+
+.selectblock .signature .cert-list.ui-state-hover .elfinder-button-icon-encrypt {
+  background-position: -35px -301px; }
+
+.selectblock .signature .cert-list {
+  width: 165px;
+  float: right; }
+
+.selectblock .signature .elfinder-button-icon.elfinder-button-icon-info-more {
+  float: right;
+  margin-left: 5px;
+  cursor: pointer; }
+
+.selectblock .signature .ui-state-hover .elfinder-button-icon.elfinder-button-icon-info-more {
+  background-position: -617px -324px; }
+
+.selectblock .signature .ui-state-hover .elfinder-button-icon.elfinder-button-icon-info-more {
+  background-position: -617px -324px; }
+
+.signature .list-type, .signature .list-count {
+  cursor: default; }
+
+.signature .list-type {
+  color: black; }
+
+.signature .list-count {
+  cursor: default;
+  color: #666; }
+
+.signature .elfinder-button-menu {
+  top: 20px;
+  left: 149px;
+  width: 300px; }
+
+.signature .elfinder-button-menu .elfinder-button-menu-item {
+  background-color: white;
+  cursor: default; }
+
+.selectblock .signature .elfinder-button-icon.elfinder-button-icon-info-more {
+  background-position: -597px -324px;
+  margin-left: 5px; }
+
+.selectblock .signature .havesig .textblock .top .actiontitle a {
+  float: right;
+  color: #999999;
+  font-size: 0.9em; }
+
+.selectblock .signature .havesig .textblock .top .actiontitle .elfinder-button {
+  float: right; }
+
+.selectblock .signature .havesig .textblock .top .actiontitle a.action {
+  font-weight: bold;
+  font-size: 1em;
+  color: #000000;
+  float: left;
+  text-decoration: none; }
+
+.selectblock .signature .havesig .textblock .top .actiontitle a.action:hover {
+  color: #4d4d4d; }
+
+/*.selectblock .signature .havesig .textblock .bottom a {
+  color: #3498db;
+}*/
+.elfinder-cwd-icon-encrypt {
+  width: 11px;
+  display: block;
+  height: 16px;
+  background-position: -510px -300px; }
+
+.elfinder-cwd-icon-sign {
+  width: 16px;
+  display: block;
+  height: 15px;
+  background-position: -635px -300px; }
+
+.selectico .elfinder-cwd-icon {
+  background: url("/Assets/i/elfinder/icons.png") -682px -92px;
+  background-repeat: no-repeat;
+  display: block;
+  margin-top: 0;
+  width: 82px;
+  height: 92px; }
+
+.selectico .elfinder-cwd-icon-application.elfinder-cwd-icon-pgp-signature {
+  background-position: -420px 0 !important; }
+
+.selectico .elfinder-cwd-icon-application.elfinder-cwd-icon-crypt {
+  background-position: -504px 0 !important; }
+
+.selectico .elfinder-cwd-icon-application.elfinder-cwd-icon-signcrypt {
+  background-position: -587px 0 !important; }
+
+.selectico .elfinder-cwd-icon-application.elfinder-cwd-icon-x-x509-ca-cert {
+  background-position: -598px -92px !important;
+  width: 83px; }
+
+.selectico .elfinder-cwd-icon-x-empty {
+  background-position: 0 0 !important; }
+
+.selectico .elfinder-cwd-icon-text {
+  background-position: -672px 0 !important; }
+
+.selectico .elfinder-cwd-icon-image,
+.selectico .elfinder-cwd-icon-vnd-adobe-photoshop,
+.selectico .elfinder-cwd-icon-postscript {
+  background-position: -336px 0 !important; }
+
+.selectico .elfinder-cwd-icon-audio {
+  background-position: -336px -92px !important; }
+
+.selectico .elfinder-cwd-icon-video,
+.selectico .elfinder-cwd-icon-flash-video {
+  background-position: -252px -92px !important; }
+
+.selectico .elfinder-cwd-icon-pdf {
+  background-position: -252px 0 !important; }
+
+.selectico .elfinder-cwd-icon-ms-excel,
+.selectico .elfinder-cwd-icon-vnd-ms-excel,
+.selectico .elfinder-cwd-icon-vnd-ms-excel-addin-macroEnabled-12,
+.selectico .elfinder-cwd-icon-vnd-ms-excel-sheet-binary-macroEnabled-12,
+.selectico .elfinder-cwd-icon-vnd-ms-excel-sheet-macroEnabled-12,
+.selectico .elfinder-cwd-icon-vnd-ms-excel-template-macroEnabled-12,
+.selectico .elfinder-cwd-icon-vnd-ms-office,
+.selectico .elfinder-cwd-icon-vnd-ms-powerpoint,
+.selectico .elfinder-cwd-icon-vnd-ms-powerpoint-addin-macroEnabled-12,
+.selectico .elfinder-cwd-icon-vnd-ms-powerpoint-presentation-macroEnabled-12,
+.selectico .elfinder-cwd-icon-vnd-ms-powerpoint-slide-macroEnabled-12,
+.selectico .elfinder-cwd-icon-vnd-ms-powerpoint-slideshow-macroEnabled-12,
+.selectico .elfinder-cwd-icon-vnd-ms-powerpoint-template-macroEnabled-12,
+.selectico .elfinder-cwd-icon-vnd-openxmlformats-officedocument-spreadsheetml-sheet {
+  background-position: 0 0 !important; }
+
+.selectico .elfinder-cwd-icon-msword,
+.selectico .elfinder-cwd-icon-vnd-ms-word,
+.selectico .elfinder-cwd-icon-vnd-ms-word-document-macroEnabled-12,
+.selectico .elfinder-cwd-icon-vnd-ms-word-template-macroEnabled-12,
+.selectico .elfinder-cwd-icon-vnd-oasis-opendocument-chart,
+.selectico .elfinder-cwd-icon-vnd-oasis-opendocument-database,
+.selectico .elfinder-cwd-icon-vnd-oasis-opendocument-formula,
+.selectico .elfinder-cwd-icon-vnd-oasis-opendocument-graphics,
+.selectico .elfinder-cwd-icon-vnd-oasis-opendocument-graphics-template,
+.selectico .elfinder-cwd-icon-vnd-oasis-opendocument-image,
+.selectico .elfinder-cwd-icon-vnd-oasis-opendocument-presentation-template,
+.selectico .elfinder-cwd-icon-vnd-oasis-opendocument-spreadsheet-template,
+.selectico .elfinder-cwd-icon-vnd-oasis-opendocument-text-master,
+.selectico .elfinder-cwd-icon-vnd-oasis-opendocument-text-template,
+.selectico .elfinder-cwd-icon-vnd-oasis-opendocument-text-web,
+.selectico .elfinder-cwd-icon-vnd-openofficeorg-extension,
+.selectico .elfinder-cwd-icon-vnd-openxmlformats-officedocument-presentationml-presentation,
+.selectico .elfinder-cwd-icon-vnd-openxmlformats-officedocument-presentationml-slide,
+.selectico .elfinder-cwd-icon-vnd-openxmlformats-officedocument-presentationml-slideshow,
+.selectico .elfinder-cwd-icon-vnd-openxmlformats-officedocument-presentationml-template,
+.selectico .elfinder-cwd-icon-vnd-openxmlformats-officedocument-spreadsheetml-template,
+.selectico .elfinder-cwd-icon-vnd-openxmlformats-officedocument-wordprocessingml-document,
+.selectico .elfinder-cwd-icon-vnd-openxmlformats-officedocument-wordprocessingml-template {
+  background-position: -754px 0 !important; }
+
+.selectico .elfinder-cwd-icon-x-docx {
+  background-position: -1px -92px  !important; }
+
+.selectico .elfinder-cwd-icon-html {
+  background-position: -336px 0 !important; }
+
+.selectico .elfinder-cwd-icon-css,
+.selectico .elfinder-cwd-icon-vnd-oasis-opendocument-presentation,
+.selectico .elfinder-cwd-icon-vnd-oasis-opendocument-text,
+.selectico .elfinder-cwd-icon-vnd-oasis-opendocument-spreadsheet,
+.selectico .elfinder-cwd-icon-javascript,
+.selectico .elfinder-cwd-icon-x-javascript,
+.selectico .elfinder-cwd-icon-x-perl,
+.selectico .elfinder-cwd-icon-x-python,
+.selectico .elfinder-cwd-icon-x-ruby,
+.selectico .elfinder-cwd-icon-x-sh,
+.selectico .elfinder-cwd-icon-x-shellscript,
+.selectico .elfinder-cwd-icon-x-c,
+.selectico .elfinder-cwd-icon-x-csrc,
+.selectico .elfinder-cwd-icon-x-chdr,
+.selectico .elfinder-cwd-icon-x-c--,
+.selectico .elfinder-cwd-icon-x-c--src,
+.selectico .elfinder-cwd-icon-x-c--hdr,
+.selectico .elfinder-cwd-icon-x-java,
+.selectico .elfinder-cwd-icon-x-java-source,
+.selectico .elfinder-cwd-icon-rtf,
+.selectico .elfinder-cwd-icon-rtfd,
+.selectico .elfinder-cwd-icon-vnd-sun-xml-writer-template,
+.selectico .elfinder-cwd-icon-x-php {
+  background-position: 0 0 !important; }
+
+.selectico .elfinder-cwd-icon-xml {
+  background-position: -420px -92px !important; }
+
+.selectico .elfinder-cwd-icon-zip,
+.selectico .elfinder-cwd-icon-x-zip {
+  background-position: -168px -92px !important; }
+
+.selectico .elfinder-cwd-icon-x-7z-compressed,
+.selectico .elfinder-cwd-icon-x-compressed-tar,
+.selectico .elfinder-cwd-icon-x-archive,
+.selectico .elfinder-cwd-icon-x-gzip,
+.selectico .elfinder-cwd-icon-x-tar,
+.selectico .elfinder-cwd-icon-x-bzip,
+.selectico .elfinder-cwd-icon-x-bzip2 {
+  background-position: -168px 0 !important; }
+
+.selectico .elfinder-cwd-icon-x-rar,
+.selectico .elfinder-cwd-icon-x-rar-compressed {
+  background-position: -84px -92px !important; }
+
+.selectico .elfinder-cwd-icon-group {
+  width: 94px;
+  height: 102px;
+  background-position: -504px -92px !important; }
+
+/*DropDownMenu*/
+.elfinder-button-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  list-style: none;
+  font-size: 14px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
+  font-size: 20px; }
+
+.elfinder-button-menu-item {
+  cursor: pointer; }
+
+.elfinder-buttonset > form {
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  filter: Alpha(Opacity=0);
+  cursor: pointer;
+  height: 0;
+  width: 0; }
+
+.elfinder-button-menu form input {
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  z-index: 99; }
+
+.ui-state-hover.elfinder-button-menu-item {
+  background-color: #3498db;
+  color: #fff;
+  -webkit-transition: all 0s ease-out;
+  -moz-transition: all 0s ease-out;
+  -o-transition: all 0s ease-out;
+  transition: all 0s ease-out; }
+
+.elfinder-button-menu-item .elfinder-button-icon {
+  margin: 2px 5px 0 0; }
+
+.elfinder-button-menu:before {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 7px;
+  z-index: 1;
+  top: -7px;
+  left: 69%;
+  background-image: url("/Assets/i/elfinder/icons.png");
+  background-repeat: no-repeat;
+  background-position: -670px -327px; }
+
+.elfiner-button-more .elfinder-button-menu {
+  top: 23px;
+  left: -85px; }
+
+.ui-elfinder-toolbar-path {
+  margin-top: 10px;
+  padding-left: 235px;
+  font-size: 16px; }
+
+.ui-elfinder-toolbar-path .elfinder-button-menu {
+  top: 40px;
+  left: 236px; }
+
+.ui-elfinder-toolbar-path .ui-state-hover.elfinder-button-menu-item {
+  background-color: white;
+  color: #ff6600;
+  text-decoration: none; }
+
+.ui-elfinder-toolbar-path .elfinder-button-menu-item {
+  height: 30px;
+  color: #3498db;
+  text-decoration: underline; }
+
+.ui-elfinder-toolbar-path .elfinder-button-menu-item a {
+  /*text-decoration: none;
+            color: black;*/ }
+
+.ui-elfinder-toolbar-path .ui-state-hover.elfinder-button-menu-item {
+  /*color: white;*/ }
+
+.emptyfolder, .nofiles {
+  /*margin: 55px auto 10px;*/
+  margin: 0 auto 10px;
+  width: 400px; }
+
+.nofiles p {
+  font-size: 13px;
+  font-weight: bold;
+  margin: 0 0 10px; }
+
+.aligncenter {
+  text-align: center; }
+
+.elfinder-cwd-view-icons .aligncenter {
+  margin-top: 6px; }
+
+.emptyfolder img, .nofiles img {
+  margin-bottom: 25px; }
+
+.emptyfolder h6, .nofiles h6 {
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: inherit;
+  line-height: 1.1;
+  color: inherit; }
+
+p {
+  margin: 0 0 10px;
+  font-size: 12px; }
+
+.emptyfolder .elfinder-button.elfinder-link-button {
+  float: none;
+  display: inline-block;
+  margin: 0 0 -1px 5px; }
+
+.elfinder-bottomaddpanel .buttons {
+  float: right;
+  margin-top: 0; }
+
+.buttons .elfinder-buttonset .elfinder-link-button {
+  padding: 7px 15px;
+  text-align: center; }
+
+.buttons .elfinder-buttonset .elfinder-link-button .elfinder-button-text {
+  font-size: 12px;
+  color: #010101; }
+
+/*CHECKBOX*/
+.elfinder-cwd-view-icons .bootstrap-checkbox {
+  position: absolute;
+  left: 0;
+  top: 0; }
+
+.bootstrap-checkbox, #modal #message-panel .bootstrap-checkbox {
+  padding: 7px 0 4px 2px;
+  width: 28px;
+  cursor: pointer; }
+
+.button-checkbox .icon, #modal #message-panel .bootstrap-checkbox .icon {
+  display: inline-block;
+  width: 16px;
+  height: 14px;
+  margin-top: -1px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: middle;
+  background-image: url("/Assets/i/elfinder/ch-icons.png");
+  background-position: 14px 14px;
+  background-repeat: no-repeat; }
+
+.button-checkbox .icon.square, #modal #message-panel .button-checkbox .icon.square {
+  background-image: url("/Assets/i/elfinder/icons.png"); }
+
+.button-checkbox > span.cb-icon-check.square, #modal #message-panel .button-checkbox > span.cb-icon-check.square {
+  background-position: -57px -370px; }
+
+.button-checkbox > span.cb-icon-check.square:hover,
+.button-checkbox > span.cb-icon-check.square:focus,
+.button-checkbox > span.cb-icon-check.square:active,
+#modal #message-panel .button-checkbox > span.cb-icon-check.square:hover,
+#modal #message-panel .button-checkbox > span.cb-icon-check.square:focus,
+#modal #message-panel .button-checkbox > span.cb-icon-check.square:active {
+  background-position: -57px -370px; }
+
+.button-checkbox > span.cb-icon-check-empty.square, #modal #message-panel .button-checkbox > span.cb-icon-check-empty.square {
+  background-position: -57px -353px; }
+
+.button-checkbox > span.cb-icon-check-empty.square:hover,
+.button-checkbox > span.cb-icon-check-empty.square:focus,
+.button-checkbox > span.cb-icon-check-empty.square:active,
+#modal #message-panel .button-checkbox > span.cb-icon-check-empty.square:hover,
+#modal #message-panel .button-checkbox > span.cb-icon-check-empty.square:focus,
+#modal #message-panel .button-checkbox > span.cb-icon-check-empty.square:active {
+  background-position: -57px -353px; }
+
+.button-checkbox > span.cb-icon-check {
+  background-position: 0 -1px; }
+
+.button-checkbox > span.cb-icon-check:hover,
+.button-checkbox > span.cb-icon-check:focus,
+.button-checkbox > span.cb-icon-check:active {
+  background-position: 0 -25px; }
+
+.button-checkbox > span.cb-icon-check-empty {
+  background-position: -24px -1px; }
+
+.button-checkbox > span.cb-icon-check-empty:hover,
+.button-checkbox > span.cb-icon-check-empty:focus,
+.button-checkbox > span.cb-icon-check-empty:active {
+  background-position: -24px -25px; }
+
+.btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active {
+  border-color: transparent; }
+
+.btn-link, .btn-link:active, .btn-link[disabled], fieldset[disabled] .btn-link {
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none; }
+
+.btn-link {
+  color: #428bca;
+  font-weight: 400;
+  cursor: pointer;
+  border-radius: 0; }
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  border-radius: 2px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
+
+/*dialog*/
+.elfinder-dialog-icon {
+  width: 45px;
+  height: 45px;
+  top: 48%;
+  background: url("/Assets/i/old/message-info.png"); }
+
+.std42-dialog {
+  background-color: white;
+  border: 1px #3498db solid; }
+
+.elfinder-dialog-icon.elfinder-dialog-icon-open {
+  /*top: 50%;
+    background: url('/Assets/i/elfinder/icons.png') 0 -253px;
+    width: 28px;
+    height: 21px*/
+  width: 45px;
+  height: 45px;
+  top: 48%;
+  background: url("/Assets/i/old/message-info.png"); }
+
+.elfinder-notify-open .elfinder-notify-msg {
+  position: absolute;
+  left: 190px;
+  top: 31px; }
+
+.elfinder-notify-progress {
+  background: url("/Assets/i/old/preloader_send.GIF");
+  height: 13px; }
+
+.elfinder-notify-progressbar {
+  width: 212px;
+  height: 13px;
+  border: 0;
+  background: #f5f5f5;
+  margin: 5px auto;
+  overflow: hidden; }
+
+/*popup*/
+.scroll-wrap {
+  height: 320px; }
+
+.emails-popup .scroll-wrap {
+  height: 340px; }
+
+.emails-popup .img {
+  padding: 50px 0 0 360px; }
+
+.emails-popup .scroll-padder {
+  width: 900px; }
+
+.send-popup .scroll-wrap {
+  margin-left: 0 !important;
+  margin-bottom: 20px !important; }
+
+.send-popup .scroll-wrap .document {
+  padding-right: 10px; }
+
+.send-popup .scroll-wrap .document {
+  padding-right: 10px; }
+
+.send-popup .scroll-wrap .document .elfinder-button-icon-rm {
+  background-position: -120px -353px !important; }
+
+.send-popup .scroll-wrap .document .elfinder-button-icon-rm:hover {
+  background-position: -120px -373px !important; }
+
+.scroll-padder {
+  width: 900px;
+  margin-bottom: 15px; }
+
+.send-popup-master .scroll-padder, .emails-popup-master .scroll-padder {
+  width: 927px; }
+
+.scroll-padder hr {
+  margin-right: 20px;
+  border: 0;
+  border-bottom: 1px solid #d9d9d9; }
+
+.scroll-wrap {
+  position: relative;
+  overflow: hidden; }
+
+.scroll-wrap .scroller {
+  height: 100%;
+  overflow-y: scroll; }
+
+.scroller__bar-wrapper {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+  right: 5px;
+  width: 4px;
+  background: #eaeaea;
+  pointer-events: none; }
+
+.scroller__bar {
+  position: absolute;
+  z-index: 1;
+  width: 4px;
+  background: #989898;
+  opacity: 0;
+  -webkit-transition: opacity .2s linear;
+  transition: opacity .2s linear;
+  pointer-events: auto; }
+
+.baron .scroller__bar {
+  opacity: .6; }
+
+.header .close {
+  height: 16px;
+  position: absolute;
+  right: 8px;
+  top: 7px;
+  width: 16px;
+  cursor: pointer;
+  background: url("/Assets/i/old/close.png") no-repeat !important; }
+
+.header h2 {
+  color: #111;
+  float: left;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 34px;
+  margin-top: 0; }
+
+.header {
+  border-bottom: 1px solid #e5e5e5;
+  height: 41px;
+  margin-bottom: 10px; }
+
+#modal #message-panel .icon.warning {
+  background: url("/Assets/i/old/warning2.png") no-repeat center center; }
+
+#modal #message-panel .icon.info {
+  background: url("/Assets/i/old/message-info.png") no-repeat center center; }
+
+#modal #message-panel .icon.error {
+  background: url("/Scripts/master/v/image/error-g.png") no-repeat center center; }
+
+#modal #message-panel .icon {
+  float: left;
+  width: 60px;
+  height: 50px; }
+
+/*������� ����� �.�. ��� ����� ���������� ����� ��� ������*/
+.send-popup .icon-close.ui-state-hover {
+  cursor: pointer; }
+
+.send-popup .document .bottom {
+  color: #3498db;
+  font-size: 12px; }
+
+.popup .title {
+  width: 500px;
+  margin-right: 10px;
+  overflow: hidden;
+  font-size: 12px;
+  white-space: pre; }
+
+.send-popup .textblock {
+  display: inline-block;
+  margin-left: 35px; }
+
+.send-popup .document .icoblock {
+  display: inline-block; }
+
+.send-popup .document .icoblock .elfinder-button-icon {
+  cursor: pointer; }
+
+.documents-list {
+  margin-right: 15px; }
+
+.documents-list .document {
+  margin: 0;
+  position: relative;
+  padding: 20px 0 20px;
+  border-bottom: 1px solid #d9d9d9; }
+
+.documents-list .document:nth-child(2n) {
+  background: #f9f9f9; }
+
+.documents-list .document.ui-state-hover {
+  background: #edf4fa; }
+
+.send-popup .email {
+  margin-left: 0px;
+  height: 35px;
+  margin-bottom: 7px; }
+
+.send-popup .info {
+  margin-left: 25px;
+  height: 40px; }
+
+.send-popup .preloader {
+  height: 70px;
+  margin-left: 25px;
+  text-align: center;
+  width: 212px; }
+
+.send-popup .preloader:after {
+  display: block;
+  content: "Отправка файлов"; }
+
+.send-popup .preloader img {
+  margin-top: 15px; }
+
+.send-popup .email .action {
+  padding-top: 5px;
+  float: left; }
+
+.send-popup .email .inp, .send-popup .message-box .inp {
+  float: left;
+  margin-left: 20px;
+  width: 345px; }
+
+.send-popup .email a {
+  font-size: 12px; }
+
+.send-popup textarea {
+  resize: none;
+  margin-bottom: 4px;
+  height: 105px; }
+
+.send-popup .email input[type=text], .send-popup .message-box input[type=text] {
+  width: 100%;
+  height: 28px;
+  border: 1px solid #c9c9c9;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  padding: 0 5px; }
+
+.send-popup .email .error input[type=text], .send-popup .message-box .error input[type=text] {
+  background: #fff7f7;
+  border: 1px solid #f99899; }
+
+.send-popup .message-box {
+  height: 140px;
+  border-bottom: 1px solid #d9d9d9;
+  margin-left: 0;
+  padding-right: 8px;
+  margin-bottom: 10px; }
+
+.send-popup .action-box {
+  position: relative; }
+
+.send-popup .message-box textarea {
+  border: 2px solid #d9d9d9;
+  width: 100%; }
+
+.send-popup .scroll-wrap {
+  border-bottom: none;
+  height: 200px; }
+
+.send-popup .action-box .abs-left, .send-popup .action-box .abs-right {
+  position: absolute; }
+
+.send-popup .action-box .abs-left {
+  left: 0;
+  padding-bottom: 10px;
+  margin-top: 0;
+  width: 700px; }
+
+.send-popup .action-box .abs-right {
+  right: 0;
+  padding-bottom: 10px;
+  margin-top: 15px; }
+
+.send-popup .text {
+  font-size: 12px;
+  font-weight: bold;
+  height: 20px;
+  padding-top: 0;
+  margin-top: 0;
+  margin-left: 0; }
+
+.send-popup .error-text {
+  color: #ff6b6b;
+  font-size: 11px; }
+
+.send-popup .info-text {
+  color: #3D3D3D;
+  font-size: 10px;
+  position: absolute; }
+
+.info {
+  margin-top: 20px; }
+
+.info .message {
+  font-size: 15px;
+  font-weight: bold; }
+
+.info .message.error {
+  color: #ff6b6b; }
+
+.send-popup .info .message.success {
+  color: #1ac316; }
+
+.send-popup .info .action {
+  position: absolute;
+  right: 0;
+  top: 25px; }
+
+.popup .contacts-list {
+  margin-right: 17px; }
+
+.popup .contacts-list .contact-block {
+  margin: 0;
+  position: relative;
+  padding: 15px 0 15px;
+  border-top: 1px solid #d9d9d9; }
+
+.popup .contacts-list .contact-block:nth-child(2n) {
+  background: #f9f9f9; }
+
+.emails-popup .textblock {
+  display: inline-block;
+  margin-left: 10px; }
+
+.popup .contacts-list .contact-block.ui-selected {
+  background: #fffdde; }
+
+.popup .contacts-list .contact-block.ui-state-hover {
+  background: #edf4fa;
+  cursor: pointer; }
+
+.popup .contacts-list .contact-block .email {
+  width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+.document.ui-state-hover .elfinder-button-icon-rm {
+  background-position: -120px -353px; }
+
+.popup .top-pan {
+  margin-right: 20px;
+  height: 30px;
+  color: #666; }
+
+.popup .top-pan .icon {
+  margin-right: 10px; }
+
+.received-popup .document .title {
+  width: 400px;
+  float: left;
+  display: inline-block; }
+
+.received-popup .img {
+  position: absolute;
+  top: 50px;
+  left: 365px; }
+
+.received-popup .document .type {
+  width: 190px;
+  float: left;
+  display: inline-block;
+  color: #1ac316; }
+
+.received-popup .document .top {
+  margin-top: 5px; }
+
+.received-popup .buttons .ui-elfinder-button-green .elfinder-button {
+  width: 150px; }
+
+/*CONTXMENU*/
+.elfinder-contextmenu .ui-state-hover {
+  background-color: #3498db;
+  color: #fff; }
+
+.elfinder-contextmenu, .elfinder-contextmenu-sub {
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
+  font-size: 20px; }
+
+.elfinder-contextmenu-item .elfinder-contextmenu-icon {
+  width: 18px;
+  height: 18px; }
+
+.elfinder-contextmenu-item .elfinder-button-icon-download {
+  background-position: -296px -462px; }
+
+.elfinder-contextmenu-item.ui-state-hover .elfinder-button-icon-download {
+  background-position: -296px -440px; }
+
+.elfinder-contextmenu-item .elfinder-button-icon-copy {
+  background-position: -320px  -462px; }
+
+.elfinder-contextmenu-item.ui-state-hover .elfinder-button-icon-copy {
+  background-position: -320px  -440px; }
+
+.elfinder-contextmenu-item .elfinder-button-icon-opensendpopup {
+  background-position: -339px  -464px;
+  width: 22px; }
+
+.elfinder-contextmenu-item.ui-state-hover .elfinder-button-icon-opensendpopup {
+  background-position: -339px  -440px; }
+
+.elfinder-contextmenu-item .elfinder-button-icon-rm {
+  background-position: -364px -464px; }
+
+.elfinder-contextmenu-item.ui-state-hover .elfinder-button-icon-rm {
+  background-position: -363px -441px; }
+
+.elfinder-contextmenu-item .elfinder-button-icon-rename {
+  width: 22px;
+  background-position: -384px -464px; }
+
+.elfinder-contextmenu-item.ui-state-hover .elfinder-button-icon-rename {
+  background-position: -384px -441px; }
+
+.elfinder-contextmenu-item .elfinder-button-icon-mkdir {
+  background-position: -413px -464px;
+  width: 22px; }
+
+.elfinder-contextmenu-item.ui-state-hover .elfinder-button-icon-mkdir {
+  background-position: -413px  -440px; }
+
+.elfinder-contextmenu-item .elfinder-button-icon-paste {
+  background-position: -274px  -462px; }
+
+.elfinder-contextmenu-item.ui-state-hover .elfinder-button-icon-paste {
+  background-position: -274px  -440px; }
+
+.elfinder-contextmenu-item .elfinder-button-icon-sign {
+  background-position: -465px -462px; }
+
+.elfinder-contextmenu-item .elfinder-button-icon-encrypt {
+  background-position: -497px -462px; }
+
+.elfinder-contextmenu-item .elfinder-button-icon-decrypt {
+  background-position: -574px -462px; }
+
+.elfinder-contextmenu-item .elfinder-button-icon-checksign {
+  width: 22px;
+  background-position: -611px -462px; }
+
+.elfinder-contextmenu-item .elfinder-button-icon-signandencrypt {
+  background-position: -535px -462px; }
+
+.elfinder-contextmenu-item .elfinder-button-icon-decryptandchecksign {
+  background-position: -648px -462px;
+  width: 22px; }
+
+.elfinder-contextmenu-item.ui-state-hover .elfinder-button-icon-sign {
+  background-position: -465px -440px; }
+
+.elfinder-contextmenu-item.ui-state-hover .elfinder-button-icon-encrypt {
+  background-position: -497px -440px; }
+
+.elfinder-contextmenu-item.ui-state-hover .elfinder-button-icon-decrypt {
+  background-position: -574px -440px; }
+
+.elfinder-contextmenu-item.ui-state-hover .elfinder-button-icon-checksign {
+  width: 22px;
+  background-position: -611px -440px; }
+
+.elfinder-contextmenu-item.ui-state-hover .elfinder-button-icon-signandencrypt {
+  background-position: -535px -440px; }
+
+.elfinder-contextmenu-item.ui-state-hover .elfinder-button-icon-decryptandchecksign {
+  background-position: -648px -440px;
+  width: 22px; }
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+  *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+
+body > .content {
+  max-width: 1200px;
+  min-width: 980px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px; }
+  body > .content.modal {
+    max-width: 1200px;
+    min-width: 930px;
+    /* Временно, для теста */
+    width: 930px;
+    /*width: 100%; */
+    margin: -10px auto 0;
+    padding: 0 10px 0 0; }
+  body > .content > .row {
+    margin: 0; }
+
+.header-logo {
+  max-width: 100%; }
+
+a img {
+  border: none; }
+
+img {
+  vertical-align: middle; }
+
+.view-mode {
+  margin-top: 15px; }
+  .view-mode label {
+    margin: 0 8px 0 0;
+    font-weight: 400;
+    line-height: 32px;
+    font-size: 12 PX; }
+  .view-mode .modes {
+    padding: 8px;
+    background: #f7f7f7; }
+  .view-mode .mode {
+    cursor: pointer; }
+    .view-mode .mode span {
+      display: block; }
+
+label {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: 700; }
+
+.mode1:hover .ico, .mode1.active .ico {
+  background-position: -1px -383px; }
+
+.mode2:hover .ico, .mode2.active .ico {
+  background-position: -24px -383px; }
+
+.mode:first-child {
+  margin-right: 7px; }
+
+.pull-right {
+  float: right !important; }
+
+.right {
+  float: right; }
+
+.left {
+  float: left; }
+
+.ico {
+  background-image: url(/Assets/i/elfinder/icons.png);
+  background-repeat: no-repeat; }
+
+.ico-5-1-mode1 {
+  width: 16px;
+  height: 16px;
+  background-position: -1px -353px; }
+
+.ico-5-1-mode2 {
+  width: 16px;
+  height: 16px;
+  background-position: -24px -353px; }
+
+.clear {
+  clear: both; }
+
+a.btn-primary {
+  border: none;
+  text-decoration: none;
+  color: #ffffff; }
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  border-radius: 2px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
+
+.btn-primary {
+  color: #fff;
+  background-color: #428bca;
+  border-color: #357ebd;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #3498db; }
+
+.header-master {
+  margin-top: 15px; }
+
+header {
+  padding-top: 20px;
+  /*height: 70px; */ }
+
+.row {
+  margin-left: -15px;
+  margin-right: -15px; }
+
+.header-profile {
+  padding-top: 18px; }
+  .header-profile .caret {
+    float: left; }
+
+.btn-group, .btn-group-vertical {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle; }
+
+.header-dropdown {
+  margin: 4px 5px 0 0; }
+
+.header-profile a {
+  color: #3498db;
+  text-decoration: underline;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  max-width: 500px;
+  overflow: hidden; }
+  .header-profile a:hover {
+    text-decoration: none;
+    color: #ff6600;
+    -webkit-transition: all 0.1s ease-out;
+    -moz-transition: all 0.1s ease-out;
+    -o-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out; }
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  list-style: none;
+  font-size: 14px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box; }
+  .dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.428571429;
+    color: #333;
+    white-space: nowrap; }
+
+ul.dropdown-menu > li > a {
+  text-decoration: none;
+  font-size: 1.0em;
+  -webkit-transition: all 0s ease-out;
+  -moz-transition: all 0s ease-out;
+  -o-transition: all 0s ease-out;
+  transition: all 0s ease-out; }
+  ul.dropdown-menu > li > a .ico {
+    margin-right: 5px; }
+
+.ico-4-2-profile {
+  width: 12px;
+  height: 12px;
+  background-position: -260px -300px; }
+
+.ico-4-2-addressbook {
+  width: 12px;
+  height: 12px;
+  background-position: -287px -300px; }
+
+.ico-4-2-template-settings {
+  width: 12px;
+  height: 12px;
+  background-position: -311px -300px; }
+
+.ico-4-2-administration {
+  width: 12px;
+  height: 12px;
+  background-position: -334px -300px; }
+
+.ico-4-2-logout {
+  width: 12px;
+  height: 13px;
+  background-position: -356px -301px; }
+
+.ib-ico {
+  display: inline-block; }
+
+.ico-4-2-settings {
+  width: 12px;
+  height: 12px;
+  background-image: url("/Assets/i/old/settings.png");
+  background-repeat: no-repeat; }
+
+.b-ico {
+  display: block; }
+
+.profile {
+  width: 360px;
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  float: left;
+  font-family: Verdana, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 20px; }
+
+.disp-style {
+  width: 95px; }
+
+.main-icon {
+  float: left;
+  min-height: 1px;
+  padding-left: 0;
+  padding-right: 15px;
+  position: relative;
+  width: 205px; }
+  .main-icon .logo {
+    background: url("/Assets/i/old/logo-eng.png") no-repeat left bottom;
+    cursor: pointer;
+    font-family: Verdana;
+    font-size: 13px;
+    font-weight: bold; }
+
+.master {
+  width: 280px;
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px; }
+
+.btn:hover, .btn:focus {
+  /*color: #333; */
+  text-decoration: none; }
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
+  color: #fff;
+  background-color: #3276b1;
+  border-color: #285e8e;
+  -webkit-transition: all 0.1s ease-out;
+  -moz-transition: all 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out; }
+
+.open .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #3276b1;
+  border-color: #285e8e;
+  -webkit-transition: all 0.1s ease-out;
+  -moz-transition: all 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out; }
+
+.btn-primary:active, .btn-primary.active {
+  background-image: none; }
+
+.open .dropdown-toggle.btn-primary {
+  background-image: none; }
+
+.btn:active, .btn.active {
+  outline: 0;
+  background-image: none;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); }
+
+ul.dropdown-menu > li > a:hover, ul.dropdown-menu > li > a:focus {
+  background-color: #3498db;
+  color: #ffffff;
+  -webkit-transition: all 0s ease-out;
+  -moz-transition: all 0s ease-out;
+  -o-transition: all 0s ease-out;
+  transition: all 0s ease-out; }
+
+.header-profile .dropdown-menu > li > a:hover .ico-4-2-profile {
+  background-position: -260px -320px; }
+
+.header-profile .dropdown-menu > li > a:hover .ico-4-2-addressbook {
+  background-position: -287px -320px; }
+
+.header-profile .dropdown-menu > li > a:hover .ico-4-2-template-settings {
+  background-position: -311px -320px; }
+
+.header-profile .dropdown-menu > li > a:hover .ico-4-2-administration {
+  background-position: -334px -320px; }
+
+.header-profile .dropdown-menu > li > a:hover .ico-4-2-logout {
+  background-position: -356px -321px; }
+
+ul.dropdown-menu:before {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 7px;
+  z-index: 1;
+  top: -7px;
+  background-image: url("/Assets/i/elfinder/icons.png");
+  background-repeat: no-repeat;
+  background-position: -670px -327px; }
+
+.header-profile .dropdown-menu {
+  top: 120%;
+  left: -45px; }
+  .header-profile .dropdown-menu:before {
+    left: 20%; }
+
+.content.modal {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%; }
+
+.Embed.WACFrameWord {
+  border: 0 !important; }
+
+.visualiseModal {
+  margin-top: 70px; }
+  .visualiseModal .fancybox-close {
+    top: -66px;
+    background: url("/Assets/i/old/close-visualize.png") center center no-repeat;
+    width: 18px;
+    height: 18px; }
+  .visualiseModal .fancybox-title-float-wrap {
+    top: -44px; }
+  .visualiseModal .fancybox-title .child {
+    display: inline-block;
+    margin-right: -100%;
+    padding: 2px 20px;
+    background: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    font-size: 18px;
+    font-family: "Verdana";
+    text-shadow: none;
+    color: #FFF;
+    font-weight: normal;
+    line-height: 24px;
+    white-space: nowrap; }
+
+.visual-btn-box {
+  float: left;
+  padding-top: 10px; }
+  .visual-btn-box .visual-btn {
+    display: inline-block;
+    width: 121px;
+    height: 26px;
+    background: url("/Assets/i/old/visual-btn.png") top center no-repeat; }
+    .visual-btn-box .visual-btn.i-disabled {
+      background-position: bottom center; }
+
+.hidden {
+  display: none !important; }
+
+.no-visualiseModal .fancybox-skin {
+  background: #fff;
+  border: 3px solid #595959;
+  border-radius: 5px;
+  padding: 7px 23px 17px !important; }
+
+.modal-window {
+  left: 50%;
+  min-height: 100px;
+  width: 590px;
+  z-index: 1001; }
+  .modal-window a.close {
+    padding-right: 30px;
+    color: #010101; }
+  .modal-window .title {
+    border-bottom: 1px solid #e5e5e5;
+    color: #111;
+    font-size: 16px;
+    font-weight: 700;
+    height: 41px;
+    line-height: 34px;
+    margin-top: 0; }
+  .modal-window .btn-green {
+    width: 130px; }
+
+#no-visualize {
+  color: #161616;
+  width: 465px; }
+  #no-visualize .row {
+    margin: 0 0 20px 0; }
+  #no-visualize .mess-box {
+    margin: 26px 0; }
+    #no-visualize .mess-box .attention {
+      min-height: 45px;
+      background: url(/Assets/i/old/message-attention.png) left no-repeat;
+      padding-left: 70px; }
+    #no-visualize .mess-box .error {
+      min-height: 45px;
+      background: url(/Assets/i/old/message-error.png) left no-repeat;
+      padding-left: 70px; }
+    #no-visualize .mess-box .info {
+      min-height: 45px;
+      background: url(/Assets/i/old/message-info.png) left no-repeat;
+      padding-left: 70px; }
+    #no-visualize .mess-box .error span, #no-visualize .mess-box .attention span, #no-visualize .mess-box .info span {
+      display: table-cell;
+      height: 45px;
+      vertical-align: middle;
+      line-height: normal; }
+  #no-visualize .sbmt {
+    margin-bottom: 0;
+    margin-top: 0; }
+    #no-visualize .sbmt .btn-green {
+      background: none repeat scroll 0 0 #1ac316;
+      min-width: 130px;
+      padding: 0; }
+      #no-visualize .sbmt .btn-green:hover {
+        background: #21D81D;
+        min-width: 130px;
+        padding: 0; }
+    #no-visualize .sbmt .btn {
+      font-family: Verdana;
+      font-size: 12px;
+      border: 0 none;
+      border-radius: 3px;
+      color: #fff;
+      cursor: pointer;
+      display: inline-block;
+      font-weight: 700;
+      height: 34px;
+      line-height: 30px;
+      text-decoration: none; }
+    #no-visualize .sbmt .clear {
+      margin-right: 60px; }
+    #no-visualize .sbmt .close {
+      padding-right: 30px;
+      color: #010101; }
+  #no-visualize .pull-right {
+    float: right;
+    width: auto; }
+
+.content2 {
+  max-width: 1200px;
+  min-width: 980px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px; }
+
+.modal .content2 .helpLink {
+  display: none; }
+
+.helpLink {
+  margin-top: -150px;
+  z-index: 999;
+  position: absolute; }
+  .helpLink a {
+    display: inline-block;
+    width: 156px;
+    height: 32px;
+    background: url(/Assets/i/old/mainHelp.png) no-repeat; }
+
+/*# sourceMappingURL=../maps/elfinder.css.map */

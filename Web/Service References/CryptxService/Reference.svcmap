@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0bacce9d-6998-4ca4-9be0-c1817d4f996e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://api.cryptogramm.ru:5656/CryptxService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CryptxService.xsd" MetadataType="Schema" ID="0817dec1-828f-4b5a-b11a-b48252e5549d" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/CryptxService.svc?xsd=xsd9" />
+    <MetadataFile FileName="CryptxService1.xsd" MetadataType="Schema" ID="e8691c42-040d-4682-9b42-14eaee1d2fc9" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/CryptxService.svc?xsd=xsd8" />
+    <MetadataFile FileName="CryptxService.wsdl" MetadataType="Wsdl" ID="4b4e459c-1b5b-42a1-be38-da2e4c24f2e1" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/CryptxService.svc?wsdl" />
+    <MetadataFile FileName="CryptxService.disco" MetadataType="Disco" ID="51593a73-4f70-4837-aa8f-b5f558016424" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/CryptxService.svc?disco" />
+    <MetadataFile FileName="CryptxService2.xsd" MetadataType="Schema" ID="fd4b34da-0669-4ceb-a7f7-ca98ef5db4e8" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/CryptxService.svc?xsd=xsd4" />
+    <MetadataFile FileName="CryptxService3.xsd" MetadataType="Schema" ID="e4e19611-1f24-402c-a726-cbbd302dc0c5" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/CryptxService.svc?xsd=xsd7" />
+    <MetadataFile FileName="CryptxService4.xsd" MetadataType="Schema" ID="831cb385-4f00-466f-90f8-402c886b59d0" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/CryptxService.svc?xsd=xsd6" />
+    <MetadataFile FileName="CryptxService5.xsd" MetadataType="Schema" ID="9959b9ac-0da1-4d6d-b1f5-6f65ee52b257" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/CryptxService.svc?xsd=xsd1" />
+    <MetadataFile FileName="CryptxService6.xsd" MetadataType="Schema" ID="4a455e50-ed1b-4cb0-a782-503993e69a62" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/CryptxService.svc?xsd=xsd0" />
+    <MetadataFile FileName="CryptxService7.xsd" MetadataType="Schema" ID="261225be-6b1f-4ba4-ab1a-ad55e1512a3c" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/CryptxService.svc?xsd=xsd3" />
+    <MetadataFile FileName="CryptxService8.xsd" MetadataType="Schema" ID="8f971b02-703d-418e-9419-1f29c62db3b8" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/CryptxService.svc?xsd=xsd2" />
+    <MetadataFile FileName="CryptxService9.xsd" MetadataType="Schema" ID="90749ae8-c223-4fea-aae3-952056feb4bb" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/CryptxService.svc?xsd=xsd5" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

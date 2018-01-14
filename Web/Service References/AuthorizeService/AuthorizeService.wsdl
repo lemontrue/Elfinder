@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="AuthorizeService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://api.cryptogramm.ru:5656/AuthorizeService.svc?xsd=xsd5" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://api.cryptogramm.ru:5656/AuthorizeService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://api.cryptogramm.ru:5656/AuthorizeService.svc?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Error" />
+      <xsd:import schemaLocation="http://api.cryptogramm.ru:5656/AuthorizeService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Response" />
+      <xsd:import schemaLocation="http://api.cryptogramm.ru:5656/AuthorizeService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import schemaLocation="http://api.cryptogramm.ru:5656/AuthorizeService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Runtime.InteropServices" />
+      <xsd:import schemaLocation="http://api.cryptogramm.ru:5656/AuthorizeService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/KobilConnector.Helper" />
+      <xsd:import schemaLocation="http://api.cryptogramm.ru:5656/AuthorizeService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IAuthorizeService_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_CheckToken_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckToken" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_CheckToken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_PhoneChangeBegin_InputMessage">
+    <wsdl:part name="parameters" element="tns:PhoneChangeBegin" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_PhoneChangeBegin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PhoneChangeBeginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_EmailChangeBegin_InputMessage">
+    <wsdl:part name="parameters" element="tns:EmailChangeBegin" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_EmailChangeBegin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EmailChangeBeginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_SmsConfirmation_InputMessage">
+    <wsdl:part name="parameters" element="tns:SmsConfirmation" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_SmsConfirmation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SmsConfirmationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_EmailChangeConfirmation_InputMessage">
+    <wsdl:part name="parameters" element="tns:EmailChangeConfirmation" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_EmailChangeConfirmation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EmailChangeConfirmationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_ResendSmsConfirmation_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResendSmsConfirmation" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_ResendSmsConfirmation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResendSmsConfirmationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_DeactivateToken_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeactivateToken" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_DeactivateToken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeactivateTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_LoginWithPIN_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginWithPIN" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_LoginWithPIN_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginWithPINResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_LoginToKobilDevice_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginToKobilDevice" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_LoginToKobilDevice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginToKobilDeviceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_KobilLoginWithoutPassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:KobilLoginWithoutPassword" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_KobilLoginWithoutPassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:KobilLoginWithoutPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_CheckKobilAuth_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckKobilAuth" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_CheckKobilAuth_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckKobilAuthResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_CancelKobilAuth_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelKobilAuth" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_CancelKobilAuth_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelKobilAuthResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_ResendPIN_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResendPIN" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_ResendPIN_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResendPINResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_SendTestSMS_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendTestSMS" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_SendTestSMS_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendTestSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_GetUserData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserData" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_GetUserData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_GetUserDataByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserDataByID" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_GetUserDataByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserDataByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_GetAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccount" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_GetAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_SaveAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveAccount" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_SaveAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_ChangePassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangePassword" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_ChangePassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_UniqueEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:UniqueEmail" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_UniqueEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UniqueEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_GetKobilActivation_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetKobilActivation" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_GetKobilActivation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetKobilActivationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_SendToSupport_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendToSupport" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_SendToSupport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendToSupportResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_GetUserNotifications_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserNotifications" />
+  </wsdl:message>
+  <wsdl:message name="IAuthorizeService_GetUserNotifications_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserNotificationsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IAuthorizeService">
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/Login" message="tns:IAuthorizeService_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/LoginResponse" message="tns:IAuthorizeService_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckToken">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/CheckToken" message="tns:IAuthorizeService_CheckToken_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/CheckTokenResponse" message="tns:IAuthorizeService_CheckToken_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PhoneChangeBegin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/PhoneChangeBegin" message="tns:IAuthorizeService_PhoneChangeBegin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/PhoneChangeBeginResponse" message="tns:IAuthorizeService_PhoneChangeBegin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EmailChangeBegin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/EmailChangeBegin" message="tns:IAuthorizeService_EmailChangeBegin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/EmailChangeBeginResponse" message="tns:IAuthorizeService_EmailChangeBegin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SmsConfirmation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/SmsConfirmation" message="tns:IAuthorizeService_SmsConfirmation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/SmsConfirmationResponse" message="tns:IAuthorizeService_SmsConfirmation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EmailChangeConfirmation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/EmailChangeConfirmation" message="tns:IAuthorizeService_EmailChangeConfirmation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/EmailChangeConfirmationResponse" message="tns:IAuthorizeService_EmailChangeConfirmation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResendSmsConfirmation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/ResendSmsConfirmation" message="tns:IAuthorizeService_ResendSmsConfirmation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/ResendSmsConfirmationResponse" message="tns:IAuthorizeService_ResendSmsConfirmation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeactivateToken">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/DeactivateToken" message="tns:IAuthorizeService_DeactivateToken_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/DeactivateTokenResponse" message="tns:IAuthorizeService_DeactivateToken_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginWithPIN">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/LoginWithPIN" message="tns:IAuthorizeService_LoginWithPIN_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/LoginWithPINResponse" message="tns:IAuthorizeService_LoginWithPIN_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginToKobilDevice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/LoginToKobilDevice" message="tns:IAuthorizeService_LoginToKobilDevice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/LoginToKobilDeviceResponse" message="tns:IAuthorizeService_LoginToKobilDevice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="KobilLoginWithoutPassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/KobilLoginWithoutPassword" message="tns:IAuthorizeService_KobilLoginWithoutPassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/KobilLoginWithoutPasswordResponse" message="tns:IAuthorizeService_KobilLoginWithoutPassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckKobilAuth">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/CheckKobilAuth" message="tns:IAuthorizeService_CheckKobilAuth_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/CheckKobilAuthResponse" message="tns:IAuthorizeService_CheckKobilAuth_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelKobilAuth">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/CancelKobilAuth" message="tns:IAuthorizeService_CancelKobilAuth_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/CancelKobilAuthResponse" message="tns:IAuthorizeService_CancelKobilAuth_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResendPIN">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/ResendPIN" message="tns:IAuthorizeService_ResendPIN_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/ResendPINResponse" message="tns:IAuthorizeService_ResendPIN_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendTestSMS">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/SendTestSMS" message="tns:IAuthorizeService_SendTestSMS_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/SendTestSMSResponse" message="tns:IAuthorizeService_SendTestSMS_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/GetUserData" message="tns:IAuthorizeService_GetUserData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/GetUserDataResponse" message="tns:IAuthorizeService_GetUserData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDataByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/GetUserDataByID" message="tns:IAuthorizeService_GetUserDataByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/GetUserDataByIDResponse" message="tns:IAuthorizeService_GetUserDataByID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/GetAccount" message="tns:IAuthorizeService_GetAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/GetAccountResponse" message="tns:IAuthorizeService_GetAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/SaveAccount" message="tns:IAuthorizeService_SaveAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/SaveAccountResponse" message="tns:IAuthorizeService_SaveAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/ChangePassword" message="tns:IAuthorizeService_ChangePassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/ChangePasswordResponse" message="tns:IAuthorizeService_ChangePassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UniqueEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/UniqueEmail" message="tns:IAuthorizeService_UniqueEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/UniqueEmailResponse" message="tns:IAuthorizeService_UniqueEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetKobilActivation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/GetKobilActivation" message="tns:IAuthorizeService_GetKobilActivation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/GetKobilActivationResponse" message="tns:IAuthorizeService_GetKobilActivation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendToSupport">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/SendToSupport" message="tns:IAuthorizeService_SendToSupport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/SendToSupportResponse" message="tns:IAuthorizeService_SendToSupport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserNotifications">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthorizeService/GetUserNotifications" message="tns:IAuthorizeService_GetUserNotifications_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthorizeService/GetUserNotificationsResponse" message="tns:IAuthorizeService_GetUserNotifications_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IAuthorizeService" type="tns:IAuthorizeService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckToken">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/CheckToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PhoneChangeBegin">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/PhoneChangeBegin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EmailChangeBegin">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/EmailChangeBegin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsConfirmation">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/SmsConfirmation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EmailChangeConfirmation">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/EmailChangeConfirmation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResendSmsConfirmation">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/ResendSmsConfirmation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeactivateToken">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/DeactivateToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginWithPIN">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/LoginWithPIN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginToKobilDevice">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/LoginToKobilDevice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KobilLoginWithoutPassword">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/KobilLoginWithoutPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckKobilAuth">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/CheckKobilAuth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelKobilAuth">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/CancelKobilAuth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ResendPIN">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/ResendPIN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTestSMS">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/SendTestSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserData">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/GetUserData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDataByID">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/GetUserDataByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccount">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/GetAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveAccount">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/SaveAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/ChangePassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UniqueEmail">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/UniqueEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetKobilActivation">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/GetKobilActivation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendToSupport">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/SendToSupport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserNotifications">
+      <soap:operation soapAction="http://tempuri.org/IAuthorizeService/GetUserNotifications" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AuthorizeService">
+    <wsdl:port name="BasicHttpBinding_IAuthorizeService" binding="tns:BasicHttpBinding_IAuthorizeService">
+      <soap:address location="http://api.cryptogramm.ru:5656/AuthorizeService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

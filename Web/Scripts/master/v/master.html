@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+        <link href="css/common.css" rel="stylesheet" media="all" />
+        <link href="css/master.css" rel="stylesheet" media="all" />
+
+        <title>CRYPTOGRAMM</title>
+    </head>
+    <body>
+        <div class="content">
+            <header>
+                <div class="logo">CRYPTOGRAMM</div>
+                <a class="user" href="#">Киршин Севастьян Олегович</a>
+
+                <div class="templates">
+                    Шаблон:
+                    <a href="#">По умолчанию</a>
+                </div>
+                <a href="#" class="prev">Вернуться в каталог файлов</a>
+            </header>
+
+            <h2 class="main-title">Мастер работы с документами</h2>
+
+            <div id="select-files">
+                <h3 class="files-change">Обрабатываемые файлы</h3>
+
+                <div class="box">
+                    <div class="state change"></div>
+
+                    <div class="body">
+                        <ul class="file-list">
+                            <li>
+                                <div class="file-info">
+                                    <a href="#" class="name"><span>1.</span>Документ.doc</a>
+                                    <div class="last_change">Файл изменен: 24.11.2014</div>
+                                </div>
+                                <div class="actions">
+                                    <a href="#" class="delete">Удалить из списка</a>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="file-info">
+                                    <a href="#" class="name"><span>2.</span>Документ.doc</a>
+                                    <div class="deleted">Файл исключен из списка</div>
+                                </div>
+                                <div class="actions">
+                                    <div class="deleted">
+                                        <a href="#">Восстановить</a> |
+                                        <a href="#">Скрыть</a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="file-info">
+                                    <a href="#" class="name"><span>3.</span>Документ.doc</a>
+                                    <div class="last_change">Файл изменен: 24.11.2014</div>
+                                </div>
+                                <div class="actions">
+                                    <div class="progress">
+                                        <div class="bar" style="width: 40%"></div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="file-info">
+                                    <a href="#" class="name"><span>4.</span>Документ новый.doc</a>
+                                    <div class="last_change">Файл изменен: 24.11.2014</div>
+                                </div>
+                                <div class="actions">
+                                    <a href="#" class="delete">Удалить из списка</a>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="controls">
+                        <div class="file-edit-control">
+                            <a href="#">Добавит файлы из загруженных</a>
+                            <a href="#">Загрузить новые файлы</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-change">
+                    <div class="title">Выберите действие, которое необходимо осуществить:</div>
+                    <div class="row">
+                        <div class="c-500">
+                            <select>
+                                <option>--</option>
+                                <option>Подписать</option>
+                                <option>Зашифровать</option>
+                                <option>Подписать и зашифровать</option>
+                                <option>Проверить подпись</option>
+                                <option>Расшифровать</option>
+                                <option>Расшифровать и проверить подпись</option>
+                                <option></option>
+                            </select>
+                            <span class="error">Выберите действие</span>
+                        </div>
+                        <div class="c-500">
+                            <div class="btn-group pull-right">
+                                <div class="btn">Отмена</div>
+                                <div disabled class="btn btn-big btn-green">Продолжить</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,493 @@
+#content {
+    margin-left: 205px;
+    position: relative;
+}
+
+#content .add-contact {
+    float: right;
+    min-width: 300px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+#content .filter .check-all {
+    margin-right: 0 !important;
+    padding-top: 15px;
+    width: 30px;
+}
+
+#content .filter .form {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#content .filter .form .col {
+    margin-right: 20px;
+    position: relative;
+    width: 210px;
+}
+
+#content .filter .form .col .loop { top: 0 !important; }
+
+#content .filter .form .col input[type=text] {
+    background: url("../../Images/search.png") no-repeat scroll right center #fff;
+    padding-right: 30px;
+}
+
+#content .filter .form .col .loop {
+    cursor: pointer;
+    display: block;
+    height: 28px;
+    position: absolute;
+    right: 0;
+    top: 18px;
+    width: 30px;
+}
+
+#content .filter .form .col label {
+    /*display: block;*/
+    color: #161616;
+    font-size: 11px;
+    height: 18px;
+}
+
+#content .filter .form .col input.search {
+    background: url(../../Images/search.png) right center no-repeat;
+    padding-right: 30px;
+}
+
+#content .filter .form .col:last-child { margin-right: 0; }
+
+#content .contacts-list .contact:first-child { padding-top: 0; }
+
+#content .contacts-list .contact:first-child .actions { top: 5px; }
+
+#content .contacts-list .contact:hover { background: #fdfadd; }
+
+#content .contacts-list .contact {
+    padding: 20px 25px 0;
+    position: relative;
+}
+
+#content .contacts-list .contact hr {
+    border: 1px solid #d9d9d9;
+    border-top: 0;
+    margin: 25px 0 0;
+}
+
+#content .contacts-list .contact .actions {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+}
+
+#content .contacts-list .contact .actions a.edit {
+    color: #161616;
+    padding-right: 20px;
+}
+
+#content .contacts-list .contact .actions a.remove { color: #727272; }
+
+#content .contacts-list .contact .title {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 36px;
+}
+
+#content .contacts-list .contact .email { height: 20px; }
+
+#content .contacts-list .contact .email .label {
+    color: #161616;
+    width: 60px;
+}
+
+#content .contacts-list .contact .cert { padding-top: 8px; }
+
+#content .contacts-list .contact .cert .cert-title {
+    font-weight: 700;
+    height: 20px;
+}
+
+#content .contacts-list .contact .cert table.list { width: 100%; }
+
+#content .contacts-list .contact .cert table.list tbody tr { height: 22px; }
+
+#content .contacts-list .contact .cert table.list tbody tr td span.active { color: #161616; }
+
+#content .contacts-list .contact .cert table.list tbody tr td span.expire { color: #f4484a; }
+
+#content .contacts-list .contact .cert table.list tbody tr td a.download {
+    background: url(../../Images/download.png) no-repeat;
+    display: inline-block;
+    height: 13px;
+    margin-right: 10px;
+    width: 14px;
+}
+
+#content .contacts-list .contact .cert table.list tbody tr td a.remove {
+    background: url(../../Images/remove.png) no-repeat;
+    display: inline-block;
+    height: 12px;
+    width: 13px;
+}
+
+#content .certificats-list .certificat:first-child { padding-top: 0; }
+
+#content .certificats-list .certificat:first-child .actions { top: 0; }
+
+#content .certificats-list .certificat {
+    border-bottom: 1px solid #d9d9d9;
+    margin: 0 25px;
+    padding: 20px 0 25px;
+    position: relative;
+}
+
+#content .certificats-list .certificat .actions {
+    position: absolute;
+    right: 0;
+    top: 20px;
+}
+
+#content .certificats-list .certificat .actions a.down {
+    color: #161616;
+    padding-right: 20px;
+}
+
+#content .certificats-list .certificat .actions a.remove { color: #727272; }
+
+#content .certificats-list .certificat .checkbox {
+    padding-top: 28px;
+    width: 30px;
+}
+
+#content .certificats-list .certificat .col1 {
+    display: inline-block;
+    line-height: 20px;
+    vertical-align: top;
+    width: 32%;
+}
+
+#content .certificats-list .certificat .col1 .title {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 5px 0 18px 0;
+}
+
+#content .certificats-list .certificat .col1 .cert span.active { color: #161616;  }
+#content .certificats-list .certificat .col1 .cert span.expire { color: #f4484a; }
+
+#content .certificats-list .certificat .col2 {
+    display: inline-block;
+    line-height: 20px;
+    vertical-align: top;
+}
+
+#content .certificats-list .certificat .col2 .new-title {
+    padding: 5px 0 10px 0;
+    width: 250px;
+}
+
+#content .more-cert,
+#content .more-cont {
+    height: 75px;
+    padding-top: 28px;
+    text-align: center;
+}
+
+#content .cert-control { position: relative; }
+
+#content .cert-control .controls {
+    bottom: -70px;
+    position: absolute;
+    right: 0;
+}
+
+#content .cert-control .backlink {
+    bottom: -70px;
+    left: 0;
+    position: absolute;
+}
+
+#content .cert-control .backlink a {
+    background: #f3f3f3;
+    color: #373737;
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 20px;
+}
+
+#content .cert-control .controls .sbmt a.close {
+    color: #131313;
+    padding-right: 15px;
+}
+
+#content .content {
+    -webkit-border-radius: 3px;
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+    padding: 20px 0;
+}
+
+#content .content .cert-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 25px 10px;
+}
+
+#content .contact-control { margin-top: 20px; }
+
+#content .contact-control .col { width: 35%; }
+
+#content .contact-control .backlink a {
+    background: #f3f3f3;
+    color: #373737;
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 20px;
+}
+
+#content .contact-control .delete { text-align: center; }
+
+#content .contact-control .delete a {
+    color: #838383;
+    line-height: 32px;
+    text-align: center;
+}
+
+#content .contact-control .controls .sbmt a.close {
+    color: #131313;
+    padding-right: 15px;
+}
+
+#content .add-certificate { padding: 0 25px 20px; }
+
+#content .add-certificate form.contact input[type=text] { font-weight: 700; }
+
+#content .add-certificate form.contact .data { width: 450px; }
+
+#content .add-certificate form.contact .data .row { padding-bottom: 10px; }
+
+#content .add-certificate form.contact .data .row .label { width: 60px; }
+
+#content .add-certificate form.contact .data .row .value { width: 390px; }
+
+#content .add-certificate form.contact .add-cert {
+    margin-left: 25px;
+    padding-top: 15px;
+}
+
+#login {
+    margin: 0 auto 0;
+    width: 505px;
+}
+
+#login h1 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+#login .titles {
+    position: relative;
+    z-index: 2;
+}
+
+#login .title {
+    -webkit-border-radius: 3px 3px 0 0;
+    background-color: white;
+    border: 0;
+    border-radius: 3px 3px 0 0;
+    color: #0d81cc;
+    cursor: pointer;
+    display: inline-block;
+    height: 45px;
+    line-height: 16px;
+    padding: 11px 15px 0 15px;
+    text-align: center;
+    vertical-align: bottom;
+    width: 165px;
+}
+
+#login .title:last-child {
+    border-left: 0;
+    margin-left: -4px;
+}
+
+#login .title.active {
+    background-color: white;
+    border: 1px solid #d5d5d5;
+    border-bottom: 0;
+    color: #000000;
+    height: 49px;
+    padding: 14px 14px 0 14px;
+}
+
+#login .box {
+    -webkit-border-radius: 3px;
+    background: white;
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+    margin-top: -1px;
+    position: relative;
+    z-index: 1;
+}
+
+#login .box .load {
+    background: rgba(255, 255, 255, .9) url('../../Images/preloader2.gif') center no-repeat;
+    height: 230px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 503px;
+    z-index: 100;
+}
+
+#login .box .login-area {
+    height: 210px;
+    padding: 40px 15px 0;
+}
+
+#login .tab-taxnet { padding: 30px 15px 0 !important; }
+
+#login .box .login-area .row { height: 50px; }
+
+#login .box .login-area .info {
+    height: 60px;
+    margin: 0 18px;
+}
+
+#login .box .login-area label {
+    line-height: 28px;
+    padding-right: 20px;
+    text-align: right;
+    width: 158px;
+}
+
+#login .box .login-area .value {
+    position: relative;
+    width: 310px;
+}
+
+#login .box .login-area .value .checkBubble {
+    background: url(../../Images/checkBubble.png) no-repeat;
+    font-size: 11px;
+    height: 49px;
+    line-height: 48px;
+    padding-left: 15px;
+    position: absolute;
+    right: -155px;
+    top: -10px;
+    width: 148px;
+}
+
+#login .box .login-area .restore a {
+    color: #7b7b7b;
+    font-size: 11px;
+}
+
+#login .box .login-area .sbmt {
+    height: 40px;
+    margin-top: 10px;
+    padding-left: 160px;
+}
+
+#login .box .login-area .sbmt label {
+    line-height: 32px;
+    width: 80px;
+}
+
+#login .box .login-area .sbmt label .button-checkbox,
+#login .box .login-area .sbmt label input[type=checkbox] { margin-right: 10px; }
+
+#login .box .bottom {
+    border-top: 1px solid #e7e7e7;
+    height: 50px;
+    margin-top: 25px;
+}
+
+#login .box .bottom a {
+    line-height: 50px;
+    margin: 0 20px;
+}
+
+#login .error-mess {
+    background: #f3d2d2 url(../../Images/warning.png) 10px 8px no-repeat !important;
+    color: #c12a2b;
+    height: auto;
+    line-height: 22px;
+    margin-top: 13px;
+    min-height: 37px !important;
+    padding: 8px 10px 7px 50px;
+}
+
+#restore {
+    margin: 35px auto 0;
+    width: 505px;
+}
+
+#restore h1 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+#restore .box {
+    -webkit-border-radius: 0 3px 3px 3px;
+    background: white;
+    border: 1px solid #d5d5d5;
+    border-radius: 0 3px 3px 3px;
+}
+
+#restore .box .restore-area { padding: 27px 20px 0; }
+
+#restore .box .restore-area form .row { height: 60px; }
+
+#restore .box .restore-area form label {
+    line-height: 28px;
+    padding-right: 20px;
+    text-align: right;
+    width: 160px;
+}
+
+#restore .box .restore-area form .value { width: 300px; }
+
+#restore .box .restore-area form .sbmt { height: 32px; }
+
+#restore .box .bottom {
+    border-top: 1px solid #e7e7e7;
+    height: 50px;
+    margin-top: 45px;
+}
+
+#restore .box .bottom a {
+    line-height: 50px;
+    margin: 0 20px;
+}
+
+.error-mess {
+    background: #f3d2d2 url(../../Images/warning.png) 10px center no-repeat;
+    color: #c12a2b;
+    height: 37px;
+    line-height: 37px;
+    margin-top: 13px;
+    padding: 0 10px 0 50px;
+}
+
+.helpLink {
+    margin-top: 38px;
+    position: absolute;
+    z-index: 999;
+}
+
+.helpLink a {
+    background: url(/Content/Images/mainHelp.png) no-repeat;
+    display: inline-block;
+    height: 32px;
+
+    width: 156px;
+}

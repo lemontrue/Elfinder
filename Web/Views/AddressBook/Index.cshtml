@@ -1,0 +1,321 @@
+﻿@model CryptxOnline.Web.CryptxService.AddRecipientResponse
+
+@{
+    ViewBag.Title = "Адресная книга";
+    Layout = "~/Views/Shared/_LayoutCryptogramm.cshtml";
+}
+<link href="../../Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<script src="/Assets/libjs/jquery-ui-1.11.4.min.js"></script>
+<link href="../../Content/CSS/New/custompopup.css" rel="stylesheet" />
+@using (Html.BeginForm())
+{
+    @Html.Hidden("userId", (Guid) ViewBag.UserId)
+    <iframe id="ContactListFrame" onload="iFrameOnLoad(this.contentWindow.location.href);" src="@Url.Action("ContactList", new {userId = (Guid) ViewBag.UserId})" width="100%" height="755px" marginheight="0" marginwidth="0" frameborder="0"></iframe>
+    <div id="createContactFrameDiv" sandbox="allow-same-origin || allow-top-navigation || allow-forms || allow-scripts" title="Введите данные нового контакта" style="overflow: hidden; padding: 0;">
+        <iframe id="CreateContactFrame" width="100%" height="100%" marginheight="0" marginwidth="0" frameborder="0"></iframe>
+    </div>
+
+    <div id="SearchCertificateDiv" sandbox="allow-same-origin || allow-top-navigation || allow-forms || allow-scripts" style="overflow: hidden; padding: 0;">
+        <iframe id="SearchCertificateFrame" width="100%" marginheight="0" marginwidth="0" frameborder="0"></iframe>
+    </div>
+
+    <div class="hidden">
+        <div class="modal-window" id="deleteContact">
+            <div class="title">
+                Внимание!
+            </div>
+            <div class="row">
+                <div class="mess-box">
+                    <div class="attention">
+                        <span>
+                            Хотите удалить контакт из адресной книги? Сертификаты удаленного контакта будут доступны в общем списке сертификатов.Продолжить?
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row sbmt pull-right">
+                <a class="close" href="#">Отмена</a>
+                <input class="btn btn-green" type="button" value="Да" onclick=" deleteContact() " />
+            </div>
+        </div>
+        <div class="modal-window" id="deleteCertificate">
+            <div class="title">
+                Внимание!
+            </div>
+
+            <div class="row">
+                <div class="mess-box">
+                    <div class="attention">
+                        <span>
+                            Выбранный сертификат будет удален из списка сертификатов контакта, однако останется доступным в общем списке сертификатов. Продолжить?
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row sbmt pull-right">
+                <a class="close" href="#">Отмена</a> <input class="btn btn-green" type="button" value="Да" onclick=" deleteCert(this) " />
+            </div>
+        </div>
+        <div class="modal-window" id="deleteCertificates">
+            <div class="title">
+                Внимание!
+            </div>
+
+            <div class="row">
+                <div class="mess-box">
+                    <div class="attention">
+                        <span>Все выбранные сертификаты будут удалены из адресной книги, шаблонов настроек и прочих списков Cryptogramm. Продолжить?</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row sbmt pull-right">
+                <a class="close" href="#">Отмена</a> <input class="btn btn-green" type="button" value="Да" onclick=" deleteCErtificates() " />
+            </div>
+        </div>
+
+
+        <div class="modal-window" id="info">
+            <div class="title">
+                Внимание!
+            </div>
+
+            <div class="row">
+                <div class="mess-box">
+                    <div class="error" id="infoPlacer"><span></span></div>
+                </div>
+            </div>
+
+            <div class="row sbmt pull-right">
+                <input class="btn btn-green" type="button" value="Закрыть" onclick=" $.fancybox.close(); " />
+            </div>
+        </div>
+
+        <div class="modal-window" id="error">
+            <div class="title">
+                Внимание!
+            </div>
+
+            <div class="row">
+                <div class="mess-box">
+                    <div class="error" id="errorPlacer"><span></span></div>
+                </div>
+            </div>
+
+            <div class="row sbmt pull-right">
+                <input class="btn btn-green" type="button" value="Закрыть" onclick=" $.fancybox.close(); " />
+            </div>
+        </div>
+
+    </div>
+    <div id="modal" style="display: none">
+        <div class="window alert modal-window" id="preloader" style="display: none">
+            <div class="title">
+                Выполнение операции...
+            </div>
+            <form action="" autocomplete="off" method="post">
+                <div class="row">
+                    <div class="mess-box">
+                        <div class="info" id="infoText" style="text-align: center">
+                            <img src="@Url.Content("~/Assets/i/old/preloader.gif")" style="margin: 30px auto 30px auto;" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+}
+<script>
+    window.contactCertificates = [];
+    window.certificates = [];
+    window.deletingContactId = "";
+    window.deletingCertificateThumbprint = "";
+
+    window.contactId = "";
+    window.certificateId = "";
+
+    function errorModal(text) {
+        $('#errorPlacer span').html(text);
+        $.fancybox('#error');
+    }
+
+    function iFrameOnLoad(curUrl) {
+        if (curUrl.indexOf('@Url.Action("Login","Account")') !=-1 ) {
+            location.href = curUrl;
+        }
+    }
+
+    function showModal(id) {
+        var w = $("#modal #" + id);
+        if (w[0]) {
+            w.show();
+            w.parent().show();
+        }
+    }
+
+    function hideModal(id) {
+        var w = $("#modal #" + id);
+        if (w[0]) {
+            w.hide();
+            w.parent().hide();
+        }
+    }
+
+
+    function infoModal(text) {
+        $('#infoPlacer span').html(text);
+        $.fancybox('#info');
+    }
+
+    function deleteCErtificatesModal() {
+        $.fancybox('#deleteCertificates');
+    }
+
+    function deleteCErtificates() {
+        $("#ContactListFrame")[0].contentWindow.$('form').submit();
+        $.fancybox.close();
+    }
+
+    function deleteCertModalOpen(thumbprint, contactId, certificateId) {
+        if (thumbprint != undefined) {
+            window.deletingCertificateThumbprint = thumbprint;
+        } else {
+            window.contactId = contactId;
+            window.certificateId = certificateId;
+        }
+        $.fancybox('#deleteCertificate');
+    }
+
+    function deleteCert(thumbprint) {
+        if (window.contactId != undefined) {
+            $("#ContactListFrame")[0].contentWindow.deleteCert(window.contactId, window.certificateId);
+        } else {
+            $("#ContactListFrame")[0].contentWindow.deleteCert(window.deletingCertificateThumbprint);
+        }
+        $.fancybox.close();
+    }
+
+    function deleteContactModalOpen(contactId) {
+        window.deletingContactId = contactId;
+        $.fancybox('#deleteContact');
+    }
+
+    function deleteContact(contactId) {
+        $("#ContactListFrame")[0].contentWindow.contactDelete(window.deletingContactId);
+        $.fancybox.close();
+    }
+
+    function disposeSearchCertFrame(contactId) {
+        $("#SearchCertificateDiv").dialog("close");
+        $("#SearchCertificateFrame").contents().empty();
+        $("#ContactListFrame")[0].contentWindow.location.href = $("#ContactListFrame")[0].contentWindow.location.href;
+    }
+
+    function disposeCreateContactFrame(refresh) {
+        $("#createContactFrameDiv").dialog("close");
+        $("#CreateContactFrame").contents().empty();
+        $("#CreateContactFrame").attr('src', null);
+        if (refresh == true)
+            location.href = location.href;
+
+    }
+
+    function UpdateNavPane(navHtmlString) {
+        $('#breadcrumbs').html(navHtmlString);
+    }
+
+    function createContactClick(thumbprint, subject, timemessage) {
+        if ($.isArray(thumbprint)) {
+            window.certificates = thumbprint;
+            var qryString = "?userId=" + $('#userId').val();
+            $('#CreateContactFrame').attr('src', '@Url.Action("CreateContact")' + qryString);
+            $("#addContactDiv").css('display', 'none');
+            $("#createContactFrameDiv").dialog("open");
+            $("#createContactFrameDiv").dialog("option", "height", 515);
+            $("#SearchCertificateDiv").dialog("close");
+            $("#SearchCertificateFrame").contents().empty();
+        } else {
+            var qryString = "";
+            if (thumbprint != null)
+                qryString = '?Thumbprint=' + thumbprint + '&' + 'SubjectName=' + escape(subject) + '&' + 'TimeMessage=' + escape(timemessage) + '&' + 'userId=' + escape($('#userId').val());
+            else
+                qryString = '?userId=' + escape($('#userId').val());
+            $('#CreateContactFrame').attr('src', '@Url.Action("CreateContact")' + qryString);
+            $("#addContactDiv").css('display', 'none');
+            $("#createContactFrameDiv").dialog("open");
+            $("#createContactFrameDiv").dialog("option", "height", 515);
+        }
+
+    }
+
+    function findCertClick(contactId) {
+        $('#SearchCertificateFrame').attr('src', '@Url.Action("FindCertificate", "Helper", new {userId = (Guid) ViewBag.UserId})' + '&contactId=' + contactId+'&all=true');
+        $("#SearchCertificateDiv").dialog("open");
+        $("#SearchCertificateDiv").dialog("option", "height", 200);
+        $("#SearchCertificateFrame").css("height", '150px');
+    }
+
+
+    function showCertArea() {
+        var el = document.getElementById('CreateContactFrame').contentDocument.getElementById('new-contact');
+        $(el).find('.cert-list').removeClass('hidden');
+
+        $("#createContactFrameDiv").dialog("option", "height", 530);
+
+        // todo: показывать сертификаты после открытия блока
+        //$( "#createContactFrameDiv" ).find('.cert-list').removeClass('hidden').find('.scroller').css('width','auto');
+    }
+
+    function showFoundedCerts() {
+        $("#SearchCertificateDiv").dialog("option", "height", 580);
+        $("#SearchCertificateFrame").css("height", '550px');
+    }
+
+    function hideFoundedCerts() {
+        $("#SearchCertificateDiv").dialog("option", "height", 500);
+        $("#SearchCertificateFrame").css("height", 'auto');
+    }
+
+    $(document).ready(function() {
+
+        $('.dropdown-menu').mouseleave(function(e) {
+            $('.dropdown-menu').dropdown('toggle');
+        });
+        $('#createContactFrameDiv').dialog({
+            resizable: false,
+            autoOpen: false,
+            height: 315,
+            width: 554,
+            modal: true,
+            create: function(event, ui) {
+                $(".ui-widget-header").hide();
+                $("#createContactFrameDiv").dialog("option", "height", 315);
+            },
+
+        });
+        $('#SearchCertificateDiv').dialog({
+            resizable: false,
+            autoOpen: false,
+            height: 326,
+            width: 694,
+            modal: true,
+            create: function(event, ui) {
+                $(".ui-widget-header").hide();
+                $("#SearchCertificateDiv").dialog("option", "height", 200);
+            },
+
+        });
+        $("#addContact").click(function() {
+            var divC = $("#addContactDiv");
+            if (divC.css("display") == "none") {
+                divC.css("display", "block");
+            } else {
+                divC.css("display", "none");
+            }
+        });
+
+    });
+</script>

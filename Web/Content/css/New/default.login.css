@@ -1,0 +1,185 @@
+﻿.display-ib {
+    display: -moz-inline-stack; /* для FF2 */
+    display: inline-block; /* для других */
+    *display: inline; /* для ие */
+    vertical-align: top;
+    zoom: 1; /* для ие */
+    _overflow: hidden; /* для ие6, чтобы не умещающиеся в нем элементы не раздвигали блок */
+}
+
+.wrap {
+    max-width: 1280px;
+    min-width: 1024px;
+}
+
+.center { margin: 0 auto; }
+
+.clear { clear: both; }
+
+#container-login {
+    background-color: #FFFFFF;
+    height: 100%;
+    margin: 0;
+    min-width: 1024px;
+    padding: 0;
+    width: 100%;
+}
+
+        
+
+#login-content {
+    background-image: url(../../Images/login/bg.png);
+    background-position: 0 0;
+    background-repeat: repeat;
+}
+
+#login-content #header {
+    -moz-box-shadow: 0px 5px 15px 0px rgba(50, 50, 50, 0.5);
+    -webkit-box-shadow: 0px 5px 15px 0px rgba(50, 50, 50, 0.5);
+    background-color: #FFF;
+    box-shadow: 0px 5px 15px 0px rgba(50, 50, 50, 0.5);
+    font-family: Verdana;
+    padding: 22px 0;
+}
+
+#login-content #header .logotype {
+    color: inherit;
+    cursor: pointer;
+    float: left;
+    margin-left: 24px;
+    text-decoration: none;
+}
+
+#login-content #header .logotype > img { vertical-align: middle; }
+
+#login-content #header .logotype > img + span {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 67px;
+    padding-left: 10px;
+}
+
+#login-content #header div.slogan {
+    float: right;
+    font-size: 18px;
+}
+
+#login-content #header div.slogan {
+    float: right;
+    font-size: 18px;
+    padding: 12px 15px;
+}
+
+#login-content .wrap.login-form { padding: 35px 0 70px; }
+
+#information {
+    font-family: Verdana;
+    margin-bottom: 30px;
+}
+
+#information .keys {
+    border-bottom: 1px solid #E5E8EB;
+    height: 112px;
+    padding: 28px 15px 28px 24px;
+}
+
+#information .keys div {
+    float: left;
+    font-family: Verdana;
+    font-size: 12px;
+    height: 56px;
+    width: 25%;
+}
+
+#information .keys div:first-child + div + div { width: 27%; }
+
+#information .keys div:first-child + div + div + div { width: 23%; }
+
+#information .keys div img {
+    float: left;
+    margin-right: 10px;
+}
+
+#information .keys div > img + span { display: table-cell; }
+
+#information .keys div:first-child img + span {
+    padding-top: 6px;
+    width: 150px;
+}
+
+#information .keys div:first-child + div img + span {
+    padding-top: 6px;
+    width: 160px;
+}
+
+#information .keys div:first-child + div + div img + span {
+    padding-top: 6px;
+    width: 165px;
+}
+
+#information .keys div:first-child + div + div + div img + span {
+    padding-top: 6px;
+    width: 160px;
+}
+
+#information .mobile-app {
+    margin: 35px auto 0;
+    width: 600px;
+}
+
+#information .mobile-app .title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 34px;
+    text-align: center;
+}
+
+#information .mobile-app .desc { }
+
+#information .mobile-app .desc img { float: left; }
+
+#information .mobile-app .desc img + span {
+    float: left;
+    margin: 15px 0 0 20px;
+    text-align: justify;
+}
+
+#information .mobile-app .store {
+    clear: both;
+    padding: 15px;
+    text-align: center;
+}
+
+.registration-section {
+    background: url(../../Images/login/bg.png) repeat 0 0;
+    padding: 35px 0;
+}
+.registration-section .registration-box {
+    margin: 0 auto ;
+    width: 500px;
+    padding: 30px 20px;
+    background: white;
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+    position: relative;
+    z-index: 1;
+}
+
+.registration-section .registration-box h2 {
+    font-size: 24px;
+    color: #000;
+    margin: 0 auto 15px;
+}
+.registration-section .registration-box .row {
+    margin-bottom: 10px;
+}
+.registration-section .registration-box .row label {
+    margin-top: 2px;
+    color: #ff2424;
+}
+
+.registration-section .registration-box .phone-row input[type=text] {
+    display: inline-block;
+    vertical-align: middle;
+    width: 90%
+}

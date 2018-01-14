@@ -1,0 +1,511 @@
+﻿@using System.Web.Optimization
+@using CryptxOnline.Web.Models
+@model CryptxOnline.Web.Models.ContactCertificatesModel
+
+@{
+    Layout = null;
+}
+@if (ViewBag.login != null)
+{
+    <script>
+        parent.location.href = '@Url.Action("Login", "Account")'
+    </script>
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>EditContact</title>
+        <meta charset="UTF-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+        <meta name="format-detection" content="telephone=no" />
+
+
+        <link href="../../Content/CSS/New/common.css" rel="stylesheet" />
+        <link href="../../Content/CSS/New/normalize.css" rel="stylesheet" />
+        <link href="../../Content/CSS/New/icons.css" rel="stylesheet" />
+        @*<link href="../../Content/CSS/New/style.css" rel="stylesheet" />*@
+        <link href="../../Content/CSS/New/ContactListStyle.css" rel="stylesheet" />
+        <link href="../../Content/CSS/New/jquery.fancybox.css" rel="stylesheet" />
+        <link href="../../Content/CSS/New/contact.css" rel="stylesheet" />
+        @Scripts.Render("~/bundles/New")
+    </head>
+
+    <body>
+        @if (Model != null)
+        {
+            using (Html.BeginForm())
+            {
+                @Html.Hidden("userId", (Guid) ViewBag.UserId)
+                @Html.HiddenFor(m => m.ID)
+                <div class="content">
+                    <input id="file" type="file" style="opacity: 0;width: 0;height:0" accept=".cer" multiple />
+                    
+                    <div class="add-certificate">
+                        <div class="contact" >
+                            <div class="data col">
+                                <div class="row">
+                                    <div class="label col">
+                                        Имя:
+                                    </div>
+                                    <div class="value col">
+                                        @Html.TextBoxFor(m => m.Name, new {@maxlength = 24, @type = "text", @id = "name"})
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="label col">
+                                        E-mail:
+                                    </div>
+                                    <div class="value col">
+                                        @Html.TextBoxFor(m => m.Email, new {@type = "text", required = "required", maxlength = "70"})
+                                        <span id="wrongEmail" style="color: red; display: none">Адрес электронной почты введен неверно</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add-cert col">
+                                <div class="dropdown">
+                                    <div class="btn btn-green" data-toggle="dropdown">
+                                        Добавить сертифкат
+                                        <i class="icon dd-arrow">
+                                        
+                                        </i>
+                                    </div>
+                                    <div style="width: 210px" class="dropdown-menu">
+                                        <div class="arrow-top">
+                                        </div>
+                                        <ul>
+                                            <li>
+                                                <a style="cursor: pointer" id="btn-load">
+                                                    <i class="ico-7-1-download ib-ico ico">
+                                                    </i>  Загрузить из файла
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a style="cursor: pointer" onclick=" findInCryptogramm_click(event, '@Model.ID') ">
+                                                    <i class="ico-7-1-search ib-ico ico">
+                                                    </i>  Найти в Cryptogramm
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cert-title">
+                        Сертификаты
+                    </div>
+                    <div class="filter">
+                        <div class="form">
+                            <div class="col">
+                                <label>Поиск:</label>
+                                @Html.TextBoxFor(m => m.SearchString, new {@class = "search", @maxlength = 110})
+                                <span class="loop" id="loop_sbmt"></span>
+                            </div>
+                            <div class="col">
+                                <label>Фильтр:</label>
+                                @Html.DropDownListFor(m => m.Filter, new SelectList(new AddressBookModel().Certificates.GetFilterList(), "Value", "Text", (int) Model.Filter), new {@class = "style-select"})
+                            </div>
+                            <div class="col">
+                                <label>Сортировать по:</label>
+                                @Html.DropDownListFor(m => m.Sort, new SelectList(new AddressBookModel().Certificates.GetSortList(), "Value", "Text", (int) Model.Sort), new {@class = "style-select"})
+                                <input id="submitBtn" type="submit" value="запросить" name="but" style="display: none"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="scroll-wrap" style="height: 270px">
+                        <div class="scroller" >
+                            <div class="certificats-list">
+                                @if (Model.Certificates == null || Model.Certificates.Count == 0)
+                                {
+                                    <div style="font-size: 25px; padding-top: 100px; text-align: center">
+                                        По запросу не найдено ни одного сертификата
+                                    </div>
+                                }
+                                else
+                                {
+                                    foreach (ContactCertificate certificate in Model.Certificates)
+                                    {
+                                        int index = Model.Certificates.IndexOf(certificate);
+                                        @Html.EditorFor(m => certificate)
+                                    }
+                                }
+                                
+
+                            </div>
+                        </div>
+                        <div class="scroller__bar-wrapper">
+                            <div class="scroller__bar">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="more-cert" style="display: none">
+                        <a>
+                            Еще сертификатов в списке (41)
+                        </a>
+                    </div>
+                    @Html.Hidden("save", null)
+
+                    <input type="submit" value="запросить" id="que" name="que" style="display: none">
+                </div>
+                <div class="contact-control">
+                    <div class="backlink col"><a href="@Url.Action("ContactList", "AddressBook", new {userId = (Guid) ViewBag.UserId})"><i class="icon backarrow"></i>  Вернуться к списку контактов</a></div><div class="delete col"><a style="cursor: pointer" href="javascript:contactDeleteClick('@Model.ID')">Удалить контакт</a></div><div class="controls pull-right"><div class="sbmt pull-right"><a class="close" href="javascript:location.href='@Url.Action("ContactList", "AddressBook", new {userId = (Guid) ViewBag.UserId})'">Отмена</a><input class="btn btn-green" type="button" value="Сохранить" name="" onclick=" saveClick() "></div></div></div>
+            }
+        }
+        <div class="hidden">
+            <div class="modal-window" id="deleteContact">
+                <div class="title">Внимание!</div>
+                <div class="row">
+                    <div class="mess-box">
+                        <div class="attention">
+                            <span>
+                                Хотите удалить контакт из адресной книги? Сертификаты удаленного контакта будут доступны в общем списке сертификатов.Продолжить?
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row sbmt pull-right">
+                    <a class="close" href="#">Отмена</a>
+                    <input class="btn btn-green" type="button" value="Да"  />
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
+<script>
+
+    function editFriendlynameClick(thumbprint, frname) {
+        $('#fr_' + thumbprint).prop('disabled', false);
+        $('#save_' + thumbprint).css('display', 'block');
+        $('#edit_' + thumbprint).css('display', 'none');
+    }
+
+    function saveFriendlynameClick(thumbprint) {
+
+        var frname = $('#fr_' + thumbprint).val();
+        $.ajax({
+            url: '@Url.Action("ChangeFriendlyName")',
+            async: false,
+            type: "POST",
+            data: { frName: frname, thumbprint: thumbprint },
+            success: function(result) {
+                if (result.Status == "ok") {
+                    $('#fr_' + thumbprint).prop('disabled', true);
+                    $('#save_' + thumbprint).css('display', 'none');
+                    $('#edit_' + thumbprint).css('display', 'block');
+                    //parent.infoModal('Данные успешно изменены');
+                }
+                //location.href = location.href;
+                if (result.Status == "logoff") {
+                    parent.location = '@Url.Action("LogOff", "Account")';
+                }
+            },
+            error: function(request, error, result) {
+            }
+        });
+
+    }
+
+    function checkEmail(regexp, value) {
+        var re;
+        if (regexp == "")
+            re = /^([A-Za-z0-9]+\.{0,1})+([A-Za-z0-9_-]+\.)*[A-Za-z0-9_-]*[A-Za-z0-9]+@@[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*\.[A-Za-z0-9]{2,6}$/;
+        else
+            re = regexp;
+        var emails = value;
+        var emailArr = emails.split(',');
+        if (emails == null || emails == "") {
+            return false;
+        }
+
+        for (var i = 0; i < emailArr.length; i++) {
+            if (emailArr[i] == "" || !re.test(emailArr[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    function contactDeleteClick(contactId) {
+        parent.deleteContactModalOpen(contactId);
+
+        @*if (confirm('Хотите удалить контакт из адресной книги? Сертификаты удаленного контакта будут доступны в общем списке сертификатов.')) {
+            location.href = '@Url.Action("DeleteContact", "AddressBook", new { userId = (Guid)ViewBag.UserId })'+'&contactId='+contactId;
+        } else {
+
+        }*@
+    }
+
+    function contactDelete(contactId) {
+        location.href = '@Url.Action("DeleteContact", "AddressBook", new {userId = (Guid) ViewBag.UserId})' + '&contactId=' + contactId;;
+    }
+
+    function getCertificate(thumbprint) {
+        parent.location = '@Url.Action("GetCertificate", "Default")' + '?thumbPrint=' + thumbprint;
+    }
+
+    function saveClick() {
+        var email = $('#Email');
+        if (checkEmail("", email.val())) {
+            $('#save').val('val');
+            $('form').submit();
+        } else {
+            email.attr('class', 'error');
+            var we = $('#wrongEmail');
+            we.css('display', 'block');
+        }
+    }
+
+    function clearValidation() {
+        //$('form').data('validator').cancelSubmit = false;
+        $('#save').val('');
+        $('#que').click();
+
+    }
+
+//function checkEmail(regexp, value) {
+    //    var re = regexp;
+    //    var emails = value;
+    //    var emailArr = emails.split(',');
+    //    if (emails == null || emails == "") {
+    //        return false;
+    //    }
+
+    //    for (var i = 0; i < emailArr.length; i++) {
+    //        if (emailArr[i] == "" || !re.test(emailArr[i])) {
+    //            return false;
+    //        }
+    //    }
+    //    return true;
+    //}
+    function findInCryptogramm_click(event, contactId) {
+        if (event.srcElement != undefined)
+            var divC = $(event.srcElement).closest('td').find('div');
+        else
+            var divC = $(event.currentTarget).closest('td').find('div');
+        divC.css("display", "none");
+        parent.findCertClick(contactId);
+    }
+
+    $(document).ready(function() {
+        window.contactCertificates = parent.window.contactCertificates;
+        parent.window.contactCertificates = [];
+        $('.certificats-list input').keyup(function(e) {
+            var curVal = $(e.target).val();
+            var id = $(e.target).attr('id').replace('fr_', '');
+            if (curVal.length > 0) {
+                $('#save_' + id).css('display', 'block');
+            } else {
+                $('#save_' + id).css('display', 'none');
+            }
+        });
+
+        $('#name').blur(function(e) {
+            var charArr = ($('#name').val().split(''));
+            var newStr = "";
+            $.each(charArr, function() {
+                var keyCode = this.charCodeAt(0);
+                if (keyCode == 1061 || keyCode == 1066 || keyCode == 33 || keyCode == 34 || keyCode == 37 || keyCode == 8470 || keyCode == 59 || keyCode == 58 || keyCode == 63 || keyCode == 42 || keyCode == 126 || keyCode == 34 || keyCode == 60 || keyCode == 62 || keyCode == 44 || keyCode == 46 || keyCode == 61 || keyCode == 45 || keyCode == 43 || keyCode == 123 || keyCode == 125 || keyCode == 39 || keyCode == 93 || keyCode == 64 || keyCode == 39 || keyCode == 96 || keyCode == 35 || keyCode == 36 || keyCode == 94 || keyCode == 38 || keyCode == 91 || keyCode == 47 || keyCode == 92) {
+
+                } else {
+                    newStr += this;
+                }
+            });
+            $('#name').val(newStr);
+        });
+
+        $('#name').keypress(function(key) {
+            var keyCode = key.charCode;
+            if (keyCode == 1061 || keyCode == 1066 || keyCode == 33 || keyCode == 34 || keyCode == 37 || keyCode == 8470 || keyCode == 59 || keyCode == 58 || keyCode == 63 || keyCode == 42 || keyCode == 126 || keyCode == 34 || keyCode == 60 || keyCode == 62 || keyCode == 44 || keyCode == 46 || keyCode == 61 || keyCode == 45 || keyCode == 43 || keyCode == 123 || keyCode == 125 || keyCode == 39 || keyCode == 93 || keyCode == 64 || keyCode == 39 || keyCode == 96 || keyCode == 35 || keyCode == 36 || keyCode == 94 || keyCode == 38 || keyCode == 91 || keyCode == 47 || keyCode == 92)
+                return false;
+        });
+
+        $('.cusel-scroll-wrap').mouseleave(function() {
+            $('.cusel-scroll-wrap').css('display', 'none');
+        });
+        $('.dropdown-menu').mouseleave(function(e) {
+            $('[data-toggle="dropdown"]').parent().removeClass('open');
+        });
+        $('#Email').keyup(function() {
+            var email = $('#Email');
+            var we = $('#wrongEmail');
+
+            if (checkEmail("", email.val())) {
+                email.attr('class', '');
+                we.css('display', 'none');
+
+            } else {
+                email.attr('class', 'error');
+                we.css('display', 'block');
+            }
+
+        });
+        $('#Email').blur(function() {
+            var email = $('#Email');
+            var we = $('#wrongEmail');
+
+            if (checkEmail("", email.val())) {
+                email.attr('class', '');
+                we.css('display', 'none');
+
+            } else {
+                email.attr('class', 'error');
+                we.css('display', 'block');
+            }
+
+        });
+
+
+        if ('@(ViewBag.nav != null)' == 'True') {
+            parent.UpdateNavPane('@Html.Raw(ViewBag.nav)');
+        }
+
+
+        $('#Filter, #Sort').change(function() {
+            clearValidation();
+        });
+
+        $('form').keypress(function(e) {
+            if (e.keyCode == 13) {
+                if (e.target != null) {
+                    if (e.target.id == 'Name' || e.target.id == 'Email') {
+                        e.preventDefault();
+                    }
+                    if (e.target.id == 'SearchString') {
+                        e.preventDefault();
+                        clearValidation();
+                    }
+                    //поиск инпута для френдлинейм
+
+                    if (e.target.id.indexOf("fr_") > -1) {
+                        var thmbprint = e.target.id.substring(3);
+                        saveFriendlynameClick(thmbprint);
+                        e.preventDefault();
+                    }
+                }
+
+            }
+        });
+
+        $('#loop_sbmt').click(function() {
+            clearValidation();
+        });
+        //jQuery.validator.addMethod(
+        //    'regexp',
+        //    function (value, element, regexp) {
+        //        return this.optional(element) || checkEmail(regexp, value);
+        //    },
+        //    "Please check your input."
+        //);
+        //$('form').validate({
+        //    rules: {
+        //        Name: {
+        //            required: true,
+        //            minlength: 3
+        //        },
+        //        Email: {
+        //            regexp: /^([a-z0-9_-]+\.)*[a-z0-9_-]+@@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/
+        //        }
+        //    },
+        //    messages: {
+        //        Name: {
+        //            required: "Это поле обязательно для заполнения",
+        //            minlength: "Имя должно быть минимум 3 символа"
+        //        },
+        //        Email: {
+        //            regexp: "Не верный E-mail"
+        //        }
+        //    }
+        //});
+
+
+        $('#file').change(function(e) {
+            var fileInput = document.getElementById('file');
+            var files = fileInput.files;
+            for (var i = 0; i < files.length; i++) {
+                if (files[i].size < 1048576) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', '@Url.Action("AddCertificateToContact", new {userId = (Guid) ViewBag.UserId})' + '&contactId=@(Model == null ? "" : Model.ID.ToString())', false);
+                    xhr.setRequestHeader('Content-type', 'multipart/form-data');
+                    //Appending file information in Http headers
+                    //xhr.setRequestHeader('X-File-Name', files[i].name);
+                    xhr.setRequestHeader('X-File-Type', files[i].type);
+                    xhr.setRequestHeader('X-File-Size', files[i].size);
+                    xhr.setRequestHeader('ContactCertificates', JSON.stringify(window.contactCertificates));
+
+
+                    xhr.addEventListener("load", function(evt) { UploadComplete(evt); }, false);
+                    //Sending file in XMLHttpRequest
+                    xhr.send(fileInput.files[i]);
+                    var retrievedData = "";
+                } else {
+                    parent.infoModal("Файл не соответствует требованиям к сертификатам, используемым в Cryptogramm. Загрузка невозможна.");
+                }
+            }
+
+            function UploadComplete(evt) {
+                if (evt.target.status == 200) {
+                    retrievedData = jQuery.parseJSON(xhr.responseText);
+                    if (retrievedData.Status == "ok") {
+
+                    } else {
+                        if (retrievedData.Status == 'refresh') {
+                            location.href = location.href;
+                            return;
+                        }
+                        parent.infoModal(retrievedData.Status);
+                        location.href = location.href;
+                    }
+
+                } else
+                    parent.infoModal("Файл не соответствует требованиям к сертификатам, используемым в Cryptogramm. Загрузка невозможна.");
+            }
+
+        });
+
+
+        $('#btn-load').click(function() {
+            $("#addCertificateDiv").css("display", "none");
+            $('#file').click();
+        });
+
+        $("#addCertificate").click(function() {
+            var divC = $("#addCertificateDiv");
+            if (divC.css("display") == "none") {
+                divC.css("display", "block");
+            } else {
+                divC.css("display", "none");
+            }
+        });
+    });
+
+    function ConfirmAction(contactId, certificateId) {
+        parent.deleteCertModalOpen(null, contactId, certificateId);
+    }
+
+    function deleteCert(contactId, certificateId) {
+        $.ajax({
+            url: '@Url.Action("DeleteCertificateRelation")',
+            async: false,
+            type: 'POST',
+            data: { contactId: contactId, certificateId: certificateId, userId: $('#userId').val() },
+            success: function(result) {
+                if (result.status != "ok") {
+                    alert(result.status);
+                } else {
+                    location.href = location.href;
+                }
+            },
+            error: function(request, error, result) {
+                alert('error');
+            }
+        });
+    }
+
+    function Refresh() {
+        location.reload();
+    }
+</script>

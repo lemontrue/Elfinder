@@ -1,0 +1,55 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+
+<html>
+    <head>
+
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        @Scripts.Render("~/Assets/libjs/jquery-2.1.3.js")
+        @Scripts.Render("~/Assets/libjs/can/2.1.2/can.custom.js")
+        @Scripts.Render("~/Assets/libjs/moment/moment.min.js")
+        @Scripts.Render("~/Assets/js/master.js")
+        @Scripts.Render("~/Assets/libjs/bootstrap/dropdown.js")
+        @Scripts.Render("~/Assets/libjs/keypress/keypress.min.js")
+        @Scripts.Render("~/Assets/libjs/Login/baron.min.js")
+        @Scripts.Render("~/Assets/libjs/plupload/plupload.full.min.js")
+        @Scripts.Render("~/Assets/libjs/newJS/jquery.fancybox.pack.js")
+
+        <script src="/Assets/libjs/opentip.js"></script>
+
+        <link href="/Assets/css/opentip.css" rel="stylesheet" />
+        <link href="@Url.Content("~/Assets/css/master.css")" rel="stylesheet" type="text/css" media="all" />
+
+        <link href="@Url.Content("~/Assets/i/old/favicon.ico")" rel="shortcut icon" type="image/x-icon" />
+
+        <script type="text/javascript">
+            Master = {};
+            $(function() {
+                Master = new InitMaster({
+                    tag: 'body',
+                    templates: {
+                        all: @Html.Raw(ViewBag.masterModel.SettingsJSON),
+                        'default': @Html.Raw(ViewBag.masterModel.BlankProfileJSON)
+                    },
+                    urlUpload: '@Url.Action("GetFile", "Master")',
+                    user: {
+                        name: '@ViewBag.masterModel.UserInfo.Name',
+                        isAdmin: @((CurrentUser.IsInRole("GroupAdmin") || CurrentUser.IsInRole("SysAdmin")).ToString().ToLower())
+                    },
+                    initialize: {
+                        files: @Html.Raw(ViewBag.masterModel.FilesJSON),
+                        type: '@ViewBag.masterModel.OperationType'
+                    },
+                    lang: 'ru',
+                    debug: false
+                });
+            });
+        </script>
+
+        <title>Мастер</title>
+    </head>
+    <body>
+        @RenderBody()
+    </body>
+</html>

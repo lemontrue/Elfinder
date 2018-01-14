@@ -1,0 +1,86 @@
+﻿html { }
+
+table.wizard-main {
+    border: 1px solid #999999;
+    width: 100%;
+}
+
+.wizard-main .wizard-menu {
+    height: 400px;
+    min-width: 200px;
+    padding-left: 20px;
+    padding-top: 20px;
+    vertical-align: text-top;
+    width: 20%;
+}
+
+.wizard-main .wizard-panel {
+    height: 400px;
+    min-width: 600px;
+    overflow: hidden;
+    position: relative;
+}
+
+.wizard-menu table {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.wizard-menu table tr td.curr {
+    background-color: #2684f8;
+    color: white;
+    font-weight: bold;
+}
+
+.wizard-menu table tr td { position: relative }
+
+.wizard-right-top {
+    height: 330px;
+    margin-left: 20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-left: 10px;
+    padding-top: 10px;
+    position: relative;
+    top: 0;
+    width: 90%;
+    word-wrap: normal;
+}
+
+.wizard-right-bottom {
+    bottom: 5px;
+    margin-top: 20px;
+    padding-right: 20px;
+    text-align: right;
+    width: 100%;
+}
+
+.wizard-right-bottom .buttons { margin-right: 20px; }
+
+/*.wizard-right-bottom input[type="submit"] {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background:#2684f8;
+    font: normal normal bold 14px arial;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.wizard-right-bottom input[type="submit"]:hover,
+.wizard-right-bottom input[type="submit"]:focus {
+    background:#3c92fc;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.wizard-right-bottom input[type="submit"]:active {
+    background: #22449a;
+}
+input.button :disabled
+    {
+        background: #999999 !important;
+    }*/

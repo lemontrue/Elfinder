@@ -1,0 +1,256 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+        <link href="css/common.css" rel="stylesheet" media="all" />
+        <link href="css/master.css" rel="stylesheet" media="all" />
+
+        <title>CRYPTOGRAMM</title>
+    </head>
+    <body class="unselect">
+        <div class="content">
+            <header>
+                <div class="logo">CRYPTOGRAMM</div>
+                <a class="user" href="javascript:void(0)">Киршин Севастьян Олегович</a>
+
+                <div class="templates">
+                    Шаблон:
+                    <a href="javascript:void(0)">По умолчанию</a>
+                    <ul class="bubble template">
+                        <li><a href="javascript:void(0)">Раз два три</a></li>
+                        <li><a href="javascript:void(0)">Раз два три</a></li>
+                        <li><a href="javascript:void(0)">Раз два три</a></li>
+                        <li><a href="javascript:void(0)">Раз два три</a></li>
+                        <li><a href="javascript:void(0)">Раз два три</a></li>
+                        <li><a href="javascript:void(0)">Раз два три</a></li>
+                        <li><a href="javascript:void(0)">Раз два три</a></li>
+                        <li><a href="javascript:void(0)">Раз два три</a></li>
+                        <li><a href="javascript:void(0)">Раз два три</a></li>
+                        <li><a href="javascript:void(0)">Раз два три</a></li>
+                        <li><a href="javascript:void(0)">Раз два три</a></li>
+                    </ul>
+                </div>
+                <a href="javascript:void(0)" class="prev">Вернуться в каталог файлов</a>
+            </header>
+
+            <h2 class="main-title">Мастер работы с документами</h2>
+
+            <div id="select-files">
+                <h3 class="files-change">Обрабатываемые файлы</h3>
+
+                <div class="box">
+                    <div class="state ready"></div>
+
+                    <div class="body">
+                        <ul class="file-list">
+                            <li>
+                                <div class="file-info">
+                                    <a href="javascript:void(0)" class="name"><span>1.</span>Документ.doc</a>
+                                    <div class="last_change">Файл изменен: 24.11.2014</div>
+                                </div>
+                                <div class="actions">
+                                    <a href="javascript:void(0)" class="delete">Удалить из списка</a>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="file-info">
+                                    <a href="javascript:void(0)" class="name"><span>2.</span>Документ.doc</a>
+                                    <div class="deleted">Файл исключен из списка</div>
+                                </div>
+                                <div class="actions">
+                                    <div class="deleted">
+                                        <a href="javascript:void(0)">Восстановить</a> |
+                                        <a href="javascript:void(0)">Скрыть</a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="file-info">
+                                    <a href="javascript:void(0)" class="name"><span>3.</span>Документ.doc</a>
+                                    <div class="last_change">Файл изменен: 24.11.2014</div>
+                                </div>
+                                <div class="actions">
+                                    <div class="progress">
+                                        <div class="bar" style="width: 40%"></div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="file-info">
+                                    <a href="javascript:void(0)" class="name"><span>4.</span>Документ новый.doc</a>
+                                    <div class="last_change">Файл изменен: 24.11.2014</div>
+                                </div>
+                                <div class="actions">
+                                    <a href="javascript:void(0)" class="delete">Удалить из списка</a>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="controls">
+                        <div class="file-edit-control">
+                            <div class="btn change_file_list">Изменить состав файлов</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="action-change">
+                        <div class="title">Выберите действие, которое необходимо осуществить:</div>
+                        <div class="row">
+                            <div class="c-500">
+                                <select>
+                                    <option>--</option>
+                                    <option>Подписать</option>
+                                    <option>Зашифровать</option>
+                                    <option>Подписать и зашифровать</option>
+                                    <option>Проверить подпись</option>
+                                    <option>Расшифровать</option>
+                                    <option>Расшифровать и проверить подпись</option>
+                                    <option></option>
+                                </select>
+                                <span class="error">Выберите действие</span>
+                            </div>
+                            <div class="c-500">
+                                <div class="btn-group pull-right">
+                                    <div class="btn">Отмена</div>
+                                    <div disabled class="btn btn-big btn-green">Продолжить</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+
+            </div>
+
+            <div id="signature">
+                <!-- Заголовок -->
+                <div class="row title">
+                    <div class="c-500">
+                        <h2>Подписать и зашифровать</h2>
+                        <a class="change" href="javascript:void(0)">Изменить</a>
+                    </div>
+                    <div class="c-500">
+                        <div class="btn-group glue pull-right">
+                            <div class="btn sort active">Обычный</div>
+                            <div class="btn sort">Подробный</div>
+                        </div>
+                        <span class="view pull-right">Вид:</span>
+                    </div>
+                </div>
+                <!-- Тело -->
+                <div class="box">
+                    <div class="state change"></div>
+
+                    <div class="item signature">
+                        <div class="type">
+                            <div class="checkbox">
+                                <input hidden="hidden" id="a1" type="checkbox"><label for="a1">Подписать</label>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <div class="runtime">
+                                <h4>Сертификат для подписи:</h4>
+                                <ul class="certificate">
+                                    <li class="icon icon-pen">
+                                        <div class="checkbox pull-left">
+                                            <input hidden="hidden" id="a4" type="checkbox">
+                                            <label for="a4">Для договора подряда - Иванов Иван Иванович</label>
+                                        </div>
+                                        <div class="pull-left change_ser">Изменить сертификат</div>
+                                    </li>
+                                </ul>
+                                <div class="extra">
+                                    <ul>
+                                        <li>
+                                            <div class="checkbox">
+                                                <input hidden="hidden" id="a5" type="checkbox">
+                                                <label for="a5">Хранить подпись совместно с данными</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="checkbox">
+                                                <input hidden="hidden" id="a6" type="checkbox">
+                                                <label for="a6">Сжимать подпись с данными</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                    <div class="format">
+                                        <div class="title">Выходной формат файла:</div>
+                                        <select>
+                                            <option>DER кодировка (бинарные данные)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="item encrypt">
+                        <div class="type">
+                            <div class="checkbox">
+                                <input hidden="hidden" id="a2" type="checkbox">
+                                <label for="a2"> Зашифровать</label>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <div class="runtime">
+                                <h4>Сертификаты для шифрования:</h4>
+                                <ul class="certificate">
+                                    <li class="icon icon-lock">
+                                        <div class="checkbox pull-left">
+                                            <input hidden="hidden" id="a7" type="checkbox">
+                                            <label for="a7">Для договора подряда - Иванов Иван Иванович</label>
+                                        </div>
+                                        <div class="delete pull-left"></div>
+                                    </li>
+
+                                </ul>
+
+                                <div class="new">
+                                    <div class="select">Выбрать сертификаты</div>
+                                    <div class="upload">Загрузить новый сертификат</div>
+                                </div>
+
+                                <div class="line-dotted"></div>
+
+                                <div class="checkbox personal_certificate">
+                                    <input type="checkbox" hidden="hidden" id="a3">
+                                    <label for="a3"><b>Шифровать личным сертификатом</b></label>
+                                </div>
+
+                                <ul class="certificate">
+                                    <li class="icon icon-lock">
+                                        <div class="checkbox pull-left">
+                                            <input hidden="hidden" id="a8" type="checkbox">
+                                            <label for="a8">Для договора подряда - Иванов Иван Иванович</label>
+                                        </div>
+                                        <div class="delete pull-left"></div>
+                                    </li>
+                                    <li class="icon icon-lock">
+                                        <div class="checkbox pull-left">
+                                            <input hidden="hidden" id="a9" type="checkbox">
+                                            <label for="a9">Для договора подряда - Иванов Иван Иванович</label>
+                                        </div>
+                                        <div class="delete pull-left"></div>
+                                    </li>
+                                </ul>
+
+                                <div class="new">
+                                    <div class="select">Выбрать сертификаты</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

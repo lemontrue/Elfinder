@@ -1,0 +1,12 @@
+﻿@using System.Web.Optimization
+@{
+    ViewBag.Title = "Восстановление пароля";
+    Layout = "~/Views/Shared/_LayoutPassRecovery.cshtml";
+}
+
+@section scriptControl {
+    @Scripts.Render("~/Assets/libjs/passRecovery.js")
+}
+
+<div state1></div>
+<div captcha></div>

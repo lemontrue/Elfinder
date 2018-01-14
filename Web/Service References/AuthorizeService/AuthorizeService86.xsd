@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/DSS.Service.Response" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DSS.Service.Response" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://localhost:44300/AuthorizeService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:import schemaLocation="https://localhost:44300/AuthorizeService.svc?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Error" />
+  <xs:import schemaLocation="https://localhost:44300/AuthorizeService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="https://localhost:44300/AuthorizeService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/KobilConnector.Helper" />
+  <xs:import schemaLocation="https://localhost:44300/AuthorizeService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" />
+  <xs:complexType name="OldServiceResponse">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="Exception" nillable="true" type="q1:Exception" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OldServiceResponse" nillable="true" type="tns:OldServiceResponse" />
+  <xs:complexType name="ServiceResponse">
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DSS.Service.Error" minOccurs="0" name="Error" nillable="true" type="q2:ServiceError" />
+      <xs:element minOccurs="0" name="Status" type="tns:ServiceResponse.ServiceStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceResponse" nillable="true" type="tns:ServiceResponse" />
+  <xs:simpleType name="ServiceResponse.ServiceStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Success" />
+      <xs:enumeration value="Failed" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ServiceResponse.ServiceStatus" nillable="true" type="tns:ServiceResponse.ServiceStatus" />
+  <xs:complexType name="EmailChangeResponse">
+    <xs:sequence>
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DSS.Service.Error" minOccurs="0" name="Error" nillable="true" type="q3:AuthorizeServiceError" />
+      <xs:element minOccurs="0" name="PinWaitingTime" type="xs:int" />
+      <xs:element minOccurs="0" name="SmsConfirmationID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="tns:EmailChangeResponse.ResponseStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EmailChangeResponse" nillable="true" type="tns:EmailChangeResponse" />
+  <xs:simpleType name="EmailChangeResponse.ResponseStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Exist" />
+      <xs:enumeration value="SmsConfirmationSent" />
+      <xs:enumeration value="EmailConfirmationSent" />
+      <xs:enumeration value="EmailConfirmationAttemptExceeded" />
+      <xs:enumeration value="EmailChanged" />
+      <xs:enumeration value="Failed" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EmailChangeResponse.ResponseStatus" nillable="true" type="tns:EmailChangeResponse.ResponseStatus" />
+  <xs:complexType name="PhoneChangeResponse">
+    <xs:sequence>
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DSS.Service.Error" minOccurs="0" name="Error" nillable="true" type="q4:AuthorizeServiceError" />
+      <xs:element minOccurs="0" name="PinWaitingTime" type="xs:int" />
+      <xs:element minOccurs="0" name="SmsConfirmationID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="tns:PhoneChangeResponse.ResponseStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PhoneChangeResponse" nillable="true" type="tns:PhoneChangeResponse" />
+  <xs:simpleType name="PhoneChangeResponse.ResponseStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Ok" />
+      <xs:enumeration value="Exist" />
+      <xs:enumeration value="PhoneChanged" />
+      <xs:enumeration value="Failure" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PhoneChangeResponse.ResponseStatus" nillable="true" type="tns:PhoneChangeResponse.ResponseStatus" />
+  <xs:complexType name="LoginResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AcceptWaitingTime" type="xs:int" />
+      <xs:element minOccurs="0" name="AuthAcceptType" type="tns:AcceptType" />
+      <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DSS.Service.Error" minOccurs="0" name="Error" nillable="true" type="q5:AuthorizeServiceError" />
+      <xs:element minOccurs="0" name="KobilAuthEnabled" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="KobilOption" nillable="true" type="tns:LoginResponse.KobilOptions" />
+      <xs:element minOccurs="0" name="RoleChangeDateTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Token" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LoginResponse" nillable="true" type="tns:LoginResponse" />
+  <xs:simpleType name="AcceptType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Sms" />
+      <xs:enumeration value="Kobil" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AcceptType" nillable="true" type="tns:AcceptType" />
+  <xs:complexType name="LoginResponse.KobilOptions">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="KobilTransactionWaitingTime" type="xs:int" />
+      <xs:element minOccurs="0" name="PollingInterval" type="xs:int" />
+      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KobilConnector.Helper" minOccurs="0" name="Status" type="q6:KobilStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LoginResponse.KobilOptions" nillable="true" type="tns:LoginResponse.KobilOptions" />
+  <xs:complexType name="CheckTokenResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OK" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RoleChangeDateTime" nillable="true" type="xs:dateTime" />
+      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" minOccurs="0" name="Roles" nillable="true" type="q7:ArrayOfUserRoles" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CheckTokenResponse" nillable="true" type="tns:CheckTokenResponse" />
+  <xs:complexType name="SmsConfirmationResponse">
+    <xs:sequence>
+      <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DSS.Service.Error" minOccurs="0" name="Error" nillable="true" type="q8:AuthorizeServiceError" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="tns:SmsConfirmationResponse.ResponseStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SmsConfirmationResponse" nillable="true" type="tns:SmsConfirmationResponse" />
+  <xs:simpleType name="SmsConfirmationResponse.ResponseStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Ok" />
+      <xs:enumeration value="Fail" />
+      <xs:enumeration value="WrongPin" />
+      <xs:enumeration value="Expire" />
+      <xs:enumeration value="NotExist" />
+      <xs:enumeration value="AttemptCountExceeded" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SmsConfirmationResponse.ResponseStatus" nillable="true" type="tns:SmsConfirmationResponse.ResponseStatus" />
+  <xs:complexType name="EmailChangeConfirmationResponse">
+    <xs:sequence>
+      <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/DSS.Service.Error" minOccurs="0" name="Error" nillable="true" type="q9:AuthorizeServiceError" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="tns:EmailChangeConfirmationResponse.ResponseStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EmailChangeConfirmationResponse" nillable="true" type="tns:EmailChangeConfirmationResponse" />
+  <xs:simpleType name="EmailChangeConfirmationResponse.ResponseStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Ok" />
+      <xs:enumeration value="ConfirmationExpire" />
+      <xs:enumeration value="EmailAlreadyUsed" />
+      <xs:enumeration value="ConfirmationNotFound" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EmailChangeConfirmationResponse.ResponseStatus" nillable="true" type="tns:EmailChangeConfirmationResponse.ResponseStatus" />
+  <xs:complexType name="KobilAuthResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OldServiceResponse">
+        <xs:sequence>
+          <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KobilConnector.Helper" minOccurs="0" name="Status" type="q10:KobilStatus" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="KobilAuthResponse" nillable="true" type="tns:KobilAuthResponse" />
+  <xs:complexType name="ResendPinResponse">
+    <xs:sequence>
+      <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/DSS.Service.Error" minOccurs="0" name="Error" nillable="true" type="q11:AuthorizeServiceError" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResendPinResponse" nillable="true" type="tns:ResendPinResponse" />
+  <xs:complexType name="UserInfoResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OldServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="User" nillable="true" type="tns:UserInfo" />
+          <xs:element minOccurs="0" name="UserRoot" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="WebDavDir" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="WebDavRootDir" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UserInfoResponse" nillable="true" type="tns:UserInfoResponse" />
+  <xs:complexType name="UserInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsTempPassword" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PasswordExpireTime" nillable="true" type="xs:dateTime" />
+      <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" minOccurs="0" name="UserRoles" nillable="true" type="q12:ArrayOfUserRoles" />
+      <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" minOccurs="0" name="UserStatus" type="q13:UserStatuses" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserInfo" nillable="true" type="tns:UserInfo" />
+  <xs:complexType name="AccountResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OldServiceResponse">
+        <xs:sequence>
+          <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" minOccurs="0" name="Account" nillable="true" type="q14:Account" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AccountResponse" nillable="true" type="tns:AccountResponse" />
+  <xs:complexType name="GetKobilActivationResponse">
+    <xs:sequence>
+      <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/DSS.Service.Error" minOccurs="0" name="Error" nillable="true" type="q15:AuthorizeServiceError" />
+      <xs:element minOccurs="0" name="Status" type="tns:GetKobilActivationResponse.GetKobilActivationStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetKobilActivationResponse" nillable="true" type="tns:GetKobilActivationResponse" />
+  <xs:simpleType name="GetKobilActivationResponse.GetKobilActivationStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SENDVIAEMAIL" />
+      <xs:enumeration value="SENDVIASMS" />
+      <xs:enumeration value="FAILURE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="GetKobilActivationResponse.GetKobilActivationStatus" nillable="true" type="tns:GetKobilActivationResponse.GetKobilActivationStatus" />
+  <xs:complexType name="GetUserNotificationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UserNotifications" nillable="true" type="tns:ArrayOfGetUserNotificationResponse.Notification" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetUserNotificationResponse" nillable="true" type="tns:GetUserNotificationResponse" />
+  <xs:complexType name="ArrayOfGetUserNotificationResponse.Notification">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GetUserNotificationResponse.Notification" nillable="true" type="tns:GetUserNotificationResponse.Notification" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGetUserNotificationResponse.Notification" nillable="true" type="tns:ArrayOfGetUserNotificationResponse.Notification" />
+  <xs:complexType name="GetUserNotificationResponse.Notification">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" minOccurs="0" name="Type" type="q16:UserNotificationTypes" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetUserNotificationResponse.Notification" nillable="true" type="tns:GetUserNotificationResponse.Notification" />
+</xs:schema>

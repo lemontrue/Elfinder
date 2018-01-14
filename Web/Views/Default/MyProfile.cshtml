@@ -1,0 +1,554 @@
+﻿@using System.Web.Optimization
+@using CryptxOnline.Web.AuthorizeService
+@model CryptxOnline.Web.Models.ProfileModel
+@{
+    ViewBag.Title = "Мой профиль";
+    Layout = "~/Views/Shared/_LayoutCryptogramm.cshtml";
+}
+
+
+<script type="text/javascript" src="@Url.Content("~/Assets/libjs/opentip.js")"></script>
+<link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/opentip.css")">
+
+<!--[if IE 8]>
+    <link href="../../Content/CSS/New/ie.css" rel="stylesheet" />
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<script>
+
+    var ShowWelcomeModal = '@Model.ShowWelcomeModal' == 'True' ;
+    var EmailConfirmed = '@Model.EmailConfirmed' == 'True';
+    var HasMyCert = '@Model.HasMyCert' == 'True';
+
+    var EmailChangeError = '@ViewBag.EmailChangeError';
+    var showPasswordChangeModal = '@ViewBag.showPasswordChangeModal';
+    var url =  '@Url.Action("Login","Account")';
+    var url2 = '@Url.Action("ChangePass", new { userId = Model.UserId })';
+    var url3 = '@Url.Action("SendTestSms",new{userId=Model.UserId})';
+    var url4 = '@Url.Action("CheckSmsConfirmation")';
+    var url5 = '@Url.Action("Login","Account")';
+    var url6 = '@Url.Action("ResendSmsConfirmation")';
+    var url7 = '@Url.Action("Login","Account")';
+    var url8 = '@Url.Action("CheckPhone", new { userId = Model.UserId })';
+    var url9 = '@Url.Action("Login", "Account")';
+    var url10 = '@Url.Action("CheckEmail",new{userId=Model.UserId})';
+    var url11 = '@Url.Action("Login", "Account")';
+
+</script>
+
+
+<script type="text/javascript" src="@Url.Content("~/Assets/js/Crypt.Pages.Profile.js")"></script>
+
+
+<div class="profile content">
+    @using (Html.BeginForm("MyProfile", "Default", FormMethod.Post, new { id = "mainform" }))
+    {
+        @Html.HiddenFor(m => m.UserId)
+        <div class="profile-info">
+            <div class="name row">
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.IsAdmin)
+                <div class="label col">
+                    Имя:
+                </div>
+                <div class="value col">
+                    @Html.TextBoxFor(m => m.Name, new { placeholder = "Введите имя пользователя", maxLength = "50" })
+                    <span class="info error">Задайте корректное имя пользователя</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="label col">
+                    Пароль:
+                </div>
+                <div class="value col">
+                    <a class="btn btn-blue small-text" href="#" onclick="$('#CurPasswordLabel').html('Введите старый пароль:'); showModal('change-pass'); clearPassFields() ">Сменить пароль</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="label col">
+                    E-mail:
+                </div>
+                <div class="value col">
+                    @Html.HiddenFor(m => m.Email)
+                    <div class="email col">
+                        <label style="cursor: auto" id="emailAsText">@Model.Email</label>
+                        @if (!Model.EmailConfirmed)
+                        {
+                            <img id="tempEmail" src="@Url.Content("~/Assets/i/old/expire.png")" />
+                        }
+                    </div>
+                    <div class="new-email col" style="display: none">
+                        <span id="emailPreloaderImg" class="save-loader" style="display: none"></span>
+                        <input id="newEmail" type="text" style="display:none" maxlength="50" placeholder="Введите новый E-mail" />
+                    </div>
+                    <a id="changeEmailBtn" class="btn btn-blue small-text col" href="#" onclick=" changeEmailButClick() ">Сменить E-mail</a>
+                    @if (!Model.EmailConfirmed)
+                    {
+                        <a href="/Default/CheckEmail" class="js-resendEmailConfirmation">отправить письмо с запросом повторно</a>
+                    }
+                    
+                    <div id="ConfirmEmailChangeDiv" style="display: none">
+                        <input class="btn btn-blue small-text col" type="button" onclick="changeEmail(this)" value="Сохранить E-mail" />
+                        <a class="close" href="#" onclick="EmailChangeClick()">Отмена</a>
+                    </div>
+                    @*@if (!String.IsNullOrEmpty(Model.Email))
+                        {
+                            @Html.HiddenFor(m => m.Email)
+                            <div class="email col">
+                                @Model.Email
+                            </div>
+                            <a id="changeEmailBtn" class="btn btn-blue small-text col" href="#" onclick=" showModal('change-email') ">Сменить E-mail</a>
+                        }
+                        else
+                        {
+                            @Html.HiddenFor(m => m.Email)
+                            <div class="email col" style="display:none">
+                                @Model.Email
+                            </div>
+                            <a id="changeEmailBtn" class="btn btn-blue small-text col" href="#" onclick=" showModal('change-email') ">Задать E-mail</a>
+                        }*@
+                    <br />
+                    <span id="wrongEmail" style="color: red;z-index: 0;display: none">
+                        Адрес электронной почты введен неверно
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="label col">
+                    Телефон:
+                </div>
+                <div class="value col">
+                    @Html.HiddenFor(m => m.Phone)
+                    @if (!String.IsNullOrEmpty(Model.Phone)) {
+                        <span class="code">+7</span>
+                    }
+                    <div class="phone col">
+                        <label id="phoneAsText" style="cursor: text">@Model.Phone</label>
+                    </div>
+                    <div class="new-phone col" style="display: none">
+                        <div id="phonePreLoaderImg" class="save-loader" style="display: none"></div>
+                        <input type="text" class="" id="newPhone" maxlength="10" style="" placeholder="Введите телефон" />
+
+                    </div>
+                    @if (String.IsNullOrEmpty(Model.Phone))
+                    {
+                        <a id="changePhoneBtn" class="btn btn-blue small-text col" href="#" onclick=" changePhoneButClick() ">Задать телефон</a>
+                    }
+                    else
+                    {
+                        <a id="changePhoneBtn" class="btn btn-blue small-text col" href="#" onclick=" changePhoneButClick() ">Сменить телефон</a>
+                    }
+
+                    <div id="ConfirmPhoneChangeDiv" style="display: none">
+                        <a id="ConfirmPhoneChangeBtn" class="btn btn-blue small-text col" href="#" onclick=" ConfirmPhoneChangeBtn() ">Сохранить телефон</a>
+                        <a class="close" href="#" onclick="PhoneChangeCancel()">Отмена</a>
+                    </div>
+                    <span id="wrongPhone" style="color: red;z-index: 0;display: none">
+                        Необходимо ввести номер в международном формате, например +7 960 000000
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="row block">
+                <div class="label col">
+                    Подтверждение авторизации:
+                </div>
+                <div class="col" style="width: 185px;">
+                    @Html.DropDownListFor(m => m.AcceptType, new SelectList(Model.GetAuthList(), "Value", "Text", (int)Model.AcceptType), new
+                    {
+                        @class = "style-select"
+                    })
+                </div>
+                <div class="col" style="width: 285px;">
+                    <a class="small-text" id="sendTestSmsB" onclick="sendTestSms(this); return false" href="#" style="display: none;">Отправить пробное смс</a>
+
+                </div>
+                <div class="col2" style="width: 285px;">
+                    <label id="KobilAuthPassRequired" style="display: none">
+                        @Html.CheckBoxFor(m => m.KobilAuthPassRequired)
+                        <span>Запрашивать пароль</span>
+                        <i id="KobilAuthSmsRequired" class="icon description"></i>
+                    </label>
+                </div>
+            </div>
+
+
+            <div class="row block2">
+                <div class="label col">
+                    Восстановление пароля:
+                </div>
+                <div class="col" style="vertical-align: middle;width: 66%">
+                    <div style="width: 185px">
+                        @Html.DropDownListFor(m => m.RecoveryType, new SelectList(Model.GetRecoveryTypeList(Model.EmailConfirmed), "Value", "Text", (int)Model.RecoveryType), new
+                    {
+                        @class = "style-select"
+                    })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row settings">
+
+                <div class="row">
+                    <label>
+                        @Html.CheckBoxFor(m => m.AllowTransmissionFromCryptogrammUser)
+                        <span>Разрешить передачу данных на мой адрес от других пользователей системы</span>
+                    </label>
+                    <i id="AllowTransmissionFromCryptogrammUser_info" class="icon description"></i>
+                </div>
+                <div class="row">
+                    <label>
+                        @Html.CheckBoxFor(m => m.ReceiveMessageFromSupport)
+                        <span>Получать сообщения от техподдержки</span>
+                    </label>
+                </div>
+                <div class="row">
+                    <label>
+                        @Html.CheckBoxFor(m => m.SubscribeToNews)
+                        <span>Подписаться на новости</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    }
+    @{
+        var myViewData = new ViewDataDictionary { { "UserId", Model.UserId } };
+    }
+    @Html.Partial("MyCertificatesList", Model, myViewData)
+
+</div>
+<div class="cert-control">
+    <div class="backlink">
+        @if (Model.UserId == Guid.Empty)
+        {
+            if (Model.EmailConfirmed && Model.HasMyCert) {
+                <a href="@Url.Action("WebDavBrowser", "Default")">
+                    <i class="icon backarrow"></i>Вернуться на главную страницу
+                </a>
+            }
+        }
+        else
+        {
+            <a href="@Url.Action("Index", "Administration")">
+                <i class="icon backarrow"></i>Вернуться к разделу администрирование
+            </a>
+        }
+    </div>
+    <div class="controls">
+        <div class="sbmt pull-right">
+            <input class="btn btn-green" type="button" value="Сохранить" onclick="submitMain();" />
+        </div>
+    </div>
+</div>
+
+<div id="modal" style="display: none">
+    <div class=" window modal-window" id="sms-confirm" style="display: none;">
+        <div class="title">
+            Подтверждение через смс
+            <div class="left-timer">
+                00:00
+            </div>
+        </div>
+
+        <form action="">
+            <div class="row">
+                <div class="value-row success-mess text-center">
+									На указанный вами мобильный номер<br />отправлено sms-сообщение с кодом, который необходимо ввести в форму ниже.<br />По истечении трех минут отправленный код становится неактивным
+                </div>
+            </div>
+            <div class="row row-condensed">
+                <div class="default-mess text-center">
+                    Если сообщение не было получено в течение одной минуты, нажмите на кнопку "Запросить код повторно".
+                </div>
+                <div class="row">
+                    <label class="col">
+                        Полученный код:
+                    </label>
+                    <div class="value col">
+                        @Html.TextBox("pinCode", null, new { @maxlength = 10 })
+                    </div>
+                    <span class="info error" style="display:none;position: relative;font-size: 12px;color: red;">Код может содержать только цифры</span>
+                </div>
+                <div class="row sbmt pull-right">
+                    <a class="close"  href="#" onclick="hideModal('sms-confirm')">Отмена</a>
+                    <input class="btn btn-blue btn-big" id="resend" type="button" value="Запросить код повторно" disabled="disabled">
+                    <input id="send-pin" class="btn btn-blue" type="button" value="Продолжить">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="window alert modal-window" id="change-email" style="display: none">
+        <div class="title">
+            Сменить E-mail
+            <div class="close" onclick="hideModal('change-email')"></div>
+        </div>
+        <form action="" autocomplete="off" method="post">
+            <div class="row">
+                <label class="col">Введите новый E-mail:</label>
+                <div class="value col">
+                </div>
+            </div>
+            <div class="row">
+                <div class="mess-box">
+                    <div class="warning">
+                        На новый адрес эл. почты будет выслано письмо.  Для подтверждения смены адреса, пройдите по ссылке, содержащейся в письме.
+                    </div>
+                </div>
+            </div>
+            <div class="row sbmt pull-right">
+
+            </div>
+        </form>
+    </div>
+    <div class="window alert modal-window" id="change-phone" style="display: none">
+        <div class="title">
+            Сменить телефон
+            <div class="close" onclick="hideModal('change-phone')"></div>
+        </div>
+        <form action="" autocomplete="off" method="post">
+            <div class="row">
+                <label class="col">Введите новый номер телефона:</label>
+                <div class="value col">
+                    <label style="padding-right: 0">+7</label><input id="newPhone" type="text" maxlength="10" style="width: 90%" />
+                    <span id="wrongPhone" style="color: red;z-index: 0;display: none">
+                        Необходимо ввести номер в международном формате, например +7 960 000000
+                    </span>
+                </div>
+            </div>
+            <div class="row sbmt pull-right">
+                <a class="close" href="#" onclick="hideModal('change-phone')">Отмена</a>
+                <input class="btn btn-green" type="button" onclick="changePhone(this)" value="Применить" />
+            </div>
+        </form>
+    </div>
+
+    <div class="window alert modal-window" id="relogin-confirmation" style="display: none">
+        <div class="title">
+            Внимание!
+            <div class="close" onclick="hideModal('info')"></div>
+        </div>
+        <form action="" autocomplete="off" method="post">
+            <div class="row">
+                <div class="mess-box">
+                    <div class="info" id="relogin-text"><span>
+                        Пароль был успешно изменен!<br /> Для Вашей безопасности мы рекомендуем Вам авторизоваться в системе повторно. Продолжить?</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row sbmt pull-right">
+                <a class="close" href="#" onclick="hideModal('change-phone')">Отмена</a>
+                <input class="btn btn-green" type="button" onclick="RediretToLogin()" value="Да" />
+            </div>
+        </form>
+    </div>
+
+    <div class="window alert modal-window" id="changePhoneSuccess-info" style="display: none">
+        <div class="title">
+            Внимание!
+            <div class="close" onclick="location.href = '@Url.Action("MyProfile")'"></div>
+        </div>
+        <form action="" autocomplete="off" method="post">
+            <div class="row">
+                <div class="mess-box">
+                    <div class="info"><span>
+                        Телефон был успешно изменен!</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row sbmt pull-right">
+                <input class="btn btn-green" type="button" onclick="location.href='@Url.Action("MyProfile")'" value="Закрыть" />
+            </div>
+        </form>
+    </div>
+
+    <div class="window alert modal-window" id="changeEmailSuccess-info" style="display: none">
+        <div class="title">
+            Внимание!
+            <div class="close" onclick="location.href = '@Url.Action("MyProfile")'"></div>
+        </div>
+        <form action="" autocomplete="off" method="post">
+            <div class="row">
+                <div class="mess-box">
+                    <div class="info">
+											<span>
+                        На вновь заданный адрес электронной почты отправлено письмо для подтверждения. Для того, чтобы завершить процедуру смены электронного адреса, перейдите по ссылке, указанной в письме.
+											</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row sbmt pull-right">
+                <input class="btn btn-green" type="button" onclick="location.href='@Url.Action("MyProfile")'" value="Закрыть" />
+            </div>
+        </form>
+    </div>
+
+    <div class="window alert modal-window" id="captcha" style="display: none">
+        @{Html.RenderAction("Captcha", "Helper");}
+    </div>
+    <div class="window alert modal-window" id="info" style="display: none">
+        <div class="title">
+            Внимание!
+            <div class="close" onclick="hideModal('info')"></div>
+        </div>
+        <form action="" autocomplete="off" method="post">
+            <div class="row">
+                <div class="mess-box">
+                    <div class="info" id="infoText"><span>
+                        Временно данный функционал был отключен. Приносим свои извинения за возможные неудобства.
+						</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row sbmt pull-right">
+                <input class="btn btn-green" type="button" onclick="hideModal('info')" value="Закрыть" />
+            </div>
+        </form>
+    </div>
+    <div class="window alert modal-window" id="change-pass" style="display: none">
+        <div class="title">
+            Сменить пароль
+            <div class="close" onclick="hideModal('change-pass')"></div>
+        </div>
+        <form action="" autocomplete="off" method="post">
+            <div class="row" id="changePassMessage">
+
+            </div>
+            <div class="row">
+                <label id="CurPasswordLabel" class="col">Введите старый пароль:</label>
+                <div class="value col">
+                    <input id="oldPass" type="password" maxlength="40" />
+                    <span class="info error">Неверно указан старый пароль</span>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col">Введите новый пароль:</label>
+                <div class="value col">
+                    <input id="newPass" type="password" maxlength="40" />
+                    <span class="info-pass success">Надежный пароль</span>
+                    <span class="info"></span>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col">Повторите новый пароль:</label>
+                <div class="value col">
+                    <input id="newPassConfirm" type="password" />
+                    <span class="info error">Пароли не совпадают</span>
+                </div>
+            </div>
+            <div class="row sbmt pull-right">
+                <a class="close" href="#" onclick="hideModal('change-pass')">Отмена</a>
+                <input class="btn btn-green" type="button" onclick="changePassword(this)" value="Применить" />
+            </div>
+        </form>
+    </div>
+    <div class="window alert modal-window" id="sms-info" style="display: none">
+        <div class="title">
+            Внимание!
+            <div class="close" onclick="hideModal('sms-info')"></div>
+        </div>
+        <form action="" autocomplete="off" method="post">
+            <div class="row">
+                <div class="mess-box">
+                    <div class="attention" id="infoPlacer"><span>
+                        Срок действия кода подтверждения истек.
+                        В целях безопасности окно было закрыто.
+                        Повторите авторизацию сначала.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row sbmt pull-right">
+                <input class="btn btn-green" type="button" value="Закрыть" onclick="hideModal('sms-info')" />
+            </div>
+        </form>
+    </div>
+
+    <div class="window error modal-window" id="error" style="margin-left: -250px;width: 500px;display: none">
+        <div class="title">
+            Внимание!
+            <div class="close" onclick="hideModal('error')"></div>
+        </div>
+
+        <div class="row">
+            <div class="mess-box">
+                <div class="warning" id="errorPlacer">
+                <span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row sbmt pull-right">
+            <input class="btn btn-green" type="button" value="Закрыть" onclick="hideModal('error')" />
+        </div>
+    </div>
+
+    <div class="window alert modal-window" id="confirm-pass" style="display: none">
+        <div class="title">
+            Подтверждение смены пароля
+            <div class="close" onclick="hideModal('confirm-pass')"></div>
+            <div class="left-timer red"></div>
+        </div>
+        <form action="" autocomplete="off" method="post">
+            <div class="row">
+                <div class="value-row success-mess text-center">
+									На указанный вами мобильный номер<br />отправлено sms-сообщение с кодом, который необходимо ввести в форму ниже.<br />По истечении трех минут отправленный код становится неактивным
+                </div>
+            </div>
+            <div class="row row-condensed">
+                <div class="default-mess text-center">
+                    Если сообщение не было получено в течение одной минуты, нажмите на кнопку "Запросить код повторно".
+                </div>
+                <div class="row">
+                    <label class="col">Полученный код:</label>
+                    <div class="value col">
+                        <input id="" type="text" maxlength="40" />
+                        <span class="info error">Срок действия кода истек</span>
+                    </div>
+                </div>
+                <div class="row sbmt text-right">
+                    <a class="close" href="#" onclick="hideModal('confirm-pass')">Отмена</a>
+                    <input class="btn btn-blue" type="button" onclick="" value="Запросить код повторно" />
+                    <input class="btn btn-blue" type="button" onclick="" value="Далее" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="window alert modal-window" id="confirm-pass-auth" style="display: none">
+        <div class="title">
+            Подтверждение смены пароля
+            <div class="close" onclick="hideModal('confirm-pass-auth')"></div>
+            <div class="left-timer red">00:30</div>
+        </div>
+        <form action="" autocomplete="off" method="post">
+            <div class="row">
+                <div class="value-row success-mess text-center">
+									На указанный вами мобильный номер<br />отправлено sms-сообщение с кодом, который необходимо ввести в форму ниже.<br />По истечении трех минут отправленный код становится неактивным
+                </div>
+            </div>
+            <div class="row row-condensed">
+                <div class="default-mess text-center">
+                    Если сообщение не было получено в течение одной минуты, нажмите на кнопку "Запросить код повторно".
+                </div>
+                <div class="row">
+                    <label class="col">Полученный код:</label>
+                    <div class="value col">
+                        <input id="" type="text" maxlength="40" />
+                    </div>
+                    <span class="info error">Превышено максимальное количество попыток!</span>
+                </div>
+                <div class="row sbmt text-right">
+                    <a class="close" href="#" onclick="hideModal('confirm-pass-auth')">Отмена</a>
+                    <input class="btn btn-blue" type="button" onclick="" value="Запросить код повторно" />
+                    <input class="btn btn-blue" type="button" onclick="" value="Далее" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

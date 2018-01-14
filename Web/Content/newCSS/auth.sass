@@ -1,0 +1,262 @@
+
+.content
+  border: 1px solid #d5d5d5
+  padding: 20px 0
+  border-radius: 3px
+  .cert-title
+    font-weight: 700
+    font-size: 14px
+    margin: 0 25px 10px
+  .contact-control
+    margin-top: 20px
+    .col
+      width: 35%
+    .backlink
+      a
+        display: inline-block
+        padding: 0 20px
+        height: 32px
+        line-height: 32px
+        background: #f3f3f3
+        color: #373737
+    .delete
+      text-align: center
+      a
+        text-align: center
+        color: #838383
+        line-height: 32px
+    .controls
+      .sbmt
+        a.close
+          padding-right: 15px
+          color: #131313
+  .add-certificate
+    padding: 0 25px 20px
+    form.contact
+      input[type=text]
+        font-weight: 700
+      .data
+        width: 450px
+        .row
+          padding-bottom: 10px
+          .label
+            width: 60px
+          .value
+            width: 390px
+      .add-cert
+        padding-top: 15px
+        margin-left: 25px
+#login
+  width: 505px
+  margin: 35px auto 0
+  h1
+    font-size: 18px
+    font-weight: 700
+    margin-bottom: 30px
+    text-align: center
+  .title
+    border: 1px solid #d5d5d5
+    border-bottom: 0
+    border-radius: 3px 0 0 0
+    background: #fff
+    height: 46px
+    line-height: 46px
+    padding: 0 15px
+    display: inline-block
+  .box
+    border: 1px solid #d5d5d5
+    background: #fff
+    margin-top: -1px
+    border-radius: 0 3px 3px 3px
+    .login-area
+      padding: 40px 15px 0
+      .form
+        .row
+          height: 50px
+        label
+          width: 160px
+          padding-right: 20px
+          text-align: right
+          line-height: 28px
+        .value
+          width: 310px
+          position: relative
+          .checkBubble
+            position: absolute
+            right: -155px
+            top: -10px
+            width: 148px
+            height: 49px
+            line-height: 48px
+            font-size: 11px
+            padding-left: 15px
+            background: url(../img/checkBubble.png) no-repeat
+        .restore
+          a
+            color: #7b7b7b
+            font-size: 11px
+        .sbmt
+          margin-top: 25px
+          padding-left: 160px
+          label
+            line-height: 32px
+            width: 80px
+            input[type=checkbox], .button-checkbox
+              margin-right: 10px
+    .bottom
+      border-top: 1px solid #e7e7e7
+      height: 50px
+      margin-top: 25px
+      a
+        line-height: 50px
+        margin: 0 20px
+  .error-mess
+    height: 37px
+    line-height: 37px
+    background: #f3d2d2 url(../img/warning.png) 10px center no-repeat
+    margin-top: 13px
+    padding: 0 10px 0 50px
+    color: #c12a2b
+#restore
+  position: relative
+  width: 505px
+  margin: 35px auto 0
+  .blocked
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: rgba(255,255,255,.7) url(../img/preloader2.gif) center no-repeat
+  #sms-timer
+    position: absolute
+    top: 50px
+    left: 48%
+  .late.#sms-timer
+    color: #ff2424
+  h1
+    font-size: 18px
+    font-weight: 700
+    margin-bottom: 70px
+    text-align: center
+  .box
+    border: 1px solid #d5d5d5
+    background: #fff
+    border-radius: 3px 3px 3px 3px
+    .restore-area
+      position: relative
+      padding: 15px 20px 30px
+      .form
+        .row.enter
+          label
+            text-align: right
+            width: 185px
+            padding-right: 12px
+          .value
+            width: 275px
+            position: relative
+            .hint
+              position: absolute
+              top: 7px
+              right: 7px
+              font-size: 10px
+            .hint-error
+              color: #ff2424
+            .hint-success
+              color: #1ac316
+            input
+              height: 30px
+              line-height: 30px
+        .row.restored
+          margin-top: 10px
+          text-align: center
+          height: 90px
+        .row.restored-center
+          margin: 10px 0 15px
+          height: auto
+          text-align: center
+
+        .row.phone
+          label
+            padding-right: 10px
+            width: 150px
+          .value
+            width: 285px
+        .row.done
+          text-align: center
+          width: 240px
+          height: auto
+          margin: 0 auto 15px
+          .btn-cancel
+            color: #000
+            text-decoration: underline
+            font-weight: 400
+            margin: 12px 28px 0
+        .row.repeat
+          text-align: center
+          width: 330px
+          height: auto
+          margin: 0 auto 15px
+          .btn-cancel
+            color: #000
+            text-decoration: underline
+            font-weight: 400
+            margin: 12px 28px 0
+        .row.message
+          height: auto
+          min-height: 52px
+          margin-bottom: 15px
+        .row.loader
+          height: 90px
+        .row.info
+          height: 36px
+        .row
+          height: 60px
+        label
+          width: 160px
+          padding-right: 20px
+          text-align: right
+          line-height: 28px
+        .value
+          width: 300px
+        .city-code
+          width: 25px
+          line-height: 28px
+          font-weight: 700
+        .sbmt
+          height: 34px
+          line-height: 32px
+          text-align: right
+          .btn-grey
+            background: #d3d3d3
+            font-size: 13px
+            padding: 0 15px
+            font-weight: 400
+            margin-right: 15px
+          .btn-cancel
+            color: #000
+            text-decoration: underline
+            font-weight: 400
+            margin: 0 28px
+    .bottom
+      border-top: 1px solid #e7e7e7
+      height: 50px
+      a
+        line-height: 50px
+        margin: 0 20px
+.error-mess
+  margin: 0 18px
+  border-radius: 5px
+  border: 1px solid #fccfcf
+  color: #ff2424
+  background: #ffdada url(../img/warning.png) 10px center no-repeat
+  margin-top: 13px
+  padding: 11px 15px 11px 50px
+.success-mess
+  border-radius: 5px
+  border: 1px solid #c1efc0
+  color: #000
+  background: #daf5da
+  padding: 7px 15px
+.text-center
+  text-align: center !important

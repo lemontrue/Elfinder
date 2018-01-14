@@ -1,0 +1,167 @@
+.add-contact {
+    float: right;
+    min-width: 300px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.filter {
+    height: 70px;
+    padding: 0 25px;
+}
+
+.filter .check-all {
+    margin-right: 0 !important;
+    padding-top: 15px;
+    width: 30px;
+}
+
+.filter .form {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.filter .form .col {
+    margin-right: 15px;
+    position: relative;
+    width: 210px;
+}
+
+.filter .form .col .loop {
+    cursor: pointer;
+    display: block;
+    height: 28px;
+    position: absolute;
+    right: 0;
+    top: 18px;
+    width: 30px;
+}
+
+.filter .form .col label {
+    color: #161616;
+    display: block;
+    font-size: 11px;
+    height: 18px;
+}
+
+.filter .form .col input.search {
+    background: url(../../Images/search.png) right center no-repeat;
+    padding-right: 30px;
+}
+
+.filter .form .col:last-child { margin-right: 0; }
+
+.certificats-list .certificat:first-child { padding-top: 10px; }
+
+.certificats-list .certificat:first-child .actions { top: 8px; }
+
+.certificats-list .certificat:hover { background: #edf4fa; }
+
+.certificats-list .certificat.selected { background: #fffdde !important; }
+
+.certificats-list .certificat {
+    height: 110px;
+    padding: 10px 25px 0;
+    position: relative;
+}
+.certificats-list .certificat .test-certificate {
+    position: absolute;
+    right: 25px;
+    bottom: 0;
+    width: 68px;
+    height: 68px;
+    background: url(/Content/i/test-certificate.png) no-repeat;
+
+}
+
+
+.certificats-list .certificat hr {
+    border: 1px solid #d9d9d9;
+    border-top: 0;
+    bottom: 0;
+    left: 25px;
+    margin: 0;
+    position: absolute;
+    right: 25px;
+}
+
+.certificats-list .certificat .actions {
+    left: 310px;
+    position: absolute;
+    top: 10px;
+}
+
+.certificats-list .certificat .actions a.down {
+    color: #161616;
+    padding-right: 20px;
+}
+
+.certificats-list .certificat .actions a.remove { color: #727272; }
+
+.certificats-list .certificat .checkbox {
+    padding-top: 28px;
+    width: 40px;
+}
+
+.certificats-list .certificat .col1 {
+    display: inline-block;
+    line-height: 20px;
+    min-width: 200px;
+    vertical-align: top;
+    width: 30%;
+}
+
+.certificats-list .certificat .col1 .title {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 5px 0 10px 0;
+}
+
+.certificats-list .certificat .col1 .name {
+    max-height: 40px;
+    overflow: hidden;
+    margin-left: -20px;
+    padding-left: 20px;
+}
+
+.certificats-list .certificat .col1 .cert span.active { color: #161616; }
+
+.certificats-list .certificat .col1 .cert span.expire { color: #f4484a; }
+
+.certificats-list .certificat .col2 {
+    display: inline-block;
+    line-height: 20px;
+    max-width: 60%;
+    position: relative;
+    vertical-align: top;
+}
+
+.certificats-list .certificat .col2 .new-title {
+    padding: 5px 0 5px 0;
+    width: 300px;
+}
+
+.cert-control { padding-top: 20px; }
+
+.cert-control .backlink { float: left; }
+
+.cert-control .backlink a {
+    background: #f3f3f3;
+    color: #373737;
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 20px;
+}
+
+.cert-control .controls .sbmt a.close {
+    color: #131313;
+    padding-right: 15px;
+}
+
+.more-cert {
+    height: 75px;
+    padding-top: 28px;
+    text-align: center;
+}

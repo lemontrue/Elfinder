@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "Восстановление пароля";
+    Layout = "~/Views/Shared/_LayoutPassRecovery.cshtml";
+}
+
+<div state1>
+    <div id="restore">
+        <h1>
+            Восстановление пароля
+        </h1>
+        <div class="box">
+            <div class="restore-area">
+                <div class="form">
+                    <div class="row restored">
+                        <br />
+                    </div>
+                    <div class="row done">
+                        <form method="GET" action="/Account/Login">
+                            <input class="btn btn-blue" type="submit" value="Перейти к авторизации" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row bottom text-right">
+                <a href="#">
+                    Техническая поддержка
+                </a><a href="/Assets/files/autorization.pdf" target="_blank">Помощь</a>
+            </div>
+        </div>
+        <div class="error-mess text-center">
+            Ссылка больше не активна!
+        </div>
+    </div>
+</div>

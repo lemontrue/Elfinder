@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/DSS.Service" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DSS.Service" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:61159/CryptxService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfOperationFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OperationFile" nillable="true" type="tns:OperationFile" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOperationFile" nillable="true" type="tns:ArrayOfOperationFile" />
+  <xs:complexType name="OperationFile">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="FileGroupID" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="FileUri" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SrcFileUri" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="FileSize" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="CryptoOperationLogs" nillable="true" type="tns:ArrayOfCryptoOperationLog">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="CryptoOperationLogs1" nillable="true" type="tns:ArrayOfCryptoOperationLog">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OperationFile" nillable="true" type="tns:OperationFile" />
+  <xs:complexType name="ArrayOfCryptoOperationLog">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CryptoOperationLog" nillable="true" type="tns:CryptoOperationLog" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCryptoOperationLog" nillable="true" type="tns:ArrayOfCryptoOperationLog" />
+  <xs:complexType name="CryptoOperationLog">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="UserID" type="ser:guid" />
+      <xs:element minOccurs="0" name="InFile" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="OutFile" nillable="true" type="ser:guid" />
+      <xs:element minOccurs="0" name="OperationResultID" type="ser:guid" />
+      <xs:element minOccurs="0" name="OperationTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Duration" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Type" type="xs:unsignedByte" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CryptoOperationLog" nillable="true" type="tns:CryptoOperationLog" />
+</xs:schema>

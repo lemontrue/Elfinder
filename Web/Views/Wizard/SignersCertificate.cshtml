@@ -1,0 +1,516 @@
+﻿@using CryptxOnline.Web.CryptxService
+@model CryptxOnline.Web.Models.WizardModel
+
+@{
+    ViewBag.Title = Model.WizardName + " - " + Model.CustomWizardStep.StepText;
+    Layout = "~/Views/Shared/_LayoutWizardPage.cshtml";
+}
+
+<link href="@Url.Content("~/Content/CustomStyle.css")" rel="stylesheet" type="text/css" />
+
+@if (Session["errorMsg"] != null)
+{
+    <script>
+        alert('@Session["errorMsg"]');
+    </script>
+    Session.Remove("errorMsg");
+}
+
+@if (Request.QueryString["errorMsg"] != null)
+{
+    <script>
+        alert('@Request.QueryString["errorMsg"]');
+    </script>
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+    @Html.ValidationSummary(true)
+    @Html.Hidden("wizardId")
+    <div class="wizard-right-top">
+        <table>
+            @if (Model.Type != OperationType.Encrypt)
+            {
+                <tr>
+                    <td>
+                        <label>Владелец сертификата</label>
+                    </td>
+                    <td>
+                        <input type="text" disabled="true" id="certSubject" style="width: 330px"  />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Отпечаток сертификата</label>
+                    </td>
+                    <td>
+                        @if (Model.Type == OperationType.Sign || Model.Type == OperationType.Encrypt)
+                        {
+                            <input type="text" disabled="true" id="certThumbprint" style="width: 330px" value="@Model.SigningOptions.SignerCertificate1"/>
+                        }
+                        @if (Model.Type == OperationType.Decrypt)
+                        {
+                            <input type="text" disabled="true" id="certThumbprint" style="width: 330px" value="@Model.DecryptionOptions.DecryptCertificate"/>
+                        }
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td style="vertical-align: top">
+                    @if (Model.Type == OperationType.Encrypt)
+                    {
+                        <a>Выберите личные сертификаты</a>
+                    }
+                </td>
+                <td style="">
+                    @if (Model.Type == OperationType.Encrypt)
+                    {
+                        @Html.ListBoxFor(x => x.SignersCertificate.MyCertificates, (List<SelectListItem>) ViewBag.CertList, new {style = "width:100%"})
+                    }
+                    else
+                    {
+                        @Html.DropDownList("CertList", new SelectList(ViewBag.CertList, "Value", "Text"), "Выберите сертификат", new {style = "width:227px;"})
+                        <input id="getCert" type="button" value="Просмотреть" />
+                    }
+                </td>
+            </tr>
+            @if (Model.Type == OperationType.Encrypt)
+            {
+                <tr>
+                    <td style="vertical-align: top">
+                        Выберите сертификаты контрагентов
+                    </td>
+                    <td  style="vertical-align: top">
+                        @Html.ListBoxFor(x => x.SignersCertificate.RecipientCertificates, (List<SelectListItem>) ViewBag.RecipList, new {style = "width:100%"})
+                        @if (Model.Type == OperationType.Encrypt)
+                        {
+                            <div >
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <input name="addRecipCert" style="" type="button" value="Добавить сертификат" class="button" onclick=" clickOpenModal(1) " />
+                                        </td>
+                                    </tr>
+                                </table>
+            
+                            </div>
+                        }
+
+                    </td>
+                </tr>
+            }
+        </table>
+        @if (Model.Type == OperationType.Decrypt)
+        {
+            <div><a href="#open1" onclick=" show('hidden_1', 200, 10) ">Информация о файле</a></div>
+            <div id=hidden_1 style="background-color: #f0f0f0; display: none; height: 200px; width: 495px;">
+                <table style="border-spacing: 10px 0px">
+                    <tr>
+                        <th>
+                            Получатель
+                        </th>
+                        <th>
+                            Серийный номер
+                        </th>
+                        <th>
+                            Алгоритм публичного ключа
+                        </th>
+                    </tr>
+                    @*заглшука пока работаем с 1 файлом *@
+                    @if (Model.DecryptionOptions.FileDecryptCertificates != null)
+                    {
+                        foreach (CertificateInfo cert in Model.DecryptionOptions.FileDecryptCertificates)
+                        {
+                            if (cert.Decrypt != null)
+                            {
+                                <tr>
+                                    <td>
+                                        @cert.Decrypt.Issuer
+                                    </td>
+                                    <td>
+                                        @cert.Decrypt.SerialNumber
+                                    </td>
+                                    <td>
+                                        @cert.Decrypt.PublicKeyAlgorithm
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                                
+                </table>
+            </div>
+            <script language="JavaScript" type="text/javascript">
+                /*<![CDATA[*/var s = [], s_timer = [];
+
+                function show(id, h, spd) {
+                    s[id] = s[id] == spd ? -spd : spd;
+                    s_timer[id] = setTimeout(function() {
+                        var obj = document.getElementById(id);
+                        if (obj.offsetHeight + s[id] >= h) {
+                            obj.style.height = h + "px";
+                            obj.style.overflow = "auto";
+                        } else if (obj.offsetHeight + s[id] <= 0) {
+                            obj.style.height = 0 + "px";
+                            obj.style.display = "none";
+                        } else {
+                            obj.style.height = (obj.offsetHeight + s[id]) + "px";
+                            obj.style.overflow = "hidden";
+                            obj.style.display = "block";
+                            setTimeout(arguments.callee, 10);
+                        }
+                    }, 10);
+                } /*]]>*/
+
+            </script>
+        }
+
+    </div>
+
+    <div class="wizard-right-bottom">
+        <div class="buttons">
+            <input type="submit" class="button" name="backButton" value="Назад"/>
+            <input type="submit" disabled="true" name="nextButton" class="button" value="Вперед" />&nbsp&nbsp&nbsp&nbsp
+            @if (Model.CanmakeOperation)
+            {
+                if (Model.Type == OperationType.Sign || Model.Type == OperationType.Decrypt)
+                {
+                    <input type="button" class="button" name="makeOperation" value="@Model.MakeOperationText" onclick=" clickOpenModal() " />
+                }
+                if (Model.Type == OperationType.Encrypt)
+                {
+                    <input type="submit" id="makeOperation" class="button" name="makeOperation" value="@Model.MakeOperationText" />
+                }
+            }
+            else
+            {
+                if (Model.Type == OperationType.Sign || Model.Type == OperationType.Decrypt)
+                {
+                    <input type="button" class="button" name="makeOperation" value="@Model.MakeOperationText" disabled="true" onclick=" clickOpenModal() " />
+                }
+                if (Model.Type == OperationType.Encrypt)
+                {
+                    <input type="submit" id="makeOperation" class="button" name="makeOperation" disabled="true" value="@Model.MakeOperationText" />
+                }
+            }
+            <input type="submit" class="button" name="cancelButton" value="Отмена" onclick=" location = '@Url.Action("CloseWizard", "Wizard")    ' " />
+        </div>
+
+    </div>
+
+    <div id="boxes">
+        <div id="dialog" class="window"> 
+            <table width="100%">
+                <tr>
+                    <td>
+                        Пин-код ключа
+                    </td>
+                    <td style="text-align: right">
+                        <img href="#"class="close" src="@Url.Content("~/Assets/i/old/dialog-close_7593.png")" width="32" height="32" border="0" />
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        @Html.Password("pinCode")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @if (Model.CanmakeOperation)
+                        {
+                            <input type="submit" onclick=" closeModal() " id="makeOperation" class="button" name="makeOperation" value="@Model.MakeOperationText" />
+                        }
+                        else
+                        {
+                            <input type="submit" onclick=" closeModal() " id="makeOperation" class="button" name="makeOperation" disabled="true" value="@Model.MakeOperationText" />
+                        }
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="dialogRecip" class="window">
+            <table style="width: 100%">
+                <tr>
+                    <td colspan="2" style="font-size: 10px; font-style: italic;">
+                        Выберите файл загружаемого сертифката, название опционально<img href="#" class="close" style="position: absolute; right: 5px; top: 5px;" src="@Url.Content("~/Assets/i/old/dialog-close_7593.png")" width="32" height="32" border="0" />
+                        <br/>
+                        <br/>
+                        <br/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 10%">
+                        Описание 
+                    </td>
+                    <td>@Html.TextBox("fName", "", new {@style = "width:100%"})</td>
+                </tr>
+                <tr>
+                    <td>
+                        Файл
+                    </td>
+                    <td >
+                        <input type="file"  id="file" name="File" accept=".cer" title="выберите сертификат" style="text-align: left; width: 100%;"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <table style="width: 100%">
+                            <tr>
+                                <td style="left: 10px; position: absolute; text-align: left">
+                                    <input id="addRecipCert" name="addRecipCert" style="" type="submit" value="Добавить сертификат" class="button" disabled="disabled" />
+                                </td>
+                                @*                                <td style="text-align: right">
+                                    <input type="button" class="button" value="Отмена" onclick="closeModal()"/>
+                                </td>*@
+                            </tr>
+                        </table>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="mask"></div>
+}
+
+<script>
+    function closeModal() {
+        //$(".validation-summary-errors").remove();
+        $('#mask, .window').hide();
+        $(".validation-summary-errors").remove();
+    };
+
+    function clickOpenModal(param) {
+        globalRes = true;
+        $.ajax({
+            url: '@Url.Action("Requestpin", "Wizard")',
+            async: false,
+            type: 'POST',
+            data: { wizardId: $('#wizardId').val() },
+            success: function(result) {
+                if (result == 'False') {
+                    closeModal();
+                    globalRes = false;
+                    $('#makeOperation').trigger('click');
+                }
+            },
+            error: function(request, error, result) {
+                location.href = location.href;
+                var wnd = window.open("about:blank", "_blank", "height:100;width:100");
+                wnd.document.write(request.responseText);
+
+                //alert('Ошибка при анализе файла');
+                return false;
+            }
+        });
+        if (globalRes) {
+            $("#pinCode").val("");
+            //Cancel the link behavior
+            //e.preventDefault();
+            //Get the A tag
+            var id = '#dialog';
+            if (param == 1)
+                id = '#dialogRecip';
+            //Get the screen height and width
+            var maskHeight = $(document).height();
+            var maskWidth = $(window).width();
+
+            //Set heigth and width to mask to fill up the whole screen
+            $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+            $('#mask').css({ 'position': 'fixed' });
+
+            //transition effect		
+            $('#mask').fadeIn(1000);
+            $('#mask').fadeTo("slow", 0.8);
+
+            //Get the window height and width
+            var winH = $(window).height();
+            var winW = $(window).width();
+
+            //Set the popup window to center
+            $(id).css('top', winH / 2 - $(id).height() / 2);
+            $(id).css('left', winW / 2 - $(id).width() / 2);
+
+            //transition effect
+            $(id).fadeIn(2000);
+            $("#pinCode").focus();
+        }
+    };
+
+    $(document).ready(function() {
+        $("#file").bind('change', function() {
+            //this.files[0].size gets the size of your file.
+            if (this.files[0].size > 0)
+                $("#addRecipCert").removeAttr("disabled"); //attr("disabled",true);
+
+        });
+        $("#dialog").keydown(function(e) {
+            if (e.keyCode == 13) {
+                $("#makeOperation").trigger("click");
+                e.preventDefault();
+            }
+        });
+
+        //select all the a tag with name equal to modal
+        $('input[name=modal]').click(function(e) {
+            //Cancel the link behavior
+            e.preventDefault();
+            //Get the A tag
+            var id = $(this).attr('href');
+
+            //Get the screen height and width
+            var maskHeight = $(document).height();
+            var maskWidth = $(window).width();
+
+            //Set heigth and width to mask to fill up the whole screen
+            $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+
+            //transition effect		
+            $('#mask').fadeIn(1000);
+            $('#mask').fadeTo("slow", 0.8);
+
+            //Get the window height and width
+            var winH = $(window).height();
+            var winW = $(window).width();
+
+            //Set the popup window to center
+            $(id).css('top', winH / 2 - $(id).height() / 2);
+            $(id).css('left', winW / 2 - $(id).width() / 2);
+
+            //transition effect
+            $(id).fadeIn(2000);
+
+        });
+
+        //if close button is clicked
+        $('.window .close').click(function(e) {
+            //location.href = location.href;
+            //Cancel the link behavior
+            e.preventDefault();
+            $('#mask, .window').hide();
+        });
+
+        //if mask is clicked
+        $('#mask').click(function() {
+            //$(this).hide();
+            //$('.window').hide();
+        });
+
+    });
+</script>
+<script>
+    function checkEncryptionState() {
+        if ('@(Model.Type == OperationType.Encrypt)' == 'True') {
+            var EncryptToMe = $("#EncryptToMe").prop('checked'); //checked или null
+            var MyCerts = $("#SignersCertificate_MyCertificates").val();
+            var RcipCerts = $("#SignersCertificate_RecipientCertificates").val();
+            if (RcipCerts != null || MyCerts != null)
+                return true;
+            if (EncryptToMe) //!= null)
+                return true;
+        }
+        if ('@(Model.Type == OperationType.Sign)' == 'True') {
+            var listItem = $("#CertList").val();
+            if (listItem == "")
+                return false;
+            else {
+                return true;
+            }
+        }
+        return false;
+    }
+</script>
+<script>
+    $(document).ready(function() {
+
+        $("#SignersCertificate_RecipientCertificates").change(function(e) {
+            if (checkEncryptionState()) {
+                $('#makeOperation').removeAttr('disabled');
+            } else {
+                $('#makeOperation').attr('disabled', true);
+            }
+        });
+
+        $("#SignersCertificate_MyCertificates").change(function(e) {
+            if (checkEncryptionState()) {
+                $('#makeOperation').removeAttr('disabled');
+            } else {
+                $('#makeOperation').attr('disabled', true);
+            }
+        });
+
+        $("#EncryptToMe").change(function(e) {
+            if (checkEncryptionState()) {
+                $('#makeOperation').removeAttr('disabled');
+            } else {
+                $('#makeOperation').attr('disabled', true);
+            }
+        });
+
+
+        $("#fName").val("");
+        $("#file").bind('change', function() {
+            //this.files[0].size gets the size of your file.
+            if (this.files[0].size > 0)
+                $("#addRecipCert").removeAttr("disabled"); //attr("disabled",true);
+
+        });
+
+        if ('@(Model.Type == OperationType.Sign || Model.Type == OperationType.Encrypt)' == 'True') {
+            $("#CertList").val("@Model.SigningOptions.SignerCertificate1");
+        }
+        if ('@(Model.Type == OperationType.Decrypt)' == 'True') {
+            $("#CertList").val("@Model.DecryptionOptions.DecryptCertificate");
+        }
+
+        if ($("#CertList").val() == "") {
+            $('#getCert').attr('disabled', 'true');
+            if ('@(Model.Type == OperationType.Encrypt)' == 'True')
+                $('#EncryptToMe').attr('disabled', 'true');
+        } else {
+            $('#certSubject').val($("#CertList option:selected").text());
+        }
+
+        $("#CertList").change(function() {
+            var selectedItem = $(this).val();
+
+            if (selectedItem != "" && '@(Model.DownloadedFiles.Count == 0)' != 'True')
+                if (checkEncryptionState())
+                    $('[name=makeOperation]').removeAttr('disabled');
+                else {
+                    $('[name=makeOperation]').attr('disabled', 'true');
+                }
+            if (selectedItem != "") {
+                $('#certSubject').val($("#CertList option:selected").text());
+                $('#certThumbprint').val($("#CertList").val());
+                $('#getCert').removeAttr('disabled');
+                if ('@(Model.Type == OperationType.Encrypt)' == 'True')
+                    $('#EncryptToMe').removeAttr('disabled');
+                if ('@(Model.Type == OperationType.Decrypt)' == 'True')
+                    $('[name=makeOperation]').removeAttr('disabled');
+            } else {
+                $('#certSubject').val('');
+                $('#certThumbprint').val('');
+                $('#getCert').attr('disabled', 'true');
+                if ('@(Model.Type == OperationType.Encrypt)' == 'True') {
+
+                    $('#EncryptToMe').attr('checked', false);
+                    $('#EncryptToMe').attr('disabled', 'true');
+                }
+                if ('@(Model.Type == OperationType.Sign || Model.Type == OperationType.Decrypt)' == 'True') {
+                    $('[name=makeOperation]').attr('disabled', 'true');
+                }
+            }
+        });
+        $('#getCert').click(function() {
+            var selectedItem = $("#CertList").val();
+            var wizardId = $("#wizardId").val();
+            if (selectedItem != "" && selectedItem != null) {
+                location.href = '@Url.Action("GetCertificate", "Wizard")' + '?thumbPrint=' + selectedItem + "&" + "wizardId=" + wizardId;
+            }
+        });
+
+    });
+
+</script>

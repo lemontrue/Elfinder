@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/DSS.Service.Response" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DSS.Service.Response" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:61159/CryptxService.svc?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Error" />
+  <xs:import schemaLocation="http://localhost:61159/CryptxService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:import schemaLocation="http://localhost:61159/CryptxService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" />
+  <xs:import schemaLocation="http://localhost:61159/CryptxService.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Settings" />
+  <xs:import schemaLocation="http://localhost:61159/CryptxService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ServiceResponse">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/DSS.Service.Error" minOccurs="0" name="Error" nillable="true" type="q1:ServiceError" />
+      <xs:element minOccurs="0" name="Status" type="tns:ServiceResponse.ServiceStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceResponse" nillable="true" type="tns:ServiceResponse" />
+  <xs:simpleType name="ServiceResponse.ServiceStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Success" />
+      <xs:enumeration value="Failed" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ServiceResponse.ServiceStatus" nillable="true" type="tns:ServiceResponse.ServiceStatus" />
+  <xs:complexType name="OldServiceResponse">
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="Exception" nillable="true" type="q2:Exception" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OldServiceResponse" nillable="true" type="tns:OldServiceResponse" />
+  <xs:complexType name="CertificatesResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OldServiceResponse">
+        <xs:sequence>
+          <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" minOccurs="0" name="Certificates" nillable="true" type="q3:ArrayOfCertificateInfo" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CertificatesResponse" nillable="true" type="tns:CertificatesResponse" />
+  <xs:complexType name="UserAddressBookResponse">
+    <xs:sequence>
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" minOccurs="0" name="Contacts" nillable="true" type="q4:ArrayOfContact" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserAddressBookResponse" nillable="true" type="tns:UserAddressBookResponse" />
+  <xs:complexType name="ProfileResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OldServiceResponse">
+        <xs:sequence>
+          <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DSS.Service.Settings" minOccurs="0" name="Settings" nillable="true" type="q5:Settings" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ProfileResponse" nillable="true" type="tns:ProfileResponse" />
+  <xs:complexType name="UserProfilesResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OldServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="UserProfileList" nillable="true" type="tns:ArrayOfUserProfileListElement" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UserProfilesResponse" nillable="true" type="tns:UserProfilesResponse" />
+  <xs:complexType name="ArrayOfUserProfileListElement">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserProfileListElement" nillable="true" type="tns:UserProfileListElement" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserProfileListElement" nillable="true" type="tns:ArrayOfUserProfileListElement" />
+  <xs:complexType name="UserProfileListElement">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DecryptionText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EncryptionText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="IsDefault" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SignText" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserProfileListElement" nillable="true" type="tns:UserProfileListElement" />
+  <xs:complexType name="ProfileTooltipResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OldServiceResponse">
+        <xs:sequence>
+          <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" minOccurs="0" name="EncryptCertificateInfos" nillable="true" type="q6:ArrayOfCertificateInfo" />
+          <xs:element minOccurs="0" name="ID" type="ser:guid" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" minOccurs="0" name="SignCertificateInfo" nillable="true" type="q7:CertificateInfo" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ProfileTooltipResponse" nillable="true" type="tns:ProfileTooltipResponse" />
+  <xs:complexType name="NeedToPINResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OldServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="NeedToPIN" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="NeedToPINResponse" nillable="true" type="tns:NeedToPINResponse" />
+  <xs:simpleType name="AdminSort">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="LoginASC" />
+      <xs:enumeration value="LoginDESC" />
+      <xs:enumeration value="NameASC" />
+      <xs:enumeration value="NameDESC" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AdminSort" nillable="true" type="tns:AdminSort" />
+  <xs:complexType name="AdminInfoResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OldServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GroupUserInfos" nillable="true" type="tns:ArrayOfGroupUserInfo" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AdminInfoResponse" nillable="true" type="tns:AdminInfoResponse" />
+  <xs:complexType name="ArrayOfGroupUserInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GroupUserInfo" nillable="true" type="tns:GroupUserInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGroupUserInfo" nillable="true" type="tns:ArrayOfGroupUserInfo" />
+  <xs:complexType name="GroupUserInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="ser:guid" />
+      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GroupUserInfo" nillable="true" type="tns:GroupUserInfo" />
+  <xs:complexType name="SearchResultResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OldServiceResponse">
+        <xs:sequence>
+          <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" minOccurs="0" name="Certificates" nillable="true" type="q8:ArrayOfCertificateInfo" />
+          <xs:element minOccurs="0" name="ViewCount" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SearchResultResponse" nillable="true" type="tns:SearchResultResponse" />
+  <xs:complexType name="AddRecipientResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OldServiceResponse">
+        <xs:sequence>
+          <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" minOccurs="0" name="AddedCertificate" nillable="true" type="q9:CertificateInfo" />
+          <xs:element minOccurs="0" name="Status" type="tns:AddRecipientResponse.StatusTypes" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="AddRecipientResponse" nillable="true" type="tns:AddRecipientResponse" />
+  <xs:simpleType name="AddRecipientResponse.StatusTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CertInDB" />
+      <xs:enumeration value="CertAdded" />
+      <xs:enumeration value="CertHasRelation" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AddRecipientResponse.StatusTypes" nillable="true" type="tns:AddRecipientResponse.StatusTypes" />
+  <xs:complexType name="SignAttachmentResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OldServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Detached" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SignAttachmentResponse" nillable="true" type="tns:SignAttachmentResponse" />
+  <xs:complexType name="CertificateResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OldServiceResponse">
+        <xs:sequence>
+          <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" minOccurs="0" name="Certificate" nillable="true" type="q10:CertificateInfo" />
+          <xs:element minOccurs="0" name="CertificateFileBytes" nillable="true" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CertificateResponse" nillable="true" type="tns:CertificateResponse" />
+  <xs:complexType name="CryptoOperationResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OldServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="OperatedFile" nillable="true" type="xs:base64Binary" />
+          <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" minOccurs="0" name="OperationResult" nillable="true" type="q11:DataOperationResult" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CryptoOperationResponse" nillable="true" type="tns:CryptoOperationResponse" />
+  <xs:complexType name="DAVListCryptoOperationResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OldServiceResponse">
+        <xs:sequence>
+          <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" minOccurs="0" name="OperationResults" nillable="true" type="q12:ArrayOfDataOperationResult" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DAVListCryptoOperationResponse" nillable="true" type="tns:DAVListCryptoOperationResponse" />
+  <xs:complexType name="SignVerifyResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:OldServiceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CertificateStatuses" nillable="true" type="tns:ArrayOfCertificateStatus" />
+          <xs:element minOccurs="0" name="DataSourceFile" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Detached" type="xs:boolean" />
+          <xs:element minOccurs="0" name="MainStatus" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SourceFile" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SignVerifyResponse" nillable="true" type="tns:SignVerifyResponse" />
+  <xs:complexType name="ArrayOfCertificateStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CertificateStatus" nillable="true" type="tns:CertificateStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCertificateStatus" nillable="true" type="tns:ArrayOfCertificateStatus" />
+  <xs:complexType name="CertificateStatus">
+    <xs:sequence>
+      <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" minOccurs="0" name="CertificateInfo" nillable="true" type="q13:CertificateInfo" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CertificateStatus" nillable="true" type="tns:CertificateStatus" />
+  <xs:complexType name="ArrayOfSignVerifyResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SignVerifyResponse" nillable="true" type="tns:SignVerifyResponse" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSignVerifyResponse" nillable="true" type="tns:ArrayOfSignVerifyResponse" />
+  <xs:complexType name="GetVisualizationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Base64Picture" nillable="true" type="xs:string" />
+      <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DSS.Service.Error" minOccurs="0" name="Error" nillable="true" type="q14:CryptxServiceError" />
+      <xs:element minOccurs="0" name="TempToken" type="ser:guid" />
+      <xs:element minOccurs="0" name="VisualizationUrl" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetVisualizationResponse" nillable="true" type="tns:GetVisualizationResponse" />
+</xs:schema>

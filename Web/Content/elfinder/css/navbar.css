@@ -1,0 +1,205 @@
+/*********************************************/
+/*              NAVIGATION PANEL             */
+/*********************************************/
+
+/* container */
+.elfinder .elfinder-navbar {
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    background-image: none;
+    border-bottom: 0 solid;
+    border-top: 0 solid;
+    display: none;
+    overflow: auto;
+    padding: 3px 0;
+    position: relative;
+    user-select: none;
+    width: 220px;
+}
+
+
+/* ltr/rtl enviroment */
+
+.elfinder-ltr .elfinder-navbar {
+    border-left: 0 solid;
+    float: left;
+    overflow: hidden;
+}
+
+.elfinder-rtl .elfinder-navbar {
+    border-right: 0 solid;
+    float: right;
+}
+
+.elfinder-ltr .ui-resizable-e { margin-left: 10px; }
+
+/* folders tree container */
+
+.elfinder-tree {
+    display: table;
+    margin: 0 0 .5em 0;
+    width: 100%;
+}
+
+/* one folder wrapper */
+
+.elfinder-navbar-wrapper, .elfinder-place-wrapper { }
+
+/* folder */
+
+.elfinder-navbar-dir {
+    border: 1px solid transparent;
+    cursor: default;
+    display: block;
+    margin: 0;
+    outline: 0 solid;
+    overflow: hidden;
+    padding: 3px 12px;
+    position: relative;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 195px;	
+}
+
+/* ltr/rtl enviroment */
+
+.elfinder-ltr .elfinder-navbar-dir { padding-left: 35px; }
+
+.elfinder-rtl .elfinder-navbar-dir { padding-right: 35px; }
+
+/* arrow before icon */
+
+.elfinder-navbar-arrow {
+    background-image: url("../img/arrows-normal.png");
+    background-repeat: no-repeat;
+    display: none;
+    height: 14px;
+    margin-top: -8px;
+    position: absolute;
+    top: 50%;
+    width: 12px;
+}
+
+.ui-state-active .elfinder-navbar-arrow { background-image: url("../img/arrows-active.png"); }
+
+/* collapsed/expanded arrow view */
+
+.elfinder-navbar-collapsed .elfinder-navbar-arrow { display: block; }
+
+/* arrow ltr/rtl enviroment */
+
+.elfinder-ltr .elfinder-navbar-collapsed .elfinder-navbar-arrow {
+    background-position: 0 4px;
+    left: 0;
+}
+
+.elfinder-rtl .elfinder-navbar-collapsed .elfinder-navbar-arrow {
+    background-position: 0 -10px;
+    right: 0;
+}
+
+.elfinder-ltr .elfinder-navbar-expanded .elfinder-navbar-arrow,
+.elfinder-rtl .elfinder-navbar-expanded .elfinder-navbar-arrow { background-position: 0 -21px; }
+
+
+/* folder icon */
+
+.elfinder-navbar-icon {
+    background: url("../img/toolbar.png") no-repeat 0 -16px;
+    height: 16px;
+    margin-top: -8px;
+    position: absolute;
+    top: 50%;
+    width: 16px;
+}
+
+/* ltr/rtl enviroment */
+
+.elfinder-ltr .elfinder-navbar-icon { left: 14px; }
+
+.elfinder-rtl .elfinder-navbar-icon { right: 14px; }
+
+/* root folder */
+
+.elfinder-tree .elfinder-navbar-root .elfinder-navbar-icon { background-position: 0 0; }
+
+.elfinder-places .elfinder-navbar-root .elfinder-navbar-icon { background-position: 0 -48px; }
+
+/* icon in active/hove/dropactive state */
+
+.ui-state-active .elfinder-navbar-icon,
+.elfinder-droppable-active .elfinder-navbar-icon,
+.ui-state-hover .elfinder-navbar-icon { background-position: 0 -32px; }
+
+/* subdirs tree */
+
+.elfinder-navbar-subtree { display: none; }
+
+/* ltr/rtl enviroment */
+
+.elfinder-ltr .elfinder-navbar-subtree { margin-left: 12px; }
+
+.elfinder-rtl .elfinder-navbar-subtree { margin-right: 12px; }
+
+
+/* spinner */
+
+.elfinder-navbar-spinner {
+    background: url("../img/spinner-mini.gif") center center no-repeat;
+    display: block;
+    height: 14px;
+    margin-top: -7px;
+    position: absolute;
+    top: 50%;
+    width: 14px;
+}
+
+/* spinner ltr/rtl enviroment */
+
+.elfinder-ltr .elfinder-navbar-spinner {
+    left: 0;
+    margin-left: -2px;
+}
+
+.elfinder-rtl .elfinder-navbar-spinner {
+    margin-right: -2px;
+    right: 0;
+}
+
+/* permissions marker */
+
+.elfinder-navbar .elfinder-perms {
+    margin-top: -8px;
+    top: 50%;
+}
+
+/* permissions/symlink markers ltr/rtl enviroment */
+
+.elfinder-ltr .elfinder-navbar .elfinder-perms { left: 18px; }
+
+.elfinder-rtl .elfinder-navbar .elfinder-perms { right: 18px; }
+
+.elfinder-ltr .elfinder-navbar .elfinder-symlink { left: 8px; }
+
+.elfinder-rtl .elfinder-navbar .elfinder-symlink { right: 8px; }
+
+/* resizable */
+
+.elfinder-navbar .ui-resizable-handle {
+    background: transparent url('../img/resize.png') center center no-repeat;
+    left: 0;
+    width: 12px;
+}
+
+.elfinder-nav-handle-icon {
+    filter: Alpha(Opacity=50);
+    margin: -8px 2px 0 2px;
+    opacity: .5;
+    position: absolute;
+    top: 50%;
+}
+
+.elfinder-places { border: 1px solid transparent; }
+
+.elfinder-places.elfinder-droppable-active { border: 1px solid #8cafed; }

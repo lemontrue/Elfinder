@@ -1,0 +1,84 @@
+﻿@model CryptxOnline.Web.Models.ContactCertificate
+
+
+<link href="/Content/opentip.css" rel="stylesheet" />
+<div class="certificat">
+    <div class="actions">
+
+        <a class="remove" style="cursor: pointer" href="javascript:ConfirmAction('@Model.ContactId','@Model.Id') ">
+            Удалить
+        </a>
+    </div>
+    <div class="checkbox col">
+        <input name="@Model.Id" type="checkbox" />
+    </div>
+    <div class="col1">
+        <div class="title">
+            @Html.Raw(Model.NameLabel)
+        </div>
+        <div class="name">
+            @if (Model.IsTest) {
+                <span class="test-certificate-icon no-padding js-test-certificate-tip" id="testTip-@Model.Thumbprint"></span>
+            }
+            <a href="javascript:getCertificate('@Model.Thumbprint')">@Model.SubjectName</a>
+        </div>
+        <div class="cert">
+            <span style="@Model.TimeMessageStyle">
+                @Model.TimeMessage
+            </span>
+        </div>
+    </div>
+    <div class="col2">
+        <div class="new-title">
+            @Html.HiddenFor(m => Model.Id)
+            @Html.HiddenFor(m => Model.Thumbprint)
+
+            @if (string.IsNullOrEmpty(Model.FriendlyName))
+            {
+                @Html.TextBoxFor(m => Model.FriendlyName, new {@maxlength = 24, placeholder = "Введите короткое название для сертификата", @id = "fr_" + @Model.Thumbprint})
+            }
+            else
+            {
+                @Html.TextBoxFor(m => Model.FriendlyName, new {@disabled = true, @maxlength = 24, placeholder = "Введите короткое название для сертификата", @id = "fr_" + @Model.Thumbprint})
+            }
+
+        </div>
+        <span class="actions-title">
+            <a class="small-text" href="javascript:saveFriendlynameClick('@Model.Thumbprint')" id="@("save_" + Model.Thumbprint)" style="display: none">Сохранить</a>
+            @if (string.IsNullOrEmpty(Model.FriendlyName))
+            {
+                <a class="small-text" href="javascript:editFriendlynameClick('@Model.Thumbprint')" id="@("edit_" + Model.Thumbprint)" style="display: none">Изменить</a>
+            }
+            else
+            {
+                <a class="small-text" href="javascript:editFriendlynameClick('@Model.Thumbprint')" id="@("edit_" + Model.Thumbprint)" style="display: block">Изменить</a>
+            }
+
+        </span>
+        <div class="company">
+            @Model.Organization @Model.INN
+
+        </div>
+        <div class="key">
+            Отпечаток: @Model.Thumbprint
+        </div>
+    </div>
+    <hr />
+</div>
+<script>
+    $(document).ready(function() {
+				console.log(parent)
+				console.log(parent.window.contactCertificates)
+        var regTipOptions = {
+            tipJoint: "left",
+            background: '#fff5d2',
+            borderRadius: 4,
+            borderWidth: 1,
+            borderColor: '#fee8ae'
+        };
+        $(".js-test-certificate-tip").each(function(i,el){
+            new Opentip($(el), 'Сертификат выпущен без участия<br>аккредитованного Удостоверяющего<br>Центра и не имеет юридической силы.', '', regTipOptions);
+        });
+        //parent.window.contactCertificates.push('@Model.Thumbprint');
+    });
+</script>

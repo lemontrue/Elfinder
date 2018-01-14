@@ -1,0 +1,42 @@
+@using System.Web.Optimization
+
+<script type="text/javascript">
+	var Crypt = Crypt || {};
+	Crypt.Urls = {
+		KobilLogin: '@Url.Action("KobilLogin","Account")',
+		LoginGuid: '@Url.Action("LoginGuid", "Account")',
+		CheckKobil:	'@Url.Action("CheckKobil", "Account")',
+		Login: '@Url.Action("Login", "Account")',
+		CancelKobil: '@Url.Action("CancelKobil", "Account")',
+		CheckSmsPin: '@Url.Action("CheckSmsPin", "Account")',
+		ResendSms: '@Url.Action("ResendSms", "Account")',
+        CheckPhoneNEmail: '@Url.Action("CheckPhoneNEmail", "Registration")',
+		SmsConfirmReg: '@Url.Action("SmsConfirmation", "Registration")',
+		ResendSmsReg: '@Url.Action("ResendSms", "Registration")',
+        Profile: '@Url.Action("MyProfile", "Default")',
+        CertList: {
+            ChangePin: '@Url.Action("ChangePin")',
+            DeletePin: '@Url.Action("DeletePin")',
+            SetPin: '@Url.Action("SetPin")',
+            SaveCertFriendlyName: '@Url.Action("SaveCertFriendlyName")'
+        },
+        CreateTestCertificate: '@Url.Action("GetNSetTestCertificate","MarkerActivation")',
+        SendToSupport: '@Url.Action("SendToSupport","BaseAnonymous")',
+
+        MarkerLogon: '@Url.Action("Logon","MarkerActivation")',
+        MarkerCertInfo: '@Url.Action("GetCertificateInfo","MarkerActivation")',
+        MarkerRequestCertInfo: '@Url.Action("GetCertificateInfoConfirmedRequest","MarkerActivation")',
+        MarkerResendSms: '@Url.Action("ResendSms","MarkerActivation")',
+        MarkerCheckSms: '@Url.Action("CheckSms","MarkerActivation")',
+        MarkerSendRequest: '@Url.Action("CreateCertificateRequest","MarkerActivation")',
+        MarkerRequestResend: '@Url.Action("ResendRequest","MarkerActivation")',
+        MarkerRequestResendAgain: '@Url.Action("ResendRequestAfterCheckSms","MarkerActivation")',
+        MarkerRequestConfirm: '@Url.Action("GetNSetCertificate","MarkerActivation")',
+        MarkerRequestDelete: '@Url.Action("DeleteRequest","MarkerActivation")',
+        MarkerRequestGetData: '@Url.Action("GetRequestData","MarkerActivation")'
+
+	}
+</script>
+
+
+

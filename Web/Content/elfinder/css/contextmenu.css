@@ -1,0 +1,100 @@
+/* menu and submenu */
+.elfinder-contextmenu,
+.elfinder-contextmenu-sub {
+    background: #fff;
+    border: 1px solid #aaa;
+    color: #555;
+    display: none;
+    padding: 4px 0;
+    position: absolute;
+}
+
+/* submenu */
+
+.elfinder-contextmenu-sub { top: 5px; }
+
+/* submenu in rtl/ltr enviroment */
+
+.elfinder-contextmenu-ltr .elfinder-contextmenu-sub { margin-left: -5px; }
+
+.elfinder-contextmenu-rtl .elfinder-contextmenu-sub { margin-right: -5px; }
+
+/* menu item */
+
+.elfinder-contextmenu-item {
+    cursor: default;
+    display: block;
+    padding: 4px 30px;
+    position: relative;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* text in item */
+
+.elfinder-contextmenu .elfinder-contextmenu-item span { display: block; }
+
+
+
+/* submenu item in rtl/ltr enviroment */
+
+.elfinder-contextmenu-ltr .elfinder-contextmenu-item { text-align: left; }
+
+.elfinder-contextmenu-rtl .elfinder-contextmenu-item { text-align: right; }
+
+.elfinder-contextmenu-ltr .elfinder-contextmenu-sub .elfinder-contextmenu-item { padding-left: 12px; }
+
+.elfinder-contextmenu-rtl .elfinder-contextmenu-sub .elfinder-contextmenu-item { padding-right: 12px; }
+
+/* command/submenu icon */
+
+.elfinder-contextmenu-arrow,
+.elfinder-contextmenu-icon {
+    margin-top: -8px;
+    position: absolute;
+    top: 50%;
+}
+
+/* command icon in rtl/ltr enviroment */
+
+.elfinder-contextmenu-ltr .elfinder-contextmenu-icon {
+    left: 8px;
+    top: 5px;
+}
+
+.elfinder-contextmenu-rtl .elfinder-contextmenu-icon {
+    right: 8px;
+    top: 5px;
+}
+
+/* arrow icon */
+
+.elfinder-contextmenu-arrow {
+    background: url('../img/arrows-normal.png') 5px 4px no-repeat;
+    height: 16px;
+    width: 16px;
+}
+
+/* arrow icon in rtl/ltr enviroment */
+
+.elfinder-contextmenu-ltr .elfinder-contextmenu-arrow { right: 5px; }
+
+.elfinder-contextmenu-rtl .elfinder-contextmenu-arrow {
+    background-position: 0 -10px;
+    left: 5px;
+}
+
+/* disable ui border/bg image on hover */
+
+.elfinder-contextmenu .ui-state-hover {
+    background-image: none;
+    border: 0 solid;
+}
+
+/* separator */
+
+.elfinder-contextmenu-separator {
+    border-top: 1px solid #ccc;
+    height: 0;
+    margin: 0 1px;
+}

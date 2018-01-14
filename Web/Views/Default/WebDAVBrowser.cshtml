@@ -1,0 +1,482 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Главная</title>
+    <meta charset="UTF-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" href="@Url.Content("~/Assets/i/old/favicon.ico")" />
+</head>
+
+<body>
+    <div id='scriptandstyle'>
+
+        <link href="/Assets/css/common.css?v=@AssetsVersion" rel="stylesheet"/>
+        <link href="/Assets/css/elfinder.css?v=@AssetsVersion" rel="stylesheet"/>
+
+
+        <script type="text/javascript" src="/Assets/js/elfinder.js?v=@AssetsVersion"></script>
+        <script type="text/javascript" src="/Assets/js/mainpage.js?v=@AssetsVersion"></script>
+
+
+        <!--[if IE]>
+            <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/elfinder/css/CustomThemeIE.css")">
+        <![endif]-->
+
+
+    </div>
+    <script type="text/javascript">
+
+        $(function () {
+            elFinder.prototype._options.commands.push('receivedmail');
+            elFinder.prototype._options.commands.push('encrypt');
+            elFinder.prototype._options.commands.push('decrypt');
+            elFinder.prototype._options.commands.push('sign');
+            elFinder.prototype._options.commands.push('checksign');
+            elFinder.prototype._options.commands.push('signandencrypt');
+            elFinder.prototype._options.commands.push('decryptandchecksign');
+            elFinder.prototype._options.commands.push('add');
+            elFinder.prototype._options.commands.push('cancel');
+            elFinder.prototype._options.commands.push('cryptinfo');
+            elFinder.prototype._options.commands.push('certdownload');
+            elFinder.prototype._options.commands.push('post');
+            elFinder.prototype._options.commands.push('opensendpopup');
+            elFinder.prototype._options.commands.push('addressbook');
+            elFinder.prototype._options.commands.push('filter');
+            elFinder.prototype._options.commands.push('more');
+            elFinder.prototype._options.commands.push('infobarcmd');
+            elFinder.prototype._options.commands.push('multiplyadd');
+
+            var visualisationPath = '';
+            var ismodal = false;
+            var myCommands = elFinder.prototype._options.commands;
+            var disabled = ['extract', 'archive', 'select', 'resize', 'cut'];
+            if (location.href.indexOf('ismodal') != -1) {
+                ismodal = true;
+                disabled.push('copy');
+                disabled.push('paste');
+                disabled.push('rm');
+            }
+            $.each(disabled, function (i, cmd) {
+                (idx = $.inArray(cmd, myCommands)) !== -1 && myCommands.splice(idx, 1);
+            });
+
+            var options = {
+				url: '../connector',
+				tmbUrl: 'Files/',
+				requestType: 'post',
+				commands: myCommands,
+				useBrowserHistory: false,
+				lang: 'ru',
+				rememberLastDir: true,
+				dateFormat: 'd.m.y',
+				defaultView: 'list',
+				ui: ['tree', 'infobar', 'toolbar'],
+				resizable: false,
+				height: 693,
+				width: '100%',
+				uiOptions: {
+					toolbar: [
+						['multiplyadd'],
+						['paste'],
+						['sign'],
+						['encrypt'],
+						['signandencrypt'],
+						['decrypt'],
+						['checksign'],
+						['decryptandchecksign'],
+						['more']
+					],
+					tree: {
+						openRootOnLoad: true,
+						syncTree: true
+					},
+					cwd: {
+						listView: {
+							columns: ['date', 'kind'],
+							columnsCustomName: {}
+						}
+					},
+					navbar: {
+						minWidth: 200,
+						maxWidth: 200,
+						resizable: false
+					}
+				},
+				contextmenu: {
+                    navbar: [],
+                    cwd: ['mkdir', 'paste'],
+                    files: ['sign', 'encrypt', 'signandencrypt', 'decrypt', 'checksign', 'decryptandchecksign', '|',
+                        'copy', 'paste', 'rm', 'rename', 'download', 'opensendpopup']
+                },
+                handlers: {
+                    select: function (event, elfinderInstance) {
+                        elfinderInstance.ui['toolbar'].selectFile();
+                        var cmd;
+
+                        if ((cmd = elfinderInstance._commands['infobarcmd'])) {
+                            cmd.exec();
+                        }
+                        elfinderInstance.ui['toolbar'].openFolder();
+
+                        if (event.data.selected.length == 1) {
+                            var file = elfinderInstance.exec('add', [event.data.selected[0]],{action:'showBtn'});
+                        } else {
+							if (event.data.selected.length > 1) {
+								$('.js-visaulize').hide();
+							}
+						}
+                    },
+                    open: function (event, elfinderInstance) {
+                        elfinderInstance.ui['toolbar'].openFolder();
+                    },
+                    dblclick: function (event, elfinderInstance) {
+                        elfinderInstance.exec('add', [event.data.file],{action:'open'});
+                    }
+
+                }
+            };
+
+            if (ismodal) {
+                $('body').find('.content:first').hide();
+                $('body').find('.content:last').addClass("modal");
+                delete options.width;
+                delete options.handlers;
+                options.ui = ['tree', 'bottomaddpanel'];
+                options.height = 390;
+                options.contextmenu = { navbar: [], cwd: [], files: [] },
+                $('html').css('overflow', 'hidden');
+                $('body').css('overflow', 'hidden');
+            }
+			else {
+                options.getFileCallback = function() {}
+            }
+            //debugger;
+            var finder = $('#elfinder').elfinder(options).elfinder('instance');
+            if (ismodal) { finder.isModal = true; }
+
+            !ismodal && initPage(finder);
+        });
+
+        $('.js-visaulize').on('click',function() {
+            if ($(this).hasClass('i-disabled')) {
+                return false;
+            }
+        });
+
+        function visualisation (data,file, opts) {
+            if (opts.action === 'open') {
+                if (window.visualState) return false;
+                window.visualState = true
+            }
+
+            if (!data || !opts) {
+             return false
+            }
+			var sfile = file[0];
+            var file = data[0],
+                name =  file.path.split( '/'),
+                ext = '',
+                acceptExt = ['ods','xls','xlsb','xlsx','ods','xlsb','xlsm','xlsx','odp','pot','potm','potx',
+                    'pps','ppsm','ppsx','ppt','pptm','pptx','odp','ppsx','pptx','doc','docm','docx','dot',
+                    'dotm','dotx','odt','pdf','one','onetoc2','jpg','jpeg','gif','png','bmp','xml'];
+
+            name =  name[name.length-1];
+
+            if (!name ) {
+                return false;
+            }
+
+            ext = name.split('.');
+            ext = ext[ext.length-1];
+            if (acceptExt.indexOf(ext.toLowerCase()) == -1) {
+                if ( opts.action === 'open') {
+                    $.fancybox('#no-visualize',{
+                        wrapCSS : 'no-visualiseModal',
+						autoSize	: true,
+						autoResize	: true,
+						scrolling: 'no',
+                        afterClose: function() {
+                            window.visualState = false;
+                        }
+                    });
+                }
+                return false;
+            }
+            if (opts.action === 'showBtn') {
+                $('.js-visaulize').on('click',function(e) {
+                    var type = $(e.target).data('type');
+
+                    switch (type) {
+                        default :
+                            break;
+                        case 1:
+                            $.fancybox({href: "/Visualization/Office?fileUri=" + file.path, type: 'iframe'}, {
+                                maxWidth: 700,
+                                height: 1000,
+                                minWidth: 200,
+                                autoSize: true,
+                                autoResize: false,
+                                scrolling: 'no',
+                                topRatio: 0,
+                                margin: [20, 20, 90, 20],
+                                closeClick: false,
+                                openEffect: 'fade',
+                                wrapCSS: 'visualiseModal',
+                                title: name,
+                                afterClose: function () {
+                                    window.visualState = false;
+                                }
+                            });
+                            break;
+                        case 2:
+                            $.fancybox({href: "/Visualization/Picture?fileUri=" + file.path, type: 'iframe'}, {
+                                helpers: {title: {position: 'top'}},
+                                maxWidth: 700,
+                                height: 200,
+                                minWidth: 200,
+                                autoSize: true,
+                                autoResize: false,
+                                scrolling: 'no',
+                                topRatio: 0,
+                                margin: [20, 20, 90, 20],
+                                closeClick: false,
+                                openEffect: 'fade',
+                                wrapCSS: 'visualiseModal',
+                                title: name,
+                                afterClose: function () {
+                                    window.visualState = false;
+                                }
+                            });
+                            break;
+                        case 3:
+                            $.fancybox({href: "/Visualization/Xml?fileUri=" + file.path, type: 'iframe'}, {
+                                helpers: {title: {position: 'top'}},
+                                maxWidth: 700,
+                                height: 200,
+                                minWidth: 200,
+                                autoSize: true,
+                                autoResize: false,
+                                scrolling: 'no',
+                                topRatio: 0,
+                                margin: [20, 20, 90, 20],
+                                closeClick: false,
+                                openEffect: 'fade',
+                                wrapCSS: 'visualiseModal',
+                                title: name,
+                                afterClose: function () {
+                                    window.visualState = false;
+                                }
+                            });
+                            break;
+                    }
+                });
+            } else{
+				var type = sfile.VisualizationType;
+
+				switch (type) {
+					default :
+						break;
+					case 1:
+						$.fancybox({href :"/Visualization/Office?fileUri="+file.path ,type: 'iframe'},{
+							maxWidth	: 700,
+							height    : 1000,
+							minWidth	: 200,
+							autoSize	: true,
+							autoResize	: true,
+							scrolling: 'no',
+							topRatio: 0,
+							margin: [20, 20, 90, 20],
+							closeClick	: false,
+							openEffect	: 'fade',
+							wrapCSS     : 'visualiseModal',
+							title       : name,
+							afterClose: function() {
+								window.visualState = false;
+							}
+						});
+						break;
+					case 2:
+
+						$.fancybox({href :"/Visualization/Picture?fileUri="+file.path ,type: 'iframe'},{
+							helpers: {title: {position: 'top'}},
+							maxWidth	: 700,
+//							height    : 1000,
+							minWidth	: 200,
+							autoSize	: true,
+							autoResize	: true,
+							scrolling: 'no',
+							topRatio: 0,
+							margin: [20, 20, 90, 20],
+							closeClick	: false,
+							openEffect	: 'fade',
+							wrapCSS     : 'visualiseModal',
+							title       : name,
+							afterClose: function() {
+								window.visualState = false;
+							}
+						});
+						break;
+                    case 3:
+                        $.fancybox({href :"/Visualization/Xml?fileUri="+file.path ,type: 'iframe'},{
+                            helpers: {title: {position: 'top'}},
+                            maxWidth	: 700,
+                            height    : 200,
+                            minWidth	: 200,
+                            autoSize	: true,
+                            autoResize	: false,
+							scrolling: 'no',
+							topRatio: 0,
+							margin: [20, 20, 90, 20],
+							closeClick	: false,
+							openEffect	: 'fade',
+							wrapCSS     : 'visualiseModal',
+							title       : name,
+							afterClose: function() {
+								window.visualState = false;
+							}
+						});
+						break;
+				}
+            }
+        }
+
+        function initPage(elFinder) {
+            var changeViewIcon = function (fm) {
+                if (fm._commands.view.value != 'list') {
+                    $('#view-block').addClass('active');
+                    $("#view-list").removeClass('active');
+                } else {
+                    $('#view-list').addClass('active');
+                    $("#view-block").removeClass('active');
+                }
+            };
+
+            changeViewIcon(elFinder);
+
+            $("#view-block").bind('click', function (e) {
+                if (elFinder._commands.view.value == 'list') {
+                    elFinder.exec('view');
+                    changeViewIcon(elFinder);
+                }
+                e.preventDefault();
+            });
+            $("#view-list").bind('click', function (e) {
+                if (elFinder._commands.view.value == 'icons') {
+                    elFinder.exec('view');
+                    changeViewIcon(elFinder);
+                }
+                e.preventDefault();
+            });
+
+            $("#maindrop, .header-profile-fname").click(function (e) {
+                e.stopPropagation();
+                $(".dropdown-menu").show().css('overflow','visible');
+            });
+            $(".dropdown-menu").find('a').bind('click', function (e) {
+                $(".dropdown-menu").hide();
+            });
+            $('html').click(function () {
+                $(".dropdown-menu").hide();
+                $(".elfinder-button-menu").hide();
+            });
+        }
+
+        function redurl(url) {
+            location.href = url;
+        }
+    </script>
+    <div class='content'>
+        <div class='row'>
+            <div class="topheader">
+                <div class="main-icon">
+                    <a class="logo" href="@Url.Action("WebDavBrowser","Default")"></a>
+                    @*<a href="@Url.Action("WebDavBrowser","Default")" title="На главную">
+                            <img src="@Url.Content("~/Assets/i/old/crypto-logo.png")" alt="CryptoGramm Logo" title="CryptoGramm" class="header-logo">
+                        </a>*@
+                </div>
+                <div class="profile">
+                    <div class="header-profile btn-group">
+                        <a id="maindrop" class="header-dropdown left" data-toggle="dropdown">
+                            <span class="ico-4-2-settings b-ico ico"></span>
+                        </a>
+                        <a href="#" class="header-profile-fname left">@CurrentUser.FIO</a>
+                        <span class="caret"></span>
+                        <div class="arrow-top"></div>
+                        <ul class="dropdown-menu ">
+
+                            <li>
+                                <a href="@Url.Action("MyProfile","Default")"><span class="ico-4-2-profile ib-ico ico"></span>Мой профиль</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index","AddressBook")"><span class="ico-4-2-addressbook ib-ico ico"></span>Адресная книга</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index","Settings")"><span class="ico-4-2-template-settings ib-ico ico"></span>Шаблоны настроек</a>
+                            </li>
+                            @if (CurrentUser.IsInRole("GroupAdmin")|| CurrentUser.IsInRole("SysAdmin"))
+                            {
+                                <li>
+                                    <a href="@Url.Action("Index", "Administration")"><span class="ico-4-2-administration ib-ico ico"></span>Администрирование</a>
+                                </li>
+                            }
+                            <li>
+                                <a href="@Url.Action("LogOff","Account")"><span class="ico-4-2-logout ib-ico ico"></span>Выход</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="disp-style pull-right">
+                    <div class="view-mode">
+                        <div class="modes right">
+                            <div id="view-list" class="mode2 mode left active">
+                                <span class="ico-5-1-mode2 ico"></span>
+                            </div>
+                            <div id="view-block" class="mode1 mode left">
+                                <span class="ico-5-1-mode1 ico"></span>
+                            </div>
+                        </div>
+                        <label class="right">Вид:</label>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="master pull-right">
+                    <a href="@Url.Action("Index","Master")" class="header-master btn btn-primary pull-right">Мастер работы с документами</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='content'>
+        <div id="elfinder"></div>
+		<div class="content2">
+			<div class="helpLink">
+				<a href="/Assets/files/main.pdf" target="_blank"></a>
+			</div>
+		</div>
+    </div>
+
+<div class="hidden">
+    <div class="modal-window" id="no-visualize">
+        <div class="title">
+            Внимание!
+        </div>
+        <form action="" autocomplete="off" method="post">
+            <div class="row">
+                <div class="mess-box">
+                    <div class="info" id="infoPlacer">     <span>
+                        Файл данного типа не может быть просмотрен в браузере! Вы можете скачать файл и посмотреть его на устройстве. </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row sbmt pull-right">
+                <input class="btn btn-green" type="button" value="Закрыть" onclick="$.fancybox.close();" />
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+
+

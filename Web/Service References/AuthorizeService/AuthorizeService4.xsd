@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/KobilConnector.Helper" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/KobilConnector.Helper" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="KobilStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Off" />
+      <xs:enumeration value="Accept" />
+      <xs:enumeration value="Reject" />
+      <xs:enumeration value="WaitDevice" />
+      <xs:enumeration value="WaitResult" />
+      <xs:enumeration value="Error" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="KobilStatus" nillable="true" type="tns:KobilStatus" />
+</xs:schema>

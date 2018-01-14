@@ -1,0 +1,181 @@
+body
+  padding: 0
+  margin: 0
+ul
+  margin: 0
+  padding: 0
+
+.scroll-wrap
+  height: 330px
+  overflow: hidden
+  position: relative
+.scroller
+  -webkit-overflow-scrolling: touch
+  height: 100%
+  overflow-y: scroll
+  .certificats-list-modal
+    padding-right: 5px
+    .certificat:hover
+      background: #edf4fa
+  &::-webkit-scrollbar
+    width: 0
+
+.scroller__bar-wrapper
+  background: #eaeaea
+  bottom: 0
+  pointer-events: none
+  position: absolute
+  right: 5px
+  top: 0
+  width: 4px
+  z-index: 3
+
+.scroller__bar
+  -webkit-transition: opacity .2s linear
+  background: #989898
+  opacity: 0
+  pointer-events: auto
+  position: absolute
+  transition: opacity .2s linear
+  width: 4px
+  z-index: 1
+  &:hover
+    opacity: 0.8
+
+.baron .scroller__bar
+  opacity: 0.6
+
+.baron_h .scroller__bar_h
+  bottom: 30px
+  opacity: 0.6
+.tabs
+  .tabs-content
+    .tabs-pane
+      padding: 20px 0 !important
+
+
+
+.filter
+  height: 70px
+  padding: 0 25px
+  .check-all
+    margin-right: 0 !important
+    padding-top: 27px
+    width: 30px
+  .form
+    display: inline-block
+    vertical-align: top
+    .col
+      margin-right: 15px
+      position: relative
+      width: 210px
+      .loop
+        cursor: pointer
+        display: block
+        height: 28px
+        position: absolute
+        right: 0
+        top: 18px
+        width: 30px
+      label
+        color: #161616
+        display: block
+        font-size: 11px
+        height: 18px
+      input.search
+        background: img('/old/search.png', 'right center no-repeat' ,'')
+        padding-right: 30px
+      &:last-child
+        margin-right: 0
+
+.certificats-list .certificat
+  &:first-child
+    padding-top: 10px
+    .actions
+      top: 8px
+  &:hover
+    background: #edf4fa
+  &.selected
+    background: #fffdde !important
+  height: 110px
+  padding: 10px 25px 0
+  position: relative
+  .test-certificate
+    position: absolute
+    right: 25px
+    bottom: 0
+    width: 68px
+    height: 68px
+    background: url(/Content/i/test-certificate.png) no-repeat
+  hr
+    border: 1px solid #d9d9d9
+    border-top: 0
+    bottom: 0
+    left: 25px
+    margin: 0
+    position: absolute
+    right: 25px
+  .actions
+    left: 310px
+    position: absolute
+    top: 10px
+    a
+      &.down
+        color: #161616
+        padding-right: 20px
+      &.remove
+        color: #727272
+  .checkbox
+    padding-top: 28px
+    width: 40px
+  .col1
+    display: inline-block
+    line-height: 20px
+    min-width: 200px
+    vertical-align: top
+    width: 30%
+    .title
+      font-size: 14px
+      font-weight: 700
+      padding: 5px 0 10px 0
+    .name
+      max-height: 40px
+      overflow: hidden
+      margin-left: -20px
+      padding-left: 20px
+    .cert span
+      a
+        text-decoration: none
+      &.active
+        color: #161616
+      &.expire
+        color: #f4484a
+  .col2
+    display: inline-block
+    line-height: 20px
+    max-width: 60%
+    position: relative
+    vertical-align: top
+    .new-title
+      padding: 5px 0 5px 0
+      width: 300px
+
+.cert-control
+  padding-top: 20px
+  .backlink
+    float: left
+    a
+      background: #f3f3f3
+      color: #373737
+      display: inline-block
+      height: 32px
+      line-height: 32px
+      padding: 0 20px
+  .controls .sbmt a.close
+    color: #131313
+    padding-right: 15px
+
+.more-cert
+  height: 75px
+  padding-top: 28px
+  text-align: center

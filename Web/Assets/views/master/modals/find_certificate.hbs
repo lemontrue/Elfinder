@@ -1,0 +1,75 @@
+<div class="select_certificate">
+    {{#if certificate.length}}
+      {{#nothingFound}}
+        <div class="alert-search">Ничего не найдено!</div>
+      {{else}}
+        <table>
+            <thead>
+            <tr style="line-height: 32px;">
+                {{#if modAll}}
+                    <td style="width: 5%">
+                        <input can-value="checkAll" hidden="hidden" id="check_all" type="checkbox" />
+                        <label class="check" for="check_all" title="Выбрать всё"></label>
+                    </td>
+                {{else}}
+                {{/if}}
+
+                <td style="width: {{#if modAll}}50{{else}}55{{/if}}%">
+                    <span can-click="event.sort.owner">Владелец</span>
+                </td>
+                <td style="width: 25%">
+                    <span can-click="event.sort.validity">Срок действия</span>
+                </td>
+                <td style="width: 25%">
+                    <span can-click="event.sort.organization">Организация</span>
+                </td>
+            </tr>
+            </thead>
+        </table>
+        <div class="tab-scroll">
+            <table>
+                <tbody>
+                {{#each certificate}}
+                    {{#if show}}
+                        <tr can-click="event.select" can-dblclick="event.dblclick" cert="{{ID}}" class="{{#if check}}active{{else}}{{/if}}">
+                            {{#if modAll}}
+                                <td class="name" style="width: 5%">
+                                    <input can-click="event.notclick" can-value="check" hidden="hidden" id="{{ID}}" type="checkbox" />
+                                    <label class="check" for="{{ID}}"></label>
+                                </td>
+                            {{else}}
+                            {{/if}}
+
+                            <td class="name" style="width: {{#if modAll}}50{{else}}55{{/if}}%">
+                                {{#if isTest}}<span class="test-certificate-icon {{#if modAll}}{{else}}no-padding{{/if}} js-test-certificate-tip" id="testTip-{{ID}}"></span>{{else}}<span class="fake-test-certificate-icon {{#if modAll}}{{else}}no-padding{{/if}} "></span>{{/if}}
+                                {{owner}}
+                            </td>
+                            <td style="width: 25%">{{validity}}</td>
+                            <td style="width: 20%">{{organization}}</td>
+                        </tr>
+                    {{/if}}
+                {{/each}}
+                </tbody>
+            </table>
+            
+        </div>
+      {{/nothingFound}}
+    {{else}}
+        <div class="alert-search">
+            {{#if modAll}}
+                Воспользуйтесь поиском для отображения нужных сертификатов
+            {{else}}
+                Сертификаты не найдены
+            {{/if}}
+        </div>
+    {{/if}}
+
+</div>
+<div class="btn-group sc">
+    <div can-click="event.exit" class="btn ">Отмена</div>
+    {{#if cls.length}}
+        <div can-click="event.add" class="btn btn-green">Добавить</div>
+    {{else}}
+        <div disabled class="btn btn-green">Добавить</div>
+    {{/if}}
+</div>

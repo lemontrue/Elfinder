@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://api.demo.cryptogramm.ru:11111/MarkerActivationService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://api.demo.cryptogramm.ru:11111/MarkerActivationService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Response.MarkerActivation" />
+  <xs:import schemaLocation="http://api.demo.cryptogramm.ru:11111/MarkerActivationService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/System.IO" />
+  <xs:element name="LogOn">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="token" type="q1:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LogOnResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DSS.Service.Response.MarkerActivation" minOccurs="0" name="LogOnResult" nillable="true" type="q2:LogonResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckSms">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pin" nillable="true" type="xs:string" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="session" nillable="true" type="q3:MemoryStream" />
+        <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="token" type="q4:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckSmsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DSS.Service.Response.MarkerActivation" minOccurs="0" name="CheckSmsResult" nillable="true" type="q5:MarkerActivationResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMarkerStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
+        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="token" type="q6:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMarkerStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/DSS.Service.Response.MarkerActivation" minOccurs="0" name="GetMarkerStatusResult" nillable="true" type="q7:GetMarkerStatusResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCertificateInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="session" nillable="true" type="q8:MemoryStream" />
+        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="token" type="q9:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCertificateInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DSS.Service.Response.MarkerActivation" minOccurs="0" name="GetCertificateInfoResult" nillable="true" type="q10:GetCertificateInfoResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="session" nillable="true" type="q11:MemoryStream" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DSS.Service.Response.MarkerActivation" minOccurs="0" name="param" nillable="true" type="q12:CreateRequestParams" />
+        <xs:element minOccurs="0" name="userInfoXML" nillable="true" type="xs:string" />
+        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="token" type="q13:guid" />
+        <xs:element minOccurs="0" name="exportable" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateRequestResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/DSS.Service.Response.MarkerActivation" minOccurs="0" name="CreateRequestResult" nillable="true" type="q14:CreateRequestResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ResendRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="requestId" type="q15:guid" />
+        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="token" type="q16:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ResendRequestResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/DSS.Service.Response.MarkerActivation" minOccurs="0" name="ResendRequestResult" nillable="true" type="q17:CreateRequestResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMyCertificatesRequests">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/DSS.Service.Response.MarkerActivation" minOccurs="0" name="sort" type="q18:GetMyCertificatesRequestsResponse.Sort" />
+        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="userId" type="q19:guid" />
+        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="token" type="q20:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMyCertificatesRequestsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/DSS.Service.Response.MarkerActivation" minOccurs="0" name="GetMyCertificatesRequestsResult" nillable="true" type="q21:GetMyCertificatesRequestsResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="requestId" type="q22:guid" />
+        <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="token" type="q23:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteRequestResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/DSS.Service.Response.MarkerActivation" minOccurs="0" name="DeleteRequestResult" nillable="true" type="q24:MarkerActivationResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserHtml">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="requestId" type="q25:guid" />
+        <xs:element xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="token" type="q26:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserHtmlResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/DSS.Service.Response.MarkerActivation" minOccurs="0" name="GetUserHtmlResult" nillable="true" type="q27:GetUserHtmlResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ResendSms">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="session" nillable="true" type="q28:MemoryStream" />
+        <xs:element xmlns:q29="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="token" type="q29:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ResendSmsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/DSS.Service.Response.MarkerActivation" minOccurs="0" name="ResendSmsResult" nillable="true" type="q30:MarkerActivationResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNSetCertificate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="requestId" type="q31:guid" />
+        <xs:element minOccurs="0" name="pin" nillable="true" type="xs:string" />
+        <xs:element xmlns:q32="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="token" type="q32:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNSetCertificateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/DSS.Service.Response.MarkerActivation" minOccurs="0" name="GetNSetCertificateResult" nillable="true" type="q33:GetNSetCertificateResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNSetTestCertificate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pin" nillable="true" type="xs:string" />
+        <xs:element xmlns:q34="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="token" type="q34:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNSetTestCertificateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/DSS.Service.Response.MarkerActivation" minOccurs="0" name="GetNSetTestCertificateResult" nillable="true" type="q35:GetNSetTestCertificateResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

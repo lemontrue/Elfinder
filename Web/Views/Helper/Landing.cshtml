@@ -1,0 +1,424 @@
+﻿@using System.Web.Optimization
+@using CryptxOnline.Web.Helpers
+@model dynamic
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cryptogramm</title>
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+	<meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=1000">
+
+    <link href="/Assets/i/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <link href="/Assets/css/common.css?v=@AssetsVersion" rel="stylesheet"/>
+    <link href="/Assets/css/landing.css?v=@AssetsVersion" rel="stylesheet"/>
+
+	<!--[if IE 8]>
+        <link href="/Assets/css/ie.css?v=@AssetsVersion" rel="stylesheet"/>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="app-landing">
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter30405302 = new Ya.Metrika({id:30405302,
+                    webvisor:true,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true});
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/30405302" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<div class="js-app-landing hidden">
+	<div id="header" class="js-fixed-header">
+        <div class="grid">
+            <div class="main-icon">
+                <div class="logo"><a href="/">&nbsp;</a></div>
+            </div>
+            <div class="links">
+                <a href="@Url.Action("Login", "Account")" target="_blank">Войти</a>
+                <a href="#" class="js-feedback">Связаться с нами</a>
+                <a href="#" class="btn btn-green js-show-registration">Зарегистрироваться</a>
+            </div>
+        </div>
+	</div>
+
+	<div id="content">
+        <div id="slider">
+            <div class="grid">
+                <h2>Сервис для создания, проверки и работы с<br>облачной электронной подписью</h2>
+                <ul class="nav jcarousel-pagination">
+
+                </ul>
+                <div class="jcarousel-wrapper tabs">
+                    <div class="jcarousel">
+                        <ul>
+                            <li class="tab" data-tab="1" data-title="Для физических лиц">
+                                <div class="pic">
+                                    <div class="balloon">
+                                        <span class="man"></span>
+                                        <span class="large">99%</span>
+                                        <br>
+                                        <span class="text">почтовых сообщений может быть перехвачено злоумышленниками</span>
+                                    </div>
+                                    <img src="/Content/i/landing/slider-fiz.png" alt="" />
+                                </div>
+                                <div class="terms">
+                                    <div class="title">Обмен и согласование конфиденциальной<br>информации</div>
+                                    <div class="term">
+                                        <span class="sprite sprite-ssl"></span>
+                                        <div class="text">Обезопасьте данные с помощью шифрования</div>
+                                    </div>
+                                    <div class="term">
+                                        <span class="sprite sprite-time"></span>
+                                        <div class="text">Проверяйте подлинность электронного<br>документа от получателя</div>
+                                    </div>
+                                    <div class="term">
+                                        <span class="sprite sprite-docs"></span>
+                                        <div class="text">Храните и обменивайтесь важной информацией<br>с любого устройства</div>
+                                    </div>
+                                    <div class="btn js-show-registration">Попробуйте прямо сейчас!</div>
+                                </div>
+                            </li>
+                            <li class="tab" data-tab="2" data-title="Для бизнеса">
+                                <div class="pic text-center">
+                                    <img src="/Content/i/landing/slider-biz.png" alt="" />
+                                </div>
+                                <div class="terms">
+                                    <div class="term">
+                                        <span class="sprite sprite-cloud"></span>
+                                        <div class="name">Удаленное проведение криптоопераций</div>
+                                        <div class="text">Шифруйте и подписывайте Ваши электронные документы в сети с любого устройства с доступом в интернет. Ничего лишнего!</div>
+                                    </div>
+                                    <div class="term">
+                                        <span class="sprite sprite-time"></span>
+                                        <div class="name">Экспертиза и проверка подписи</div>
+                                        <div class="text">Проверьте подлинность открытых ключей электронной подписи, срок их действия, кем и когда выдан. Ваша уверенность!</div>
+                                    </div>
+                                    <div class="term">
+                                        <span class="sprite sprite-docs"></span>
+                                        <div class="name">Отправка, получение и хранение файлов</div>
+                                        <div class="text">Шифруйте и подписывайте Ваши электронные документы в сети с любого устройства с доступом в интернет.</div>
+                                    </div>
+                                    <div class="btn js-show-registration">Попробуйте прямо сейчас!</div>
+                                </div>
+                            </li>
+                            <li class="tab" data-tab="3" data-title="Интеграция">
+                                <div class="pic"><img src="/Content/i/landing/slider-integration.png" alt="" /></div>
+                                <div class="terms">
+                                    <div class="term">
+                                        <span class="sprite sprite-mass"></span>
+                                        <div class="name">Массовый выпуск «облачных сертификатов»</div>
+                                        <div class="text">Предоставление API для возможности удаленного взаимодействия с ПАК удостоверяющих центров, расширение их функционала.</div>
+                                    </div>
+                                    <div class="term">
+                                        <span class="sprite sprite-ssl"></span>
+                                        <div class="name">Хранение сертификатов в «защищенном» облаке</div>
+                                        <div class="text">Обеспечение хранения закрытых ключей в сертифицированном облачном криптографическом модуле.</div>
+                                    </div>
+                                    <div class="term">
+                                        <span class="sprite sprite-settings"></span>
+                                        <div class="name">Интеграция с существующими системами ЭДО и электронных услуг</div>
+                                        <div class="text">Шифруйте и подписывайте Ваши электронные документы в сети с любого устройства с доступом в интернет.</div>
+                                    </div>
+                                    <div class="btn js-show-registration">Попробуйте прямо сейчас!</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+                    <a href="#" class="jcarousel-control-next">&rsaquo;</a>
+                </div>
+            </div>
+        </div>
+        <div id="security">
+            <div class="grid">
+                <div class="security-fiz js-slider-related js-fiz">
+                    <h2>Cryptogramm защитит ваши данные</h2>
+                    <div class="row">
+                        <div class="col">
+                            <div class="pic ">
+                                <img src="/Content/i/landing/security-doc.png" alt="" />
+                            </div>
+                            <span>При обмене информацией<br>о планах в бизнесе</span>
+                        </div>
+                        <div class="col">
+                            <div class="pic">
+                                <img src="/Content/i/landing/security-stat.png" alt="" />
+                            </div>
+                            <span>При пересылке финансовой<br>и коммерческой информации</span>
+                        </div>
+                        <div class="col">
+                            <div class="pic">
+                                <img src="/Content/i/landing/security-home.png" alt="" />
+                            </div>
+                            <span>При передаче проектов на<br>согласование заказчику</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="security-biz js-slider-related js-biz hidden">
+                    <div class="pic ">
+                        <img src="/Content/i/landing/security-biz.png" alt="" />
+                    </div>
+                    <h2>Cryptogramm защитит ваши данные</h2>
+                    <div class="description">
+                        До 99% электронной почты может быть перехвачено или взломано.<br />
+                        Потеря конфиденциальной информации ставит под риск Вашу репутацию<br />
+                        и может грозить дополнительными финансовыми расходами
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile">
+            <div class="grid">
+                <img src="/Content/i/landing/mobile.png" alt="" />
+                <h2>Мобильность и доступность</h2>
+                <span>Вы можете работать с любого устройства, освоив систему за минуту</span>
+            </div>
+        </div>
+
+        <div id="legal">
+            <div class="grid">
+                <img src="/Content/i/landing/legal.png" alt="" />
+                <div class="title">
+                    Юридическая значимость
+                </div>
+                <div class="stamp"> </div>
+            </div>
+        </div>
+
+        <div id="form">
+            <div class="icons icons-left"></div>
+            <div class="icons icons-right"></div>
+            <div class="icons icons-top"></div>
+            <div class="icons icons-left-bottom"></div>
+            <div class="icons icons-right-bottom"></div>
+
+            <div class="registration-box js-registration-box">
+                <h2>Регистрация</h2>
+                @using (Html.BeginForm("Index", "Registration", FormMethod.Post, new { @class = "js-registration-form", @autocomplete = "off" }))
+                {
+                    <div class="row">
+                        <input type="text" name="FIO" maxlength="50" value="" placeholder="ФИО">
+                    </div>
+                    <div class="row phone-row">
+                        <input type="text" name="Phone" maxlength="10" class="js-phone" value="" placeholder="Телефон">
+                    </div>
+                    <div class="row">
+                        <input type="text" name="Email" maxlength="50" value="" placeholder="E-mail">
+                    </div>
+                    <div class="row">
+                        <input type="password" name="Password" maxlength="40" value="" placeholder="Пароль">
+                        <span class="eye js-eye"></span>
+                    </div>
+                    <div class="row">
+                        <input type="text" name="City" class="js-city-search" value="" placeholder="Город" maxlength="100" autocomplete="off">
+                        <i class="icon description js-registrationCity-tip "></i>
+                    </div>
+                    <div class="row">
+                        <input type="text" name="" class="js-promo-code" value="" placeholder="Промо-код" maxlength="100" autocomplete="off">
+                        <span class="promo-code js-promo-code-message">Введите корректный промокод</span>
+                    </div>
+                    <div class="row  row-submit text-center">
+                        <input type="submit" class="btn disabled js-onRegistration" name="ok" value="Зарегистрироваться">
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div id="footer">
+            <div class="grid">
+                <div class="copy">
+                    <img src="/Content/i/landing/taxnet.png" alt="" />
+                    <br>
+                    Copyright © 2015.ЗАО “Такснет”
+
+                </div>
+                <div class="contacts">
+                    <div class="phone">
+                        8 (843) 231-92-00
+                    </div>
+                    <div class="email">
+                        <a href="mailto:support@cryptogramm.ru">support@cryptogramm.ru</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+	</div>
+</div>
+<div class="hidden">
+    <script id="tpl-blankCentered" type="text/html">
+        <div class="modal-blankCentered">
+            <div class="modal-title js-dialog-title">
+                <div class="title">
+                    <%- title %>
+                </div>
+            </div>
+            <div class="modal-body js-dialog-body">
+                <div class="row text-center"><%= text %></div>
+                <div class="row sbmt text-center">
+                    <input class="btn btn-green" type="button" value="OK" onclick=" $.fancybox.close(); " />
+                </div>
+
+            </div>
+        </div>
+    </script>
+
+    <script id="tpl-blankError" type="text/html">
+        <div class="modal-blankError">
+            <div class="modal-title js-dialog-title">
+                <div class="title">Внимание!</div>
+            </div>
+            <div class="modal-body js-dialog-body">
+
+                <div class="row">
+                    <div class="mess-box">
+                        <div class="error js-error"><span><%= text %></span></div>
+                    </div>
+                </div>
+
+                <div class="row sbmt pull-right">
+                    <input class="btn btn-green" type="button" value="Закрыть" onclick=" $.fancybox.close(); " />
+                </div>
+
+            </div>
+        </div>
+    </script>
+
+    <script id="tpl-regPhone" type="text/html">
+        <div class="modal-regPhone">
+            <div class="modal-title js-dialog-title">
+                <div class="title">Подтверждение номера телефона</div>
+                <div class="time js-time">00:00</div>
+            </div>
+            <div class="modal-body js-dialog-body">
+
+                <form action="" method="post" autocomplete="off">
+
+                    <div class="row">
+                        <div class="value-row success-mess text-center">
+                            На мобильный телефон, указанный Вами в форме, выслано <br /> SMS-сообщение с кодом подтверждения
+                        </div>
+                    </div>
+
+                    <div class="row text-center row-condensed">
+                        Если сообщение не было получено в течение минуты, нажмите на кнопку "Запросить код повторно".
+                    </div>
+
+                    <div class="row row-condensed row-padded text-center">
+                        <label class="col" style="cursor: default"> Полученный код: </label>
+                        <div class="value col">
+                            @Html.TextBox("pinCode2", null, new { maxlength = 10, @class = "js-pin" })
+                            <span class="error js-error"></span>
+                        </div>
+                    </div>
+
+                    <div class="row sbmt">
+                        <div class="action text-right">
+                            <a class="close js-close" href="#">Отмена</a>
+                            <input class="btn btn-blue js-resend" type="button" value="Запросить код повторно" disabled="disabled" />
+                            <input class="btn btn-blue js-submit" type="button" value="Продолжить" />
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </script>
+
+    <script id="tpl-feedback" type="text/html">
+        <div class="modal-feedback">
+            <div class="modal-title js-dialog-title">
+                <div class="title">Давайте общаться!</div>
+            </div>
+            <div class="modal-body js-dialog-body">
+
+                <form action="" method="post" autocomplete="off">
+
+                    <div class="row">
+                        <div class="value-row info text-center">
+                            Если у вас есть вопросы и предложения или вам нужна информация о Cryptogramm, напишите нам!
+                        </div>
+                    </div>
+
+                    <div class="row row-condensed row-padded text-center">
+                        <input class="js-field js-name" name="fbName" type="text" value="" placeholder="Ваше имя">
+                    </div>
+                    <div class="row row-condensed row-padded text-center">
+                        <input class="js-field js-phone" name="fbPhone" type="text" value="" placeholder="Телефон">
+                    </div>
+                    <div class="row row-condensed row-padded text-center">
+                        <input class="js-field js-email" name="fbMail" type="text" value="" placeholder="E-mail">
+                    </div>
+                    <div class="row row-condensed row-padded text-center">
+                        <textarea class="js-field js-message" name="fbMessage"  placeholder="Сообщение"></textarea>
+                    </div>
+
+
+                    <div class="row sbmt">
+                        <div class="action text-center">
+                            <input class="btn js-submit i-disabled" type="button" value="Отправить" />
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </script>
+
+
+    <script id="tpl-baseTemporary" type="text/html">
+        <div class="modal-baseTemporary">
+            <div class="modal-body js-dialog-body">
+                <div class="row text-center js-dialog-text"><%= text %></div>
+            </div>
+        </div>
+    </script>
+
+</div>
+<div class="scrollUp js-scrollUp"><div></div></div>
+<div class="float-feedback js-float-feedback">
+    <div class="img"><div></div></div>
+    <div class="tip">Связаться с нами</div>
+</div>
+@Html.Partial("/Views/Shared/JsGlobal.cshtml")
+
+@Html.Partial("/Views/Shared/jQuery.cshtml")
+
+@Scripts.Render("~/bundles/Global")
+@Scripts.Render("~/bundles/Landing")
+
+</body>
+</html>

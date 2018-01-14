@@ -1,0 +1,64 @@
+<div id="signature">
+    <!-- Заголовок -->
+    <div class="row title">
+        <div class="c-500">
+            <h2>{{title}}</h2>
+            <a can-click="event.refiles" class="change" href="javascript:void(0)">Изменить</a>
+        </div>
+        <div class="c-500"></div>
+    </div>
+    <!-- Тело -->
+    <div class="box">
+        <div class="state {{boxState}}"></div>
+
+        {{#if result}}
+            <div class="result_bg"></div>
+        {{/if}}
+
+        <div class="item signature" style="padding: 0">
+            <div class="content">
+                <div class="runtime">
+                    <ul class="certificate">
+                        <li class="icon icon-pen">
+                            <div class="checkbox pull-left">
+                                <label for="a4">
+                                    {{#if certificate}}
+                                        {{#if certificate.IsTest}}<span class="test-certificate-icon float js-test-certificate-tip" id="testTip-{{id}}"></span>{{/if}}
+                                        {{certificate.SubjectName}}
+                                    {{else}}
+                                        Сертификат не выбран
+                                    {{/if}}
+                                </label>
+                            </div>
+                            <div can-click="event.change_certificate" class="pull-left change_ser">Изменить сертификат</div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        {{#if result}}
+            <div class="controls">
+                <div class="file-edit-control" style="margin: 22px 0 0 280px;">
+                    <div can-click="event.composition_certificate_change" class="btn change_file_list">Изменить сертификат</div>
+                </div>
+            </div>
+        {{/if}}
+    </div>
+
+    {{#if result}}
+    {{else}}
+        <div class="c-500">
+            <div class="btn-group pull-right">
+                <div can-click="event.cancel" class="btn">Отмена</div>
+
+                {{#if ready}}
+                    <div can-click="event.action_run" class="btn btn-big btn-green">Продолжить</div>
+                {{else}}
+                    <div disabled class="btn btn-big btn-green">Продолжить</div>
+                {{/if}}
+            </div>
+        </div>
+    {{/if}}
+</div>

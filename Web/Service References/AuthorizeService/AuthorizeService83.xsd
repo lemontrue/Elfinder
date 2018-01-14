@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://localhost:44300/AuthorizeService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="https://localhost:44300/AuthorizeService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Response" />
+  <xs:complexType name="ArrayOfUserRoles">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserRoles" type="tns:UserRoles" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserRoles" nillable="true" type="tns:ArrayOfUserRoles" />
+  <xs:simpleType name="UserRoles">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="User">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GroupAdmin">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SysAdmin">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="UserRoles" nillable="true" type="tns:UserRoles" />
+  <xs:simpleType name="UserStatuses">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="New">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Confirmed">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotActive">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Deleted">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="UserStatuses" nillable="true" type="tns:UserStatuses" />
+  <xs:complexType name="Account">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/DSS.Service.Response" minOccurs="0" name="AcceptType" type="q1:AcceptType" />
+      <xs:element minOccurs="0" name="AllowTransmissionFromCryptogrammUser" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmailConfirmed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="HasMyCert" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="IsAdmin" type="xs:boolean" />
+      <xs:element minOccurs="0" name="KobilAuthPassRequired" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReceiveMessageFromSupport" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RecoveryCheckPhone" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RecoveryType" type="tns:RecoveryType" />
+      <xs:element minOccurs="0" name="SubscribeToNews" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Account" nillable="true" type="tns:Account" />
+  <xs:simpleType name="RecoveryType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Ban" />
+      <xs:enumeration value="Sms" />
+      <xs:enumeration value="Kobil" />
+      <xs:enumeration value="Email" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="RecoveryType" nillable="true" type="tns:RecoveryType" />
+  <xs:simpleType name="UserNotificationTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Dialog">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="UserNotificationTypes" nillable="true" type="tns:UserNotificationTypes" />
+</xs:schema>

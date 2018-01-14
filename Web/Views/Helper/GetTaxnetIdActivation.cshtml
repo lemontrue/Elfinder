@@ -1,0 +1,159 @@
+﻿@using System.Web.Optimization
+@using CryptxOnline.Web.Helpers
+@model dynamic
+@{
+ViewBag.Title = "Получение кода активации";
+}
+
+<!DOCTYPE html>
+<html style="padding-top:20px">
+<head>
+	<title>@ViewBag.Title</title>
+	<link href="@Url.Content("~/Assets/i/old/favicon.ico")" rel="shortcut icon" />
+	<meta charset="UTF-8" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta content="IE=edge" http-equiv="X-UA-Compatible" />
+
+	<link href="@Url.Content("~/Assets/i/old/favicon.ico")" rel="shortcut icon" type="image/x-icon" />
+
+    <link href="/Assets/css/activation.css?v=@AssetsVersion" rel="stylesheet"/>
+
+	<script src="@Url.Content("~/Assets/libjs/jquery-2.1.3.min.js")"  media="all"></script>
+	<script src="@Url.Content("~/Assets/libjs/opentip.js")"  media="all" ></script>
+
+	<!--[if IE 8]>
+	<link href="@Url.Content("~/Content/CSS/New/ie.css")" rel="stylesheet"/>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
+
+</head>
+
+<body>
+<div id="container">
+	<div id="header">
+		<div class="main-icon">
+			<div class="logo"></div>
+		</div>
+	</div>
+
+	<div id="content">
+
+		<div class="form">
+			<div class="title">
+				Получение кода активации
+			</div>
+			<div class="descr">
+				Введите E-mail адрес, указанный в вашем профиле.
+				На данный E-mail будет выслан код активации<br>приложения и инструкции по его установке.
+			</div>
+			@using (Html.BeginForm())
+			{
+			<div class="field">
+				@Html.TextBox("email", null, new { placeholder = "Введите E-mail"})
+				<i class="icon description mail-tip" ></i>
+			</div>
+
+			<div class="error-box">
+				<div class="error js-error hidden">
+                    <span></span>
+				</div>
+				<div class="error2 js-error2 hidden">
+					@ViewBag.Error
+				</div>
+
+			</div>
+			<div class="submit">
+				<button class="js-submit" type="submit">Отправить код</button>
+			</div>
+
+			}
+		</div>
+		<div class="pattern"></div>
+	</div>
+
+	<div class="mobile-app">
+		<div class="title">Мобильное приложение<br>для iOS и Android</div>
+		<div class="desc">
+			<img src="/Content/Images/login/logo_key.png" alt="Мобильное приложение для iOS и Android">
+			<span>
+				Используйте современные технологии<br>
+				аутентификации, чтобы быть уверенным в<br>
+				том, что ваш бизнес не только<br>
+				максимально мобилен и эффективен, но<br>
+				также и максимально защищен от<br>
+				внешних угроз.
+			</span>
+		</div>
+		<div class="store">
+			<a href="itms-services://?action=download-manifest&amp;url=https://demo.cryptogramm.ru/download/iOS/demo.cryptogramm.2.1.3.plist"><img src="/Content/Images/login/store01.png" alt="Apple AppStore"></a>
+			<a href="https://demo.cryptogramm.ru/download/Android/demo.cryptogramm2.2.3.apk"><img src="/Content/Images/login/store02.png" alt="Google play"></a>
+		</div>
+	</div>
+
+</div>
+<script>
+
+    $.ajaxSetup({
+        async: true,
+        type: 'POST'
+    });
+
+    $(function() {
+        new Opentip($(".mail-tip"), "Вы также можете повторно выпустить код активации, если старый был утрачен. Внимание! После выпуска нового кода активации старый код становится неактивным");
+
+        $('.js-submit').click(function () {
+            var reg = new RegExp(/^([A-Za-z0-9]+\.{0,1})+([A-Za-z0-9_-]+\.)*[A-Za-z0-9_-]*[A-Za-z0-9]+@@[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*\.[A-Za-z0-9]{2,6}$/);
+            var val = $('#email').val()
+            if (val == '') {
+                $('.error2').removeClass('hidden').text('Введите E-mail')
+            } else {
+                if (!reg.test(val)) {
+                    $('.error2').removeClass('hidden').text('Некорректный E-mail')
+                } else {
+                    return true
+                }
+            }
+            return false
+        });
+
+        $('#email').on('keypress', function () {
+            $('.error2, .error').addClass('hidden').text('Некорректный E-mail');
+            $('.js-submit').removeClass('sended').text('Отправить код');
+        });
+
+        $('#content').click(function(){
+            $('.js-error').addClass('hidden').text('');
+        });
+
+        $('#content form').submit(function(){
+            if ($('.js-submit').hasClass('sended')) {
+                return false
+            }
+            $.ajax({
+                url: $(this).attr('href'),
+                data: {
+                    'email': $('#email').val()
+                },
+                success: function(response) {
+                    if (response.Status == 0) {
+                        $('.js-submit').addClass('sended').text('Код успешно отправлен');
+                        setTimeout(function(){
+                            $('.js-submit').removeClass('sended').text('Отправить код');
+                        },4000)
+                    } else if (!!response.Status) {
+                        $('.js-error').removeClass('hidden').text('Пользователь с данным e-mail не зарегистрирован');
+                    } else {
+                        $('.js-error').removeClass('hidden').text('При отправке кода произошла ошибка');
+                    }
+                },
+                error: function() {
+                    $('.js-error').removeClass('hidden').text('При отправке кода произошла ошибка');
+                }
+            });
+            return false
+        });
+    })
+</script>
+
+</body>
+</html>

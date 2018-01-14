@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>@ViewBag.Title</title>
+        <meta name="format-detection" content="telephone=no" />
+        <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+        <script src="@Url.Content("~/Assets/libjs/jquery-2.1.0.min.js")" type="text/javascript"></script>
+        <link href="@Url.Content("~/Content/kendo.common.min.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/kendo.metro.min.css")" rel="stylesheet" type="text/css" />
+        <script src="@Url.Content("~/Assets/libjs/kendo.web.min.js")" type="text/javascript"></script>
+
+    </head>
+
+    <body>
+        @if (@ViewContext.RouteData.Values["action"].ToString() != "Login")
+        {
+            <div id="header">
+                <table style="width: 100%">
+                    <tr>
+                        <td style="padding-left: 30px; width: 200px;">
+                            <a href="@Url.Action("Index", "Default")"> <img border="0" class="main-img" src="@Url.Content("~/Assets/i/old/main_logo.png")" /></a>
+                        </td>
+                        <td style="font-size: 30px; margin-bottom: 0px; vertical-align: bottom">
+                            CryptX Online
+                        </td>
+
+                        <td>
+                            @*                        @if (Request.Cookies[".DSSAUTH"] != null)
+                            {
+                                @Html.ActionLink("Мастер подписи", "Index", "Wizard", new {type = 1}, new {})<a>&nbsp</a>
+                                @Html.ActionLink("Мастер шифрования", "Index", "Wizard", new {type = 2}, new {})
+                            }*@
+                        </td>
+                        <td style="padding-right: 10px; text-align: right; vertical-align: central;">
+
+                            @if (Request.Cookies[".DSSAUTH"] != null)
+                            {
+                                if (!(@ViewContext.RouteData.Values["action"].ToString() == "Index" && @ViewContext.RouteData.Values["controller"].ToString() == "Default"))
+                                {
+                                }
+                                if (ViewBag.login != null)
+                                {
+                                    <a>Вы авторизованы как</a>
+                                    <a style="font-size: 16px; font-style: italic; padding-right: 20px"><b>@ViewBag.login</b> &nbsp;</a>
+                                }
+                                <button class="button" onclick=" location.href = '@Url.Action("LogOff", "Account")';return false; ">Выход</button>
+                            }
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div id="header">
+                <table style="text-align: left; width: 100%;">
+                    <tr>
+                        <td style="padding-left: 30px; width: 200px;">
+                            <a href="@Url.Action("Index", "Default")"> <img border="0" class="main-img" src="@Url.Content("~/Assets/i/old/main_logo.png")" /></a>
+                        </td>
+                        <td style="font-size: 30px; margin-bottom: 0px; vertical-align: bottom">
+                            CryptX Online
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+        }
+        @if (!((@ViewContext.RouteData.Values["action"].ToString() == "Login" && @ViewContext.RouteData.Values["controller"].ToString() == "Default") || (@ViewContext.RouteData.Values["action"].ToString() == "Index" && @ViewContext.RouteData.Values["controller"].ToString() == "Error")))
+        {
+            <div class="certs-panel center-panel">
+                <table style="width: 100%">
+                    <tr>
+                        <td style="vertical-align: top; width: 15%">
+                            <table style="margin-left: 10px">
+                                <tr>
+                                    <td>
+                                        @Html.ActionLink("Мои сертификаты", "MyCertificates", "Default")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.ActionLink("Сертификаты контрагентов", "RecipientCertificates", "Default")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-bottom: 15px">
+                                        @Html.ActionLink("Профили пользователя", "Profiles", "Default")
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td style="background-color: gray"></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top: 10px">
+                                        @Html.ActionLink("Мастер", "Index", "Master")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top: 10px">
+                                        @Html.ActionLink("Мастер подписи", "Index", "Wizard", new {type = 1}, new {})
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.ActionLink("Мастер проверки подписи", "Index", "Wizard", new {type = 4}, new {})
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.ActionLink("Мастер шифрования", "Index", "Wizard", new {type = 2}, new {})
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        @Html.ActionLink("Мастер расшифровки", "Index", "Wizard", new {type = 3}, new {})
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                        <td>
+                            @RenderBody()
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        }
+        else
+        {
+            @RenderBody()
+        }
+        @*@Scripts.Render("~/bundles/jquery")*@
+        @RenderSection("scripts", false)
+    </body>
+</html>

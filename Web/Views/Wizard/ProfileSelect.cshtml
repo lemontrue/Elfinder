@@ -1,0 +1,330 @@
+﻿@using CryptxOnline.Web.CryptxService
+@model CryptxOnline.Web.Models.WizardModel
+
+
+@{
+    ViewBag.Title = Model.WizardName + " - " + Model.CustomWizardStep.StepText;
+    Layout = "~/Views/Shared/_LayoutWizardPage.cshtml";
+}
+@if (Request.QueryString["errorMsg"] != null)
+{
+    <script>
+        alert('@Request.QueryString["errorMsg"]');
+    </script>
+}
+
+<link href="@Url.Content("~/Content/CustomStyle.css")" rel="stylesheet" type="text/css" />
+@using (Html.BeginForm())
+{
+    @Html.Hidden("wizardId")
+    <div class="wizard-right-top">
+        <table>
+            <tr>
+                @if (Model.Type == OperationType.Sign)
+                {
+                    <td style="height: 80%">
+                        Данный мастер поможет Вам задать настройки подписи, подписать файл.<br /> 
+                        <br />
+                        Вы можете последовательно (шаг за шагом) задавать используемые для подписи <br />
+                        настройки, а можете использовать заранее подготовленные настройки из профиля.<br />
+                        Когда все необходимые для подписи данные будут заданы, станет активной кнопка <br />
+                        "Подписать".<br />
+                        <br />
+                        Для формирования подписи необходимо:<br />
+                        1. выбрать файл ;<br />
+                        2. задать параметры, которые будут использоваться при подписи;<br />
+                        3. выбрать сертификат подписанта;<br />
+                        4. в случае необходимости задать дополнительные настройки.<br />                
+                    </td>
+                }
+                @if (Model.Type == OperationType.Encrypt)
+                {
+                    <td style="height: 80%">
+                        Данный мастер поможет Вам зашифровать файл.<br/>
+                        Вы можете последовательно (шаг за шагом) задавать используемые при шифровании настройки, а можете использовать заранее подготовленные настройки из профиля.<br/>
+                        Когда все необходимые данные будут заданы, станет активной кнопка "Зашифровать".<br/>
+                        <br/>
+                        Для шифрования необходимо:<br/>
+                        1. выбрать файл ;<br/>
+                        2. задать параметры, которые будут использоваться при шифровании;<br/>
+                        3. выбрать сертификаты получателей.<br/>
+                    </td>
+                }
+                @if (Model.Type == OperationType.Decrypt)
+                {
+                    <td style="height: 80%">
+                        Данный мастер поможет Вам расшифровать файл.<br/>
+                        Вы можете последовательно (шаг за шагом) задавать используемые настройки, а можете использовать заранее подготовленные настройки из профиля.<br/>
+                        Когда все необходимые данные будут заданы, станет активной кнопка "Расшифровать".<br/>
+                        <br/>
+                        Для расшифровки необходимо:<br/>
+                        1. выбрать файл (файлы);<br/>
+                        2. задать параметры, которые будут использоваться при расшифровки.<br/>
+                    </td>
+                }
+                @if (Model.Type == OperationType.SignVerify)
+                {
+                    <td style="height: 80%">
+                        Данный мастер поможет Вам проверить подпись файла<br/>
+                        Когда все необходимые для подписи данные будут заданы, станет активной кнопка "Проверить подпись".<br/><br/>
+
+                        Для проверки подписи необходимо выбрать подписанный файл<br/>
+                            
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>
+                    <br/>
+                    <br/>
+                    Выберите профиль @Html.DropDownList("Profile", null, "", new {@style = "width:200px"})
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.CheckBox("useDefault", Model.ProfileSelect.UseDefault) <label>Не использовать настройки из профиля</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.ValidationSummary(true)
+                </td>
+            </tr>
+        </table>
+            
+    </div>
+    <div class="wizard-right-bottom">
+        <div class="buttons">
+            @if (string.IsNullOrEmpty(Model.CustomWizardStep.PreviousStep))
+            {
+                <input type="submit" name="backButton" class="button" value="Назад" disabled="true" />
+            }
+            else
+            {
+                <input type="submit" name="backButton" class="button" value="Назад" />
+            }
+
+            @if (string.IsNullOrEmpty(Model.CustomWizardStep.NextStep))
+            {
+                <input type="submit" name="nextButton" class="button" value="Вперед" disabled="true"/>
+            }
+            else
+            {
+                <input type="submit" name="nextButton" class="button" value="Вперед" />
+            }
+            &nbsp&nbsp&nbsp&nbsp
+                
+            @if (Model.CanmakeOperation)
+            {
+                if (Model.Type == OperationType.Sign || Model.Type == OperationType.Decrypt)
+                {
+                    <input type="button" class="button" name="makeOperation" value="@Model.MakeOperationText" onclick=" clickOpenModal() " />
+                }
+                if (Model.Type == OperationType.Encrypt || Model.Type == OperationType.SignVerify)
+                {
+                    <input type="submit" id="makeOperation" class="button" name="makeOperation" value="@Model.MakeOperationText" />
+                }
+            }
+            else
+            {
+                if (Model.Type == OperationType.Sign || Model.Type == OperationType.Decrypt)
+                {
+                    <input type="button" class="button" name="makeOperation" value="@Model.MakeOperationText" disabled="true" onclick=" clickOpenModal() " />
+                }
+                if (Model.Type == OperationType.Encrypt || Model.Type == OperationType.SignVerify)
+                {
+                    <input type="submit" id="makeOperation" class="button" name="makeOperation" disabled="true" value="@Model.MakeOperationText" />
+                }
+            }
+            <input type="submit" name="cancelButton" class="button" value="Отмена" onclick=" location = '@Url.Action("CloseWizard", "Wizard")' "/>
+        </div>
+    </div>
+
+    <div id="boxes">
+        <div id="dialog" class="window"> 
+            <table width="100%">
+                <tr>
+                    <td>
+                        Пин-код ключа
+                    </td>
+                    <td style="text-align: right">
+                        <img href="#"class="close" src="@Url.Content("~/Assets/i/old/dialog-close_7593.png")" width="32" height="32" border="0" />
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        @Html.Password("pinCode")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @if (Model.CanmakeOperation)
+                        {
+                            <input type="submit" onclick=" closeModal() " class="button" id="makeOperation" name="makeOperation" value="@Model.MakeOperationText" />
+                        }
+                        else
+                        {
+                            <input type="submit" onclick=" closeModal() " class="button" id="makeOperation" name="makeOperation" disabled="true" value="@Model.MakeOperationText" />
+                        }
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="mask"></div>
+}
+
+<script>
+    $(document).ready(function() {
+        if ($('#useDefault').prop('checked')) {
+            $('#Profile').attr('disabled', 'true');
+        }
+        $('#useDefault').change(function() {
+            if (this.checked) {
+                var wizardId = $('#wizardId').val();
+                var str = '@Url.Action("Index", new {type = Model.Type, profileId = Guid.Empty, useDefault = true})' + "&wizardId=" + wizardId;
+                str = str.replace('&amp;', '&').replace('&amp;', '&').replace('&amp;', '&');
+
+                location.href = str;
+            } else {
+                $('#Profile').removeAttr('disabled');
+                var wizardId = $('#wizardId').val();
+                var str = '@Url.Action("Index", new {type = Model.Type, profileId = Guid.Empty, useDefault = false})' + "&wizardId=" + wizardId;
+                str = str.replace('&amp;', '&').replace('&amp;', '&').replace('&amp;', '&');
+
+                location.href = str;
+            }
+        });
+        //$('#Profile').attr('disabled', 'true');
+        //$('#defaultProfile').attr('checked', 'true');
+        $('#Profile').change(function(e) {
+            var selectedOption = this.value;
+            var wizardId = $('#wizardId').val();
+            if (selectedOption != "")
+                location.href = '@Url.Action("Index", new {Model.Type})' + "&profileId=" + selectedOption + "&wizardId=" + wizardId;
+            else
+                location.href = '@Url.Action("Index", new {type = Model.Type, profileId = Guid.Empty})' + "&wizardId=" + wizardId;
+        });
+    });
+
+</script>
+
+<script>
+    function closeModal() {
+        //$(".validation-summary-errors").remove();
+        $('#mask, .window').hide();
+        $(".validation-summary-errors").remove();
+    };
+
+    function clickOpenModal() {
+        globalRes = true;
+        $.ajax({
+            url: '@Url.Action("Requestpin", "Wizard")',
+            async: false,
+            type: 'POST',
+            data: { wizardId: $('#wizardId').val() },
+            success: function(result) {
+                if (result == 'False') {
+                    globalRes = false;
+                    closeModal();
+                    $('#makeOperation').trigger('click');
+                }
+            },
+            error: function(request, error, result) {
+                location.href = location.href;
+                var wnd = window.open("about:blank", "_blank", "height:100;width:100");
+                wnd.document.write(request.responseText);
+
+                //alert('Ошибка при анализе файла');
+                return false;
+            }
+        });
+        if (globalRes) {
+            $("#pinCode").val("");
+            //Cancel the link behavior
+            //e.preventDefault();
+            //Get the A tag
+            var id = '#dialog';
+            //Get the screen height and width
+            var maskHeight = $(document).height();
+            var maskWidth = $(window).width();
+
+            //Set heigth and width to mask to fill up the whole screen
+            $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+            $('#mask').css({ 'position': 'fixed' });
+
+            //transition effect		
+            $('#mask').fadeIn(1000);
+            $('#mask').fadeTo("slow", 0.8);
+
+            //Get the window height and width
+            var winH = $(window).height();
+            var winW = $(window).width();
+
+            //Set the popup window to center
+            $(id).css('top', winH / 2 - $(id).height() / 2);
+            $(id).css('left', winW / 2 - $(id).width() / 2);
+
+            //transition effect
+            $(id).fadeIn(2000);
+            $("#pinCode").focus();
+        }
+    };
+
+    $(document).ready(function() {
+        $("#dialog").keydown(function(e) {
+            if (e.keyCode == 13) {
+                $("#makeOperation").trigger("click");
+                e.preventDefault();
+            }
+        });
+
+        //select all the a tag with name equal to modal
+        $('input[name=modal]').click(function(e) {
+            //Cancel the link behavior
+            e.preventDefault();
+            //Get the A tag
+            var id = $(this).attr('href');
+
+            //Get the screen height and width
+            var maskHeight = $(document).height();
+            var maskWidth = $(window).width();
+
+            //Set heigth and width to mask to fill up the whole screen
+            $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+
+            //transition effect		
+            $('#mask').fadeIn(1000);
+            $('#mask').fadeTo("slow", 0.8);
+
+            //Get the window height and width
+            var winH = $(window).height();
+            var winW = $(window).width();
+
+            //Set the popup window to center
+            $(id).css('top', winH / 2 - $(id).height() / 2);
+            $(id).css('left', winW / 2 - $(id).width() / 2);
+
+            //transition effect
+            $(id).fadeIn(2000);
+
+        });
+
+        //if close button is clicked
+        $('.window .close').click(function(e) {
+            //location.href = location.href;
+            //Cancel the link behavior
+            e.preventDefault();
+            $('#mask, .window').hide();
+            $(".validation-summary-errors").remove();
+        });
+
+        //if mask is clicked
+        $('#mask').click(function() {
+            //$(this).hide();
+            //$('.window').hide();
+        });
+
+    });
+</script>

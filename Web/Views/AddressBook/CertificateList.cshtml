@@ -1,0 +1,497 @@
+﻿@using System.Web.Optimization
+@using CryptxOnline.Web.CryptxService
+@model CryptxOnline.Web.Models.AddressBookModel
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title></title>
+        <meta name="format-detection" content="telephone=no" />
+        @*            <meta charset="UTF-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+        <meta name="format-detection" content="telephone=no" />
+        <link href="../../Content/css/New/reset.css" rel="stylesheet" />
+        <link href="../../Content/css/New/common.css" rel="stylesheet" />
+        <link href="../../Content/css/New/modals.css" rel="stylesheet" />
+        <link href="../../Content/css/New/normalize.css" rel="stylesheet" />
+        <link href="../../Content/css/New/icons.css" rel="stylesheet" />
+        <link href="../../Content/css/New/address2.css" rel="stylesheet" />
+        <link href="../../Content/css/New/jquery.fancybox.css" rel="stylesheet" />
+        <script src="/Assets/libjs/Login/jquery.1.8.0.min.js"></script>
+        <script src="/Assets/libjs/Login/modernizr.js"></script>
+        <script src="/Assets/libjs/Login/respond.js"></script>
+        <script src="/Assets/libjs/Login/bootstrap.min.js"></script>
+        <script src="/Assets/libjs/Login/baron.min.js"></script>
+        <script src="/Assets/libjs/Login/jquery.fancybox.pack.js"></script>
+        <script src="/Assets/libjs/Login/cusel.min.js"></script>
+        <script src="/Assets/libjs/Login/bootstrap-checkbox.js"></script>
+        <script src="/Assets/libjs/Login/jquery.textPlaceholder.js"></script>
+        <script src="/Assets/libjs/Login/script.js"></script>*@
+
+        <meta charset="UTF-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+
+
+
+        @*  <link href="../../Content/opentip.css" rel="stylesheet" />
+        <link href="../../Content/CSS/New/common.css" rel="stylesheet" />
+        <link href="../../Content/CSS/New/normalize.css" rel="stylesheet" />
+        <link href="../../Content/CSS/New/icons.css" rel="stylesheet" />
+        <link href="../../Content/CSS/New/ContactListStyle.css" rel="stylesheet" />
+        <link href="../../Content/CSS/New/jquery.fancybox.css" rel="stylesheet" />
+        <link href="../../Content/CSS/New/address2.css" rel="stylesheet" />*@
+
+
+        <link href="/Assets/css/common.css?v=@AssetsVersion" rel="stylesheet"/>
+        <link href="/Assets/css/address2.css?v=@AssetsVersion" rel="stylesheet"/>
+
+        @Scripts.Render("~/bundles/New")
+    </head>
+    @if (Model.Status == "logoff")
+    {
+        <script>
+            parent.location.href = '@Url.Action("LogOff", "Account")'
+        </script>
+    }
+
+    else
+    {
+        <body>
+            @using (Html.BeginForm())
+            {
+                @Html.Hidden("userId", (Guid) ViewBag.UserId)
+                <div id="content">
+                    <div class="dropdown add-contact hidden">
+                        <div class="btn btn-green pull-right" data-toggle="dropdown">
+                            Добавить контакт
+                            <i class="dd-arrow">
+                            </i>
+
+                        </div>
+                        <div class="dropdown-menu">
+                            <div class="arrow-top">
+                            </div>
+                            <ul>
+                                <li>
+                                    <a href="">
+                                        <i class="icon user">
+                                        </i>  Создать новый контакт
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="icon down">
+                                        </i>  Загрузить из файла сертификата
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <i class="icon loop">
+                                        </i>  Найти в Cryptogramm
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tabs">
+                        <ul class="tabs-nav">
+                            <li class="col">
+                                <a href="@Url.Action("ContactList", new {userId = (Guid) ViewBag.UserId})">Список контактов</a>
+                            </li><!--
+                                     --><li class="active col">
+                                            <a>Список сертификатов</a>
+                                        </li>
+                        </ul>
+                        <div class="tabs-content">
+                            <div class="tabs-pane" id="certificats">
+                                <div class="add-contact">
+                                    <input id="fileFromCert" type="file"  accept=".cer" multiple />
+                                    <div class="btn btn-green pull-right" onclick=" addCertClick() ">
+                                        Добавить сертификат
+                                    </div>
+                                </div>
+                                <div class="filter">
+                                    <div class="check-all col" id="certs-all">
+                                        <input class="checkAll" name="3" type="checkbox">
+                                    </div>
+                                    <div class="form">
+                                        <div class="col">
+                                            <label>Поиск:</label>
+                                            @Html.TextBoxFor(m => m.Certificates.SearchString, new {@class = "search", @maxlength = 110})
+                                            <span class="loop" id="loop_sbmt"></span>
+                                        </div>
+                                        <div class="col">
+                                            <label>Фильтр:</label>
+                                            @Html.DropDownListFor(m => m.Certificates.Filter, new SelectList(Model.Certificates.GetFilterList(), "Value", "Text", (int) Model.Certificates.Filter), new {@class = "style-select"})
+                                        </div>
+                                        <div class="col">
+                                            <label>Сортировать по:</label>
+                                            @Html.DropDownListFor(m => m.Certificates.Sort, new SelectList(Model.Certificates.GetSortList(), "Value", "Text", (int) Model.Certificates.Sort), new {@class = "style-select"})
+                                            <input id="submitBtn" type="submit" value="запросить" name="que" style="display: none" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="scroll-wrap">
+                                    <div class="scroller">
+                                        <div class="certificats-list">
+                                            @if (Model.Certificates != null)
+                                            {
+                                                if (Model.Certificates.UserCertificates.Count == 0)
+                                                {
+                                                    <div style="font-size: 25px; padding-top: 100px; text-align: center">
+                                                        По запросу не найдено ни одного сертификата
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    foreach (ContactCertificateRelationship cert in Model.Certificates.UserCertificates)
+                                                    {
+                                                        <div class="certificat">
+                                                            <div class="checkbox col">
+                                                                <input id="@cert.CertificateInfo.Thumbprint" type="checkbox" />
+                                                            </div>
+                                                            <div class="col1">
+                                                                <div class="title">
+                                                                    Название сертификата
+                                                                </div>
+                                                                <div class="name">
+
+                                                                    @if (cert.CertificateInfo.IsTest) {
+                                                                        <span class="test-certificate-icon js-test-certificate-tip" id="testTip-@cert.CertificateInfo.Thumbprint"></span>
+                                                                    }
+                                                                    <a href="@Url.Action("GetCertificate", "Default", new {thumbPrint = @cert.CertificateInfo.Thumbprint})" title="@cert.CertificateInfo.SubjectName">
+                                                                        @cert.CertificateInfo.SubjectName
+                                                                    </a>
+                                                                </div>
+                                                                <div class="cert">
+                                                                    <span>
+                                                                        @{
+                                                                            if (DateTime.Now < cert.CertificateInfo.NotBefore)
+                                                                            {
+                                                                                <a> Недействителен до @cert.CertificateInfo.NotBefore.Date.ToShortDateString().Replace("/", ".")</a>
+                                                                            }
+                                                                            if (DateTime.Now > cert.CertificateInfo.NotBefore && DateTime.Now < cert.CertificateInfo.NotAfter)
+                                                                            {
+                                                                                <a>Действителен до @cert.CertificateInfo.NotAfter.Date.ToShortDateString().Replace("/", ".")</a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a style="color: red">Недействителен с @cert.CertificateInfo.NotAfter.Date.ToShortDateString().Replace("/", ".")</a>
+                                                                            }
+                                                                        }
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col2">
+                                                                <div class="new-title">
+                                                                    @if (string.IsNullOrEmpty(cert.FriendlyName))
+                                                                    {
+                                                                        @Html.TextBoxFor(m => cert.FriendlyName, new {@maxlength = 24, placeholder = "Введите короткое название для сертификата", @id = "fr_" + @cert.CertificateInfo.Thumbprint})
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @Html.TextBoxFor(m => cert.FriendlyName, new {@disabled = true, @maxlength = 24, placeholder = "Введите короткое название для сертификата", @id = "fr_" + @cert.CertificateInfo.Thumbprint})
+                                                                    }
+                                                                </div>
+                                                                <span class="actions">
+                                                                    <a class="small-text" href="javascript:saveFriendlynameClick('@cert.CertificateInfo.Thumbprint')" id="@("save_" + cert.CertificateInfo.Thumbprint)" style="display: none">Сохранить</a>
+                                                                    @if (string.IsNullOrEmpty(cert.FriendlyName))
+                                                                    {
+                                                                        <a class="small-text" href="javascript:editFriendlynameClick('@cert.CertificateInfo.Thumbprint')" id="@("edit_" + cert.CertificateInfo.Thumbprint)" style="display: none">Изменить</a>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <a class="small-text" href="javascript:editFriendlynameClick('@cert.CertificateInfo.Thumbprint')" id="@("edit_" + cert.CertificateInfo.Thumbprint)" style="display: block">Изменить</a>
+                                                                    }
+                                                                </span>
+                                                                <div class="company">
+                                                                    @cert.CertificateInfo.Organization @(string.IsNullOrEmpty(cert.CertificateInfo.INN) ? "" : "ИНН: " + cert.CertificateInfo.INN)
+                                                                </div>
+                                                                <div class="key">
+                                                                    Отпечаток: @cert.CertificateInfo.Thumbprint
+                                                                </div>
+                                                            </div>
+                                                            @if (cert.CertificateInfo.IsTest) {
+                                                                <div class="test-certificate "></div>
+                                                            }
+                                                            <hr />
+                                                        </div>
+                                                    }
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="scroller__bar-wrapper">
+                                        <div class="scroller__bar">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cert-control">
+                            <div class="backlink">
+                                <a href="javascript:backClick()">
+                                    <i class="icon backarrow"></i>
+                                    К списку контактов
+                                </a>
+                            </div>
+                            <div class="controls">
+                                <div class="sbmt pull-right">
+                                    <a class="close" href="@Url.Action("CertificateList", new {userId = (Guid) ViewBag.UserId})">
+                                        Отмена
+                                    </a>
+                                    <input class="btn btn-blue" type="button" value="Удалить" onclick=" deleteClick() " />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                @Html.Hidden("deletingCerts")
+                @Html.Hidden("toContactList")
+            }
+        </body>
+    }
+</html>
+@if (Model.Status != "logoff")
+{
+    <script>
+        function editFriendlynameClick(thumbprint, frname) {
+            $('#fr_' + thumbprint).prop('disabled', false);
+            $('#save_' + thumbprint).css('display', 'block');
+            $('#edit_' + thumbprint).css('display', 'none');
+        }
+
+        function saveFriendlynameClick(thumbprint) {
+            var frname = $('#fr_' + thumbprint).val();
+            $.ajax({
+                url: '@Url.Action("ChangeFriendlyName")',
+                async: false,
+                type: "POST",
+                data: { frName: frname, thumbprint: thumbprint, userId: $('#userId').val() },
+                success: function(result) {
+                    if (result.Status == "ok") {
+                        $('#fr_' + thumbprint).prop('disabled', true);
+                        $('#save_' + thumbprint).css('display', 'none');
+                        $('#edit_' + thumbprint).css('display', 'block');
+                        //parent.infoModal('Данные успешно изменены');
+                    }
+                    if (result.Status == "not ok") {
+                        parent.errorModal('Не удалось переимновать сертификат');
+                    }
+                    //location.href = location.href;
+                    if (result.Status == "logoff") {
+                        parent.location = '@Url.Action("LogOff", "Account")';
+                    }
+                },
+                error: function(request, error, result) {
+                }
+            });
+
+        }
+
+        function backClick() {
+            location.href = '@Url.Action("ContactList", new {userId = (Guid) ViewBag.UserId})';
+        }
+
+        function addCertClick() {
+            var fileElem = $('#fileFromCert');
+            fileElem.click();
+        }
+
+        function deleteCertClick(thumbprint) {
+            parent.deleteCertModalOpen(thumbprint);
+        }
+
+        function deleteCert(thumbprint) {
+            $.ajax({
+                url: '@Url.Action("DeleteReceipientCertificate")',
+                async: false,
+                type: "POST",
+                data: { thumbprint: thumbprint, userId: $('#userId').val() },
+                success: function(result) {
+                    if (result.Status == "ok")
+                        location.href = location.href;
+                    if (result.Status == "logoff") {
+                        parent.location = '@Url.Action("LogOff", "Account")';
+                    }
+                },
+                error: function(request, error, result) {
+                }
+            });
+
+        }
+
+        function deleteClick() {
+            var checked = $('input:checked');
+            if (checked.length != 0) {
+                var array = [];
+                checked.each(function() {
+                    array.push(this.id);
+                });
+                $('#deletingCerts').val(JSON.stringify(array));
+                parent.deleteCErtificatesModal();
+            }
+            //if (confirm('Все выбранные сертификаты будут удалены из адресной книги, шаблонов настроек и прочих списков Cryptogramm. Продолжить?')) {
+            //    $('form').submit();
+            //}
+            //alert('зачем здесь продублирована кнопка удалить?');
+        }
+
+        function sortFilterSelectChange() {
+            $('#submitBtn').click();
+        }
+
+    </script>
+
+    <script>
+        window.isDirty = false;
+        $('form').submit(function() {
+            parent.showModal('preloader');
+        });
+        $('input').keyup(function(e) {
+            var curVal = $(e.target).val();
+            var id = $(e.target).attr('id').replace('fr_', '');
+            if (curVal.length > 0) {
+                $('#save_' + id).css('display', 'block');
+            } else {
+                $('#save_' + id).css('display', 'none');
+            }
+        });
+        $('#loop_sbmt').click(function(e) {
+            $('form').submit();
+        });
+        $('input').keypress(function(e) {
+            var id = $(e.target).attr('id');
+            if ($('#' + id).val()) {
+
+            }
+            if (e.keyCode == 13) {
+                if (id == 'Certificates_SearchString') {
+                    $('form').submit();
+                } else {
+                    var thumbprint = e.target.id.replace('fr_', '');
+                    e.preventDefault();
+                    $.ajax({
+                        url: '@Url.Action("ChangeFriendlyName")',
+                        async: false,
+                        type: "POST",
+                        data: { frName: $(e.target).val(), thumbprint: thumbprint, userId: $('#userId').val() },
+                        success: function(result) {
+                            if (result.Status == "ok") {
+                                $('#fr_' + thumbprint).prop('disabled', true);
+                                $('#save_' + thumbprint).css('display', 'none');
+                                $('#edit_' + thumbprint).css('display', 'block');
+
+                                //parent.infoModal('Данные успешно изменены');
+                            }
+                            if (result.Status == "not ok") {
+                                parent.errorModal('Не удалось переимновать сертификат');
+                            }
+                            //location.href = location.href;
+                            if (result.Status == "logoff") {
+                                parent.location = '@Url.Action("LogOff", "Account")';
+                            }
+                        },
+                        error: function(request, error, result) {
+                        }
+                    });
+
+
+                }
+            }
+        });
+        $(document).ready(function() {
+
+            var regTipOptions = {
+                tipJoint: "left",
+                background: '#fff5d2',
+                borderRadius: 4,
+                borderWidth: 1,
+                borderColor: '#fee8ae'
+            };
+
+            $(".js-test-certificate-tip").each(function(i,el) {
+                new Opentip(el, 'Сертификат выпущен без участия<br>аккредитованного Удостоверяющего<br>Центра и не имеет юридической силы.', '', regTipOptions);
+            });
+
+            var globalStatus = "";
+            parent.hideModal('preloader');
+            if ('@(ViewBag.nav != null)' == 'True') {
+                if (parent.UpdateNavPane != null)
+                    parent.UpdateNavPane('@Html.Raw(ViewBag.nav)');
+            }
+
+            $('.cusel-scroll-wrap').mouseleave(function() {
+                $('.cusel-scroll-wrap').css('display', 'none');
+            });
+            $('#certs-all').change(function(e) {
+                var checkboxes = $('.certificats-list').find(':checkbox');
+                checkboxes.prop('checked', e.target.checked);
+
+            });
+            $('#Certificates_Filter').change(function() {
+                sortFilterSelectChange();
+            });
+            $('#Certificates_Sort').change(function() {
+                sortFilterSelectChange();
+            });
+
+            $('#fileFromCert').change(function(e) {
+                var fileInput = document.getElementById(e.target.id);
+                var files = fileInput.files;
+                for (var i = 0; i < files.length; i++) {
+                    if (files[i].size < 1048576) {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST', '@Url.Action("AddRecipientCertificateToUser", new {userId = (Guid) ViewBag.UserId})', false);
+                        xhr.setRequestHeader('Content-type', 'multipart/form-data');
+                        //Appending file information in Http headers
+                        //xhr.setRequestHeader('X-File-Name', files[i].name);
+                        xhr.setRequestHeader('X-File-Type', files[i].type);
+                        xhr.setRequestHeader('X-File-Size', files[i].size);
+
+
+                        xhr.addEventListener("load", function(evt) { UploadComplete(evt); }, false);
+                        //Sending file in XMLHttpRequest
+                        xhr.send(fileInput.files[i]);
+                        var retrievedData = "";
+                    } else {
+                        parent.infoModal("Файл не соответствует требованиям к сертификатам, используемым в Cryptogramm. Загрузка невозможна.");
+                    }
+                }
+
+                function UploadComplete(evt) {
+                    if (evt.target.status == 200) {
+                        retrievedData = jQuery.parseJSON(xhr.responseText);
+                        switch (retrievedData.Status) {
+                        case "ok":
+                            //parent.createContactClick(retrievedData.Thumbprint, retrievedData.SubjectName, retrievedData.TimeMessage);
+                            break;
+                        case "refresh":
+                            Refresh();
+                            break;
+                        default:
+                            globalStatus = retrievedData.Status;
+                            break;
+                        }
+                    } else
+                        parent.infoModal("Ошибка загрузки файла");
+                }
+
+                if (globalStatus != '') {
+                    parent.infoModal(globalStatus);
+                }
+            });
+
+        });
+
+        function Refresh() {
+            location.reload();
+        }
+    </script>
+}

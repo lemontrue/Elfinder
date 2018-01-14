@@ -1,0 +1,584 @@
+﻿@using System.Web.Optimization
+@using CryptxOnline.Web.AuthorizeService
+@using CryptxOnline.Web.Helpers
+<!DOCTYPE html>
+<html style="padding-top:20px">
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="UTF-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+
+    <link href="/Assets/i/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+
+    <link href="/Assets/css/common.css?v=@AssetsVersion" rel="stylesheet"/>
+    <link href="/Assets/css/profile.css?v=@AssetsVersion" rel="stylesheet"/>
+
+    @Html.Partial("/Views/Shared/JsGlobal.cshtml")
+    @Scripts.Render("~/bundles/Profile")
+
+    <!--[if IE 8]>
+    <link href="../../Content/CSS/New/ie.css" rel="stylesheet"/>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
+
+</head>
+
+<body>
+    <div id="container">
+        <div id="header">
+            <a href="@Url.Action("WebDavBrowser","Default")" style="color:black">
+                <div class="main-icon">
+                    <div class="logo"></div>
+                </div>
+            </a>
+            @if (CurrentUser.Identity.IsAuthenticated)
+            {
+                <div class="user-box col" style="padding-top: 18px">
+                    <div class="dropdown user-settings">
+                        <a class="head-user" data-toggle="dropdown" href="#">
+                            <i class="ico-4-2-settings ib-ico ico" style="margin: 3px 5px 0 0"></i>@CurrentUser.FIO<span class="caret" style="margin-left: 2px"></span>
+                        </a>
+                        <div class="dropdown-menu" style="width: 185px;">
+                            <div class="arrow-top"></div>
+                            <ul>
+                                @if (CurrentUser.Status != UserStatuses.New)
+                                {
+                                    <li><a href="@Url.Action("MyProfile", "Default")"> <i class="ico-4-2-profile ib-ico ico"></i> Мой профиль</a></li>
+                                    <li><a href="@Url.Action("Index", "AddressBook")"> <i class="ico-4-2-addressbook ib-ico ico"></i> Адресная книга</a></li>
+                                    <li><a href="@Url.Action("Index", "Settings")"> <i class="ico-4-2-template-settings ib-ico ico"></i> Шаблоны настроек</a></li>
+                                    if (CurrentUser.IsInRole("GroupAdmin") || CurrentUser.IsInRole("SysAdmin"))
+                                    {
+                                        <li><a href="@Url.Action("Index", "Administration")"> <i class="ico-4-2-administration ib-ico ico"></i> Администрирование</a></li>
+                                    }
+                                }
+                            <li><a href="@Url.Action("LogOff", "Account")"> <i class="ico-4-2-logout ib-ico ico"></i> Выход</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        <div id="breadcrumbs">
+            <ul>
+                @if (ViewBag.nav != null)
+                {
+                    foreach (NavElement navElement in (List<NavElement>)ViewBag.nav)
+                    {
+
+                        <li class="col">
+                            @{
+                        if (navElement.IsUrl)
+                        {
+                            <a href="@Url.Action(navElement.Action, navElement.Controller)">@navElement.Name</a>
+                        }
+                        else
+                        {
+                            <span>@Html.Raw(navElement.Name)</span>
+                        }
+                            }
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+        @if (ViewContext.RouteData.Values["controller"].ToString() != "Error" && CurrentUser != null)
+        {
+            <div id="navigation">
+                <ul>
+
+                    @if (Request.QueryString["userId"] != null && new Guid(Request.QueryString["userId"]) != Guid.Empty)
+                    {
+                        if (CurrentUser.IsInRole("GroupAdmin") || CurrentUser.IsInRole("SysAdmin"))
+                        {
+
+                            <li>
+                                @Html.ActionLink("Мой профиль", "MyProfile", "Default")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Адресная книга", "Index", "AddressBook")
+                            </li>
+                            <li>
+                                @Html.ActionLink("Шаблоны настроек", "Index", "Settings")
+                            </li>
+                            <li class="active">
+                                @Html.ActionLink("Администрирование", "Index", "Administration")
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        if (CurrentUser.Status != UserStatuses.New)
+                        {
+
+                            if (ViewContext.RouteData.Values["action"].ToString().ToLower() == "myprofile" && ViewContext.RouteData.Values["controller"].ToString() == "Default")
+                            {
+                                <li class="active">
+                                    @Html.ActionLink("Мой профиль", "MyProfile", "Default")
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    @Html.ActionLink("Мой профиль", "MyProfile", "Default")
+                                </li>
+                            }
+
+                            if (ViewContext.RouteData.Values["action"].ToString().ToLower() == "index" && ViewContext.RouteData.Values["controller"].ToString().ToLower() == "addressbook")
+                            {
+                                <li class="active">
+                                    @Html.ActionLink("Адресная книга", "Index", "AddressBook")
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    @Html.ActionLink("Адресная книга", "Index", "AddressBook")
+                                </li>
+                            }
+                            if (ViewContext.RouteData.Values["controller"].ToString().ToLower() == "settings")
+                            {
+                                <li class="active">
+                                    @Html.ActionLink("Шаблоны настроек", "Index", "Settings")
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    @Html.ActionLink("Шаблоны настроек", "Index", "Settings")
+                                </li>
+                            }
+                            if (CurrentUser != null && (CurrentUser.IsInRole("GroupAdmin") || CurrentUser.IsInRole("SysAdmin")))
+                            {
+                                if (ViewContext.RouteData.Values["controller"].ToString().ToLower() == "administration")
+                                {
+                                    <li class="active">
+                                        @Html.ActionLink("Администрирование", "Index", "Administration")
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        @Html.ActionLink("Администрирование", "Index", "Administration")
+                                    </li>
+                                }
+                            }
+                        }
+                    }
+                </ul>
+            </div>
+        }
+        <div id="content">
+            @RenderBody()
+        </div>
+    </div>
+
+
+<div class="hidden">
+    <script id="tpl-blankCentered" type="text/html">
+        <div class="modal-blankCentered">
+            <div class="modal-title js-dialog-title">
+                <div class="title">
+                    <%= title %>
+                </div>
+            </div>
+            <div class="modal-body js-dialog-body">
+                <div class="row text-center"><%= text %></div>
+                <div class="row sbmt text-center">
+                    <input class="btn btn-green" type="button" value="OK" onclick=" $.fancybox.close(); " />
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script id="tpl-blankInform" type="text/html">
+        <div class="modal-blankInform">
+            <div class="modal-title js-dialog-title">
+                <div class="title">
+                    <%= title %>
+                </div>
+            </div>
+            <div class="modal-body js-dialog-body">
+                <div class="row text-center"><%= text %></div>
+                <div class="row sbmt text-center">
+                    <input class="btn btn-blue" type="button" value="Закрыть" onclick=" $.fancybox.close(); " />
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script id="tpl-blankConfirm" type="text/html">
+        <div class="modal-blankConfirm">
+            <div class="modal-title js-dialog-title">
+                <div class="title">
+                    <%= title %>
+                </div>
+            </div>
+            <div class="modal-body js-dialog-body">
+                <div class="row text-center"><%= text %></div>
+                <div class="row sbmt text-center">
+                    <input class="btn" type="button" value="Закрыть" onclick=" $.fancybox.close(); " />
+                    <input class="btn btn-blue" type="button" value="Закрыть" onclick=" $.fancybox.close(); " />
+                </div>
+            </div>
+        </div>
+    </script>
+
+
+    <script id="tpl-welcomeModal" type="text/html">
+        <div class="modal-welcomeModal">
+            <div class="modal-title js-dialog-title text-center">
+                <div class="title"><%- title %></div>
+                <div class="description"><%= text %></div>
+            </div>
+
+            <div class="modal-body js-dialog-body row <%- Single ? 'i-single' : '' %>">
+                <div class="need">Вам нужно:</div>
+                <div class="step-box email <%- EmailConfirmed ? 'hidden' : '' %>">
+                    <div class="step-num">1</div>
+                    <div class="step-title">Подтвердить E-Mail</div>
+                    <div class="step-text">Для этого перейдите по ссылке,<br>отправленной на Ваш E-mail,<br>который Вы указали при регистрации.</div>
+                </div>
+                <div class="step-box cert <%- HasMyCert ? 'hidden' : '' %>">
+                    <div class="step-num">2</div>
+                    <div class="step-title">Выпустить Ваш первый сертификат</div>
+                    <% if (Single) { %>
+                        <div class="step-text">Для этого закройте окно и<br>нажмите кнопку"Выпустить тестовый сертификат"<br>или перейдите по <a href="#" class="js-createTestCertificate">ссылке</a></div>
+                    <% } else { %>
+                        <div class="step-text">Для этого подтвердите Ваш E-mail, а<br>затем нажмите на кнопку "Выпустить<br>тестовый сертификат".</div>
+                    <% } %>
+                </div>
+            </div>
+            <div class="row sbmt">
+                <div class="hideModal pull-left <%- First ? 'hidden' : '' %>">
+                    <label>
+                        <input type="checkbox" class="js-hide-modal" name="hideModal" />
+                        Больше не показывать данное сообщение
+                    </label>
+                </div>
+                <div class="pull-right">
+                    <input class="btn btn-blue" type="button" value="OK" onclick=" $.fancybox.close(); " />
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script id="tpl-markerActivation" type="text/html">
+        <div class="modal-markerActivation">
+            <div class="modal-title js-dialog-title">
+                <ul class="js-tabs-title step1">
+                    <li class="active js-item">
+                        <span class="num"><span class="val val1"></span></span>
+                        <span class="text">Ввод маркера</span>
+                    </li>
+                    <li class="js-item">
+                        <span class="num"><span class="val val2"></span></span>
+                        <span class="text">Подтверждение данных</span>
+                    </li>
+                    <li class="js-item"><span class="num">
+                        <span class="val val3"></span></span>
+                        <span class="text">Ввод пин-кода и отправка<br>запроса на сертификат</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-body js-dialog-body">
+                <div class="sub-dialog-cancel hidden js-sub-dialog-cancel">
+                    <div class="sub-title">Отмена операции</div>
+                    <div class="descr">
+                        Вы уверены, что хотите прервать процесс добавления сертификата?<br>
+                        Все данные будут утеряны!
+                    </div>
+                    <div class="actions">
+                        <span class="act-btn decline js-cancel-decline">Нет</span>
+                        <span class="act-btn confirm js-confirm-decline">Да</span>
+                    </div>
+                </div>
+                <div class="sub-dialog-cancel hidden js-sub-dialog-back">
+                    <div class="sub-title">Отмена операции</div>
+                    <div class="descr">
+                        Вы уверены, что хотите вернуться на предыдущий этап?<br>
+                        Все введенные данные будут утеряны!
+                    </div>
+                    <div class="actions">
+                        <span class="act-btn decline js-cancel-back">Нет</span>
+                        <span class="act-btn confirm js-confirm-back">Да</span>
+                    </div>
+                </div>
+                <div class="sub-dialog-cancel hidden js-sub-dialog-change-auth">
+                    <div class="sub-title">Отмена операции</div>
+                    <div class="descr">
+                        Вы уверены, что хотите изменить значения введенных полей?<br>
+                    </div>
+                    <div class="actions">
+                        <span class="act-btn decline js-cancel-change-auth">Нет</span>
+                        <span class="act-btn confirm js-confirm-change-auth">Да</span>
+                    </div>
+                </div>
+                <div class="sub-dialog-cancel hidden js-sub-dialog-confirm-request">
+                    <div class="sub-title">Подтверждение операции</div>
+                    <div class="descr js-confirm-request-text"></div>
+                    <div class="actions">
+                        <span class="act-btn decline js-cancel-request">Отмена</span>
+                        <span class="act-btn confirm js-confirm-request">Продолжить</span>
+                    </div>
+                </div>
+                <div class="tab tab-login js-tab-content">
+                    <span class="intro-text">Введите маркер (логин и пароль), полученный Вами в удостоверяющем центре.</span>
+                    <div class="login-form">
+                        <div class="column-form js-auth">
+                            <div class="row">
+                                <span class="label">Логин:</span>
+                                <input type="text" class="input js-login" value="">
+                            </div>
+                            <div class="row">
+                                <span class="label">Пароль:</span>
+                                <input type="password" class="input js-pass" value="">
+                            </div>
+                        </div>
+                        <div class="column-actions">
+                            <div class="small-loader js-loader hidden"></div>
+                            <a href="" class="change-marker js-change hidden">Изменить</a>
+                        </div>
+                    </div>
+                    <div class="pincode-form js-phone-confirm hidden">
+                        <div class="confirm-text">
+                            На мобильный номер, который вы указывали в УЦ, отправлен код-подтверждение
+                        </div>
+                        <div class="column-form">
+                            <div class="row">
+                                <span class="label">Введите код:</span>
+                                <input type="text" class="input js-pin" maxlength="6" value="">
+                                <div class="time js-time">00:00</div>
+                            </div>
+                        </div>
+                        <div class="column-actions">
+                            <a href="" class="marker-resend-link js-resend hidden">Запросить код повторно</a>
+                        </div>
+                    </div>
+                    <div class="error js-error hidden"></div>
+                </div>
+                <div class="tab tab-confirm js-tab-content hidden">
+                    <span class="intro-text">
+                        Внимательно проверьте Ваши данные! В случае если в данных обнаружена ошибка, <br>
+                        обратитесь в удостоверяющий центр!
+                    </span>
+                    <div class="cert-info-confirm js-cert-info"></div>
+                </div>
+                <div class="tab tab-pin js-tab-content hidden"> </div>
+            </div>
+            <div class="modal-footer js-dialog-footer">
+                <div class="prev-block">
+                    <a href="" class="cancel-btn js-prev js-cancel">Отмена</a>
+                    <a href="" class="cancel-btn js-prev js-back hidden">Назад</a>
+                </div>
+                <div class="next-block">
+                    <a href="" class="btn btn-green js-next disabled" >Продолжить</a>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script id="tpl-markerCertInfo" type="text/html">
+        <dl>
+            <% if (name) { %>
+            <dt>ФИО:</dt><dd><%- name %></dd>
+            <% } %>
+            <% if (post) { %>
+            <dt>Должность:</dt><dd><%- post %></dd>
+            <% } %>
+            <% if (address) { %>
+            <dt>Адрес:</dt><dd><%- address %></dd>
+            <% } %>
+            <% if (company) { %>
+            <dt>Организация:</dt><dd><%- company %></dd>
+            <% } %>
+            <% if (city) { %>
+            <dt>Город:</dt><dd><%- city %></dd>
+            <% } %>
+            <% if (region) { %>
+            <dt>Область:</dt><dd><%- region %></dd>
+            <% } %>
+            <% if (email) { %>
+            <dt>E-mail:</dt><dd><%- email %></dd>
+            <% } %>
+            <% if (inn) { %>
+            <dt>ИНН:</dt><dd><%- inn %></dd>
+            <% } %>
+            <% if (ogrn) { %>
+            <dt>ОГРН:</dt><dd><%- ogrn %></dd>
+            <% } %>
+            <% if (ogrnip) { %>
+            <dt>ОГРНИП:</dt><dd><%- ogrnip %></dd>
+            <% } %>
+            <% if (snils) { %>
+            <dt>СНИЛС:</dt><dd><%- snils %></dd>
+            <% } %>
+            <% if (KeyUsage) { %>
+            <dt>Использование ключа:</dt><dd><%- KeyUsage %></dd>
+            <% } %>
+            <% if (EnhancedKeyUsage) { %>
+            <dt>Область использования (расширенная):</dt><dd><%- EnhancedKeyUsage %></dd>
+            <% } %>
+        </dl>
+        <a href="" class="print-btn js-print">Распечатать</a>
+    </script>
+    <script id="tpl-tab-pin" type="text/html">
+        <span class="intro-text">Задайте ПИН-код для контейнера закрытого ключа.</span>
+        <div class="new-pin-form">
+            <div class="row pin-row">
+                <span class="label">ПИН-код:</span>
+                <input type="text" class="input js-new-pin" maxlength="8" value="">
+                <i id="MarkerNewPin_info" class="icon description"></i>
+                <div class="error js-error-request hidden"></div>
+            </div>
+            <div class="row">
+                <div class="save-pin">
+                    <span class="intro-text">Выберите хотите ли вы хранить ПИН-код в системе:</span>
+                    <span class="save-pin-select">
+                        <select class="style-select" id="savePin">
+                            <option value="1" selected="selected">Хранить ПИН-код в системе</option>
+                            <option value="0">Не хранить ПИН-код в системе</option>
+                        </select>
+                    </span>
+                    <i id="MarkerPinContainer_info" class="icon description"></i>
+                </div>
+
+                <div class="row checkbox-row">
+                    <label>
+                        <input class="js-send-sms" type="checkbox" checked="checked">
+                        <span>Отправить ПИН-код по СМС</span>
+                    </label>
+                </div>
+                <div class="row checkbox-row">
+                    <label>
+                        <input class="js-send-email" type="checkbox">
+                        <span>Отправить ПИН-код по E-mail</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script  id="tpl-markerCertInfo-print" type="text/html">
+        <style>
+        body {
+            width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        dl {
+            font-size: 17px;
+            padding-bottom: 15px;
+        }
+        dl dd {
+            display: inline-block;
+            width: 400px;
+            background: #d2e6f3;
+            padding: 5px 8px 0;
+            margin: 0 0 0 10px;
+        }
+        dl dt {
+            display: inline-block;
+            vertical-align: top;
+            text-align: right;
+            padding-right: 8px;
+            width: 120px;
+            padding-top: 5px;
+        }
+        .print-btn {
+            display: none;
+        }
+        </style>
+    </script>
+
+
+    <script id="tpl-confirmRequestSend" type="text/html">
+            <div class="modal-confirmRequestSend">
+                <div class="modal-title">
+                    Внимательно проверьте Ваши данные! <br>
+                    Если в данных обнаружена ошибка, обратитесь в Удостоверяющий Центр!
+                    Если данные являются достоверными, нажмите на кнопку “Подтвердить выпуск”,
+                    в этом случае визуальная форма выпущенного сертификата будет подписана
+                    и отправлена в Удостоверяющий Центр, после чего работа в системе будет
+                    осуществляться в полном режиме.
+                </div>
+                <div class="modal-body js-dialog-body">
+                    <div class="sub-dialog-cancel hidden js-sub-dialog">
+                        <div class="sub-title">Отмена операции</div>
+                        <div class="descr">
+                            Вы уверены что не хотите подтвердить получение сертификата? Вы сможете повторить операцию подтверждения в любое удобное для Вас время, но помните, что до тех пор, пока сертификат не подтвержден Вы не сможете им воспользоваться.
+                        </div>
+                        <div class="actions">
+                            <span class="act-btn decline js-sub-cancel">Нет</span>
+                            <span class="act-btn confirm js-sub-confirm">Да</span>
+                        </div>
+                    </div>
+                    <div class="tab-content">
+                        <div class="cert-info-confirm">
+                            <dl>
+                                <% if (name) { %>
+                                <dt>ФИО:</dt><dd><%- name %></dd>
+                                <% } %>
+                                <% if (post) { %>
+                                <dt>Должность:</dt><dd><%- post %></dd>
+                                <% } %>
+                                <% if (address) { %>
+                                <dt>Адрес:</dt><dd><%- address %></dd>
+                                <% } %>
+                                <% if (company) { %>
+                                <dt>Организация:</dt><dd><%- company %></dd>
+                                <% } %>
+                                <% if (city) { %>
+                                <dt>Город:</dt><dd><%- city %></dd>
+                                <% } %>
+                                <% if (region) { %>
+                                <dt>Область:</dt><dd><%- region %></dd>
+                                <% } %>
+                                <% if (email) { %>
+                                <dt>E-mail:</dt><dd><%- email %></dd>
+                                <% } %>
+                                <% if (inn) { %>
+                                <dt>ИНН:</dt><dd><%- inn %></dd>
+                                <% } %>
+                                <% if (ogrn) { %>
+                                <dt>ОГРН:</dt><dd><%- ogrn %></dd>
+                                <% } %>
+                                <% if (ogrnip) { %>
+                                <dt>ОГРНИП:</dt><dd><%- ogrnip %></dd>
+                                <% } %>
+                                <% if (snils) { %>
+                                <dt>СНИЛС:</dt><dd><%- snils %></dd>
+                                <% } %>
+                                <% if (KeyUsage) { %>
+                                <dt>Использование ключа:</dt><dd><%- KeyUsage %></dd>
+                                <% } %>
+                                <% if (EnhancedKeyUsage) { %>
+                                <dt>Область использования (расширенная):</dt><dd><%- EnhancedKeyUsage %></dd>
+                                <% } %>
+
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer js-dialog-footer">
+                    <div class="prev-block">
+                        <a href="" class="cancel-btn js-prev js-cancel">Отмена</a>
+                    </div>
+                    <div class="next-block">
+                        <a href="" class="btn btn-green js-confirm" >Подтвердить</a>
+                    </div>
+                </div>
+            </div>
+        </script>
+
+
+
+
+</div>
+
+    @RenderSection("scripts", required: false)
+
+
+
+</body>
+</html>

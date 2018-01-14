@@ -1,0 +1,18 @@
+<div id="modal">
+    <div class="window {{type}}">
+        <div class="header">
+            <h2>{{title}}</h2>
+            {{#if searchLine}}
+                <input can-keyup="searchValue" class="searchLine" placeholder="Поиск сертификатов" value="">
+                <span class="loop"></span>
+            {{/if}}
+            <div class="close" {{close}}></div>
+        </div>
+        <div class="content" {{append content}}></div>
+        {{#if loading}}
+            <div class="loading">
+                <div class="title">{{loading}}</div>
+            </div>
+        {{/if}}
+    </div>
+</div>

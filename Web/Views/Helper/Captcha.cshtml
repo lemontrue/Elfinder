@@ -1,0 +1,40 @@
+﻿@using CaptchaMvc.HtmlHelpers
+@using CaptchaMvc.Interface
+@{
+    Layout = null;
+    ICaptcha captcha = Html.Captcha("Обновить", "Введите защитные символы:", 5);
+    if (DateTime.Now.Millisecond%2 == 1)
+    {
+        captcha = Html.MathCaptcha("Обновить", "Введите результат операции:");
+    }
+}
+<script>
+    $(function() {
+
+        $("form.ajax-captcha").submit(function() {
+            $.post($(this).attr("action"), $(this).serialize(), function(data) {
+                alert(data.Message);
+                if (data.IsOk) {
+                    location.href = location.href;
+                    return;
+                }
+                $('#@captcha.BuildInfo.ImageElementId').attr('src', data.Captcha.@captcha.BuildInfo.ImageElementId);
+                $('#@captcha.BuildInfo.TokenElementId').attr('value', data.Captcha.@captcha.BuildInfo.TokenElementId);
+                $('#@captcha.BuildInfo.InputElementId').attr('value', '');
+            });
+            return false;
+        });
+    });
+</script>
+
+@using (Html.BeginForm("Captcha", "Helper", FormMethod.Post, new {@class = "ajax-captcha"}))
+{
+    <div>
+        <div>
+            @captcha
+        </div>
+    </div>
+    <p>
+        <input type="submit" value="Отправить" />
+    </p>
+}

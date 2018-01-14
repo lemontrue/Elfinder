@@ -1,0 +1,130 @@
+﻿@using System.Web.Optimization
+@using CryptxOnline.Web.CryptxService
+@model CryptxOnline.Web.Models.AdminModel
+@{
+    ViewBag.Title = "Администрирование";
+    Layout = "~/Views/Shared/_LayoutCryptogramm.cshtml";
+}
+@Styles.Render("~/Assets/resources/sass/profile/admin.css")
+@using (Html.BeginForm())
+{
+    if (ViewBag.UserId != null)
+    {
+        @Html.Hidden("UserId", (Guid) ViewBag.UserId)
+    }
+    <div>
+        <div class="admin content" style="padding: 0">
+            <div class="admin-head">
+                <div class="filter">
+                    <div class="form">
+                        <div class="col col1" style="width: 200px">
+                            <label class="col" style="width: 30px">Поиск:</label>
+
+                            <div class="value col" style="width: 140px">
+                                @Html.TextBoxFor(m => m.SearchString, new {@maxlength = 110})
+                                <span id="loop_sbmt" class="loop"></span>
+                            </div>
+                        </div>
+
+                        <div class="col col2" style="width: 400px">
+                            <label class="col" style="width: 102px">Сортировать по:</label>
+
+                            <div class="value col" style="width: 240px">
+                                @Html.DropDownListFor(m => m.AdminSort, new SelectList(Model.GetSortList(), "Value", "Text", (int) Model.AdminSort), new {@class = "style-select", @id = "sort"})
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="table-head">
+                <div class="col1">
+                    Логин
+                </div>
+
+                <div class="col2">
+                    Пользователь
+                </div>
+
+                <div class="col3">
+                    Профиль пользователя
+                </div>
+
+                <div class="col4">
+                    Адресная книга
+                </div>
+
+                <div class="col5">
+                    Шаблоны настроек
+                </div>
+            </div>
+
+
+            <div class="scroll-wrap">
+                <div class="scroller">
+                    <div class="users-list">
+                        @if (Model.GroupUserInfos.Count == 0)
+                        {
+                            <div style="font-size: 25px; padding-top: 70px; text-align: center">
+                                По запросу не найдено ни одной учетной записи
+                            </div>
+                        }
+                        else
+                        {
+                            foreach (GroupUserInfo userInfo in Model.GroupUserInfos)
+                            {
+                                <div class="user">
+                                    <div class="col1">
+                                        @userInfo.Login
+                                    </div>
+                                    <div class="col2">
+                                        @userInfo.Name
+                                    </div>
+                                    <div class="col3">
+                                        <a href="@Url.Action("MyProfile", "Default", new {userId = userInfo.ID})">Редактировать</a>
+                                    </div>
+
+                                    <div class="col4">
+                                        <a href="@Url.Action("Index", "AddressBook", new {userId = userInfo.ID})">Редактировать</a>
+                                    </div>
+
+                                    <div class="col5">
+                                        <a href="@Url.Action("Index", "Settings", new {userId = userInfo.ID})">Редактировать</a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+
+                <div class="scroller__bar-wrapper">
+                    <div class="scroller__bar"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cert-control">
+            <div class="backlink" style="bottom: -40px">
+                <a href="@Url.Action("WebDavBrowser", "Default")"> <i class="icon backarrow"></i>Вернуться на главную страницу</a>
+            </div>
+        </div>
+
+    </div>
+}
+<script>
+    $(document).ready(function() {
+        $('#loop_sbmt').click(function() {
+            $('form').submit();
+        });
+        $('#sort').change(function() {
+            $('form').submit();
+        });
+        $('#searchString').keypress(function(e) {
+            if (e.keyCode == 13) {
+                $('form').submit();
+            };
+
+        });
+    });
+</script>

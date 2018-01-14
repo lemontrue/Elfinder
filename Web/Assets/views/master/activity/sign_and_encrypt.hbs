@@ -1,0 +1,362 @@
+<div id="signature">
+{{#debug}}
+    {{log 'Активация шаблона подписи и шифрования'}}
+{{/debug}}
+    <!-- Заголовок -->
+    <div class="row title">
+        <div class="c-500">
+            <h2>Подписать и зашифровать</h2>
+            <a can-click="event.refiles" class="change" href="javascript:void(0)">Изменить</a>
+        </div>
+        <div class="c-500">
+            <div class="btn-group glue pull-right">
+                <div can-click="event.change_detail.normal" class="btn sort {{#if event.view_detail}}{{else}}active{{/if}}">Обычный</div><!--
+                --><div can-click="event.change_detail.detail" class="btn sort {{#if event.view_detail}}active{{else}}{{/if}}">Подробный</div>
+            </div>
+            <span class="view pull-right">Вид:</span>
+        </div>
+    </div>
+    <!-- Тело -->
+    <div class="box">
+    <div class="state {{#if event.result}}ready{{else}}change{{/if}}"></div>
+
+        {{#if event.result}}
+            <div class="result_bg"></div>
+        {{/if}}
+
+        <div class="item signature">
+            {{#if template.signature.length }}
+                <div class="type">
+                    <div class="checkbox">
+                        <input can-change="event.change_subscribe" {{#if subscribe}}checked{{/if}} hidden="hidden" id="a1" type="checkbox">
+                        <label for="a1">Подписать</label>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="runtime">
+                        <h4>Сертификат для подписи:</h4>
+                        <ul class="certificate">
+
+                            <li class="icon icon-pen">
+
+                                <div class="checkbox pull-left">
+                                    {{#each template.signature}}
+                                        <span can-click="event.sert_download">
+                                            {{#if data.IsTest}}
+                                                <span class="test-certificate-icon float js-test-certificate-tip" id="testTip-{{hash}}"></span>
+                                            {{/if}}
+                                            {{data.SubjectName}}
+                                        </span>
+                                    {{/each}}
+                                </div>
+                                {{#ifCountCert template.signature}}
+                                    <div can-click="event.change_certificate.subscribe" class="pull-left change_ser">Изменить сертификат</div>
+                                {{/ifCountCert}}
+                            </li>
+                        </ul>
+
+                        {{#if event.view_detail}}
+                            <div class="extra">
+                                <ul>
+                                    <li>
+                                        <div class="checkbox">
+                                            <input can-value="detailedSettings.signature.detached" hidden="hidden" id="a5" type="checkbox">
+                                            <label for="a5">Хранить подпись совместно с данными</label>
+                                        </div>
+                                    </li>
+                                    <!-- Скрыто по багу 5894 -->
+                                    <!--<li>
+                                        <div class="checkbox">
+                                            <input can-value="detailedSettings.signature.zipType" hidden="hidden" id="a6" type="checkbox">
+                                            <label for="a6">Сжимать подпись с данными</label>
+                                        </div>
+                                    </li>-->
+                                </ul>
+
+                                <div class="format">
+                                    <div class="title">Выходной формат файла:</div>
+                                    <select can-value="detailedSettings.signature.encodingType">
+                                        <option value="1">Base64 кодировка</option>
+                                        <option value="2">Base64 кодировка с заголовками</option>
+                                        <option value="3">DER кодировка (бинарные данные)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        {{/if}}
+
+                    </div>
+
+                </div>
+
+            {{else}}
+                <div class="row">
+                    <div class="c-700">
+                        <div class="type">
+                            <div class="checkbox">
+                                <input can-change="event.change_subscribe" {{#if subscribe}}checked{{/if}} hidden="hidden" id="a1" type="checkbox">
+                                <label for="a1">Подписать</label>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <div class="btn_array">
+                                <div can-click="event.change_certificate.subscribe" class="btn btn-blue choice">Выберите сертификат для подписи</div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="c-300">
+                        {{#if subscribe}}
+                            {{#if template.signature.length}}
+                            {{else}}
+                                <div class="message">
+                                    <span>Не выбран сертификат!</span>
+                                </div>
+                            {{/if}}
+                        {{/if}}
+                    </div>
+                </div>
+            {{/if}}
+
+        </div>
+        <div class="item encrypt">
+            {{#if template.encryption.length }}
+                <div class="type">
+                    <div class="checkbox">
+                        <input can-change="event.change_encrypt" {{#if encrypt}}checked{{/if}} hidden="hidden" id="a2" type="checkbox">
+                        <label for="a2"> Зашифровать</label>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="runtime">
+                        <h4>Сертификаты для шифрования:</h4>
+                        <ul class="certificate">
+                            {{#each template.encryption}}
+                                <li class="icon icon-lock">
+                                    {{#if data.IsTest}}
+                                        <span class="test-certificate-icon float js-test-certificate-tip" id="testTip-{{hash}}"></span>
+                                    {{/if}}
+                                    <div class="checkbox pull-left">
+
+                                            <input can-value="active" hidden="hidden" id="{{hash}}" type="checkbox">
+                                            <label for="{{hash}}">
+
+                                                <span can-click="event.sert_download">{{data.SubjectName}}</span>
+                                            </label>
+                                            <div can-click="event.delete.encryption" class="delete pull-left"></div>
+                                    </div>
+
+                                </li>
+                            {{/each}}
+                        </ul>
+
+                        {{#if event.view_detail}}
+                            <div class="extra">
+                                <div class="format">
+                                    <div class="title">Выходной формат файла:</div>
+                                    <select can-value="detailedSettings.encryption.encodingType">
+                                        <option value="1">Base64 кодировка</option>
+                                        <option value="2">Base64 кодировка с заголовками</option>
+                                        <option value="3">DER кодировка (бинарные данные)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        {{/if}}
+
+                        <div class="new">
+                            <div can-click="event.change_certificate.encryption" class="select">Выбрать сертификаты</div>
+                            {{regUploadEncSer}}
+                            <div class="upload" id="{{sigid}}">Загрузить новый сертификат</div>
+                        </div>
+
+                        <div class="line-dotted"></div>
+
+                        <div class="checkbox personal_certificate">
+                            <input can-change="event.change_encrypt_personal" {{#if encryptPersonalCertificates}}checked{{/if}} type="checkbox" hidden="hidden" id="a3">
+                            <label for="a3"><b>Шифровать личными сертификатами</b></label>
+                        </div>
+
+                        {{#if encryptPersonalCertificates}}
+                            <ul class="certificate">
+                                {{#each template.personal}}
+                                    <li class="icon icon-lock">
+                                        {{#if data.IsTest}}
+                                            <span class="test-certificate-icon float js-test-certificate-tip" id="testTip-{{hash}}"></span>
+                                        {{/if}}
+                                        <div class="checkbox pull-left">
+                                            <input can-value="active" hidden="hidden" id="{{hash}}" type="checkbox">
+                                            <label for="{{hash}}">
+                                                <span can-click="event.sert_download">{{data.SubjectName}}</span>
+                                            </label>
+                                            <div can-click="event.delete.personal" class="delete pull-left"></div>
+                                        </div>
+
+                                    </li>
+                                {{/each}}
+                            </ul>
+
+                        {{#ifCountCert template.personal}}
+                            <div class="new">
+                                <div can-click="event.change_certificate.personal" class="select">Выбрать сертификаты</div>
+                            </div>
+                        {{/ifCountCert}}
+
+                        {{/if}}
+                    </div>
+
+                </div>
+            {{else}}
+                <div class="row">
+                    <div class="c-700">
+                        <div class="type">
+                            <div class="checkbox">
+                                <input can-change="event.change_encrypt" {{#if encrypt}}checked{{/if}} hidden="hidden" id="encrypt" type="checkbox">
+                                <label for="encrypt"> Зашифровать</label>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <div class="btn_array">
+                                <div can-click="event.change_certificate.encryption" class="btn btn-blue encryption">Выберите сертификат для шифрования</div>
+                                {{regUploadEncSer}}
+                                <div class="new_certificate" id="{{sigid}}">Загрузить новый сертификат</div>
+                            </div>
+                            <div class="checkbox personal_certificate">
+                                <input can-change="event.change_encrypt_personal" type="checkbox" hidden="hidden" id="a3" {{#if encryptPersonalCertificates}}checked{{/if}}>
+                                <label for="a3">Шифровать личным сертификатом</label>
+                            </div>
+
+                            {{#if encryptPersonalCertificates}}
+                                <ul class="certificate">
+                                    {{#each template.personal}}
+                                        <li class="icon icon-lock">
+                                            <div class="checkbox pull-left">
+                                                <input can-value="active" hidden="hidden" id="{{hash}}" type="checkbox">
+                                                <label for="{{hash}}">
+                                                    <span can-click="event.sert_download">{{data.SubjectName}}</span>
+                                                </label>
+                                            </div>
+                                            <div can-click="event.delete.personal" class="delete pull-left"></div>
+                                        </li>
+                                    {{/each}}
+                                </ul>
+
+                                {{#ifCountCert template.personal}}
+                                    <div class="new">
+                                        <div can-click="event.change_certificate.personal" class="select">Выбрать сертификаты</div>
+                                    </div>
+                                {{/ifCountCert}}
+                            {{/if}}
+                        </div>
+
+                    </div>
+                    <div class="c-300">
+                        {{#if encrypt}}
+                            {{#if errorSelectEncSert}}
+                            {{else}}
+                                <div class="message">
+                                    <span>Не выбран сертификат!</span>
+                                </div>
+                            {{/if}}
+                        {{/if}}
+
+                    </div>
+                </div>
+            {{/if}}
+
+        </div>
+
+        {{#if event.result}}
+            <div class="controls">
+                <div class="file-edit-control">
+                    <div can-click="event.action_change" class="btn change_file_list">Изменить сертификаты и параметры</div>
+                </div>
+            </div>
+        {{/if}}
+
+    </div>
+
+
+    {{#if event.result}}
+    {{else}}
+        <div class="c-500">
+            <div class="btn-group pull-right">
+                <div can-click="event.cancel" class="btn">Отмена</div>
+
+                {{#if a.run }}
+                    <div can-click="event.action_run" class="btn btn-big btn-green">Продолжить</div>
+                {{else}}
+                    <div disabled class="btn btn-big btn-green">Продолжить</div>
+                {{/if}}
+            </div>
+        </div>
+    {{/if}}
+
+</div>
+
+{{#if event.result}}
+    <div class="result">
+        <h2>Результаты работы</h2>
+        <div class="box">
+            <div class="state {{#if resultData.error}}result{{else}}ready{{/if}}"></div>
+
+            <div class="body">
+            {{#if resultData.error}}
+                <div class="error_message" style="padding: 17px 25px;font-size: 13px;color: rgb(187, 0, 0);">{{resultData.errorMessage}}</div>
+            {{else}}
+                <ul class="file-list">
+                    {{#each resultData.files}}
+                        <li class="item">
+                            <div class="file-info">
+                                <div class="name" title="{{pathName}}">
+                                    <div class="icon {{icon}}"></div>
+                                    {{#if isTest}}<span class="test-certificate-icon float js-test-file-tip" id="testTip-{{id}}"></span>{{/if}}
+                                    {{name}}
+                                    <span class="info {{#if error}}error{{else}}success{{/if}}">{{status}}</span></div>
+                                <ul class="param list-inline">
+                                    {{#if error}}
+                                        <li can-click="event.more">Подробнее</li>
+                                    {{else}}
+                                        <li can-click="event.download">Скачать</li>
+                                        <li can-click="event.remove">Удалить</li>
+                                    {{/if}}
+                                </ul>
+                            </div>
+                            <div class="actions">
+                                <span can-click="event.send" class="send">Отправить</span>
+                            </div>
+
+                            <div class="more {{#if isMoreShow}}show{{/if}}">
+                                <div class="error">{{errorMessage}}</div>
+                            </div>
+                        </li>
+                    {{/each}}
+                </ul>
+            {{/if}}
+
+            </div>
+
+            {{#if resultData.error}}
+            {{else}}
+                <div class="controls">
+                    <div class="file-edit-control">
+                        <div can-click="resultData.event.showAlert" class="btn result show-alert" style="{{#if moreThanThirtyFiles}} display:block; {{else}} display:none; {{/if}}">Отправить успешно обработанные</div>
+                        <div can-click="resultData.event.sendAll" class="btn result send-all" style="{{#if moreThanThirtyFiles}} display:none; {{else}} display:block; {{/if}}">Отправить успешно обработанные</div>
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+    </div>
+
+    <div class="row footer">
+        <div class="c-500 a">
+            <span can-click="resultData.event.backFiles">Вернуться в каталог файлов</span>
+        </div>
+        <div class="c-500 b">
+            <span can-click="event.refiles">Повторить операцию с начала</span>
+        </div>
+    </div>
+{{/if}}

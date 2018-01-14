@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Страница пользователя";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="@Url.Content("~/Content/CustomStyle.css")" rel="stylesheet" type="text/css" />
+@if (Request.QueryString["errorMsg"] != null)
+{
+    <script>
+        alert('@Request.QueryString["errorMsg"]');
+    </script>
+}
+
+<div  style="padding-left: 20px; padding-top: 20px; text-align: center; vertical-align: central">
+</div>

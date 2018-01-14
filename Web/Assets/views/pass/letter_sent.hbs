@@ -1,0 +1,29 @@
+﻿<div id="restore">
+    <h1>
+        Восстановление пароля
+    </h1>
+    <div class="box">
+        <div class="restore-area">
+            <div class="form">
+                <div class="row restored">
+                  На указанный E-mail отправлено письмо с инструкцией по
+                  <br />  восстановлению пароля. Если письма нет во входящих сообщениях,
+                    <br />  то попробуйте найти его в папке "Спам".
+                </div>
+                <div class="row done">
+                    <form method="GET" action="/Account/Login">
+                        <input class="btn btn-blue" type="submit" value="Перейти к авторизации" />
+                    </form>
+                    <a can-click="event.start" class="btn btn-cancel" href="#">
+                        Письмо не было получено
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row bottom text-right">
+            <a href="#">
+                Техническая поддержка
+            </a>
+        </div>
+    </div>
+</div>

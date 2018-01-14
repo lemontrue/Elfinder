@@ -1,0 +1,205 @@
+#content {
+    margin-left: 205px;
+    position: relative;
+}
+
+.content {
+    -webkit-border-radius: 3px;
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+    padding: 0;
+}
+
+.admin-view .row { padding: 0 25px; }
+
+.admin-view .add {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.admin-view .title {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 0 25px 20px;
+}
+
+.admin-view .more {
+    border-top: 1px solid #d9d9d9;
+    height: 45px;
+    line-height: 45px;
+    margin: 0 25px;
+}
+
+.admin-view .more a.pull-left { color: black; }
+
+.admin-view .admin-head {
+    padding-top: 20px;
+    position: relative;
+}
+
+.admin-view .admin-head .row {
+    line-height: 30px;
+    margin-bottom: 10px;
+}
+
+.admin-view .admin-head .row .label { width: 65px; }
+
+.admin-view .admin-head .row .value { width: 350px; }
+
+.admin-view .serts {
+    border-bottom: 1px solid #d9d9d9;
+    padding-top: 10px;
+}
+
+.admin-view .serts .more {
+    border: 0;
+    height: 65px;
+    line-height: 65px;
+}
+
+.admin-view .serts .btn {
+    font-weight: 400;
+    height: 23px;
+    line-height: 23px;
+    margin-top: 3px;
+    padding: 0;
+    text-align: center;
+    width: 125px;
+}
+
+.admin-view .serts .scroll-wrap { height: 245px; }
+
+.admin-view .serts .serts-list .sert:hover { background: #edf4fa; }
+
+.admin-view .serts .serts-list .sert { padding: 15px 10px 10px 0; }
+
+.admin-view .serts .serts-list .sert .row { margin-bottom: 10px; }
+
+.admin-view .serts .serts-list .sert span {
+    line-height: 30px;
+    padding-right: 4px;
+}
+
+.admin-view .serts .serts-list .sert .col1 {
+    margin-right: 25px;
+    width: 430px;
+}
+
+.admin-view .serts .serts-list .sert .col1 .value input {
+    margin-right: 7px;
+    width: 100px;
+}
+
+.admin-view .serts .serts-list .sert .col2 { width: 230px; }
+
+.admin-view .serts .serts-list .sert .col3 { width: 40px; }
+
+.admin-view .serts .serts-list .sert .col3 .down { text-align: right; }
+
+.admin-view .address {
+    border-bottom: 1px solid #d9d9d9;
+    padding-bottom: 10px;
+    padding-top: 30px;
+    position: relative;
+}
+
+.admin-view .address .add .dropdown-menu { width: 230px; }
+
+.admin-view .address .head-row {
+    border-bottom: 1px solid #d9d9d9;
+    height: 32px;
+    line-height: 32px;
+    margin: 10px 25px 0;
+}
+
+.admin-view .address .head-row .col1 { width: 240px; }
+
+.admin-view .address .head-row .col2 { width: 310px; }
+
+.admin-view .address .head-row .col3 { width: 140px; }
+
+.admin-view .address .scroll-wrap { height: 140px; }
+
+.admin-view .address .users-list .user:hover { background: #edf4fa; }
+
+.admin-view .address .users-list .user {
+    height: 34px;
+    line-height: 34px;
+    padding: 0 25px;
+}
+
+.admin-view .address .users-list .user .col1 { width: 240px; }
+
+.admin-view .address .users-list .user .col2 { width: 310px; }
+
+.admin-view .address .users-list .user .col3 { width: 90px; }
+
+.admin-view .address .users-list .user .col4 {
+    text-align: right;
+    width: 50px;
+}
+
+.admin-view .address .users-list .user .col4 .actions a { text-decoration: none; }
+
+.admin-view .tpls {
+    padding-bottom: 10px;
+    padding-top: 30px;
+    position: relative;
+}
+
+.admin-view .tpls .head-row {
+    border-bottom: 1px solid #d9d9d9;
+    height: 32px;
+    line-height: 32px;
+    margin: 10px 25px 0;
+}
+
+.admin-view .tpls .head-row .col1 { width: 190px; }
+
+.admin-view .tpls .head-row .col2 { width: 210px; }
+
+.admin-view .tpls .head-row .col3 { width: 290px; }
+
+.admin-view .tpls .head-row .scroll-wrap { height: 140px; }
+
+.admin-view .tpls .scroll-wrap { height: 140px; }
+
+.admin-view .tpls .tpls-list .tpl:hover { background: #edf4fa; }
+
+.admin-view .tpls .tpls-list .tpl {
+    height: 34px;
+    line-height: 34px;
+    padding: 0 25px;
+}
+
+.admin-view .tpls .tpls-list .tpl .col1 { width: 190px; }
+
+.admin-view .tpls .tpls-list .tpl .col2 { width: 210px; }
+
+.admin-view .tpls .tpls-list .tpl .col3 { width: 240px; }
+
+.admin-view .tpls .tpls-list .tpl .col4 { width: 50px; }
+
+.admin-view .tpls .tpls-list .tpl .col4 .actions a { text-decoration: none; }
+
+.admin-control {
+    padding-top: 20px;
+    position: relative;
+}
+
+.admin-control .backlink { float: left; }
+
+.admin-control .backlink a {
+    background: #f3f3f3;
+    color: #373737;
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 20px;
+}
+
+.admin-control .controls .sbmt a.close {
+    color: #131313;
+    padding-right: 15px;
+}

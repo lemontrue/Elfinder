@@ -1,0 +1,273 @@
+﻿@using CryptxOnline.Web.CryptxService
+@model CryptxOnline.Web.Models.SearchModel
+
+<script src="@Url.Content("~/Assets/libjs/jquery-2.0.3.js")" type="text/javascript"></script>
+<link href="@Url.Content("~/Content/CustomStyle.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Assets/libjs/jquery-ui-1.10.3.js")" type="text/javascript"></script>
+
+
+<script src="@Url.Content("~/Assets/libjs/MicrosoftAjax.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Assets/libjs/MicrosoftMvcValidation.js")" type="text/javascript"></script>
+<link href="@Url.Content("~/Content/CustomStyle.css")" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Поиск контрагента";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <table>
+        <tr>
+            <td>
+                @Html.LabelFor(x => x.SearchText)
+            </td>
+            <td>
+                @Html.TextBoxFor(x => x.SearchText, new {title = "Введите часть наименования, ИНН или другое поле, минимум 5 симоволов"})
+            </td>
+            <td>
+                @Html.ValidationMessageFor(x => x.SearchText)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.LabelFor(x => x.Active)
+            </td>
+            <td>
+                @Html.CheckBoxFor(x => x.Active)
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" class="button" style="text-align: left" value="Найти" onclick=" return checkSearchString() "/>
+            </td>
+            <td>
+                <input type="button" class="button" style="float: left" value="Вернуться" onclick=" location.href = '@Url.Action("RecipientCertificates")' "/>
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+    </table>
+    if (Model.ResultCertificates != null)
+    {
+        <div class="certs-table" style="width: 100%">
+            <table style="margin-bottom: 20px; table-layout: fixed; text-align: left; vertical-align: middle; width: 100%;">
+                <tr>
+                    <th style="text-align: left">
+                        Описание
+                    </th>
+                    <th style="text-align: left">
+                        Кому выдан
+                    </th>
+                    <th style="text-align: left">
+                        Кем выдан
+                    </th>
+                    <th style="text-align: left">
+                        Действителен с
+                    </th>
+                    <th style="text-align: left">
+                        Действителен по
+                    </th>
+                    <th style="text-align: left">
+                        Действие
+                    </th>
+                </tr>
+                @if (Model.ResultCertificates.Count != 0)
+                {
+                    foreach (CertificateInfo c in Model.ResultCertificates)
+                    {
+                        <tr>
+                            <td style="max-width: 30%; word-wrap: break-word;">
+                                @if (c.RecipientCertificate != null && !string.IsNullOrEmpty(c.RecipientCertificate.FriendlyName))
+                                {
+                                    <a>@c.RecipientCertificate.FriendlyName</a>
+                                }
+                            </td>
+                            <td >
+                                <a href="@Url.Action("GetCertificate", new {thumbPrint = @c.Thumbprint})"/><img border="0" align="absmiddle" src="@Url.Content("~/Assets/i/old/certAndKey.ico")" />
+                                <a title="@c.FullSubjectName">@c.SubjectName</a>
+                                @*@Html.ActionLink(c.SubjectName, "GetCertificate", new { thumbPrint = @c.Thumbprint }, new { @title = @c.FullSubjectName })*@
+                            </td>
+                            <td>
+                                @c.IssureName
+                            </td>
+                            <td>
+                                @c.NotBefore
+                            </td>
+                            <td>
+                                @c.NotAfter
+                            </td>
+                            <td style="width: 20px">
+                                @if (c.RecipientCertificate == null)
+                                {
+                                    <input type="button" name="edit" class="button" style="float: left" value="Добавить в справочник" onclick=" clickOpenModal('@c.Thumbprint') " />
+                                }
+                                else
+                                {
+                                    <a>Уже добавлен в справочник</a>
+                                }
+                                @*<img align="absmiddle" name="edit" src="@Url.Content("~/Assets/i/old/kedit_1708.png")" onclick=" clickOpenModal('@c.Thumbprint','@(c.RecipientCertificate != null ? c.RecipientCertificate.FriendlyName : "")') "/>
+                                            <img align="absmiddle" name="delete" src="@Url.Content("~/Assets/i/old/remove_5729.png")" onclick=" clickOpenModal('@c.Thumbprint') "/> *@
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" style="text-align: center" >
+                            <a>Сертификаты не найдены</a>        
+                        </td>
+                    </tr>
+                }
+            </table>
+                        
+        </div>
+        <div>
+            @if (Model.ResultLength > Model.ViewCount)
+            {
+                <a>Показано @Model.ViewCount первых записей. Уточните параметры поиска</a>
+            }
+        </div>
+    }
+    <div id="boxes">
+        <div id="dialogEditRecip" class="window">
+            @Html.Hidden("curThumbprint")
+            <table style="width: 100%">
+                <tr>
+                    <td style="font-size: 10px; font-style: italic; text-align: left;">
+                        <img href="#" class="close" style="position: absolute; right: 5px; top: 5px;" src="@Url.Content("~/Assets/i/old/dialog-close_7593.png")" width="32" height="32" border="0" />
+                    </td>
+                </tr>
+                <tr style="height: 80px">
+                    <td>
+                        Описание @Html.TextBox("curfName", "", new {@style = "width:100%", @maxlength = "40"})
+                    </td>
+                </tr>
+                <tr>
+                    <td style="left: 10px; position: absolute; text-align: left">
+                        <input type="submit" id="addRelationU2R" name="addRelationU2R" value="Сохранить" class="button" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div id="mask"></div>
+}
+<script>
+    function checkSearchString() {
+        var value = $("#SearchText").val();
+        if (value == "") {
+            alert('Введите минимум 5 символов');
+            return false;
+        }
+    }
+</script>
+
+<script>
+    function closeModal() {
+        //$(".validation-summary-errors").remove();
+        $('#mask, .window').hide();
+        $(".validation-summary-errors").remove();
+    };
+
+    function clickOpenModal(thumbprint, friendlyName) {
+        $("#pinCode").val("");
+        //Cancel the link behavior
+        //e.preventDefault();
+        //Get the A tag
+        $("#curThumbprint").val(thumbprint);
+        var id = '#dialog';
+        if (event.srcElement.name == "delete")
+            id = "#dialogDelRecip";
+        if (event.srcElement.name == "edit") {
+            $("#curfName").val(friendlyName);
+            id = "#dialogEditRecip";
+        }
+        //Get the screen height and width
+        var maskHeight = $(document).height();
+        var maskWidth = $(window).width();
+
+        //Set heigth and width to mask to fill up the whole screen
+        $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+        $('#mask').css({ 'position': 'fixed' });
+
+        //transition effect		
+        $('#mask').fadeIn(1000);
+        $('#mask').fadeTo("slow", 0.8);
+
+        //Get the window height and width
+        var winH = $(window).height();
+        var winW = $(window).width();
+
+        //Set the popup window to center
+        $(id).css('top', winH / 2 - $(id).height() / 2);
+        $(id).css('left', winW / 2 - $(id).width() / 2);
+
+        //transition effect
+        $(id).fadeIn(2000);
+        $("#curfName").focus();
+    };
+
+    $(document).ready(function() {
+        $("#curThumbprint").val('');
+        $("#dialogEditRecip").keydown(function(e) {
+            if (e.keyCode == 13) {
+                $("#addRelationU2R").trigger("click");
+                e.preventDefault();
+            }
+        });
+
+        //select all the a tag with name equal to modal
+        $('input[name=modal]').click(function(e) {
+            //Cancel the link behavior
+            e.preventDefault();
+            //Get the A tag
+            var id = $(this).attr('href');
+
+            //Get the screen height and width
+            var maskHeight = $(document).height();
+            var maskWidth = $(window).width();
+
+            //Set heigth and width to mask to fill up the whole screen
+            $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+
+            //transition effect		
+            $('#mask').fadeIn(1000);
+            $('#mask').fadeTo("slow", 0.8);
+
+            //Get the window height and width
+            var winH = $(window).height();
+            var winW = $(window).width();
+
+            //Set the popup window to center
+            $(id).css('top', winH / 2 - $(id).height() / 2);
+            $(id).css('left', winW / 2 - $(id).width() / 2);
+
+            //transition effect
+            $(id).fadeIn(2000);
+
+        });
+
+        //if close button is clicked
+        $('.window .close').click(function(e) {
+            //location.href = location.href;
+            //Cancel the link behavior
+            e.preventDefault();
+            $('#mask, .window').hide();
+        });
+
+        //if mask is clicked
+        $('#mask').click(function() {
+            //$(this).hide();
+            //$('.window').hide();
+        });
+
+    });
+</script>

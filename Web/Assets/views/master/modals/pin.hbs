@@ -1,0 +1,18 @@
+<div id="message-panel">
+    <div style="font-size: 13px;margin: 15px 0 0 0;">
+        Для выполнения криптооперации, пожалуйста, введите пин-код, заданный для вашего личного сертификата.
+    </div>
+    <div class="content-group pin">
+        <label>Пин код:</label>
+        <input can-value="pin" type="password" min="4" max="8" autocomplete="off" >
+        <div class="check">
+            <input can-value="save" id="pin-check" type="checkbox"> <label for="pin-check">Запомнить</label>
+        </div>
+    </div>
+    <div class="message_error">{{error}}</div>
+    <div class="btn-group">
+        {{#each btns}}
+            <div can-click="call" class="btn {{cls}}">{{text}}</div>
+        {{/each}}
+    </div>
+</div>

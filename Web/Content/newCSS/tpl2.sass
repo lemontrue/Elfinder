@@ -1,0 +1,395 @@
+#content
+  position: relative
+  margin-left: 205px
+.content
+  border: 1px solid #d5d5d5
+  padding: 0
+  border-radius: 3px
+.tpl-view
+  color: #3d3d3d
+  .tpl-head
+    padding: 20px 20px 0
+    position: relative
+    border-bottom: 1px solid #d3d3d3
+    .create
+      position: absolute
+      top: 20px
+      right: 20px
+      .btn
+        color: #ffffff
+    .row
+      margin-bottom: 25px
+    .view
+      line-height: 32px
+      span
+        padding-right: 7px
+      .toggle
+        .element
+          width: 115px
+          height: 32px
+          text-align: center
+          background: #f3f3f3
+          color: #656565
+          cursor: pointer
+        .element:first-child
+          border-radius: 3px 0 0 3px
+        .element:last-child
+          border-radius: 0 3px 3px 0
+        .active
+          background: #5f97d8
+          color: #fff
+          font-weight: 700
+    .name
+      .label
+        padding-right: 7px
+      .title
+        font-size: 14px
+        font-weight: 700
+        padding-right: 20px
+      a.edit
+    .descr
+      .label
+        width: 140px
+        float: left
+      .description
+        margin-left: 145px
+        border: 1px solid #d5d5d5
+        border-radius: 3px
+        padding: 17px 18px 17px 23px
+        textarea
+          width: 100%
+          height: inherit
+          border: 0
+          overflow-x: hidden
+          overflow-y: hidden
+          text-indent: 0
+          min-height: 55px
+          resize: none
+  .sign-settings
+    padding: 0 20px
+    position: relative
+    border-bottom: 1px solid #d3d3d3
+    .tooltip
+      position: absolute
+      top: 85px
+      right: 70px
+      z-index: 1000
+      display: none
+      float: left
+      padding: 7px 0
+      margin: 7px 0 0
+      list-style: none
+      background-color: #fff
+      border: 1px solid #ccc
+      *border-right-width: 2px
+      *border-bottom-width: 2px
+      border-radius: 3px
+      background-clip: padding-box
+      .arrow-top
+        background: url(../img/arrow-top.png)
+        width: 19px
+        height: 7px
+        position: absolute
+        top: -7px
+        right: 32px
+      .body
+        padding: 0 10px
+    .title
+      font-weight: 700
+      font-size: 14px
+      height: 45px
+      line-height: 45px
+    .row
+      margin-bottom: 15px
+      .row
+        margin-top: 5px
+        margin-bottom: 0
+    .label
+      line-height: 28px
+      width: 200px
+    .label.top
+      line-height: 20px
+    .value
+      width: 485px
+    .edit-sign
+      margin: 5px 0 0 8px
+      width: 20px
+    .selection
+      width: 215px
+  .encrypt-settings
+    padding: 0 20px
+    position: relative
+    border-bottom: 1px solid #d3d3d3
+    .selection
+      width: 215px
+    .row
+      margin-bottom: 15px
+    .title
+      font-weight: 700
+      font-size: 14px
+      height: 45px
+      line-height: 45px
+    .label
+      line-height: 28px
+      width: 200px
+    .value
+      width: 485px
+    .scroll-wrap
+      height: 105px
+      .template-list
+        .template:last-child
+          margin-bottom: 0
+        .template
+          margin-bottom: 8px
+          .row-title
+            width: 440px
+          .actions
+            vertical-align: middle
+            margin: 4px 0 0 8px
+            width: 30px
+    a.add-cert
+      margin-top: 10px
+      display: inline-block
+      height: 20px
+      line-height: 20px
+      padding-left: 25px
+      background: url(../img/add-sert.png) left no-repeat
+    .row
+      label
+        span
+          color: #000
+.tpl-control
+  position: relative
+  padding-top: 20px
+  .controls
+  .delete
+    margin-left: 70px
+    text-align: center
+    a
+      text-align: center
+      color: #838383
+      line-height: 32px
+  .backlink
+    float: left
+    a
+      display: inline-block
+      padding: 0 20px
+      height: 32px
+      line-height: 32px
+      background: #f3f3f3
+      color: #373737
+  .controls
+    .sbmt
+      a.close
+        padding-right: 15px
+        color: #131313
+#select-cert
+  color: #161616
+  width: 935px
+  position: relative
+  .title
+    margin-right: 20px
+  .scroll-wrap
+    height: 230px
+  .search
+    position: absolute
+    top: 0
+    left: 460px
+    width: 325px
+    input[type=text]
+      height: 22px
+      line-height: 22px
+      background: url(../img/loop-grey.png) right center no-repeat
+      padding-right: 20px
+  .result
+    table
+      width: 915px
+      thead
+        tr
+          height: 44px
+          border-bottom: 1px solid #e4e4e4
+          th
+            color: #898989
+            text-align: left
+            vertical-align: middle
+      tbody
+        tr:nth-child(2n+1)
+          background: #f9f9f9
+        tr
+          height: 44px
+          border-bottom: 1px solid #e4e4e4
+          td
+            text-align: left
+            vertical-align: middle
+  .sbmt
+    margin-bottom: 0
+    margin-top: 20px
+    .close
+      padding-right: 15px
+      color: #131313
+#select-cert2
+  color: #161616
+  width: 935px
+  position: relative
+  .title
+    margin-right: 20px
+  .scroll-wrap
+    height: 230px
+  .search
+    position: absolute
+    top: 0
+    left: 460px
+    width: 325px
+    input[type=text]
+      height: 22px
+      line-height: 22px
+      background: url(../img/loop-grey.png) right center no-repeat
+      padding-right: 20px
+  .result
+    table
+      width: 915px
+      thead
+        tr
+          height: 44px
+          border-bottom: 1px solid #e4e4e4
+          th
+            color: #898989
+            text-align: left
+            vertical-align: middle
+      tbody
+        tr:nth-child(2n+1)
+          background: #f9f9f9
+        tr
+          height: 44px
+          border-bottom: 1px solid #e4e4e4
+          td
+            text-align: left
+            vertical-align: middle
+  .sbmt
+    margin-bottom: 0
+    margin-top: 20px
+    a
+      line-height: 34px
+      padding-right: 15px
+    .close
+      color: #131313
+#change-pass
+  color: #161616
+  width: 550px
+  form
+    margin-top: 30px
+    .row
+      margin-bottom: 20px
+    label
+      line-height: 26px
+      width: 190px
+      padding-right: 20px
+      text-align: right
+    .value
+      width: 360px
+      position: relative
+      span.control-label.label-success
+        position: absolute
+        top: 8px
+        right: 10px
+        color: #70c234
+        font-size: 10px
+      span.control-label.label-error
+        position: absolute
+        top: 8px
+        right: 10px
+        color: #dc2929
+        font-size: 10px
+    .sbmt
+      margin-bottom: 0
+      margin-top: 20px
+      .close
+        padding-right: 15px
+        color: #131313
+#change-pin
+  color: #161616
+  width: 550px
+  form
+    margin-top: 30px
+    .row
+      margin-bottom: 20px
+    label
+      line-height: 26px
+      width: 210px
+      padding-right: 20px
+      text-align: right
+    .value
+      width: 340px
+      position: relative
+    .sbmt
+      margin-bottom: 0
+      margin-top: 20px
+      .close
+        padding-right: 15px
+        color: #131313
+#change-pin2
+  color: #161616
+  width: 550px
+  form
+    margin-top: 30px
+    .row
+      margin-bottom: 20px
+    label
+      line-height: 26px
+      width: 200px
+      padding-right: 20px
+      text-align: right
+    .value
+      width: 350px
+      position: relative
+    .sbmt
+      margin-bottom: 0
+      margin-top: 20px
+      .clear
+        margin-right: 60px
+      .close
+        padding-right: 15px
+        color: #131313
+#attention
+  color: #161616
+  width: 510px
+  form
+    margin-top: 30px
+    .row
+      margin-bottom: 20px
+    .mess-box
+      margin-top: 30px
+      .info
+        min-height: 45px
+        background: url(../img/message-info.png) left no-repeat
+        padding-left: 70px
+        line-height: 20px
+    .sbmt
+      margin-bottom: 0
+      margin-top: 20px
+      .clear
+        margin-right: 60px
+      .close
+        padding-right: 15px
+        color: #131313
+#info
+  color: #161616
+  width: 510px
+  form
+    margin-top: 30px
+    .row
+      margin-bottom: 20px
+    .mess-box
+      margin-top: 30px
+      .attention
+        min-height: 38px
+        background: url(../img/message-attention.png) left no-repeat
+        padding-left: 70px
+    .sbmt
+      margin-bottom: 0
+      margin-top: 20px
+      .clear
+        margin-right: 60px
+      .close
+        padding-right: 15px
+        color: #131313

@@ -1,0 +1,64 @@
+.dropdown
+  float: left
+  position: relative
+  a.dropdown-toggle
+    cursor: pointer
+  &.open
+    a.dropdown-toggle
+      background-color: #f5f5f5
+    .dropdown-menu
+      display: block
+  .dropdown-menu
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175)
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175)
+    display: none
+    min-width: 0
+    &.pull-right
+      left: auto
+      margin-top: 1px
+      right: 0
+
+.user-settings .dropdown-menu li
+  background-image: none !important
+
+.dropdown .dropdown-menu li
+  &:hover
+    background: #1899f4
+    color: #fff !important
+  a
+    &:hover
+      background: #1899f4
+      color: #fff !important
+    border-style: none
+    color: #131313
+    display: block
+    float: none
+    line-height: 20px
+    padding: 3px 20px
+    text-decoration: none
+
+.dropdown-menu, .popup-menu
+  background-clip: padding-box
+  background-color: #fff
+  border: 1px solid #ccc
+  border-bottom-width: 2px
+  border-radius: 3px
+  border-right-width: 2px
+  display: none
+  float: left
+  list-style: none
+  margin: 7px 0 0
+  min-width: 160px
+  padding: 5px 0
+  position: absolute
+  right: 10px
+  top: 100%
+  z-index: 1000
+
+.dropdown-menu .arrow-top
+  background: img('/old/arrow-top.png','','')
+  height: 6px
+  position: absolute
+  right: 30px
+  top: -6px
+  width: 19px

@@ -1,0 +1,817 @@
+
+.scroll-wrap
+  height: 330px
+  overflow: hidden
+  position: relative
+
+
+.result .scroll-wrap
+  height: 270px
+
+.scroller
+  -webkit-overflow-scrolling: touch
+  height: 100%
+  overflow-y: scroll
+  .certificats-list-modal
+    padding-right: 5px
+    .certificat:hover
+      background: #edf4fa
+  &::-webkit-scrollbar
+    width: 0
+
+.scroller__bar-wrapper
+  background: #eaeaea
+  bottom: 0
+  pointer-events: none
+  position: absolute
+  right: 5px
+  top: 0
+  width: 4px
+  z-index: 3
+
+.scroller__bar
+  -webkit-transition: opacity .2s linear
+  background: #989898
+  opacity: 0
+  pointer-events: auto
+  position: absolute
+  transition: opacity .2s linear
+  width: 4px
+  z-index: 1
+  &:hover
+    opacity: 0.8
+
+.baron .scroller__bar
+  opacity: 0.6
+
+.baron_h .scroller__bar_h
+  bottom: 30px
+  opacity: 0.6
+
+.wrapper_iphone
+  .header__title_state_fixed
+    position: relative
+  .header__title_position_top
+    position: absolute
+    top: 0
+  .header__title_position_bottom
+    bottom: 0
+    position: absolute
+
+#container
+  margin: 0 auto
+  max-width: 1200px
+  min-width: 980px
+  padding: 0 10px
+  width: expression(document.body.clientWidth>1280?"1280px":"auto")
+
+.dropdown
+  float: left
+  position: relative
+  a.dropdown-toggle
+    cursor: pointer
+  &.open
+    a.dropdown-toggle
+      background-color: #f5f5f5
+    .dropdown-menu
+      display: block
+  .dropdown-menu
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175)
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175)
+    display: none
+    min-width: 0
+    &.pull-right
+      left: auto
+      margin-top: 1px
+      right: 0
+
+.user-settings .dropdown-menu li
+  background-image: none !important
+
+.dropdown .dropdown-menu li
+  &:hover
+    background: #1899f4
+    color: #fff !important
+  a
+    &:hover
+      background: #1899f4
+      color: #fff !important
+    border-style: none
+    color: #131313
+    display: block
+    float: none
+    line-height: 20px
+    padding: 3px 20px
+    text-decoration: none
+
+.dropdown-menu, .popup-menu
+  background-clip: padding-box
+  background-color: #fff
+  border: 1px solid #ccc
+  border-bottom-width: 2px
+  border-radius: 3px
+  border-right-width: 2px
+  display: none
+  float: left
+  list-style: none
+  margin: 7px 0 0
+  min-width: 160px
+  padding: 5px 0
+  position: absolute
+  right: 10px
+  top: 100%
+  z-index: 1000
+
+.dropdown-menu .arrow-top
+  background: img('/old/arrow-top.png', '' ,'')
+  height: 6px
+  position: absolute
+  right: 30px
+  top: -6px
+  width: 19px
+
+.organization-menu
+  padding: 10px 0
+  ul
+    color: #1e1e1e
+    font-size: 12px
+    li
+      padding: 0 17px !important
+      &:hover
+        background: #5898f1 !important
+        color: #fff !important
+        a
+          color: #fff !important
+
+
+
+.bootstrap-checkbox >
+button.btn
+  padding: 7px 0 4px 2px
+  width: 28px
+  &.displayAsButton
+    width: auto
+    > span
+      &.label-checkbox
+        padding: 0 8px 0 4px
+      &.icon
+        margin: 2px 4px
+      &.label-prepend-checkbox
+        padding: 0 4px 0 8px
+  &.btn-large
+    padding: 10px 0 6px 2px
+    width: 36px
+  &.btn-small
+    padding: 5px 0 3px 1px
+    width: 24px
+  &.btn-mini
+    padding: 4px 0 1px 1px
+    width: 20px
+  .btn.btn-link
+    text-decoration: none
+
+#mybody
+  padding-top: 0
+
+a
+  color: #3498db
+  &:hover, &:visited
+    color: #3498db
+  &.btn:visited
+    color: #fff
+  &:hover
+    -moz-transition: all .1s ease-out 0s
+    -o-transition: all .1s ease-out 0s
+    -webkit-transition: all .1s ease-out 0s
+    color: #f60
+    text-decoration: none
+    transition: all 0.1s ease-out 0s
+
+.btn-blue:hover
+  -moz-transition: all .3s ease-out 0s
+  -o-transition: all .3s ease-out 0s
+  -webkit-transition: all .3s ease-out 0s
+  background: #3276b1
+  transition: all 0.3s ease-out 0s
+
+.btn
+  -webkit-border-radius: 3px
+  border: 0
+  border-radius: 3px
+  color: #FFF
+  cursor: pointer
+  display: inline-block
+  font-weight: 700
+  height: 34px
+  line-height: 34px
+  text-decoration: none
+  &:hover
+    color: #FFF
+
+.bth:active
+  color: #FFF
+
+.btn-green
+  background: #1ac316
+  min-width: 130px
+  padding: 0
+
+.add-contact .btn-green
+  text-align: center
+  width: 200px
+
+.btn-green:hover
+  -moz-transition: all .3s ease-out 0s
+  -o-transition: all .3s ease-out 0s
+  -webkit-transition: all .3s ease-out 0s
+  background: #1dda19
+  transition: all 0.3s ease-out 0s
+
+.btn-blue
+  background: #5f97d8
+  padding: 0 40px
+
+.button-checkbox .btn
+  background: none
+  padding: 0 !important
+  width: auto !important
+  vertical-align: top !important
+
+input
+  &[type=email], &[type=password]
+    -webkit-border-radius: 3px
+    border: 1px solid #c9c9c9
+    border-radius: 3px
+    height: 28px
+    padding: 0 5px
+    width: 100%
+  &[type=text]
+    -webkit-border-radius: 3px
+    border: 1px solid #c9c9c9
+    border-radius: 3px
+    height: 28px
+    padding: 0 5px
+    width: 100%
+    &::-webkit-input-placeholder
+      color: #222
+      font-size: 11px
+      font-style: italic
+
+.text-placeholder
+  color: #222
+  font-size: 11px !important
+  font-style: italic !important
+
+input[type=text]
+  &::-o-input-placeholder, &::-moz-placeholder
+    color: #222
+    font-size: 11px
+    font-style: italic
+
+
+.tabs
+  .tabs-content
+    -webkit-border-radius: 3px
+    border: 1px solid #d6d6d6
+    border-radius: 3px
+    margin-top: -1px
+    .tabs-pane
+      display: none
+      padding: 20px 0
+      &:first-child
+        display: block
+  ul.tabs-nav li
+    -webkit-border-radius: 3px 3px 0 0
+    background: #f2f2f2
+    border: 1px solid #d6d6d6
+    border-left: 0
+    border-radius: 3px 3px 0 0
+    height: 46px
+    a
+      color: #161616
+      display: block
+      height: inherit
+      line-height: 42px
+      padding: 0 25px
+      text-decoration: none
+    &.active
+      background: #FFF
+      border-bottom: 0
+    &:first-child
+      border-left: 1px solid #d6d6d6
+
+
+.fancybox-skin
+  border: 3px solid #595959 !important
+  box-shadow: none !important
+
+.modal-window
+  .title
+    border-bottom: 1px solid #e5e5e5
+    color: #111
+    font-size: 16px
+    font-weight: 700
+    height: 41px
+    line-height: 34px
+    margin-top: 0
+  .btn-green
+    width: 130px
+
+
+#CreateContactFrame #new-contact .hidden
+  display: block !important
+
+#new-contact
+  width: 500px
+  height: 400px
+  .btn-green
+    padding: 0 20px
+  .certificats-list-modal .certificat
+    margin-right: 15px
+    padding: 15px 0 10px
+    .name
+      line-height: 20px
+      padding-top: 6px
+      width: 170px
+      .test-certificate-icon
+        margin: 0 5px 0 0
+    .sert
+      margin-right: 10px
+      width: 255px
+    .action
+      padding-top: 6px
+      width: 45px
+      a
+        &.down
+          background: img('/old/download.png', 'no-repeat' ,'')
+          display: inline-block
+          height: 13px
+          margin-right: 10px
+          width: 14px
+        &.remove
+          background: img('/old/remove.png', 'no-repeat' ,'')
+          display: inline-block
+          height: 12px
+          width: 13px
+  .row
+    margin-bottom: 9px
+  label
+    padding-right: 12px
+    padding-top: 8px
+    text-align: right
+    width: 60px
+  .value
+    width: 435px
+    small
+      color: #5e5e5e
+      font-size: 10px
+      line-height: 22px
+  .scroll-wrap
+    height: 196px
+  .cert-toggle
+    height: 34px
+    margin: -5px 0 15px
+    position: relative
+    .btn
+      font-size: 11px
+      font-weight: 400
+  .sbmt
+    margin-bottom: 0
+    margin-top: 20px
+    .close
+      color: #131313
+      padding-right: 30px
+  .cert-list
+    display: block
+    width: 520px
+    .block-title
+      background: img('/old/block-title-bg.png', 'bottom repeat-x' ,'')
+      margin-right: 20px
+      .text
+        background: #FFF
+        display: inline-block
+        font-weight: 700
+        padding-right: 10px
+
+#founded
+  min-height: 1000px
+  padding-top: 0
+  width: 638px
+  .search
+    margin-right: 20px
+    margin-top: 3px
+    width: 480px
+  .action
+    width: 130px
+  .row.checkbox
+    margin-top: 0
+    line-height: 32px
+  label
+    text-align: right
+    width: 65px
+    span
+      line-height: 28px
+      vertical-align: middle
+    .button-checkbox
+      margin-right: 5px
+  .value
+    width: 435px
+    small
+      color: #5e5e5e
+      font-size: 10px
+      line-height: 22px
+  .result
+    margin-top: 10px
+    width: 650px
+    .res-title
+      font-size: 14px
+      font-weight: 700
+      line-height: 36px
+    table
+      width: 635px
+      thead tr
+        border-bottom: 1px solid #e4e4e4
+        border-top: 1px solid #e4e4e4
+        height: 31px
+        th
+          &:first-child
+            text-align: center
+            width: 30px
+          color: #898989
+          text-align: left
+          vertical-align: middle
+      tbody tr
+        &.selected
+          background: #fefdde !important
+        &:nth-child(2n + 1)
+          background: #f9f9f9
+        border-bottom: 1px solid #e4e4e4
+        height: 44px
+        &:hover
+          background: #edf4fa
+        td
+          + input[type=checkbox]:checked
+            background: red
+          &:first-child
+            text-align: center
+            width: 30px
+          text-align: left
+          vertical-align: middle
+    .sbmt
+      margin-top: 20px
+      .close
+        color: #131313
+        padding-right: 30px
+
+#find
+  width: 500px
+  form
+    padding-top: 30px
+    .search
+      width: 500px
+    .row.checkbox
+      margin-top: 15px
+    label
+      text-align: right
+      width: 65px
+      span
+        line-height: 28px
+        vertical-align: middle
+      .button-checkbox
+        margin-right: 5px
+    .value
+      width: 435px
+      small
+        color: #5e5e5e
+        font-size: 10px
+        line-height: 22px
+  .result
+    margin-top: 10px
+    .res-title
+      font-size: 14px
+      font-weight: 700
+      line-height: 36px
+    table
+      width: 100%
+      thead tr
+        border-bottom: 1px solid #e4e4e4
+        border-top: 1px solid #e4e4e4
+        height: 31px
+        th
+          &:first-child
+            text-align: center
+            width: 30px
+          color: #898989
+          text-align: left
+          vertical-align: middle
+      tbody tr
+        &:nth-child(2n + 1)
+          background: #f9f9f9
+        border-bottom: 1px solid #e4e4e4
+        height: 44px
+        td
+          + input[type=checkbox]:checked
+            background: red
+          &:first-child
+            text-align: center
+            width: 30px
+          text-align: left
+          vertical-align: middle
+  .sbmt
+    margin-top: 20px
+    .close
+      color: #131313
+      padding-right: 15px
+
+#upload
+  width: 650px
+  .upload-box
+    -webkit-border-radius: 3px
+    background: img('/old/upload-big.png', 'center no-repeat' ,'#f9f9f9')
+    border: 1px dashed #cfcfcf
+    border-radius: 3px
+    color: #505050
+    height: 120px
+    margin-top: 30px
+    padding-top: 85px
+    text-align: center
+  .result
+    margin-top: 10px
+    .res-title
+      font-size: 14px
+      font-weight: 700
+      line-height: 36px
+    table
+      width: 100%
+      thead tr
+        border-bottom: 1px solid #e4e4e4
+        border-top: 1px solid #e4e4e4
+        height: 31px
+        th
+          &:first-child
+            text-align: center
+            width: 30px
+          color: #898989
+          text-align: left
+          vertical-align: middle
+      tbody tr
+        &.selected
+          background: #fefdde !important
+        &:nth-child(2n + 1)
+          background: #f9f9f9
+        border-bottom: 1px solid #e4e4e4
+        height: 44px
+        td
+          + input[type=checkbox]:checked
+            background: red
+          &:first-child
+            text-align: center
+            width: 30px
+          text-align: left
+          vertical-align: middle
+    .sbmt
+      margin-top: 20px
+      .close
+        color: #131313
+        padding-right: 15px
+
+#start-upload
+  width: 650px
+  .upload-box
+    -webkit-border-radius: 3px
+    background: img('/old/upload-big.png', 'center no-repeat' ,'#f9f9f9')
+    border: 1px dashed #cfcfcf
+    border-radius: 3px
+    color: #505050
+    height: 120px
+    margin-top: 30px
+    padding-top: 85px
+    text-align: center
+  .result
+    margin-top: 10px
+    .res-title
+      font-size: 14px
+      font-weight: 700
+      line-height: 36px
+    .sbmt
+      margin-top: 20px
+      .close
+        color: #131313
+        padding-right: 15px
+
+#founded-online
+  width: 650px
+  form
+    padding-top: 30px
+    .search
+      margin-right: 20px
+      width: 500px
+    .action
+      width: 130px
+    .row.checkbox
+      margin-top: 15px
+    label
+      text-align: right
+      width: 65px
+      span
+        line-height: 28px
+        vertical-align: middle
+      .button-checkbox
+        margin-right: 5px
+    .value
+      width: 435px
+      small
+        color: #5e5e5e
+        font-size: 10px
+        line-height: 22px
+  .result
+    margin-top: 10px
+    .res-title
+      font-size: 14px
+      font-weight: 700
+      line-height: 36px
+    table
+      width: 100%
+      thead tr
+        border-bottom: 1px solid #e4e4e4
+        border-top: 1px solid #e4e4e4
+        height: 31px
+        th
+          &:first-child
+            text-align: center
+            width: 30px
+          color: #898989
+          text-align: left
+          vertical-align: middle
+      tbody tr
+        &.selected
+          background: #fefdde !important
+        &:nth-child(2n + 1)
+          background: #f9f9f9
+        border-bottom: 1px solid #e4e4e4
+        height: 44px
+        td
+          + input[type=checkbox]:checked
+            background: red
+          &:first-child
+            text-align: center
+            width: 30px
+          text-align: left
+          vertical-align: middle
+    .sbmt
+      margin-top: 20px
+      .close
+        color: #131313
+        padding-right: 15px
+
+#find-online
+  width: 500px
+  form
+    padding-top: 30px
+    .search
+      width: 500px
+    .row.checkbox
+      margin-top: 15px
+    label
+      text-align: right
+      width: 65px
+      span
+        line-height: 28px
+        vertical-align: middle
+      .button-checkbox
+        margin-right: 5px
+    .value
+      width: 435px
+      small
+        color: #5e5e5e
+        font-size: 10px
+        line-height: 22px
+  .result
+    margin-top: 10px
+    .res-title
+      font-size: 14px
+      font-weight: 700
+      line-height: 36px
+    table
+      width: 100%
+      thead tr
+        border-bottom: 1px solid #e4e4e4
+        border-top: 1px solid #e4e4e4
+        height: 31px
+        th
+          &:first-child
+            text-align: center
+            width: 30px
+          color: #898989
+          text-align: left
+          vertical-align: middle
+      tbody tr
+        &:nth-child(2n + 1)
+          background: #f9f9f9
+        border-bottom: 1px solid #e4e4e4
+        height: 44px
+        td
+          + input[type=checkbox]:checked
+            background: red
+          &:first-child
+            text-align: center
+            width: 30px
+          text-align: left
+          vertical-align: middle
+  .sbmt
+    margin-top: 20px
+    .close
+      color: #131313
+      padding-right: 15px
+
+#container
+  #header
+    height: 65px
+    .logo a
+      background: img('/old/logo_withouttext.png', 'no-repeat' ,'')
+      display: block
+      height: 45px
+      width: 167px
+    .user-box
+      padding-top: 23px
+      a.head-user
+        font-size: 13px
+        margin-right: 5px
+        padding-top: 2px
+        vertical-align: middle
+      .dropdown-menu
+        font-size: 14px
+        left: -45px
+        top: 123%
+        width: 210px !important
+        .arrow-top
+          left: 39px
+          right: auto
+  #breadcrumbs
+    font-size: 16px
+    height: 65px
+    margin-left: 205px
+    ul li
+      background: img('/old/breadcrumbs-arrow.png', 'left 8px no-repeat' ,'')
+      padding: 0 13px 0 19px
+      &:first-child
+        background: none
+        padding-left: 0
+  #navigation
+    float: left
+    width: 205px
+    ul li
+      height: 27px
+      a
+        color: #3b3b3b
+        font-size: 14px
+        text-decoration: none
+      &.active a
+        color: #000
+        font-weight: 700
+
+#header
+  .main-icon
+    float: left
+    min-height: 1px
+    padding-left: 0
+    padding-right: 15px
+    position: relative
+    width: 205px
+    .logo
+      background: img('/old/logo-eng.png', 'no-repeat left bottom' ,'')
+      box-sizing: content-box
+      cursor: pointer
+      font-size: 13px
+      font-weight: 700
+      padding-top: 6px
+  .logo
+    float: left
+    height: 45px
+    width: 174px
+
+input
+  &[type=email].error, &[type=password].error, &[type=text].error
+    background: #fcf5f6
+    border: 1px solid #e19797
+    color: red
+
+.ui-widget-overlay
+  background: img('/fb/fancybox_overlay.png', 'repeat scroll 0 0' ,'rgba(0, 0, 0, 0)') !important
+  opacity: 1 !important
+
+.ui-dialog
+  border: 3px solid #595959 !important
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br
+  border-bottom-right-radius: 5px
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl
+  border-bottom-left-radius: 5px
+
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr
+  border-top-right-radius: 5px
+
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl
+  border-top-left-radius: 5px
+

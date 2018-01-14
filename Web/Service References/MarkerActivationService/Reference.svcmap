@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f36bf247-4625-4e9a-bd67-ab294cdc5bbc" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://api.demo.cryptogramm.ru:11111/MarkerActivationService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MarkerActivationService.xsd" MetadataType="Schema" ID="79954b94-f3c4-4d1b-87c4-9458ab42c3bf" SourceId="1" SourceUrl="http://api.demo.cryptogramm.ru:11111/MarkerActivationService.svc?xsd=xsd5" />
+    <MetadataFile FileName="MarkerActivationService1.xsd" MetadataType="Schema" ID="06398a0c-4060-4606-a8e5-98b25b695ca1" SourceId="1" SourceUrl="http://api.demo.cryptogramm.ru:11111/MarkerActivationService.svc?xsd=xsd6" />
+    <MetadataFile FileName="MarkerActivationService2.xsd" MetadataType="Schema" ID="0267ec83-2fbc-4369-a89e-03ee34a681b0" SourceId="1" SourceUrl="http://api.demo.cryptogramm.ru:11111/MarkerActivationService.svc?xsd=xsd7" />
+    <MetadataFile FileName="MarkerActivationService.wsdl" MetadataType="Wsdl" ID="167cf0e8-40fd-4191-9a32-698f28ca985c" SourceId="1" SourceUrl="http://api.demo.cryptogramm.ru:11111/MarkerActivationService.svc?wsdl" />
+    <MetadataFile FileName="MarkerActivationService.disco" MetadataType="Disco" ID="329e145c-e9ca-46db-b3d2-b0935434d498" SourceId="1" SourceUrl="http://api.demo.cryptogramm.ru:11111/MarkerActivationService.svc?disco" />
+    <MetadataFile FileName="MarkerActivationService3.xsd" MetadataType="Schema" ID="2089f204-f905-4cb5-8f15-f902969537bb" SourceId="1" SourceUrl="http://api.demo.cryptogramm.ru:11111/MarkerActivationService.svc?xsd=xsd0" />
+    <MetadataFile FileName="MarkerActivationService4.xsd" MetadataType="Schema" ID="dc9850c5-6056-4af9-b3b7-253b757e27cd" SourceId="1" SourceUrl="http://api.demo.cryptogramm.ru:11111/MarkerActivationService.svc?xsd=xsd1" />
+    <MetadataFile FileName="MarkerActivationService5.xsd" MetadataType="Schema" ID="a02442d0-63de-4dfc-b124-1dde5acc3e8f" SourceId="1" SourceUrl="http://api.demo.cryptogramm.ru:11111/MarkerActivationService.svc?xsd=xsd2" />
+    <MetadataFile FileName="MarkerActivationService6.xsd" MetadataType="Schema" ID="056abf7d-b4ef-4b30-af54-df102328ca06" SourceId="1" SourceUrl="http://api.demo.cryptogramm.ru:11111/MarkerActivationService.svc?xsd=xsd3" />
+    <MetadataFile FileName="MarkerActivationService7.xsd" MetadataType="Schema" ID="bc0c2278-3976-458e-89d3-400cc8da1e6c" SourceId="1" SourceUrl="http://api.demo.cryptogramm.ru:11111/MarkerActivationService.svc?xsd=xsd4" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

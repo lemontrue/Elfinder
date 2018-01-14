@@ -1,0 +1,68 @@
+html, body {
+    height: 100%;
+    margin: 0;
+
+    padding: 0;
+    width: 100%;
+}
+
+.container { width: 950px; }
+
+#fileDialog {
+    background-color: rgba(0, 0, 0, 0.4);
+
+    bottom: 0;
+
+    display: none;
+    left: 0;
+    position: absolute;
+    right: 0;
+
+    top: 0;
+
+    z-index: 10;
+}
+
+#fileDialog .window {
+    background-color: #fff;
+    box-shadow: 0 0px 90px rgba(63, 63, 63, 0.31);
+    height: 450px;
+    left: 50%;
+    margin-left: -350px;
+    margin-top: -225px;
+    position: absolute;
+    top: 50%;
+    width: 700px;
+    z-index: 20;
+}
+
+#fileDialog .window header { padding: 10px; }
+
+#fileDialog .window header h3 {
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+#fileDialog .window header span {
+    color: #CAC0C0;
+    cursor: pointer;
+    float: right;
+}
+
+#fileDialog .window header span:hover { color: #666; }
+
+#fileDialog .window .body {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 42px;
+}
+
+#fileDialog .window .body iframe {
+    border: none;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}

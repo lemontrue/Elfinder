@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://localhost:44301/MarkerActivationService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="CertificateInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CertificateId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Decrypt" nillable="true" type="tns:CertificateInfo.DecryptInfo" />
+      <xs:element minOccurs="0" name="FullSubjectName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="INN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsTest" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IssureName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MyCertificate" nillable="true" type="tns:CertificateInfo.MyCertificateInfo" />
+      <xs:element minOccurs="0" name="NotAfter" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="NotBefore" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Organization" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RecipientCertificate" nillable="true" type="tns:CertificateInfo.RecipientCertificateInfo" />
+      <xs:element minOccurs="0" name="SubjectName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Thumbprint" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CertificateInfo" nillable="true" type="tns:CertificateInfo" />
+  <xs:complexType name="CertificateInfo.DecryptInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Issuer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PublicKeyAlgorithm" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SerialNumber" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CertificateInfo.DecryptInfo" nillable="true" type="tns:CertificateInfo.DecryptInfo" />
+  <xs:complexType name="CertificateInfo.MyCertificateInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FriendlyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HasPIN" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CertificateInfo.MyCertificateInfo" nillable="true" type="tns:CertificateInfo.MyCertificateInfo" />
+  <xs:complexType name="CertificateInfo.RecipientCertificateInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FriendlyName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CertificateInfo.RecipientCertificateInfo" nillable="true" type="tns:CertificateInfo.RecipientCertificateInfo" />
+</xs:schema>

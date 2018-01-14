@@ -1,0 +1,336 @@
+﻿@using System.Web.Optimization
+@using CryptxOnline.Web.Helpers
+@using Newtonsoft.Json
+@model List<CryptxOnline.Web.Helpers.CertificateInfoContactAdd>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE HTML>
+
+<html style="; height: auto; overflow: hidden; padding: 4px 18px 10px; width: auto;">
+    <head>
+        <link href="../../Content/CSS/New/common.css" rel="stylesheet" />
+        <link href="../../Content/CSS/New/normalize.css" rel="stylesheet" />
+        <link href="../../Content/CSS/New/icons.css" rel="stylesheet" />
+        @*<link href="../../Content/CSS/New/style.css" rel="stylesheet" />*@
+        <link href="../../Content/CSS/New/ContactListStyle.css" rel="stylesheet" />
+        <link href="../../Content/CSS/New/jquery.fancybox.css" rel="stylesheet" />
+        <link href="../../Content/opentip.css" rel="stylesheet" />
+        @Scripts.Render("~/bundles/New")
+
+        @if (@Model == null && Request.HttpMethod == "POST")
+        {
+            <script>
+
+                parent.disposeSearchCertFrame();
+                //parent.$("#SearchCertificateDiv").dialog("close");
+                //parent.$('#ContactListFrame')[0].contentWindow.Refresh();
+                //parent.$("#SearchCertificateFrame").remove();
+            </script>
+        }
+        <style>
+            .error { color: red; }
+        </style>
+    </head>
+    @using (Html.BeginForm())
+    {
+        @Html.Hidden("contactId", new {ViewBag.contactId})
+        @Html.Hidden("selectedItem")
+        @Html.Hidden("userId", (Guid) ViewBag.UserId)
+        @Html.Hidden("all", (bool)ViewBag.all)
+        <body id="mybody" style="">
+            @*            <input type="button" value="test" onclick="parent.disposeSearchCertFrame()"/>*@
+            <div style="height: 470px">
+                <div style="cursor: pointer; position: absolute; right: 0px; top: 0px;">
+                    <a title="закрыть" class="fancybox-item fancybox-close" onclick=" closeFrame() "></a>
+                </div>
+
+                <div class="modal-window" id="founded">
+                    <div class="title">
+                        Введите текст для поиска в "Cryptogramm"
+                    </div>
+                    <div class="row" style="padding-top: 30px">
+                        <div class="search col">
+                            @Html.TextBox("SearchString", null, new {@maxlength = 110, @id = "SearchString", @placeholder = "Поиск ведется по ФИО владельца и названию организации"})
+                            <span id="wrongSearch" style="color: red; display: none">Введите больше 4х символов</span>
+                        </div>
+                        <div class="action col text-right">
+                            <input class="btn btn-blue" type="submit" value="Найти" />
+                        </div>
+                    </div>
+                    <div class="row checkbox">
+                        <label for="IsActive">
+                            @Html.CheckBox("IsActive", true)
+                            <span>
+                                Искать только действующие сертификаты
+                            </span>
+                        </label>
+                    </div>
+                    <div class="result">
+                        <div class="res-title">
+                            Результаты поиска:
+                        </div>
+                        <table id="findedCertificatesHeader" class="rowCheck">
+                            <colgroup>
+                                <col span="1" style="width: 30px" />
+                                <col span="1" style="width: 255px" />
+                                <col span="1" style="width: 140px" />
+                                <col span="1" style="width: 140px" />
+                                <col span="1" style="width: 80px" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th><input class="checkAll" id="certs-all" type="checkbox" /></th>
+                                    <th>Владелец</th>
+                                    <th>Срок действия</th>
+                                    <th>Организация</th>
+                                    <th>Выдан</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <div class="scroll-wrap">
+                            <div class="scroller">
+                                <div class="certificats-list-modal">
+
+                                    @if (Model != null && Model.Count != 0)
+                                    {
+                                        <table id="findedCertificates" class="rowCheck">
+                                            <colgroup>
+                                                <col span="1" style="width: 30px" />
+                                                <col span="1" style="width: 255px" />
+                                                <col span="1" style="width: 140px" />
+                                                <col span="1" style="width: 140px" />
+                                                <col span="1" style="width: 80px" />
+                                            </colgroup>
+
+                                            @foreach (CertificateInfoContactAdd certInfo in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" id="@certInfo.CertificateId" custdata="@JsonConvert.SerializeObject(certInfo)" />
+
+                                                    </td>
+                                                    <td>
+                                                        @if (certInfo.IsTest) {
+                                                            <span class="test-certificate-icon no-padding js-test-certificate-tip" id="testTip-@certInfo.CertificateId"></span>
+                                                        } else {
+                                                            <span class="fake-test-certificate-icon no-padding"></span>
+                                                        }
+                                                        @Html.ActionLink(certInfo.SubjectName, "GetCertificate", "Default", new {thumbPrint = @certInfo.Thumbprint}, null)
+                                                    </td>
+                                                    <td>
+                                                        @certInfo.TimeMessage
+                                                    </td>
+                                                    <td>
+                                                        @certInfo.Organization
+                                                    </td>
+                                                    <td>
+                                                        @certInfo.IssureName
+                                                    </td>
+                                                </tr>
+                                            }
+
+                                        </table>
+                                    }
+                                    else
+                                    {
+                                        <div style="font-size: 25px; padding-top: 100px; text-align: center">
+                                            Ничего не найдено
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="scroller__bar-wrapper">
+                                <div class="scroller__bar">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row sbmt pull-right">
+                            <a class="close" href="#" onclick=" closeFrame() ">Отмена</a>
+                            @if (ViewBag.contactId != null && ViewBag.contactId != Guid.Empty)
+                            {
+                                <input class="btn btn-green" type="submit" value="Добавить" name="addToContact" onclick=" collectData() " />
+                            }
+                            else
+                            {
+                                <input class="btn btn-green" type="button" value="Добавить" onclick=" sendData() " />
+                            }
+
+                        </div>
+                    </div>
+                </div>
+
+                @*                <div>
+                        <b>Результаты поиска:</b>
+                        <table id="findedCertificates" style="width: 100%">
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="allChkBox"/>
+                                </td>
+                                <td>
+                                    Владелец
+                                </td>
+                                <td>
+                                    Срок действия
+                                </td>
+                                <td>
+                                    Организация
+                                </td>
+                                <td>
+                                    Выдан
+                                </td>
+                            </tr>
+                            @if (Model != null)
+                            {
+                                foreach (CertificateInfoContactAdd certInfo in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" id="@certInfo.CertificateId" custData="@JsonConvert.SerializeObject(certInfo)"/>
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink(certInfo.SubjectName, "GetCertificate", "Default", new {thumbPrint = @certInfo.Thumbprint}, null)
+                                        </td>
+                                        <td>
+                                            @certInfo.TimeMessage
+                                        </td>
+                                        <td>
+                                            @certInfo.Organization
+                                        </td>
+                                        <td>
+                                            @certInfo.IssureName
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </table>
+                    </div>*@
+
+            </div>
+        </body>
+    }
+</html>
+
+<script>
+    $(document).ready(function() {
+
+        var regTipOptions = {
+            tipJoint: "left",
+            background: '#fff5d2',
+            borderRadius: 4,
+            borderWidth: 1,
+            borderColor: '#fee8ae'
+        };
+        $(".js-test-certificate-tip").each(function(i,el){
+            new Opentip($(el), 'Сертификат выпущен без участия<br>аккредитованного Удостоверяющего<br>Центра и не имеет юридической силы.', '', regTipOptions);
+        });
+
+        if (!!$('.certificats-list-modal').find('table')[0]) {
+            $('.result').removeClass('hidden');
+            parent.showFoundedCerts();
+        }
+        $('body').attr('style', '');
+
+        $('#allChkBox').change(function(event) {
+            var table = $(event.target).parents('table:first');
+            var rows = table.find('tr');
+            var checboxes = rows.find(':checkbox');
+            //выбраны все
+
+            if (event.target.checked) {
+
+                checboxes.prop('checked', true);
+            }
+            //выбор снят со всех
+            else {
+                checboxes.prop('checked', false);
+            }
+        });
+        $('form').submit(function(e) {
+            var searchVal = $('#SearchString').val();
+            if (searchVal.length < 5) {
+                $('#wrongSearch').css('display', 'block');
+                $('#SearchString').focus();
+                $('#SearchString').addClass('error');
+                e.preventDefault();
+            }
+        });
+
+        //$('form').validate({
+        //    rules: {
+        //        SearchString: {
+        //            required: true,
+        //            minlength: 5
+        //        }
+        //    },
+        //    messages: {
+        //        SearchString: {
+        //            required: "Это поле обязательно для заполнения",
+        //            minlength: "Поле должно быть минимум 5 символов"
+        //        }
+        //    }
+        //});
+    });
+</script>
+<script>
+    function collectData() {
+        var table = $('#findedCertificates');
+        var rows = table.find('tr:not(:has(th))');
+        var checboxes = rows.find(':checkbox');
+        var array = [];
+        $.each(checboxes, function() {
+            if (this.checked) {
+                obj = jQuery.parseJSON($(this).attr('custData'));
+                array.push(obj);
+            }
+        });
+        $('#selectedItem').val(JSON.stringify(array));
+        return true;
+    }
+
+    function sendData() {
+        var table = $('#findedCertificates');
+        var rows = table.find('tr:not(:has(th))');
+        var checboxes = rows.find(':checkbox');
+        if (checboxes.length == 0)
+            return;
+        var obj = new Object();
+        var createContactFrame = parent.$("#CreateContactFrame").prop('contentWindow');
+        var objArray = [];
+        //parent.showCertArea();
+
+        $.each(checboxes, function() {
+
+            if (this.checked) {
+                obj = jQuery.parseJSON($(this).attr('custData'));
+
+                if ('@(!string.IsNullOrEmpty(Request.QueryString["returnType"]) && Request.QueryString["returnType"] == "enc")' == 'True') {
+                    parent.populateEncCert(obj);
+                }
+
+                if (parent.$("#CreateContactFrame").prop('src') != null && parent.$("#CreateContactFrame").prop('src') != "") {
+                    createContactFrame.addCertificate(obj);
+                } else {
+
+                    //alert('Открываем окно создания контакта');
+                    objArray.push(obj);
+
+                }
+            }
+        });
+
+        if (parent.$("#CreateContactFrame").prop('src') == "") {
+            parent.createContactClick(objArray);
+        } else {
+            closeFrame();
+        }
+    }
+
+    function closeFrame() {
+        parent.disposeSearchCertFrame();
+
+    }
+</script>

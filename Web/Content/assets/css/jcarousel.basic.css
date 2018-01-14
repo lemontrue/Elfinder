@@ -1,0 +1,99 @@
+.jcarousel-wrapper {
+    position: relative;
+}
+
+
+.jcarousel-wrapper .photo-credits {
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    font-size: 13px;
+    color: #fff;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.85);
+    opacity: .66;
+}
+
+.jcarousel-wrapper .photo-credits a {
+    color: #fff;
+}
+
+/** Carousel **/
+
+.jcarousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.jcarousel ul {
+    width: 20000em;
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.jcarousel li {
+    float: left;
+}
+
+/** Carousel Controls **/
+
+.jcarousel-control-prev,
+.jcarousel-control-next {
+    position: absolute;
+    top: 150px;
+    width: 43px;
+    height: 43px;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 0 1px #000;
+    font: 0 Arial, sans-serif;
+    background:  url(/Content/i/slider-arrow.png)  no-repeat;
+    opacity: 1;
+    transition: all 0s ease 0s !important;
+}
+
+.jcarousel-control-prev {
+    left: 0;
+    background-position: top left;
+}
+
+.jcarousel-control-next {
+    right: 0;
+    background-position: bottom left;
+}
+
+.jcarousel-control-prev:hover {
+    left: 0;
+    background-position: top right;
+}
+
+.jcarousel-control-next:hover {
+    right: 0;
+    background-position: bottom right;
+}
+
+.jcarousel-control-prev:hover span,
+.jcarousel-control-next:hover span {
+    display: block;
+}
+
+.jcarousel-control-prev.inactive,
+.jcarousel-control-next.inactive {
+    opacity: .5;
+    cursor: default;
+}
+
+/** Carousel Pagination **/
+
+.jcarousel-pagination a {
+    text-decoration: none;
+    color:inherit;
+}
+
+.jcarousel-pagination a.active {
+    background: #4E443C;
+    color: #fff;
+    opacity: 1;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.75);
+}

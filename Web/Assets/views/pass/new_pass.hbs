@@ -1,0 +1,61 @@
+﻿<div id="restore">
+    <h1>
+        Восстановление пароля
+    </h1>
+    <div class="box">
+        <div class="restore-area">
+            <div class="form">
+                <div class="row restored">
+                    Пароль должен быть длиною не менее 6 символов, включать
+                    <br />  цифры, заглавные и строчные буквы.
+                </div>
+                <div class="row enter">
+                    <label class="col">
+                        Введите новый пароль:
+                    </label>
+                    <div class="value col">
+                        <input {{focusEl}} can-value="passValue" required="required" type="password" />
+                        {{#if strongPassword}}
+                            <div class="hint hint-success">
+                                Надежный пароль
+                            </div>
+                        {{else}}
+                            <div class="hint hint-error">
+                                Ненадежный пароль
+                            </div>
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="row enter">
+                    <label class="col">
+                        Повторите новый пароль:
+                    </label>
+                    <div class="value col">
+                        <input can-value="rePassValue" required="required" type="password" />
+                        {{#if passwordsNotMatch}}
+                            <div class="hint hint-error">
+                                Пароли не совпадают
+                            </div>
+                        {{else}}
+                            <div class="hint hint-success">
+                                Пароли совпадают
+                            </div>
+                        {{/if}}
+
+                    </div>
+                </div>
+
+                {{trackingError passValue rePassValue}}
+
+                <div class="row sbmt">
+                    <input can-click="event.next" {{#inverse btnNextState}}disabled{{/inverse}} class="btn btn{{#if btnNextState}}-blue{{else}}-grey{{/if}}" type="submit" value="Сменить пароль" />
+                </div>
+            </div>
+        </div>
+        <div class="row bottom text-right">
+            <a href="#">
+                Техническая поддержка
+            </a>
+        </div>
+    </div>
+</div>

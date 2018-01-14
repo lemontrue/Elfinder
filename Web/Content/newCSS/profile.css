@@ -1,0 +1,230 @@
+#content {
+    margin-left: 205px;
+    position: relative;
+}
+
+.content {
+    -webkit-border-radius: 3px;
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+    padding: 20px 0 0;
+}
+
+.profile .profile-info {
+    color: #3d3d3d;
+    padding: 0 25px;
+}
+
+.profile .profile-info .row {
+    margin-bottom: 10px;
+    min-height: 28px;
+}
+
+.profile .profile-info .name .value { width: 330px; }
+
+.profile .profile-info .settings {
+    margin-bottom: 20px;
+    margin-left: 100px;
+    position: relative;
+}
+
+.profile .profile-info .settings .row {
+    margin-bottom: 0;
+    min-height: 15px;
+}
+
+.profile .profile-info .settings .row .tooltip {
+    -webkit-border-radius: 3px;
+    background-clip: padding-box;
+    background-color: white;
+    border: 1px solid #ccc;
+    *border-bottom-width: 2px;
+    border-radius: 3px;
+    *border-right-width: 2px;
+    display: none;
+    float: left;
+    list-style: none;
+    margin: 7px 0 0;
+    padding: 7px 0;
+    position: absolute;
+    right: -20px;
+    top: 23px;
+    z-index: 1000;
+}
+
+.profile .profile-info .settings .row .tooltip .arrow-top {
+    background: url(../img/arrow-top.png);
+    height: 7px;
+    position: absolute;
+    right: 32px;
+    top: -7px;
+    width: 19px;
+}
+
+.profile .profile-info .settings .row .tooltip .body { padding: 0 10px; }
+
+.profile .profile-info .settings .row label span {
+    line-height: 30px;
+    vertical-align: middle;
+}
+
+.profile .profile-info .label {
+    line-height: 28px;
+    vertical-align: middle;
+    width: 100px;
+}
+
+.profile .profile-info .value { line-height: 28px; }
+
+.profile .profile-info .email { margin-right: 10px; }
+
+.profile .profile-info .login { font-weight: 700; }
+
+.profile .profile-info .btn {
+    font-weight: 400;
+    height: 23px;
+    line-height: 23px;
+    margin-top: 3px;
+    padding: 0;
+    text-align: center;
+    width: 125px;
+}
+
+.profile .filter {
+    background: #f9f9f9;
+    border-bottom: 1px solid #d9d9d9;
+    border-top: 1px solid #d9d9d9;
+    height: 87px;
+    margin-bottom: 20px;
+    padding: 15px 25px 20px;
+}
+
+.profile .filter .title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 10px;
+    width: 170px !important;
+}
+
+.profile .filter .col {
+    margin-right: 20px;
+    vertical-align: middle;
+    width: 185px;
+}
+
+.profile .filter .col label {
+    color: #161616;
+    display: block;
+    font-size: 11px;
+    height: 18px;
+}
+
+.profile .filter .pin {
+    margin-right: 0;
+    width: 100px;
+}
+
+.profile .filter .pin label span {
+    line-height: 28px;
+    vertical-align: middle;
+}
+
+.profile .certificats-list .certificat:hover { background: #edf4fa; }
+
+.profile .certificats-list .certificat {
+    padding: 10px 25px 0;
+    position: relative;
+}
+
+.profile .certificats-list .certificat hr {
+    border: 0;
+    border-top: 1px solid #d9d9d9;
+    margin: 0;
+    margin-top: 20px;
+}
+
+.profile .certificats-list .certificat .col1 {
+    display: inline-block;
+    line-height: 20px;
+    vertical-align: top;
+    width: 240px;
+}
+
+.profile .certificats-list .certificat .col1 .title {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 5px 0 18px 0;
+}
+
+.profile .certificats-list .certificat .col1 .cert span.active { color: #3d3d3d; }
+
+.profile .certificats-list .certificat .col1 .cert span.expire {
+    background: url(../img/expire.png) left no-repeat;
+    padding-left: 15px;
+}
+
+.profile .certificats-list .certificat .col2 {
+    display: inline-block;
+    line-height: 20px;
+    min-width: 460px;
+    position: relative;
+    vertical-align: top;
+}
+
+.profile .certificats-list .certificat .col2 .down {
+    position: absolute;
+    right: 10px;
+    top: 45px;
+}
+
+.profile .certificats-list .certificat .col2 .new-title { padding: 5px 0 10px 0; }
+
+.profile .certificats-list .certificat .col2 .pin-box { margin-top: 10px; }
+
+.profile .certificats-list .certificat .col2 .pin-box .col {
+    margin-right: 7px;
+    vertical-align: middle;
+}
+
+.profile .certificats-list .certificat .col2 .pin-box .btn {
+    color: white;
+    font-weight: 400;
+    height: 23px;
+    line-height: 23px;
+    padding: 0;
+    text-align: center;
+    text-decoration: none;
+    width: 125px;
+}
+
+.profile .certificats-list .certificat .col2 .pin-box .btn:active,
+.profile .certificats-list .certificat .col2 .pin-box .btn:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.profile .certificats-list .certificat .col2 .pin-box input[type=text] { width: 100px; }
+
+.profile .more-cert {
+    height: 75px;
+    padding-top: 28px;
+    text-align: center;
+}
+
+.cert-control { padding-top: 20px; }
+
+.cert-control .backlink { float: left; }
+
+.cert-control .backlink a {
+    background: #f3f3f3;
+    color: #373737;
+    display: inline-block;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 20px;
+}
+
+.cert-control .controls .sbmt a.close {
+    color: #131313;
+    padding-right: 15px;
+}

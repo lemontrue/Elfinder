@@ -1,0 +1,1515 @@
+body {
+    display: table;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+div, p, span, ul, li {
+    cursor: default;
+}
+
+#select-files {
+
+}
+
+#select-files .select {
+    height: 330px;
+    width: 100%;
+    cursor: pointer;
+    position: relative;
+}
+#select-files .select:hover {
+    cursor: pointer;
+}
+
+#select-files .select .upload {
+    float: left;
+    width: 489px;
+    height: 100%;
+    border: 1px dashed #858585;
+    border-right: none;
+    border-radius: 3px 0 0 3px;
+    background: url("../image/upload.png") no-repeat center 90px;
+
+}
+#select-files .select .upload:hover {
+    cursor: pointer;
+}
+
+#select-files .select .upload.drag {
+    background: rgba(232, 241, 255, 1) url("../image/upload.png") no-repeat center 90px;
+}
+
+#select-files .select .upload > .drag {
+    display: none;
+    position: absolute;
+    width: 86px;
+    height: 84px;
+    margin: 220px 0 0 387px;
+}
+
+#select-files .select .upload.drag .drag {
+    display: block;
+    background: url("../image/drag.png");
+}
+
+#select-files .select .upload .title, #select-files .select .my-files .title {
+    position: absolute;
+    padding: 175px 165px 136px;
+    text-decoration: underline;
+    /*z-index: 5;*/
+}
+
+#select-files .select .upload .title:hover, #select-files .select .my-files .title:hover {
+    cursor: pointer;
+}
+
+#select-files .select .upload .title:hover {
+    cursor: pointer;
+}
+
+#select-files .select .my-files .title {
+    padding: 176px 172px 116px 185px;
+}
+
+#select-files .select .upload .info {
+    position: absolute;
+    color: #6b6b6b;
+    font-size: 12px;
+    padding: 262px 146px 26px 159px;
+    width: 184px;
+    text-align: center;
+    cursor: pointer
+}
+
+#select-files .select .upload:hover {
+    background: rgba(232, 241, 255, 1) url("../image/upload.png") no-repeat center 90px;
+    cursor: pointer;
+}
+
+#select-files .select .my-files:hover {
+    background: rgba(232, 241, 255, 1) url("../image/document.png") no-repeat center 90px;
+}
+
+#select-files .select .my-files {
+    float: left;
+
+    width: 488px;
+    height: 100%;
+
+    border-radius: 3px;
+    border: 1px solid #858585;
+
+    background: url("../image/document.png") no-repeat center 90px;
+}
+#select-files .select .my-files:hover {
+    cursor: pointer;
+}
+
+#select-files .select .or {
+    position: absolute;
+    text-align: center;
+    border: 1px solid #8e8e8e;
+    width: 60px;
+    height: 40px;
+    color: #8e8e8e;
+    font-family: Verdana;
+    font-size: 14px;
+    border-radius: 31px;
+    padding-top: 20px;
+    left: 50%;
+    margin-left: -30px;
+    top: 50%;
+    margin-top: -30px;
+    background: #fff;
+    z-index: 10;
+    cursor: default;
+}
+
+.box {
+    min-height: 50px;
+    width: 100%;
+
+    border: 1px solid #c9c9c9;
+    border-radius: 3px;
+
+    position: relative;
+
+    margin-bottom: 15px;
+
+    box-shadow: 0 0 20px #E7E7E7;
+}
+
+.box .state {
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    left: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.box .state.change {
+    background: #1899f4;
+}
+
+.box .state.ready {
+    background: #1ac316;
+}
+
+.box .state.result {
+    background: #f4484a;
+}
+
+.box .controls {
+    height: 65px;
+
+    z-index: 100;
+    position: inherit;
+}
+
+#select-files .files-change {
+    font-family: Verdana;
+    font-weight: bold;
+    color: #373737;
+    font-size: 20px;
+
+    margin-bottom: 15px;
+}
+
+#select-files .box .body {
+    position: relative;
+    height: 300px;
+    margin-left: 2px;
+
+    overflow-y: auto;
+}
+
+#select-files .box .file-list {
+
+}
+
+#select-files .box .file-list li {
+    min-height: 45px;
+    border-bottom: 1px solid #e1e1e1;
+    padding: 19px 26px 10px 33px;
+    -webkit-transition: background 0.2s ease;
+}
+
+#select-files .box .file-list li:hover {
+    background: rgba(232, 242, 255, 0.8);
+}
+
+#select-files .box .file-list li:hover > .actions .delete {
+    display: block;
+}
+
+#select-files .box .file-list li:hover > .actions .deleted {
+    display: block;
+}
+
+#select-files .box .file-list .file-info {
+    float: left;
+    font-family: Verdana;
+    color: #141414;
+    font-size: 12px;
+
+    width: 480px;
+}
+
+#select-files .box .file-list .attached {
+    background: url("../image/rg.png") no-repeat 16px 3px;
+    padding: 0 0 0 30px;
+    display: table;
+}
+
+#select-files .box .file-list .attached.error {
+    background: url("../image/error.png") no-repeat 16px 3px;
+}
+
+#select-files .box .file-list .attached .name {
+    float: left;
+    margin: 0 20px 0 0;
+}
+
+#select-files .box .file-list .attached.error .name {
+    color: #f4484a;
+}
+
+#select-files .box .file-list .attached .link {
+    float: left;
+
+    cursor: pointer;
+}
+
+#select-files .box .file-list .attached .link span {
+    color: #0485e1;
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 0 20px 0 0;
+}
+
+#select-files .box .file-list .attached .link span:hover {
+    text-decoration: none;
+}
+
+#select-files .box .file-list .actions {
+    float: left;
+    width: 419px;
+}
+
+#select-files .box .file-list .actions .delete {
+    display: none;
+
+    text-align: right;
+    color: #ff002a;
+    font-size: 12px;
+    background: url("../image/delete.png") no-repeat 4px 3px;
+    margin-top: 7px;
+    width: 128px;
+    float: right;
+}
+
+#select-files .box .file-list .actions .delete:hover {
+    text-decoration: none;
+}
+
+#select-files .box .file-list .actions .deleted {
+    float: right;
+    margin-top: 7px;
+}
+
+#select-files .box .file-list .actions .progress {
+    float: right;
+    margin-top: 14px;
+
+    height: 3px;
+    width: 180px;
+
+    background: #e8e8e8;
+
+    position: relative;
+}
+
+#select-files .box .file-list .actions .upload_exit {
+    width: 10px;
+    height: 10px;
+    background: url("../image/close-m-r.png") no-repeat;
+    position: absolute;
+    margin: 10px 0px 0 0;
+    cursor: pointer;
+    left: 945px;
+}
+
+#select-files .box .file-list .actions .progress .bar {
+    position: absolute;
+    height: 100%;
+    width: 0%;
+
+    background: #1ac316;
+}
+
+#select-files .box .file-list .actions .error {
+    color: #ff002a;
+    padding: 7px 0 0 14px;
+    background: url("../image/error.png") no-repeat left 10px;
+    margin: 0 0 0 25px;
+}
+
+#select-files .box .file-list .actions .deleted, #select-files .box .file-list .actions .deleted > a {
+    font-size: 12px;
+    color: #323232;
+}
+
+#select-files .box .file-list .file-info .name {
+    color: #141414;
+    margin-bottom: 5px;
+    display: inline-block;
+    white-space: nowrap; /* css-3 */
+    cursor: default;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: default;
+    overflow: hidden;
+    width: 475px;
+}
+
+#select-files .box .file-list .file-info .name span {
+    padding-right: 4px;
+    display: inline-block;
+}
+
+#select-files .box .file-list .file-info .last_change {
+
+}
+
+#select-files .box .file-list .file-info .deleted {
+    color: #ff5571;
+}
+
+#select-files .box .file-edit-control {
+    margin: 22px 0 0 272px;
+}
+
+#signature .box .file-edit-control {
+    margin: 22px 0 0 245px;
+}
+
+.result .box .file-edit-control {
+    margin: 22px 0 0 245px;
+}
+
+#select-files .box .file-edit-control > a {
+    color: #141414;
+    font-size: 12px;
+
+    padding-left: 24px;
+}
+
+#select-files .box .file-edit-control > a:hover {
+    text-decoration: none;
+    cursor: pointer
+}
+
+#select-files .box .file-edit-control > a.add_upload_files {
+    background: url("../image/document-m.png") no-repeat 3px center;
+    margin-right: 22px;
+    margin: 0 0 0 30px;
+}
+
+#select-files .box .file-edit-control > a#newFile {
+    background: url("../image/upload-m.png") no-repeat left center;
+}
+
+#select-files .action-change {
+    display: table;
+}
+
+#select-files .action-change .title {
+    color: #181818;
+
+    margin-bottom: 10px;
+}
+
+#select-files .action-change select {
+    height: 30px;
+    width: 344px;
+
+    border: 1px solid #c9c9c9;
+    border-radius: 3px;
+    margin-top: 5px;
+}
+
+#select-files .action-change .error {
+    color: #ff002a;
+    padding-left: 10px;
+    position: absolute;
+    padding-top: 12px;
+}
+
+.btn.change_file_list {
+    padding: 7px 15px;
+    background: #1ac316 url("../image/document-m-b.png") no-repeat 18px center;
+    color: #fff;
+    border-radius: 3px;
+    text-decoration: none;
+    text-align: left;
+    padding-left: 46px;
+    display: inline-block;
+    margin-left: 120px;
+
+    box-shadow: 0px 2px 16px #CFCFCF;
+}
+
+.btn.change_file_list:hover {
+    background: #34CF31 url("../image/document-m-b.png") no-repeat 18px center;
+}
+
+.btn.change_file_list:active {
+    background: #18B114 url("../image/document-m-b.png") no-repeat 18px center;
+}
+
+.btn.result {
+    padding: 7px 15px;
+    background: #fff url("../image/mail-green.png") no-repeat 18px 8px;
+    color: #000;
+    border-radius: 3px;
+    text-decoration: none;
+    text-align: left;
+    padding-left: 46px;
+    display: inline-block;
+    margin: 6px 0 0 120px;
+}
+
+.btn.result.show-alert {
+    background-image: url("../image/mail-grey.png");
+}
+
+#signature {
+    display: table;
+    width: 100%;
+}
+
+#signature > .row.title {
+    display: table;
+
+    height: 75px;
+}
+
+#signature > .row.title h2 {
+    color: #373737;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 25px 0;
+    float: left;
+}
+
+#signature > .row.title a.change {
+    float: left;
+    color: #3498db;
+    font-size: 12px;
+    margin: 33px 0 0 5px;
+}
+
+#signature > .row.title a.change:hover {
+    text-decoration: none;
+    color: #ff6600;
+}
+
+#signature > .row.title .btn-group {
+    margin: 25px 0;
+}
+
+#signature > .row.title span.view {
+    margin: 32px 10px 0 0;
+    font-weight: bold;
+}
+
+#signature .box {
+
+}
+
+.btn.sort {
+    color: #656565;
+    text-decoration: none;
+}
+
+.btn.sort:hover {
+    background: #E2F3FF;
+}
+
+.btn.sort:active {
+    background: #8CBFE4;
+    color: #FFFFFF;
+}
+
+.btn.sort.active {
+    background: #3498db;
+    color: #fff;
+}
+
+#signature .box .type {
+    width: 138px;
+    padding-left: 10px;
+}
+
+#signature .box .type label {
+    color: #141414;
+}
+
+#signature .box .item {
+    min-height: 64px;
+    padding-bottom: 10px;
+    width: 100%;
+
+    -webkit-transition: background 0.2s ease;
+
+    display: table;
+}
+
+#signature .box .item:hover {
+    background: #ECF0F8;
+}
+
+#signature .box .item.signature {
+    border-bottom: 1px solid #e1e1e1;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] + label {
+    cursor: pointer;
+    padding-left: 1px;
+}
+
+input[type="checkbox"] + label::before {
+    content: "";
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    margin: 0 5px -1px 0;
+
+    background-repeat: no-repeat;
+    background-position: 2px 2px;
+    border: 1px solid #c9c9c9;
+}
+
+input[type="checkbox"] + label::before {
+
+}
+
+input[type="checkbox"]:checked + label::before {
+    background-image: url('../image/ch.png');
+}
+
+input[type="checkbox"]:disabled + label::before {
+
+}
+
+input[type="checkbox"]:checked:disabled + label::before {
+    background-image: url('../image/ch.png');
+}
+
+#signature .box .item .type {
+    float: left;
+}
+
+#signature .box .item .type > .checkbox {
+    margin: 25px 0;
+}
+
+#signature .box .item .content {
+    float: left;
+    margin: 0;
+    width: auto;
+}
+
+#signature .box .item .message {
+    float: right;
+}
+
+#signature .box .item .content .btn_array > .btn {
+    margin: 16px 0;
+    width: 272px;
+}
+
+#signature .box .item .content .choice {
+
+}
+
+#signature .box .item .content .encryption {
+    float: left
+
+}
+
+#signature .box .item .message > span {
+    color: #ff002a;
+    margin: 25px 25px 0 0;
+    display: block;
+}
+
+#signature .box .item .content .btn_array {
+    display: inline-block;
+}
+
+#signature .box .item .content .personal_certificate {
+    margin-bottom: 15px;
+}
+
+#signature .box .item .content .btn_array > .new_certificate {
+    float: left;
+    margin: 25px 0 0 30px;
+
+    background: url("../image/upload-m-g.png") no-repeat left center;
+    padding: 0 0 0 15px;
+    cursor: pointer;
+}
+
+#signature .box .item .content .runtime {
+    margin: 25px 0 20px 56px;
+}
+
+#signature .box .item .content ul.certificate {
+    margin: 12px 0 0 0;
+}
+
+#signature .box .item .content ul.certificate li {
+    height: 15px;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+#signature .box .item .content ul.certificate li span {
+    text-decoration: underline;
+    cursor: pointer;
+
+}
+
+#signature .box .item .content ul.certificate li span:hover {
+    text-decoration: none;
+}
+
+#signature .box .item .change_ser {
+    font-size: 12px;
+    color: #3498db;
+    margin-left: 50px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#signature .box .item .change_ser:hover {
+    text-decoration: none;
+    color: #ff6600;
+}
+
+#signature .box .item .content ul.certificate li label {
+    font-size: 12px;
+}
+
+#signature .box .item .content ul.certificate li .delete {
+    background: url("../image/delete.png") no-repeat;
+
+    width: 10px;
+    height: 9px;
+    margin: 3px 0 0 5px;
+    cursor: pointer;
+}
+
+ul.certificate li.icon {
+    padding-left: 22px;
+}
+
+ul.certificate li.icon.icon-pen {
+    background: url("../image/pen.png") no-repeat left top;
+}
+
+ul.certificate li.icon.icon-lock {
+    background: url("../image/lock.png") no-repeat left top;
+}
+
+#signature .box .item .content .extra {
+    margin: 0 0 0 22px;
+}
+
+#signature .box .item .content .extra li {
+    margin-bottom: 2px;
+    color: #141414;
+}
+
+#signature .box .item .content .line-dotted {
+    border-bottom: 1px dashed #d4d4d4;
+    width: 200px;
+    height: 0px;
+
+    margin: 22px 0 12px 0;
+}
+
+#signature .new {
+    display: table;
+    margin: 12px 0 0 0
+}
+
+#signature .new div {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#signature .new .select {
+    float: left;
+    color: #3498db;
+    margin-right: 30px;
+}
+
+#signature .new .select:hover {
+    text-decoration: none;
+    color: #ff6600;
+}
+
+#signature .new .upload {
+    float: left;
+    color: #202020;
+    padding-left: 18px;
+
+    background: url("../image/upload-m-g.png") no-repeat left center;
+}
+
+#signature .new .upload:hover {
+    text-decoration: none;
+}
+
+#signature .format {
+    display: table;
+    margin: 10px 0 0 0;
+}
+
+#signature .format .title {
+    color: #141414;
+    margin-bottom: 5px;
+}
+
+#signature .format select {
+    height: 27px;
+    width: 257px;
+
+    outline: none;
+}
+
+.bubble {
+    position: relative;
+    width: 260px;
+    height: 120px;
+    padding: 0px;
+    background: #FFFFFF;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.bubble:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 0 7px 6px;
+    border-color: #FFFFFF transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+    margin-left: -7px;
+    top: -6px;
+    left: 50%;
+}
+
+.bubble.template {
+    display: none;
+
+    position: absolute;
+
+    border: 1px solid #E0E0E0;
+    margin: 10px 0px 0 -104px;
+    background: #FFFFFF;
+    box-shadow: 0 4px 10px rgba(175, 175, 175, 0.52);
+
+    height: initial;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    z-index: 1000;
+}
+
+.bubble.template:after {
+    border-color: #BDD2FF transparent;
+    margin-left: 74px;
+}
+
+.bubble.template li {
+
+}
+
+.bubble.template li:first-child a {
+    border-radius: 3px 3px 0 0;
+}
+
+.bubble.template li:last-child a {
+    border-radius: 0 0 3px 3px;
+}
+
+.bubble.template li a {
+    cursor: pointer;
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+    text-decoration: none;
+    border: none;
+}
+
+.bubble.template li a:hover {
+    text-decoration: none;
+    color: #fff;
+
+    background: #6db3f2; /* Old browsers */
+    background: -moz-linear-gradient(top, #6db3f2 0%, #54a3ee 50%, #3690f0 51%, #1e69de 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #6db3f2), color-stop(50%, #54a3ee), color-stop(51%, #3690f0), color-stop(100%, #1e69de)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #6db3f2 0%, #54a3ee 50%, #3690f0 51%, #1e69de 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #6db3f2 0%, #54a3ee 50%, #3690f0 51%, #1e69de 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #6db3f2 0%, #54a3ee 50%, #3690f0 51%, #1e69de 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #6db3f2 0%, #54a3ee 50%, #3690f0 51%, #1e69de 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6db3f2', endColorstr='#1e69de', GradientType=0); /* IE6-9 */
+
+}
+
+div[action] {
+    margin: 0 0 10px 0;
+}
+
+div[app] {
+    margin: 0 0 20px 0;
+}
+
+.select_certificate {
+    height: 255px;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+
+}
+
+.select_certificate > table {
+    border-bottom: 1px solid #dddddd;
+    border-top: 1px solid #dddddd;
+}
+
+.select_certificate .tab-scroll {
+    height: 195px;
+    overflow-y: auto;
+}
+
+.select_certificate .alert-search {
+    color: #A0A0A0;
+    font-size: 25px;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.select_certificate table {
+    border-collapse: collapse;
+    width: 100%;
+
+    font-size: 12px;
+}
+
+.select_certificate > table {
+    border-top: 0;
+    margin-top: -10px;
+}
+
+.select_certificate table td {
+    padding: 10px 5px;
+    line-height: 20.5px;
+}
+
+.select_certificate table td span {
+    /*text-decoration: underline;*/
+    cursor: default;
+}
+
+/*.select_certificate table td span:hover {
+    text-decoration: none;
+}*/
+
+.select_certificate table tbody {
+    color: #3b3b3b;
+}
+
+.select_certificate table tbody tr {
+    line-height: 45px;
+    cursor: pointer;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.select_certificate table tbody tr:nth-child(2n) {
+    background-color: #f9f9f9;
+}
+
+.select_certificate table tbody tr:hover {
+    background-color: rgb(234, 239, 255);
+}
+
+.select_certificate table tbody tr.active {
+    background-color: #fffdde;
+}
+
+.select_certificate table tbody tr:first-child {
+    /*border-top: 1px solid #e5e5e5;*/
+}
+
+.select_certificate table tbody tr .name {
+    color: #2589cb;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.select_certificate table thead {
+    color: #898989;
+}
+
+.select_certificate .check {
+    margin: 0 0 0 10px;
+}
+
+.btn-group.sc {
+    float: right;
+    margin: 0 0 10px 0;
+}
+
+.result {
+
+}
+
+.result h2 {
+    color: #000;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 10px 0 25px 0;
+}
+
+.result .file-list {
+    margin: 0 0 0 2px;
+}
+
+.result .file-list .item {
+    position: relative;
+    width: 100%;
+    display: table;
+    padding: 0 0 20px 0;
+
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.result .file-list .item:hover {
+    background: rgba(232, 242, 255, 0.8);
+}
+
+.result .file-list .item .file-info {
+    float: left;
+    width: 630px;
+    margin: 20px 0 0 0;
+}
+
+.result .file-list .item .actions {
+    float: left;
+    width: 340px;
+}
+
+.result .file-list .item .actions.status {
+    text-align: right;
+    margin: 20px 0 0 0;
+}
+
+.result .file-list .item .actions.status .info {
+    padding: 0 20px 0 12px;
+}
+
+.result .file-list .item:hover .actions .send {
+    display: block;
+}
+
+.result .file-list .item .actions .send {
+    float: right;
+    margin: 30px 30px 0 0;
+    text-decoration: underline;
+    cursor: pointer;
+    display: none;
+    color: #292929;
+}
+
+.result .file-list .item .actions .send:hover {
+    text-decoration: none;
+}
+
+.result .file-list .item .name {
+    margin: 0px 0 5px 35px;
+    font-size: 12px;
+    color: #000;
+    position: relative;
+}
+.result .file-list .item .name  a{
+    color: #000
+}
+
+.result .file-list .item .icon {
+    float: left;
+    height: 18px;
+    margin: -3px 5px 0 0;
+}
+
+.result .file-list .item .icon.sig {
+    width: 8px;
+    background: url("../image/pen-big-gray.png");
+    padding: inherit;
+    margin: 0 5px 0 0;
+}
+
+.result .file-list .item .icon.enc {
+    width: 14px;
+    background: url("../image/lock-big-grey.png");
+}
+
+.result .file-list .item .icon.sig_enc {
+    width: 22px;
+    background: url("../image/pen-big-gray.png") no-repeat, url("../image/lock-big-grey.png") no-repeat 8px 0;
+}
+
+.result .file-list .item .download {
+    width: 14px;
+    height: 13px;
+
+    background: url("../image/download-m.png") no-repeat;
+
+    display: inline-block;
+
+    margin: 0 0 0 3px;
+
+    cursor: pointer;
+}
+
+.result .file-list .item .visual {
+    width: 16px;
+    height: 14px;
+
+    background: url("../image/visual-eye.png") no-repeat;
+
+    display: inline-block;
+
+    margin: 0 0 0 10px;
+
+    cursor: pointer;
+}
+
+.result .file-list .item .delete {
+    width: 14px;
+    height: 13px;
+    background: url("../image/close-m2.png") no-repeat left center;
+    display: inline-block;
+    margin: 0 0 0 3px;
+    cursor: pointer;
+}
+
+.result .file-list .item .sig {
+    color: #737373;
+    margin: 0 0 5px 0;
+    padding: 0 0 0 35px;
+}
+
+.result .file-list .item .sig .name {
+    display: inline-block;
+    margin: 0;
+}
+
+.result .file-list .item .view_link {
+    display: block;
+    margin: 0 0 0 35px;
+    color: #1687d2;
+}
+
+.result .file-list .item .param {
+    margin: 15px 0 0 35px;
+    display: table;
+}
+
+.result .file-list .item .param li {
+    color: #1687d2;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.result .file-list .item .param li:hover {
+    text-decoration: none;
+    color: #ff6600;
+}
+
+.result .file-list .item .info {
+    margin: 0 0 0 30px;
+    padding: 0 0 0 13px;
+    font-size: 10px;
+}
+
+.result .file-list .item .info.success {
+    color: #1ac316;
+    background: url("../image/success.png") no-repeat left center;
+}
+
+.result .file-list .item .info.error {
+    color: #f4484a;
+    background: url("../image/error.png") no-repeat left center;
+}
+
+.result .file-list .item .more {
+    display: none;
+    clear: left;
+    position: relative;
+    margin: 0;
+    padding: 4px 0 0 35px;
+}
+
+.result .file-list .item .more .error {
+    clear: both;
+    color: rgb(128, 32, 32);
+}
+
+.result .file-list .item .more.show {
+    display: block;
+}
+.result .file-list .item .more.show >div{
+    position:relative;
+}
+
+.result .file-list .item .more.show .test-certificate {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 68px;
+    height: 68px;
+    background: url(/Content/i/test-certificate.png) no-repeat;
+}
+
+.row.footer {
+    display: table;
+    margin: 30px 0 50px 0;
+
+    color: #343434;
+}
+
+.row.footer .a {
+    text-decoration: underline;
+
+    cursor: pointer;
+    background: url("../image/prev.png") no-repeat 10px center;
+    padding: 0px 0 0 26px;
+}
+
+.row.footer .a span, .row.footer .b span {
+    cursor: pointer;
+}
+
+.row.footer .a:hover, .row.footer .b:hover {
+    text-decoration: none;
+}
+
+.row.footer .b {
+    background: url("../image/repeat.png") no-repeat scroll 242px center rgba(0, 0, 0, 0);
+    cursor: pointer;
+    text-align: right;
+    text-decoration: underline;
+    width: 464px;
+}
+
+#modal #message-panel .content-group.pin {
+    padding: 0 0 0 0;
+}
+
+#modal #message-panel .content-group.pin label {
+    color: #000000;
+    padding-right: 35px;
+}
+
+#modal #message-panel .content-group.pin input[type=password] {
+    width: 400px;
+    height: 28px;
+    border: 1px solid #bfbfbf;
+    border-radius: 4px;
+    outline: none;
+    padding: 1px 5px;
+}
+
+#modal #message-panel .content-group.pin .check {
+    padding: 10px 0 0 96px;
+}
+
+.box .total_mistake {
+    text-align: center;
+    padding: 36px;
+    font-size: 16px;
+    color: rgb(207, 25, 25);
+}
+
+.dropdown-menu {
+    left: 170px;
+    top: 66px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176) !important;
+}
+
+.dropdown-menu.profile {
+    left: 830px;
+}
+
+.dropdown.open > .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu > li > a:hover .ico-4-2-profile {
+    background-position: -260px -320px;
+}
+
+.dropdown-menu > li > a:hover .ico-4-2-addressbook {
+    background-position: -287px -320px;
+}
+
+.dropdown-menu > li > a:hover .ico-4-2-template-settings {
+    background-position: -311px -320px;
+}
+
+.dropdown-menu > li > a:hover .ico-4-2-administration {
+    background-position: -334px -320px;
+}
+
+.dropdown-menu > li > a:hover .ico-4-2-logout {
+    background-position: -356px -321px;
+}
+
+.box .result_bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(252, 252, 252, 0.73);
+    z-index: 10;
+    border-radius: 2px;
+}
+
+.box .load {
+    text-align: center;
+    font-size: 18px;
+    color: rgb(43, 43, 43);
+    margin: 12px;
+}
+
+.box .sig_info {
+    margin-bottom: 15px;
+    clear: left;
+}
+
+.box .sig_info li {
+    display: table;
+    padding: 1px 0px;
+    font-size: 10px;
+}
+
+.box .sig_info .key {
+    color: #737373;
+    width: 103px;
+}
+
+.box .sig_info .value {
+
+}
+
+.box .sig_info li div {
+    float: left;
+}
+
+div[error] {
+    display: none;
+
+    text-align: center;
+    color: red;
+    font-size: 20px;
+    margin: 5px 0 20px 0;
+}
+
+div[error] span {
+    color: rgb(77, 134, 255);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+div[loader] {
+    display: none;
+
+    width: 128px;
+    height: 128px;
+
+    background: url("../image/loader.gif");
+
+    position: absolute;
+    left: 50%;
+    margin: 5px 0 20px -64px;
+}
+
+div[information_process] .cap {
+    position: absolute;
+    top: 92px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.57);
+    margin: 0 -10px -10px -10px;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 0 25px 0px rgba(1, 1, 1, 0.23);
+    z-index: 1000;
+}
+
+#information_process {
+    height: 70px;
+    width: 450px;
+    border-radius: 10px 10px 0 0;
+    position: fixed;
+    left: 50%;
+    margin-left: -225px;
+    box-shadow: 0px 0px 56px rgba(142, 142, 142, 1);
+    border: 1px solid #EDEDED;
+    background: #fff;
+    z-index: 1000;
+    bottom: -90px;
+}
+
+#information_process .progress {
+    height: 13px;
+    width: 425px;
+    margin: 5px 0 0 12px;
+    background: url("../image/progress.gif") no-repeat;
+}
+
+#information_process .progress .count {
+    margin: 0 0 0 80px;
+    position: absolute;
+    font-size: 10px;
+    color: #7A7A7A;
+}
+
+#information_process .progress .exit {
+    margin: 0 0 0 380px;
+    position: absolute;
+    font-size: 10px;
+    color: #7A7A7A;
+
+    cursor: pointer;
+}
+
+#information_process .progress .exit:hover {
+    color: #494949;
+}
+
+#information_process .progress .time {
+    margin: 0 0 0 215px;
+    position: absolute;
+    font-size: 10px;
+    color: #7A7A7A;
+}
+
+#information_process .body {
+    height: 44px;
+}
+
+#information_process .body div[message] {
+    margin: 18px 0 0 12px;
+    display: block;
+    position: absolute;
+    color: #303030;
+}
+
+#information_process .body div[exit] {
+    float: right;
+}
+
+.cert_time_error {
+    margin: 15px 0 0 0;
+    color: #F4484A;
+    position: absolute;
+    font-size: 11px;
+}
+
+#ApplicationContainer .Embed.WACFrameWord {
+    border: 0 !important;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+.visualiseModal {
+    margin-top: 70px !important;
+}
+.visualiseModal .fancybox-close {
+    top: -66px;
+    background: url('/Content/Images/close-visualize.png') center center no-repeat;
+    width: 18px;
+    height: 18px;
+}
+
+.visualiseModal .fancybox-title-float-wrap {
+    top: -44px;
+}
+
+.visualiseModal .fancybox-title .child {
+    display: inline-block;
+    margin-right: -100%;
+    padding: 2px 20px;
+    background: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    font-size: 18px;
+    font-family: "Verdana";
+    text-shadow: none;
+    color: #FFF;
+    font-weight: normal;
+    line-height: 24px;
+    white-space: nowrap;
+}
+.visual-btn-box {
+    float: left;
+    padding-top: 10px;
+}
+.visual-btn-box .visual-btn {
+    display: inline-block;
+    width: 121px;
+    height: 26px;
+    background: url('/Content/Images/visual-btn.png') top center no-repeat;
+}
+.visual-btn-box .visual-btn.i-disabled {
+    background-position: bottom center;
+}
+.helpLink {
+    z-index: 999;
+    position: absolute;
+}
+.helpLink a{
+    display: inline-block;
+    width:156px;
+    height:32px;
+    background: url(/Content/Images/mainHelp.png) no-repeat;
+}
+
+
+
+.test-certificate-icon {
+    cursor: pointer;
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    margin: 0 7px 0 -15px;
+    background: url(/Content/i/test-sertificate-icon.png) top center no-repeat;
+    vertical-align: middle;
+}
+.test-certificate-icon.no-padding {
+    margin-left: 0
+}
+.test-certificate-icon.float {
+    position: absolute;
+    left: -20px;
+    top: 1px;
+    margin: 0;
+}
+.fake-test-certificate-icon {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    margin: 0 7px 0 -15px;
+}
+.fake-test-certificate-icon.no-padding {
+    width: 13px;
+    height: 13px;
+    display: inline-block;
+
+    margin-left: 0
+}
+.fake-test-certificate-icon.float {
+    position: absolute;
+    left: -20px;
+    top: 1px;
+    margin: 0;
+}
+.test-certificate-icon:hover {
+    background-position: bottom center ;
+}

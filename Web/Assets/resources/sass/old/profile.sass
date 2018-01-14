@@ -1,0 +1,740 @@
+#content
+  margin-left: 205px
+  position: relative
+
+.text-center
+  text-align: center !important
+
+.content
+  -webkit-border-radius: 3px
+  border: 1px solid #d5d5d5
+  border-radius: 3px
+  padding: 20px 0
+
+#myCertificateList
+  position: relative
+.subModal
+  position: absolute
+  background: rgba(0,0,0,.3)
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  z-index: 1000
+.sub-dialog-cancel
+  position: absolute
+  left: 200px
+  top: 120px
+  width: 560px
+  min-height: 230px
+  padding: 30px 20px 30px
+  border-radius: 4px
+  border: 1px solid #e3e3e3
+  background: #fff
+  box-shadow: 5px 5px 10px rgba(0,0,0,.15)
+  text-align: center
+  z-index: 99
+  .sub-title
+    font-size: 16px
+    font-weight: 700
+  .descr
+    padding-top: 20px
+  .actions
+    padding-top: 30px
+    .act-btn
+      display: inline-block
+      width: 170px
+      height: 34px
+      line-height: 32px
+      text-transform: uppercase
+      font-size: 13px
+      font-weight: 700
+      margin: 0 5px
+      cursor: pointer
+
+    .decline
+      background: #1ac316
+      border: 1px solid #1ac316
+      color: #fff
+      &:hover
+        background: #1dda19
+    .confirm
+      background: #fff
+      border: 1px solid #a9a9a9
+      color: #000
+      &:hover
+        background: #ececec
+
+.profile
+  .profile-info
+    color: #3d3d3d
+    padding: 0 25px
+    .settings .row .tooltip
+      background-clip: padding-box
+      background-color: white
+      border: 1px solid #ccc
+      border-radius: 3px
+      display: none
+      float: left
+      list-style: none outside none
+      margin: 7px 0 0
+      padding: 7px 0
+      position: absolute
+      right: -20px
+      top: 23px
+      z-index: 1000
+      .arrow-top
+        background: img('/old/arrow-top.png', 'repeat scroll 0 0' ,'')
+        height: 7px
+        position: absolute
+        right: 32px
+        top: -7px
+        width: 19px
+      .body
+        padding: 0 10px
+    .row
+      margin-bottom: 10px
+      min-height: 28px
+      &.block
+        border-bottom: 1px solid #e8e8e8
+        border-top: 1px solid #e8e8e8
+        margin-bottom: 0
+        min-height: 70px
+        padding-bottom: 10px
+        padding-top: 20px
+      &.block2
+        border-bottom: 1px solid #e8e8e8
+        min-height: 70px
+        padding-top: 20px
+      &.block .col, &.block2 .col
+        line-height: 26px
+      &.block
+        .col2
+          display: block !important
+          line-height: 26px
+          margin-left: 215px
+        .label
+          line-height: 26px
+          vertical-align: top
+          width: 210px
+      &.block2 .label
+        line-height: 26px
+        vertical-align: top
+        width: 210px
+    .name .value
+      width: 330px
+    .settings
+      margin-bottom: 20px
+      margin-left: 0px
+      .row
+        margin-bottom: 0
+        min-height: 15px
+        label span
+          line-height: 30px
+          vertical-align: middle
+    .label
+      line-height: 28px
+      vertical-align: middle
+      width: 115px
+    .value
+      line-height: 28px
+    .email
+      margin-right: 10px
+      max-width: 400px
+      min-width: 170px
+      overflow: hidden
+    .new-email
+      position: relative
+      width: 330px
+      .save-loader
+        background: img('/old/save-loader.gif', '' ,'')
+        display: inline-block
+        height: 15px
+        left: -23px
+        position: absolute
+        top: 6px
+        width: 15px
+    .phone
+      display: inline-block
+      margin-right: 10px
+      max-width: 400px
+      min-width: 150px
+      overflow: hidden
+    .new-phone
+      display: inline-block
+      position: relative
+      input[type=text]
+        width: 308px
+      .save-loader
+        background: img('/old/save-loader.gif', 'bottom repeat-x' ,'')
+        display: inline-block
+        height: 15px
+        left: -40px
+        position: absolute
+        top: 6px
+        width: 15px
+    .login
+      font-weight: 700
+    .btn
+      font-weight: 400
+      height: 23px
+      line-height: 23px
+      margin-top: 3px
+      padding: 0
+      text-align: center
+      width: 125px
+  .filter
+    background: #f9f9f9
+    border-bottom: 1px solid #d9d9d9
+    border-top: 1px solid #d9d9d9
+    height: 108px !important
+    padding: 15px 15px 0 !important
+    position: relative
+    .marker-activation
+      position: absolute
+      bottom: 50px
+      right: 15px
+      width: 180px
+      .marker-activation-btn
+        display: inline-block
+        text-decoration: none
+        font-family: Verdana, Arial, sans-serif
+        font-size: 12px
+        border-radius: 3px
+        height: 28px
+        width: 180px
+        line-height: 28px
+        color: #fff
+        padding-left: 13px
+        text-align: center
+        background: img('/plus.png', ' 11px 8px no-repeat' ,'#1ac316')
+        &:hover
+          background-color: #1dda19
+      .marker-get-btn
+        display: none
+        text-decoration: none
+        font-family: Verdana, Arial, sans-serif
+        font-size: 12px
+        border-radius: 3px
+        height: 28px
+        width: 180px
+        margin-bottom: 7px
+        line-height: 28px
+        color: #fff
+        padding-left: 13px
+        text-align: center
+        background: img('/plus.png', ' 11px 8px no-repeat' ,'#3498db')
+        &:hover
+          background-color: #3276b1
+    .title
+      font-size: 16px
+      font-weight: 700
+      margin: 10px 0 0 10px
+      height: 45px
+      width: 170px !important
+    .tabs
+      height: 38px
+      ul li
+        float: left
+        display: inline-block
+        line-height: 36px
+        padding: 0 30px
+        .item
+          text-decoration: underline
+          cursor: pointer
+        &.active
+          border-radius: 5px 5px 0 0
+          border: 1px solid #d6d6d6
+          border-bottom: 0
+          background: #fff
+          .item
+            text-decoration: none
+            cursor: default
+        span
+          &.green
+            display: inline-block
+            width: 15px
+            height: 15px
+            border-radius: 3px
+            color: #fff
+            font-size: 12px
+            line-height: 15px
+            text-align: center
+            background: #1ac316
+          &.red
+            display: inline-block
+            width: 15px
+            height: 15px
+            border-radius: 3px
+            color: #fff
+            font-size: 12px
+            line-height: 15px
+            text-align: center
+            background: #ff2841
+  .empty-certificates
+    height: 330px
+    text-align: center
+    padding-top: 35px
+    line-height: normal
+    .info .btn
+      margin: 12px 0
+      padding: 0
+      width: 240px
+      font-weight: 400
+    hr
+      width: 165px
+      border: 1px solid #d9d9d9
+      border-top: 0
+      margin: 25px 0
+      display: inline-block
+  .sort
+    height: 64px
+    padding: 17px 25px
+    border-bottom: 1px solid #e8e8e8
+    .col
+      margin-right: 17px
+      vertical-align: middle
+    .col2
+      display: inline-block
+      vertical-align: middle
+      width: 215px
+    .col label
+      color: #161616
+      display: block
+      font-size: 11px
+      height: 18px
+    .pin
+      margin-right: 0
+      width: 270px
+      label
+        span
+          line-height: 28px
+          vertical-align: middle
+        &:first-child
+          padding-right: 25px
+          line-height: 32px
+  .certificats-list .certificat
+    &:first-child
+      padding-top: 0
+    &:hover
+      background-color: #edf4fa
+    &:first-child .actions
+      top: 0
+    border-bottom: 0 !important
+    margin: 0 !important
+    padding: 20px 25px 0 30px !important
+    position: relative
+    hr
+      border: 1px solid #d9d9d9
+      border-top: 0
+      margin: 25px 0 0
+    .test-certificate
+      position: absolute
+      right: 25px
+      bottom: 0
+      width: 68px
+      height: 68px
+      background: img('/test-certificate.png', 'no-repeat' ,'')
+    .col1
+      display: inline-block
+      line-height: 20px
+      padding-right: 5px
+      vertical-align: top
+      width: 240px
+      overflow: hidden
+      .title
+        font-size: 14px
+        font-weight: 700
+        padding: 5px 0 18px 0
+        &.error
+          color: red
+      .cert span
+        &.active
+          color: #3d3d3d
+        &.expire
+          background: img('/old/expire.png', 'left no-repeat' ,'')
+          padding-left: 15px
+    .col2
+      display: inline-block
+      line-height: 20px
+      position: relative
+      vertical-align: top
+      /*min-width: 460px;
+      width: 67%
+      .down
+        position: absolute
+        right: 10px
+        top: 45px
+      .new-title
+        padding: 5px 0 10px 0
+        width: 450px !important
+        input
+          width: 384px
+      .pin-box
+        margin-top: 10px
+        .col
+          /*margin-right: 7px;
+          margin-right: 2px
+          vertical-align: middle
+        .btn
+          color: white
+          font-weight: 400
+          height: 23px
+          line-height: 23px
+          padding: 0
+          text-align: center
+          text-decoration: none
+          width: 125px
+          &:active, &:hover
+            color: white
+            text-decoration: none
+        input[type=text]
+          width: 100px
+  .more-cert
+    height: 75px
+    padding-top: 28px
+    text-align: center
+  .cert-control
+    position: relative
+    .controls
+      bottom: -70px
+      position: absolute
+      right: 0
+    .backlink
+      bottom: -70px
+      left: 0
+      position: absolute
+      a
+        background: #f3f3f3
+        color: #373737
+        display: inline-block
+        height: 32px
+        line-height: 32px
+        padding: 0 20px
+    .controls .sbmt a.close
+      color: #131313
+      padding-right: 30px
+
+#change-phone
+  color: #161616
+  width: 550px
+  form
+    margin-top: 30px
+    label
+      line-height: 26px
+      padding-right: 20px
+      text-align: left
+      width: 250px
+    .value
+      width: 284px
+    .mess-box
+      margin: 26px 0
+      .warning
+        background: img('/old/message-warning.png', 'left no-repeat' ,'')
+        min-height: 32px
+        padding-left: 45px
+        span
+          display: table-cell
+          height: 32px
+          vertical-align: middle
+    .sbmt
+      margin-top: 20px
+      .close
+        color: #131313
+        padding-right: 30px
+
+#change-email
+  color: #161616
+  width: 550px
+  form
+    margin-top: 30px
+    label
+      line-height: 26px
+      padding-right: 20px
+      text-align: left
+      width: 175px
+    .value
+      width: 375px
+    .mess-box
+      margin: 26px 0
+      .warning
+        background: img('/old/message-warning.png', 'left no-repeat' ,'')
+        min-height: 32px
+        padding-left: 45px
+        span
+          display: table-cell
+          height: 32px
+          vertical-align: middle
+    .sbmt
+      margin-top: 0px
+      .close
+        color: #131313
+        padding-right: 30px
+
+#change-pass
+  color: #161616
+  width: 550px
+  .btn-green
+    padding: 0 30px
+  form
+    margin-top: 30px
+    .row
+      margin-bottom: 20px
+    label
+      line-height: 26px
+      padding-right: 10px
+      text-align: right
+      width: 190px
+    .value
+      position: relative
+      width: 340px
+      span.control-label
+        &.label-success
+          color: #70c234
+          font-size: 10px
+          position: absolute
+          right: 10px
+          top: 8px
+        &.label-error
+          color: #dc2929
+          font-size: 10px
+          position: absolute
+          right: 10px
+          top: 8px
+    .sbmt
+      margin-bottom: 0
+      margin-top: 0px
+      .close
+        color: #131313
+        padding-right: 30px
+
+#set-pass
+  color: #161616
+  width: 550px
+  .btn-green
+    padding: 0 30px
+  form
+    margin-top: 10px
+    .row
+      margin-bottom: 20px
+    label
+      line-height: 26px
+      padding-right: 20px
+      text-align: right
+      width: 190px
+    .value
+      position: relative
+      width: 340px
+    .value-row
+      position: relative
+    .value span.control-label
+      &.label-success
+        color: #70c234
+        font-size: 10px
+        position: absolute
+        right: 10px
+        top: 8px
+      &.label-error
+        color: #dc2929
+        font-size: 10px
+        position: absolute
+        right: 10px
+        top: 8px
+    .sbmt
+      margin-bottom: 0
+      margin-top: 0px
+      .close
+        color: #131313
+        padding-right: 30px
+
+#confirm-pass
+  color: #161616
+  width: 550px
+  .title .left-timer
+    font-size: 13px
+    font-weight: 400
+    position: absolute
+    right: 30px
+    top: 0
+    &.red
+      color: #f00
+  .btn-green
+    padding: 0 30px
+  form
+    margin-top: 10px
+    .row
+      margin-bottom: 20px
+    label
+      line-height: 26px
+      padding-right: 20px
+      text-align: right
+      width: 180px
+    .value
+      position: relative
+      width: 290px
+    .value-row
+      position: relative
+    .row.row-condensed
+      padding: 0 30px 10px
+    .success-mess
+      -webkit-border-radius: 5px
+      background: #daf5da
+      border: 1px solid #c1efc0
+      border-radius: 5px
+      color: black
+      padding: 7px 15px
+    .default-mess
+      padding: 0 20px 20px
+    .value span.control-label
+      &.label-success
+        color: #70c234
+        font-size: 10px
+        position: absolute
+        right: 10px
+        top: 8px
+      &.label-error
+        color: #dc2929
+        font-size: 10px
+        position: absolute
+        right: 10px
+        top: 8px
+    .sbmt
+      margin-bottom: 0
+      margin-top: 0px
+      .btn
+        margin-bottom: 0
+        margin-right: 15px
+        margin-top: 20px
+      \:last-child
+        margin-right: 0
+      .close
+        color: #131313
+  span.error
+    display: none
+    font-size: 12px
+    margin-top: 10px
+    text-align: right
+
+.change-pin
+  color: #161616
+  width: 550px
+  form
+    margin-top: 30px
+    .row
+      margin-bottom: 20px
+    label
+      line-height: 26px
+      padding-right: 20px
+      text-align: left
+      width: 210px
+    .value
+      position: relative
+      width: 340px
+    .sbmt
+      margin-bottom: 0
+      margin-top: 0px
+      .close
+        color: #131313
+        padding-right: 30px
+
+#change-pin2
+  color: #161616
+  width: 550px
+  form
+    margin-top: 30px
+    .row
+      margin-bottom: 20px
+    label
+      line-height: 26px
+      padding-right: 20px
+      text-align: left
+      width: 200px
+    .value
+      position: relative
+      width: 340px
+    .sbmt
+      margin-bottom: 0
+      margin-top: 0px
+      .clear
+        margin-right: 60px
+      .close
+        color: #131313
+        padding-right: 30px
+
+#attention
+  color: #161616
+  width: 465px
+  form
+    margin-top: 30px
+    .row
+      margin-bottom: 20px
+    .mess-box
+      margin: 26px 0
+      .info
+        background: img('/old/message-info.png', ' left no-repeat' ,'')
+        line-height: 20px
+        min-height: 45px
+        padding-left: 70px
+        span
+          display: table-cell
+          height: 45px
+          vertical-align: middle
+    .sbmt
+      margin-bottom: 0
+      margin-top: 0px
+      .clear
+        margin-right: 60px
+      .close
+        color: #131313
+        padding-right: 30px
+
+#info
+  color: #161616
+  width: 465px
+  form
+    margin-top: 30px
+    .row
+      margin-bottom: 20px
+    .mess-box
+      margin: 26px 0
+      .attention
+        background: img('/old/message-attention.png', 'left no-repeat' ,'')
+        min-height: 38px
+        padding-left: 70px
+        span
+          display: table-cell
+          height: 38px
+          vertical-align: middle
+    .sbmt
+      margin-bottom: 0
+      margin-top: 0
+      .clear
+        margin-right: 60px
+      .close
+        color: #131313
+        padding-right: 30px
+
+input.error
+  background: rgb(253, 204, 204)
+  border: 1px solid red
+
+span
+  &.error
+    color: red !important
+    display: none
+    font-size: 10px
+  &.success
+    color: #70c234 !important
+    display: none
+    font-size: 10px
+
+.profile form .value span.control-label.label-error
+  color: #dc2929
+  font-size: 10px
+  position: absolute
+  right: 10px
+  top: 8px
+
+.modal-window .row .value.col .info
+  color: #7C7777
+  font-size: 10px

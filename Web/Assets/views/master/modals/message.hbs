@@ -1,0 +1,12 @@
+<div id="message-panel">
+    <div class="mess-box">
+        <div class="{{icon}}">
+            <span>{{&text}}</span>
+        </div>
+    </div>
+    <div class="btn-group">
+        {{#each btns}}
+            <div can-click="call" class="btn {{cls}}">{{text}}</div>
+        {{/each}}
+    </div>
+</div>

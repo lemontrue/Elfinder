@@ -1,0 +1,393 @@
+﻿@using CryptxOnline.Web.Helpers
+@model CryptxOnline.Web.CryptxService.Settings
+
+@{
+    if (Model.Id == Guid.Empty)
+    {
+        ViewBag.Title = "Создание профиля пользователя";
+    }
+    else
+    {
+        ViewBag.Title = "Редактирование профиля пользователя";
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="@Url.Content("~/Assets/libjs/jquery-2.0.3.js")" type="text/javascript"></script>
+<link href="@Url.Content("~/Content/CustomStyle.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Assets/libjs/jquery-ui-1.10.3.js")" type="text/javascript"></script>
+
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Id)
+
+
+    <fieldset>
+        <legend>Настройки</legend>
+        <table width="100%">
+            <tr>
+                <td style="width: 30%">
+                    Название
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model._MainSettings.Name, new {maxlength = 50, title = "максимум 50 символов,минимум 1 символ", id = "_MainSettings.Name", style = "width:340px"})
+                </td>
+            </tr>
+            <tr style="">
+                <td>
+                    Email
+                </td>
+                <td>
+                    @Html.TextBoxFor(model => model._MainSettings.Email, new {maxlength = 100, title = "Возможен ввод нескольких адресов E-mail разделенных точкой с запятой", style = "width:340px"})
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top">
+                    Описание
+                </td>
+                <td>
+                    @Html.TextAreaFor(model => model._MainSettings.Description, 3, 40, new {maxlength = 1000, title = "максимум 1000 символов", style = "width:340px"})
+                </td>
+            </tr>
+            <tr style="">
+                <td>
+                    Установить по умолчанию
+                </td>
+                <td>
+                    @Html.CheckBoxFor(model => model._MainSettings.IsDefault)
+                </td>
+            </tr>
+        </table>
+
+
+
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Подпись</legend>
+        <table width="100%">
+            <tr>
+                <td style="width: 30%">
+                    @Html.RadioButtonFor(model => model._SignatureSettings.Detached, false) Хранить подпись совместно с данными
+                    <br />
+                    @Html.RadioButtonFor(model => model._SignatureSettings.Detached, true) Хранить подпись отдельно от данных
+                </td>
+            </tr>
+            <tr style="">
+                <td>
+                    Выходной формат файла
+                </td>
+                <td>
+                    @Html.DropDownListFor(x => x._SignatureSettings._EncodingType, new SelectList(Helper.GetEncodingTypesList(), "Value", "Text", (int) Model._SignatureSettings._EncodingType), new {style = "width:340px"})
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Сертификат
+                </td>
+                <td>
+                    @Html.DropDownListFor(model => model._SignatureSettings.SignerCertificate1, (List<SelectListItem>) ViewBag.MyCertificateList, "Выберите сертификат", new {style = "width:340px"})
+                </td>
+            </tr>
+            <tr style="">
+                <td>
+                    Пин-код
+                </td>
+                @if (Model.Id == Guid.Empty)
+                {
+                    <td>
+                        @Html.PasswordFor(model => model._SignatureSettings.KeysetPassword, new {style = "width:340px"})
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @if (string.IsNullOrEmpty(Model._SignatureSettings.KeysetPassword))
+                        {
+                            <a>Не задан</a>
+                        }
+                        else
+                        {
+                            <a>задан</a>
+                        }
+                        <input type="button" value="Изменить" id="signPin" onclick=" clickOpenModal();return 0; " />
+                    </td>
+                }
+            </tr>
+        </table>
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Шифрование</legend>
+        <table width="100%">
+            <tr>
+                <td style="width: 30%">
+                    Выходной формат файла
+                </td>
+                <td>
+                    @Html.DropDownListFor(x => x._EncryptionSettings._EncodingType, new SelectList(Helper.GetEncodingTypesList(), "Value", "Text", (int) Model._SignatureSettings._EncodingType), new {style = "width:340px"})
+                </td>
+            </tr>
+            <tr style="">
+                <td>
+                    Мои cертификаты
+                </td>
+                <td>
+                    @Html.ListBoxFor(model => model._EncryptionSettings.RecipientCertificates1, (List<SelectListItem>) ViewBag.MyCertificateList, new {style = "width:340px"})
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Сертификаты контрагентов
+                </td>
+                <td>
+                    @Html.ListBoxFor(model => model._EncryptionSettings.RecipientCertificates1, (List<SelectListItem>) ViewBag.RecipientCertificateList, new {style = "width:340px"})
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <fieldset>
+        <legend>Расшифровка</legend>
+        <table width="100%">
+            <tr>
+                <td style="width: 30%">
+                    Сертификат
+                </td>
+                <td>
+                    @Html.DropDownListFor(model => model._DecryptionSettings.DecryptCertificate, (List<SelectListItem>) ViewBag.MyCertificateList, "Выберите сертификат", new {style = "width:340px"})
+                </td>
+            </tr>
+            <tr style="">
+                <td>
+                    Пин-код
+                </td>
+                @if (Model.Id == Guid.Empty)
+                {
+                    <td>
+                        @Html.PasswordFor(model => model._DecryptionSettings.KeysetPassword, new {@style = "width:340px", @maxlength = "40"})
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @if (string.IsNullOrEmpty(Model._DecryptionSettings.KeysetPassword))
+                        {
+                            <a>Не задан</a>
+                        }
+                        else
+                        {
+                            <a>задан</a>
+                        }
+                        <input type="button" id="decrPin" value="Изменить" onclick=" clickOpenModal();return 0; " />
+                    </td>
+                }
+            </tr>
+        </table>
+    </fieldset>
+    <p>
+        <input name="save" style="float: left" type="submit" value="Сохранить" class="button" onclick=" return CheckValidation() " />
+        <input name="save" type="button" value="Вернуться" class="button" onclick=" location.href = '@Url.Action("Profiles")        ' " />
+
+    </p>
+
+
+    <div id="boxes">
+        <div id="dialogSignPin" class="window">
+            @Html.Hidden("curThumbprint")
+            <table style="width: 100%">
+                <tr>
+                    <td style="font-size: 10px; font-style: italic; text-align: left;">
+                        Введите Пин-код для сертификата подписи<img href="#" class="close" style="position: absolute; right: 5px; top: 5px;" src="@Url.Content("~/Assets/i/old/dialog-close_7593.png")" width="32" height="32" border="0" />
+                    </td>
+                </tr>
+                <tr style="height: 80px">
+                    <td>
+                        Пин-код @Html.TextBoxFor(model => model._SignatureSettings.KeysetPassword, new {@style = "width:100%", @maxlength = "40"})
+                    </td>
+                </tr>
+                <tr>
+                    <td style="left: 10px; position: absolute; text-align: left">
+                        <input type="submit" name="saveSignPin" value="Сохранить" class="button" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="dialogDecrPin" class="window">
+            @Html.Hidden("curThumbprint")
+            <table style="width: 100%">
+                <tr>
+                    <td style="font-size: 10px; font-style: italic; text-align: left;">
+                        Введите Пин-код для сертификата расшифровки<img href="#" class="close" style="position: absolute; right: 5px; top: 5px;" src="@Url.Content("~/Assets/i/old/dialog-close_7593.png")" width="32" height="32" border="0" />
+                    </td>
+                </tr>
+                <tr style="height: 80px">
+                    <td>
+                        Пин-код @Html.TextBoxFor(model => model._DecryptionSettings.KeysetPassword, new {@style = "width:100%", @maxlength = "40"})
+                    </td>
+                </tr>
+                <tr>
+                    <td style="left: 10px; position: absolute; text-align: left">
+                        <input type="submit" name="saveDecrPin" value="Сохранить" class="button" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+    </div>
+    <div id="mask"></div>
+}
+
+<script>
+    $(document).ready(function() {
+
+
+        $('[name="_SignatureSettings.SignerCertificate1"]').change(function(e) {
+            $('[name="_SignatureSettings.KeysetPassword"]').val('');
+        });
+        $('[name="_DecryptionSettings.DecryptCertificate"]').change(function(e) {
+            $('[name="_DecryptionSettings.KeysetPassword"]').val('');
+        });
+    });
+
+    function CheckValidation() {
+        var name = $("input[name='_MainSettings.Name']").val();
+        var unspaced = name.replace(/\s/g, '');
+        if (unspaced.length == 0) {
+            alert('Не корректное Название');
+            return false;
+        }
+        if (name.length < 1) {
+            alert('Необходимо заполнить поле Название');
+            return false;
+        }
+        var re = new RegExp(/^([a-z0-9_-]+\.)*[a-z0-9_-]+@@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/);
+        var emails = $("input[name='_MainSettings.Email']").val();
+        var emailArr = emails.split(';');
+        for (var i = 0; i < emailArr.length; i++) {
+            if (emailArr[i] != "" && !re.test(emailArr[i])) {
+                alert("Не корректный Email.\r\nВозможен ввод нескольких адресов E-mail разделенных точкой с запятой");
+                return false;
+            }
+        }
+
+        return true;
+    }
+</script>
+
+<script>
+    function closeModal() {
+        //$(".validation-summary-errors").remove();
+        $('#mask, .window').hide();
+        $(".validation-summary-errors").remove();
+    };
+
+    function clickOpenModal(thumbprint, friendlyName) {
+        $("#pinCode").val("");
+        //Cancel the link behavior
+        //e.preventDefault();
+        //Get the A tag
+        $("#curThumbprint").val(thumbprint);
+        var id = '#dialog';
+        if (event.srcElement.name == "delete") {
+            $('#displayname').text(friendlyName);
+            id = "#dialogDelRecip";
+        }
+        if (event.srcElement.name == "edit") {
+            $("#curfName").val(friendlyName);
+            id = "#dialogEditRecip";
+        }
+        if (event.srcElement.id == "decrPin") {
+
+            id = "#dialogDecrPin";
+        }
+        if (event.srcElement.id == "signPin") {
+
+            id = "#dialogSignPin";
+        }
+        //Get the screen height and width
+        var maskHeight = $(document).height();
+        var maskWidth = $(window).width();
+
+        //Set heigth and width to mask to fill up the whole screen
+        $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+        $('#mask').css({ 'position': 'fixed' });
+
+        //transition effect
+        $('#mask').fadeIn(1000);
+        $('#mask').fadeTo("slow", 0.8);
+
+        //Get the window height and width
+        var winH = $(window).height();
+        var winW = $(window).width();
+
+        //Set the popup window to center
+        $(id).css('top', winH / 2 - $(id).height() / 2);
+        $(id).css('left', winW / 2 - $(id).width() / 2);
+
+        //transition effect
+        $(id).fadeIn(2000);
+        $("#pinCode").focus();
+    };
+
+    $(document).ready(function() {
+        $("#curThumbprint").val('');
+        $("#dialog").keydown(function(e) {
+            if (e.keyCode == 13) {
+                $("#makeOperation").trigger("click");
+                e.preventDefault();
+            }
+        });
+
+        //select all the a tag with name equal to modal
+        $('input[name=modal]').click(function(e) {
+            //Cancel the link behavior
+            e.preventDefault();
+            //Get the A tag
+            var id = $(this).attr('href');
+
+            //Get the screen height and width
+            var maskHeight = $(document).height();
+            var maskWidth = $(window).width();
+
+            //Set heigth and width to mask to fill up the whole screen
+            $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+
+            //transition effect
+            $('#mask').fadeIn(1000);
+            $('#mask').fadeTo("slow", 0.8);
+
+            //Get the window height and width
+            var winH = $(window).height();
+            var winW = $(window).width();
+
+            //Set the popup window to center
+            $(id).css('top', winH / 2 - $(id).height() / 2);
+            $(id).css('left', winW / 2 - $(id).width() / 2);
+
+            //transition effect
+            $(id).fadeIn(2000);
+
+        });
+
+        //if close button is clicked
+        $('.window .close').click(function(e) {
+            //location.href = location.href;
+            //Cancel the link behavior
+            e.preventDefault();
+            $('#mask, .window').hide();
+        });
+
+        //if mask is clicked
+        $('#mask').click(function() {
+            //$(this).hide();
+            //$('.window').hide();
+        });
+
+    });
+</script>

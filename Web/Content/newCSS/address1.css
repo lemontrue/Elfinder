@@ -1,0 +1,110 @@
+.add-contact {
+    float: right;
+    min-width: 300px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.filter {
+    height: 70px;
+    padding: 0 25px;
+}
+
+.filter .check-all {
+    margin-right: 0 !important;
+    padding-top: 15px;
+    width: 30px;
+}
+
+.filter .form {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.filter .form .col {
+    margin-right: 20px;
+    width: 210px;
+}
+
+.filter .form .col label {
+    color: #161616;
+    display: block;
+    font-size: 11px;
+    height: 18px;
+}
+
+.filter .form .col input.search {
+    background: url(../img/search.png) right center no-repeat;
+    padding-right: 30px;
+}
+
+.filter .form .col:last-child { margin-right: 0; }
+
+.contacts-list { padding-bottom: 80px; }
+
+.contacts-list .contact:first-child { padding-top: 0; }
+
+.contacts-list .contact:first-child .actions { top: 5px; }
+
+.contacts-list .contact:hover { background: #edf4fa; }
+
+.contacts-list .contact {
+    padding: 20px 25px 0;
+    position: relative;
+}
+
+.contacts-list .contact hr {
+    border: 1px solid #d9d9d9;
+    border-top: 0;
+    margin: 25px 0 0;
+}
+
+.contacts-list .contact .actions {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+}
+
+.contacts-list .contact .actions a.edit {
+    color: #161616;
+    padding-right: 20px;
+}
+
+.contacts-list .contact .actions a.remove { color: #727272; }
+
+.contacts-list .contact .title {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 36px;
+}
+
+.contacts-list .contact .email { height: 20px; }
+
+.contacts-list .contact .email .label {
+    color: #161616;
+    width: 60px;
+}
+
+.contacts-list .contact .cert { padding-top: 8px; }
+
+.contacts-list .contact .cert .cert-title {
+    font-weight: 700;
+    height: 20px;
+}
+
+.contacts-list .contact .cert table.list { width: 100%; }
+
+.contacts-list .contact .cert table.list tbody tr { height: 22px; }
+
+.contacts-list .contact .cert table.list tbody tr td.text-right a { text-decoration: none; }
+
+.contacts-list .contact .cert table.list tbody tr td span.active { color: #161616; }
+
+.contacts-list .contact .cert table.list tbody tr td span.expire { color: #f4484a; }
+
+.more-cont {
+    height: 75px;
+    padding-top: 28px;
+    text-align: center;
+}

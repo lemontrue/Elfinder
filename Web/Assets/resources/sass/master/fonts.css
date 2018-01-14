@@ -1,0 +1,39 @@
+@font-face {
+    font-family: mp-bold;
+    src: url('/Assets/fonts/MyriadPro-Bold.otf');
+}
+
+@font-face {
+    font-family: mp-bold-cond;
+    src: url('/Assets/fonts/MyriadPro-BoldCond.otf');
+}
+
+@font-face {
+    font-family: mp-bold-cond-it;
+    src: url('/Assets/fonts/MyriadPro-BoldCondIt.otf');
+}
+
+@font-face {
+    font-family: mp-it;
+    src: url('/Assets/fonts/MyriadPro-It.otf');
+}
+
+@font-face {
+    font-family: mp-bold-it;
+    src: url('/Assets/fonts/MyriadPro-BoldIt.otf');
+}
+
+@font-face {
+    font-family: mp-regular;
+    src: url('/Assets/fonts/MyriadPro-Regular.otf');
+}
+
+@font-face {
+    font-family: mp-semibold;
+    src: url('/Assets/fonts/MyriadPro-Semibold.otf');
+}
+
+@font-face {
+    font-family: mp-semibold-it;
+    src: url('/Assets/fonts/MyriadPro-SemiboldIt.otf');
+}

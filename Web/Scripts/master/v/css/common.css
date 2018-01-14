@@ -1,0 +1,527 @@
+@import "fonts.css";
+
+html, body {
+    font-family: Verdana;
+    font-size: 12px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+}
+
+body { overflow-y: scroll; }
+
+ul, li, h1, h2, h3, h4, h5 {
+    margin: 0;
+    padding: 0;
+}
+
+ul, li { list-style: none; }
+
+.unselect {
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+.pull-left { float: left; }
+
+.pull-right { float: right; }
+
+.content {
+    margin: 0 auto;
+    position: relative;
+
+    width: 980px;
+}
+
+header {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 72px;
+    margin-bottom: 45px;
+    padding: 0 10px;
+    width: 100%;
+}
+
+header .logo {
+    background: url("/Content/Images/logo-eng.png") no-repeat left top;
+    cursor: pointer;
+    float: left;
+    font-size: 13px;
+    font-weight: bold;
+
+    height: 45px;
+    margin-top: 26px;
+    width: 174px;
+}
+
+header .user_title {
+    background: url("../image/gear.png") no-repeat left 42px;
+    color: #3498db;
+    float: left;
+    font-family: Verdana;
+    font-size: 13px;
+    margin-left: 31px;
+    outline: none;
+    padding: 40px 0 0 17px;
+    text-decoration: underline;
+}
+
+header .user_title:hover {
+    -moz-transition: all 0.1s ease-out;
+    -o-transition: all 0.1s ease-out;
+    -webkit-transition: all 0.1s ease-out;
+    color: #ff6600;
+    text-decoration: none;
+    transition: all 0.1s ease-out;
+}
+
+header .prev {
+    background: url("../image/prev.png") no-repeat left 52px;
+
+    color: #343434;
+    float: right;
+
+    font-family: Verdana;
+
+    font-size: 12px;
+
+    padding: 46px 0 0 15px;
+}
+
+header .prev:hover { text-decoration: none; }
+
+header .templates {
+    color: #323232;
+
+    float: right;
+    font-family: Verdana;
+    font-size: 12px;
+
+    margin-left: 44px;
+
+    padding: 46px 0 0 0;
+}
+
+header .templates ul.dropdown-menu:before { left: 100px; }
+
+header .templates a {
+    border-bottom: 1px dotted;
+
+    color: #3498db;
+    text-decoration: none;
+}
+
+.main-title {
+    font-family: Verdana;
+    font-size: 24px;
+
+    font-weight: bold;
+
+    margin-bottom: 25px;
+}
+
+.row { width: 100%; }
+
+.row .c-500 {
+    float: left;
+    width: 490px;
+}
+
+.row .c-700 {
+    float: left;
+    width: 690px;
+}
+
+.row .c-300 {
+    float: left;
+    width: 290px;
+}
+
+
+.btn-group { display: table; }
+
+.btn-group.glue { }
+
+.btn-group.glue div:first-child { border-radius: 3px 0 0 3px; }
+
+.btn-group.glue div:last-child { border-radius: 0 3px 3px 0; }
+
+.btn-group.glue div {
+    float: left;
+    margin: 0;
+}
+
+.btn-group div {
+    float: left;
+    margin-right: 5px;
+}
+
+.btn-group div:last-child { margin: 0; }
+
+.btn-group div:first-child:hover { text-decoration: none; }
+
+.btn {
+    border: none;
+    border-radius: 3px;
+    color: #010101;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    min-height: 18px;
+    min-width: 100px;
+    padding: 7px 15px;
+    text-align: center;
+    text-decoration: underline;
+}
+
+div[disabled].btn, button[disabled].btn, div[disabled].btn:hover, button[disabled].btn:hover {
+    background: #d3d3d3;
+    cursor: default;
+}
+
+.btn-big {
+    border-radius: 2px;
+    font-family: Verdana;
+    font-weight: bold;
+    width: 167px;
+}
+
+.btn.btn-green {
+    background: #1ac316;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.btn.btn-green:hover { background: #21D81D; }
+
+.btn.btn-green:active { background: #18B114; }
+
+.btn.btn-blue {
+    background: #3498db;
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn.btn-blue:active { background: #2A87C5; }
+
+.btn.btn-blue:hover { background: #3BA3E9; }
+
+#modal {
+    background: rgba(0, 0, 0, 0.5);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+#modal .window {
+    background: #fff;
+    border: 3px solid #595959;
+    border-radius: 5px;
+    box-shadow: none;
+    left: 50%;
+    margin-left: -486.5px;
+    min-height: 100px;
+    padding: 7px 23px;
+    position: absolute;
+    top: 130px;
+    width: 922px;
+    z-index: 1001;
+}
+
+#modal .window > .body {
+    background: #fff;
+    height: calc(100% - 6px - 7px - 7px);
+    padding: 7px 10px 7px 22px;
+    position: absolute;
+    width: calc(100% - 6px - 10px - 22px);
+}
+
+#modal .window > .header {
+    border-bottom: 1px solid #e5e5e5;
+    height: 41px;
+    margin-bottom: 10px;
+}
+
+#modal .window > .header h2 {
+    color: #111;
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 34px;
+}
+
+#modal .window > .header .close {
+    background: url("../image/close.png") no-repeat;
+    cursor: pointer;
+    float: right;
+    height: 16px;
+    position: absolute;
+    right: 7px;
+    top: 8px;
+    width: 16px;
+}
+
+#modal .window > .content {
+    margin: 0;
+    position: relative;
+    width: 100%;
+}
+
+#modal .window > .loading {
+    background: rgba(255, 255, 255, 1) url("../image/progress.gif") no-repeat 378px 115px;
+    bottom: 0;
+    left: 0;
+    margin: 55px 0 0 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+#modal .window > .loading .title {
+    color: #575252;
+    font-size: 11px;
+    margin: 130px 24px 0 24px;
+    text-align: center;
+}
+
+#modal > .window.alert {
+    margin-left: -255px;
+    opacity: 0;
+    width: 510px;
+}
+
+#modal #message-panel { }
+
+#modal #message-panel .message_error {
+    color: red;
+    margin: 10px 0 0 100px;
+    position: absolute;
+}
+
+#modal #message-panel .content-group {
+    margin: 26px 0 10px;
+    min-height: 50px;
+    position: relative;
+}
+
+#modal #message-panel .icon {
+    float: left;
+    height: 50px;
+    width: 60px;
+}
+
+#modal #message-panel .icon.warning { background: url("../image/warning.png") no-repeat left center; }
+
+#modal #message-panel .icon.info { background: url("../image/info.png") no-repeat left center; }
+
+#modal #message-panel .icon.error { background: url("../image/error-g.png") no-repeat left center; }
+
+#modal #message-panel .text {
+    display: table-cell;
+    float: left;
+    font-size: 13px;
+    max-height: 280px;
+    min-height: 80px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-left: 15px;
+    vertical-align: middle;
+    width: 435px;
+}
+
+#modal #message-panel .text .errorMessage {
+    height: 300px;
+    margin: 30px 0 30px 0;
+    overflow-x: auto;
+}
+
+#modal #message-panel .btn-group {
+    float: right;
+    margin: 0 0 10px 0;
+}
+
+#modal .header > input.searchLine {
+    background: url("../image/search.png") no-repeat 318px 6px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    height: 20px;
+    padding: 0 0 0 6px;
+    position: absolute;
+    right: 118px;
+    top: 15px;
+    width: 326px;
+}
+
+#modal .header > .loop {
+    cursor: pointer;
+    height: 22px;
+    position: absolute;
+    right: 118px;
+    top: 20px;
+    width: 22px;
+}
+
+ul.list-inline li {
+    float: left;
+    margin-right: 10px;
+}
+
+ul.dropdown-menu:before {
+    background-image: url('/Content/elfinder/img/icons.png');
+    background-position: -670px -327px;
+    background-repeat: no-repeat;
+    content: '';
+    height: 7px;
+    position: absolute;
+    top: -7px;
+    width: 15px;
+    z-index: 1;
+}
+
+.dropdown-menu {
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    background-clip: padding-box;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    display: none;
+    float: left;
+    font-size: 14px;
+    left: 0;
+    list-style: none;
+    margin: 2px 0 0;
+    min-width: 160px;
+    padding: 5px 0;
+    position: absolute;
+    top: 100%;
+    z-index: 10000;
+}
+
+.dropdown-menu > li > a {
+    clear: both;
+    color: #333;
+    display: block;
+    font-weight: 400;
+    line-height: 1.428571429;
+    padding: 3px 20px;
+    white-space: nowrap;
+}
+
+ul.dropdown-menu > li > a {
+    -moz-transition: all 0s ease-out;
+    -o-transition: all 0s ease-out;
+    -webkit-transition: all 0s ease-out;
+    border: none;
+    font-size: 1.0em;
+    text-decoration: none;
+
+    transition: all 0s ease-out;
+}
+
+ul.dropdown-menu > li > a .ico { margin-right: 5px; }
+
+.ico {
+    background-image: url('/Content/elfinder/img/icons.png');
+    background-repeat: no-repeat;
+}
+
+.ico-4-2-profile {
+    background-position: -260px -300px;
+    height: 12px;
+    width: 12px;
+}
+
+.ico-4-2-addressbook {
+    background-position: -287px -300px;
+    height: 12px;
+    width: 12px;
+}
+
+.ico-4-2-template-settings {
+    background-position: -311px -300px;
+    height: 12px;
+    width: 12px;
+}
+
+.ico-4-2-administration {
+    background-position: -334px -300px;
+    height: 12px;
+    width: 12px;
+}
+
+.ico-4-2-logout {
+    background-position: -356px -301px;
+    height: 13px;
+    width: 12px;
+}
+
+.ib-ico { display: inline-block; }
+
+.ico-4-2-settings {
+    background-position: -334px -301px;
+    height: 12px;
+    width: 12px;
+}
+
+.b-ico { display: block; }
+
+ul.dropdown-menu > li > a:hover, ul.dropdown-menu > li > a:focus {
+    -moz-transition: all 0s ease-out;
+    -o-transition: all 0s ease-out;
+    -webkit-transition: all 0s ease-out;
+    background-color: #3498db;
+    color: #ffffff;
+    transition: all 0s ease-out;
+}
+
+.dropdown-menu:before { left: 20%; }
+
+.caret {
+    background: url('/Content/elfinder/img/icons.png') no-repeat;
+    background-position: -645px -324px;
+    display: inline-block;
+    height: 12px;
+    margin-left: 2px;
+    width: 10px;
+}
+
+
+#modal #message-panel .mess-box { margin: 26px 0; }
+
+#modal #message-panel .mess-box .warning {
+    background: url(/Content/Images/warning2.png) left top no-repeat;
+    min-height: 38px;
+    padding-left: 70px;
+}
+
+#modal #message-panel .mess-box .info {
+    background: url(/Content/Images/message-info.png) left top no-repeat;
+    line-height: 20px;
+    min-height: 45px;
+    padding-left: 70px;
+}
+
+#modal #message-panel .mess-box .error {
+    background: url(/Content/Images/message-error.png) left top no-repeat;
+    max-height: 200px;
+    min-height: 38px;
+    overflow-y: auto;
+    padding-left: 70px;
+    padding-right: 10px;
+}
+
+#modal #message-panel .mess-box .error span, #modal #message-panel .mess-box .warning span, #modal #message-panel .mess-box .info span {
+    display: table-cell;
+    height: 38px;
+    vertical-align: middle;
+}

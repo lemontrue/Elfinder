@@ -1,0 +1,506 @@
+i.icon {
+    display: inline-block;
+    height: 13px;
+    margin-right: 5px;
+    width: 14px;
+}
+
+i.icon.user { background: url(../../Images/user.png) left no-repeat; }
+
+i.icon.book { background: url(../../Images/book.png) left no-repeat; }
+
+i.icon.settings { background: url(../../Images/settings.png) left no-repeat; }
+
+i.icon.exit { background: url(../../Images/exit.png) left no-repeat; }
+
+i.icon.tpls { background: url(../../Images/tpls.png) left no-repeat; }
+
+i.icon.down { background: url(../../Images/down.png) left no-repeat; }
+
+i.icon.loop { background: url(../../Images/loop.png) left no-repeat; }
+
+i.icon.backlink { background: url(../../Images/backlink-arrow.png) left no-repeat; }
+
+i.icon.backarrow { background: url(../../Images/backlink-arrow.png) left no-repeat; }
+
+i.icon.download {
+    background: url(../../Images/download.png) no-repeat;
+    display: inline-block;
+    height: 13px;
+    width: 14px;
+}
+
+i.icon.dd-arrow {
+    background: url(../../Images/dd-arrow.png) center no-repeat;
+    position: absolute;
+    right: 12px;
+    top: 9px;
+}
+
+i.icon.nav-arrow {
+    background: url(../../Images/nav-arrow.png) center no-repeat;
+    height: 10px;
+}
+
+i.icon.edit { background: url(../../Images/edit-tpl.png) center no-repeat; }
+
+i.icon.delete { background: url(../../Images/delete-tpl.png) center no-repeat; }
+
+i.icon.tpl-remove {
+    background: url(../../Images/tpl-remove.png) center no-repeat;
+    height: 16px;
+    width: 16px;
+}
+
+i.icon.description {
+    background: url(../../Images/description.png) center no-repeat;
+    display: inline-block;
+    height: 16px;
+    vertical-align: middle;
+    width: 16px;
+}
+
+
+.ico {
+    background-image: url(../../Images/icons.png);
+    background-repeat: no-repeat;
+}
+
+.ib-ico { display: inline-block; }
+
+.b-ico { display: block; }
+
+.ico-1-1-doc {
+    background-position: 0 0;
+    height: 92px;
+    width: 84px;
+}
+
+.ico-1-1-sdoc {
+    background-position: -503px -92px;
+    height: 102px;
+    width: 94px;
+}
+
+.ico-2-1-folder {
+    background-position: -623px -200px;
+    height: 43px;
+    width: 57px;
+}
+
+.ico-2-1-psd {
+    background-position: -194px -200px;
+    height: 43px;
+    width: 39px;
+}
+
+.ico-2-1-file {
+    background-position: -78px -200px;
+    height: 43px;
+    width: 39px;
+}
+
+.ico-2-1-doc {
+    background-position: -623px -200px;
+    height: 43px;
+    width: 39px;
+}
+
+.ico-2-1-docx {
+    background-position: -623px -200px;
+    height: 43px;
+    width: 39px;
+}
+
+.ico-2-1-archive {
+    background-position: -155px -200px;
+    height: 43px;
+    width: 39px;
+}
+
+.ico-2-1-rar {
+    background-position: -623px -200px;
+    height: 43px;
+    width: 39px;
+}
+
+.ico-2-1-zip {
+    background-position: -623px -200px;
+    height: 43px;
+    width: 39px;
+}
+
+.ico-2-1-image {
+    background-position: -233px -200px;
+    height: 43px;
+    width: 39px;
+}
+
+.ico-2-1-signature {
+    background-position: -311px -200px;
+    height: 43px;
+    width: 39px;
+}
+
+.ico-2-1-writesignature {
+    background-position: -350px -200px;
+    height: 43px;
+    width: 39px;
+}
+
+.ico-2-1-xml {
+    background-position: -623px -200px;
+    height: 43px;
+    width: 39px;
+}
+
+.ico-2-1-pdf {
+    background-position: -623px -200px;
+    height: 43px;
+    width: 39px;
+}
+
+.ico-2-1-html {
+    background-position: -623px -200px;
+    height: 43px;
+    width: 39px;
+}
+
+.ico-2-1-txt {
+    background-position: -623px -200px;
+    height: 43px;
+    width: 39px;
+}
+
+.ico-2-1-mp3 {
+    background-position: -623px -200px;
+    height: 43px;
+    width: 39px;
+}
+
+.ico-2-1-video {
+    background-position: -623px -200px;
+    height: 43px;
+    width: 39px;
+}
+
+.ico-3-1-folder {
+    background-position: 0 -253px;
+    height: 21px;
+    width: 28px;
+}
+
+.ico-3-1-psd {
+    background-position: -28px -250px;
+    height: 24px;
+    width: 22px;
+}
+
+.ico-3-1-doc {
+    background-position: -50px -250px;
+    height: 24px;
+    width: 22px;
+}
+
+.ico-3-1-rar {
+    background-position: -72px -250px;
+    height: 24px;
+    width: 22px;
+}
+
+.ico-3-1-pdf {
+    background-position: -94px -250px;
+    height: 24px;
+    width: 22px;
+}
+
+.ico-3-1-html {
+    background-position: -117px -250px;
+    height: 24px;
+    width: 22px;
+}
+
+.ico-3-1-txt {
+    background-position: -138px -250px;
+    height: 24px;
+    width: 22px;
+}
+
+.ico-3-1-mp3 {
+    background-position: -336px -250px;
+    height: 24px;
+    width: 22px;
+}
+
+.ico-4-1-1 {
+    background-position: 0 -301px;
+    display: inline-block;
+    height: 15px;
+    margin-right: 5px;
+    width: 15px;
+}
+
+a:hover .ico-4-1-1 { background-position: 0 -321px; }
+
+.ico-4-1-2 {
+    background-position: -35px -301px;
+    display: inline-block;
+    height: 15px;
+    margin-right: 5px;
+    width: 11px;
+}
+
+a:hover .ico-4-1-2 { background-position: -35px -321px; }
+
+.ico-4-1-3 {
+    background-position: -69px -301px;
+    display: inline-block;
+    height: 15px;
+    margin-right: 5px;
+    width: 18px;
+}
+
+a:hover .ico-4-1-3 { background-position: -69px -321px; }
+
+.ico-4-1-4 {
+    background-position: -111px -301px;
+    display: inline-block;
+    height: 15px;
+    margin-right: 5px;
+    width: 12px;
+}
+
+a:hover .ico-4-1-4 { background-position: -111px -321px; }
+
+.ico-4-1-5 {
+    background-position: -146px -301px;
+    display: inline-block;
+    height: 15px;
+    margin-right: 5px;
+    width: 19px;
+}
+
+a:hover .ico-4-1-5 { background-position: -146px -321px; }
+
+.ico-4-1-6 {
+    background-position: -182px -301px;
+    display: inline-block;
+    height: 15px;
+    margin-right: 5px;
+    width: 22px;
+}
+
+a:hover .ico-4-1-6 { background-position: -182px -321px; }
+
+.ico-4-2-settings {
+    background: url(../../Images/settings.png) left no-repeat;
+    height: 12px;
+    width: 12px;
+}
+
+.ico-4-2-profile {
+    background-position: -260px -300px;
+    height: 12px;
+    width: 12px;
+}
+
+.ico-4-2-addressbook {
+    background-position: -287px -300px;
+    height: 12px;
+    width: 12px;
+}
+
+.ico-4-2-template-settings {
+    background-position: -311px -300px;
+    height: 12px;
+    width: 12px;
+}
+
+.ico-4-2-administration {
+    background-position: -334px -300px;
+    height: 12px;
+    width: 12px;
+}
+
+.ico-4-2-logout {
+    background-position: -356px -301px;
+    height: 13px;
+    width: 12px;
+}
+
+.ico-4-3-delete {
+    background-position: -405px -301px;
+    height: 12px;
+    width: 12px;
+}
+
+.ico-4-3-download {
+    background-position: -422px -301px;
+    height: 12px;
+    width: 12px;
+}
+
+.ico-4-3-send {
+    background-position: -439px -302px;
+    height: 9px;
+    width: 13px;
+}
+
+.ico-4-3-rename {
+    background-position: -455px -300px;
+    height: 13px;
+    width: 13px;
+}
+
+.ico-4-3-addfavorite {
+    background-position: -471px -301px;
+    height: 12px;
+    width: 12px;
+}
+
+.ico-4-4-star {
+    background-position: -495px -326px;
+    height: 11px;
+    width: 12px;
+}
+
+.ico-4-4-star:hover, .ico-4-4-star.default { background-position: -530px -326px; }
+
+.ico-4-4-star.active { background-position: -513px -326px; }
+
+.ico-4-4-folder {
+    background-position: -548px -326px;
+    height: 9px;
+    width: 10px;
+}
+
+.ico-4-4-sign {
+    background-position: -510px -300px;
+    height: 16px;
+    width: 11px;
+}
+
+.ico-4-4-write {
+    background-position: -635px -300px;
+    height: 15px;
+    width: 16px;
+}
+
+.ico-4-4-clip {
+    background-position: -716px -299px;
+    height: 17px;
+    width: 16px;
+}
+
+.ico-5-1-mode1 {
+    background-position: -1px -353px;
+    height: 16px;
+    width: 16px;
+}
+
+.ico-5-1-mode2 {
+    background-position: -24px -353px;
+    height: 16px;
+    width: 16px;
+}
+
+.ico-5-1-mode2:hover, .ico-5-1-mode2.active { background-position: -24px -383px; }
+
+.ico-5-2-delete {
+    background-position: -120px -353px;
+    height: 18px;
+    width: 18px;
+}
+
+.ico-5-2-addfavorite {
+    background-position: -143px -353px;
+    height: 18px;
+    width: 18px;
+}
+
+.ico-5-2-download {
+    background-position: -169px -353px;
+    height: 18px;
+    width: 18px;
+}
+
+.ico-5-2-send {
+    background-position: -195px -353px;
+    height: 18px;
+    width: 18px;
+}
+
+.ico-6-2-download {
+    background-position: -66px -458px;
+    height: 14px;
+    width: 14px;
+}
+
+.ico-6-2-delete {
+    background-position: -88px -458px;
+    height: 14px;
+    width: 14px;
+}
+
+.ico-6-3-search {
+    background-position: -150px -475px;
+    height: 16px;
+    width: 14px;
+}
+
+.ico-7-1-profile {
+    background-position: 0 -428px;
+    height: 11px;
+    width: 14px;
+}
+
+.ico-7-1-download {
+    background-position: 0 -453px;
+    height: 13px;
+    width: 14px;
+}
+
+.ico-7-1-search {
+    background-position: 0 -478px;
+    height: 14px;
+    width: 14px;
+}
+
+a:hover .ico-4-1-1 { background-position: 0 -321px; }
+
+a:hover .ico-4-1-3 { background-position: -69px -321px; }
+
+a:hover .ico-4-1-4 { background-position: -111px -321px; }
+
+a:hover .ico-4-1-5 { background-position: -146px -321px; }
+
+a:hover .ico-4-1-6 { background-position: -182px -321px; }
+
+a:hover .ico-5-2-delete { background-position: -120px -373px; }
+
+a:hover .ico-5-2-addfavorite { background-position: -143px -373px; }
+
+a:hover .ico-5-2-download { background-position: -169px -373px; }
+
+a:hover .ico-5-2-send { background-position: -195px -373px; }
+
+a:hover .ico-7-1-profile { background-position: -27px -428px; }
+
+a:hover .ico-7-1-download { background-position: -26px -453px; }
+
+a:hover .ico-7-1-search { background-position: -27px -478px; }
+
+ul.dropdown-menu { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
+
+
+
+
+.dropdown-menu a:hover .ico-4-2-profile { background-position: -260px -320px }
+
+.dropdown-menu a:hover .ico-4-2-addressbook { background-position: -287px -320px }
+
+.dropdown-menu a:hover .ico-4-2-template-settings { background-position: -311px -320px }
+
+.dropdown-menu a:hover .ico-4-2-administration { background-position: -334px -320px }
+
+.dropdown-menu a:hover .ico-4-2-logout { background-position: -356px -321px }

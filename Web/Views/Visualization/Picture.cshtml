@@ -1,0 +1,18 @@
+﻿@model CryptxOnline.Web.Models.Visualization.PictureVisualizationModel
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    @Html.Label(Model.ErrorMessage)
+}
+else
+{
+<style>
+    #PictureDiv img {
+        width: 100%
+    }
+</style>
+    <div id="PictureDiv">
+        <img id="img" src="data:image/png;base64,@Model.PictureBase64 " />
+    </div>
+}
+

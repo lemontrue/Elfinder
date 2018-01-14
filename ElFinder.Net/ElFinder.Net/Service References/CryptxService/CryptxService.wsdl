@@ -1,0 +1,1121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CryptxService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WSHttpBinding_ICryptxService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:61159/CryptxService.svc?xsd=xsd5" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:61159/CryptxService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:61159/CryptxService.svc?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Error" />
+      <xsd:import schemaLocation="http://localhost:61159/CryptxService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Response" />
+      <xsd:import schemaLocation="http://localhost:61159/CryptxService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Runtime.InteropServices" />
+      <xsd:import schemaLocation="http://localhost:61159/CryptxService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import schemaLocation="http://localhost:61159/CryptxService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Helper" />
+      <xsd:import schemaLocation="http://localhost:61159/CryptxService.svc?xsd=xsd7" namespace="http://schemas.datacontract.org/2004/07/DSS.Service" />
+      <xsd:import schemaLocation="http://localhost:61159/CryptxService.svc?xsd=xsd8" namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Settings" />
+      <xsd:import schemaLocation="http://localhost:61159/CryptxService.svc?xsd=xsd9" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICryptxService_GetContact_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContact" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetContact_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_CreateContact_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateContact" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_CreateContact_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetUserCertificates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserCertificates" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetUserCertificates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserCertificatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetContactCertificates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactCertificates" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetContactCertificates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactCertificatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_EditContact_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditContact" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_EditContact_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DeleteContact_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteContact" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DeleteContact_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DeleteCertificateFromContact_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCertificateFromContact" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DeleteCertificateFromContact_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCertificateFromContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetAddressBook_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAddressBook" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetAddressBook_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAddressBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_AddCertificatesToContact_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCertificatesToContact" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_AddCertificatesToContact_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCertificatesToContactResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_FileGroupCreate_InputMessage">
+    <wsdl:part name="parameters" element="tns:FileGroupCreate" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_FileGroupCreate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FileGroupCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetFileGroupFiles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileGroupFiles" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetFileGroupFiles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileGroupFilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_FileGroupSend_InputMessage">
+    <wsdl:part name="parameters" element="tns:FileGroupSend" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_FileGroupSend_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FileGroupSendResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_FileGroupReceive_InputMessage">
+    <wsdl:part name="parameters" element="tns:FileGroupReceive" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_FileGroupReceive_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FileGroupReceiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_RejectFileGroupReceive_InputMessage">
+    <wsdl:part name="parameters" element="tns:RejectFileGroupReceive" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_RejectFileGroupReceive_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RejectFileGroupReceiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProfile" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetUserProfiles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserProfiles" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetUserProfiles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserProfilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetProfileTooltip_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProfileTooltip" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetProfileTooltip_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProfileTooltipResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_SaveNewProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveNewProfile" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_SaveNewProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveNewProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_SetProfileAsDefault_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetProfileAsDefault" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_SetProfileAsDefault_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetProfileAsDefaultResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_SaveProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveProfile" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_SaveProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetBlankProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBlankProfile" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetBlankProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBlankProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetDefaultProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDefaultProfile" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetDefaultProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDefaultProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DeleteProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteProfile" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DeleteProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_NeedToPIN_InputMessage">
+    <wsdl:part name="parameters" element="tns:NeedToPIN" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_NeedToPIN_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NeedToPINResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetGroupUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupUsers" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetGroupUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_AddCertificates_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCertificates" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_AddCertificates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCertificatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_FileBinarySend_InputMessage">
+    <wsdl:part name="parameters" element="tns:FileBinarySend" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_FileBinarySend_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FileBinarySendResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetMyCertificates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyCertificates" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetMyCertificates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMyCertificatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetRecipientCertificates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRecipientCertificates" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetRecipientCertificates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRecipientCertificatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetDecryptCertificates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDecryptCertificates" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetDecryptCertificates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDecryptCertificatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DAVGetDecryptCertificates_InputMessage">
+    <wsdl:part name="parameters" element="tns:DAVGetDecryptCertificates" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DAVGetDecryptCertificates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DAVGetDecryptCertificatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetCertificatesBySearchString_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCertificatesBySearchString" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetCertificatesBySearchString_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCertificatesBySearchStringResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_AddRecipientCertificate_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddRecipientCertificate" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_AddRecipientCertificate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddRecipientCertificateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_AddRecipientCertificateByThumbprint_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddRecipientCertificateByThumbprint" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_AddRecipientCertificateByThumbprint_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddRecipientCertificateByThumbprintResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_ChangeFriendlyName_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeFriendlyName" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_ChangeFriendlyName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeFriendlyNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_ChangeMyCertificateFriendlyName_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeMyCertificateFriendlyName" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_ChangeMyCertificateFriendlyName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeMyCertificateFriendlyNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_SetMyCertPIN_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetMyCertPIN" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_SetMyCertPIN_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetMyCertPINResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_ChangeMyCertPIN_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeMyCertPIN" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_ChangeMyCertPIN_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeMyCertPINResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DeleteMyCertPIN_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteMyCertPIN" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DeleteMyCertPIN_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteMyCertPINResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DeleteRecipientRelation_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRecipientRelation" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DeleteRecipientRelation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRecipientRelationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_SignIsAttached_InputMessage">
+    <wsdl:part name="parameters" element="tns:SignIsAttached" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_SignIsAttached_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SignIsAttachedResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetCertificate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCertificate" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetCertificate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCertificateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetFileInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetFileInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_RefreshStore_InputMessage">
+    <wsdl:part name="parameters" element="tns:RefreshStore" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_RefreshStore_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RefreshStoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_SignOperation_InputMessage">
+    <wsdl:part name="parameters" element="tns:SignOperation" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_SignOperation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SignOperationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DAVSignOperation_InputMessage">
+    <wsdl:part name="parameters" element="tns:DAVSignOperation" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DAVSignOperation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DAVSignOperationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DAVListSignOperation_InputMessage">
+    <wsdl:part name="parameters" element="tns:DAVListSignOperation" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DAVListSignOperation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DAVListSignOperationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_SignVerify_InputMessage">
+    <wsdl:part name="parameters" element="tns:SignVerify" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_SignVerify_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SignVerifyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DAVSignVerify_InputMessage">
+    <wsdl:part name="parameters" element="tns:DAVSignVerify" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DAVSignVerify_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DAVSignVerifyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DAVListSignVerify_InputMessage">
+    <wsdl:part name="parameters" element="tns:DAVListSignVerify" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DAVListSignVerify_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DAVListSignVerifyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_EncryptOperation_InputMessage">
+    <wsdl:part name="parameters" element="tns:EncryptOperation" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_EncryptOperation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EncryptOperationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DAVEncryptOperation_InputMessage">
+    <wsdl:part name="parameters" element="tns:DAVEncryptOperation" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DAVEncryptOperation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DAVEncryptOperationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DAVListEncryptOperation_InputMessage">
+    <wsdl:part name="parameters" element="tns:DAVListEncryptOperation" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DAVListEncryptOperation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DAVListEncryptOperationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DecryptOperation_InputMessage">
+    <wsdl:part name="parameters" element="tns:DecryptOperation" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DecryptOperation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DecryptOperationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DAVDecryptOperation_InputMessage">
+    <wsdl:part name="parameters" element="tns:DAVDecryptOperation" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DAVDecryptOperation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DAVDecryptOperationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DAVListDecryptOperation_InputMessage">
+    <wsdl:part name="parameters" element="tns:DAVListDecryptOperation" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_DAVListDecryptOperation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DAVListDecryptOperationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetVisualizationUrl_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizationUrl" />
+  </wsdl:message>
+  <wsdl:message name="ICryptxService_GetVisualizationUrl_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizationUrlResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICryptxService">
+    <wsdl:operation name="GetContact">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/GetContact" message="tns:ICryptxService_GetContact_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/GetContactResponse" message="tns:ICryptxService_GetContact_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateContact">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/CreateContact" message="tns:ICryptxService_CreateContact_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/CreateContactResponse" message="tns:ICryptxService_CreateContact_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserCertificates">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/GetUserCertificates" message="tns:ICryptxService_GetUserCertificates_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/GetUserCertificatesResponse" message="tns:ICryptxService_GetUserCertificates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContactCertificates">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/GetContactCertificates" message="tns:ICryptxService_GetContactCertificates_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/GetContactCertificatesResponse" message="tns:ICryptxService_GetContactCertificates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditContact">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/EditContact" message="tns:ICryptxService_EditContact_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/EditContactResponse" message="tns:ICryptxService_EditContact_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteContact">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/DeleteContact" message="tns:ICryptxService_DeleteContact_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/DeleteContactResponse" message="tns:ICryptxService_DeleteContact_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCertificateFromContact">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/DeleteCertificateFromContact" message="tns:ICryptxService_DeleteCertificateFromContact_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/DeleteCertificateFromContactResponse" message="tns:ICryptxService_DeleteCertificateFromContact_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressBook">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/GetAddressBook" message="tns:ICryptxService_GetAddressBook_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/GetAddressBookResponse" message="tns:ICryptxService_GetAddressBook_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCertificatesToContact">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/AddCertificatesToContact" message="tns:ICryptxService_AddCertificatesToContact_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/AddCertificatesToContactResponse" message="tns:ICryptxService_AddCertificatesToContact_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FileGroupCreate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/FileGroupCreate" message="tns:ICryptxService_FileGroupCreate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/FileGroupCreateResponse" message="tns:ICryptxService_FileGroupCreate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFileGroupFiles">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/GetFileGroupFiles" message="tns:ICryptxService_GetFileGroupFiles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/GetFileGroupFilesResponse" message="tns:ICryptxService_GetFileGroupFiles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FileGroupSend">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/FileGroupSend" message="tns:ICryptxService_FileGroupSend_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/FileGroupSendResponse" message="tns:ICryptxService_FileGroupSend_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FileGroupReceive">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/FileGroupReceive" message="tns:ICryptxService_FileGroupReceive_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/FileGroupReceiveResponse" message="tns:ICryptxService_FileGroupReceive_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RejectFileGroupReceive">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/RejectFileGroupReceive" message="tns:ICryptxService_RejectFileGroupReceive_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/RejectFileGroupReceiveResponse" message="tns:ICryptxService_RejectFileGroupReceive_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProfile">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/GetProfile" message="tns:ICryptxService_GetProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/GetProfileResponse" message="tns:ICryptxService_GetProfile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserProfiles">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/GetUserProfiles" message="tns:ICryptxService_GetUserProfiles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/GetUserProfilesResponse" message="tns:ICryptxService_GetUserProfiles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProfileTooltip">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/GetProfileTooltip" message="tns:ICryptxService_GetProfileTooltip_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/GetProfileTooltipResponse" message="tns:ICryptxService_GetProfileTooltip_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveNewProfile">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/SaveNewProfile" message="tns:ICryptxService_SaveNewProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/SaveNewProfileResponse" message="tns:ICryptxService_SaveNewProfile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetProfileAsDefault">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/SetProfileAsDefault" message="tns:ICryptxService_SetProfileAsDefault_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/SetProfileAsDefaultResponse" message="tns:ICryptxService_SetProfileAsDefault_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveProfile">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/SaveProfile" message="tns:ICryptxService_SaveProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/SaveProfileResponse" message="tns:ICryptxService_SaveProfile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBlankProfile">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/GetBlankProfile" message="tns:ICryptxService_GetBlankProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/GetBlankProfileResponse" message="tns:ICryptxService_GetBlankProfile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDefaultProfile">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/GetDefaultProfile" message="tns:ICryptxService_GetDefaultProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/GetDefaultProfileResponse" message="tns:ICryptxService_GetDefaultProfile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProfile">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/DeleteProfile" message="tns:ICryptxService_DeleteProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/DeleteProfileResponse" message="tns:ICryptxService_DeleteProfile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NeedToPIN">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/NeedToPIN" message="tns:ICryptxService_NeedToPIN_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/NeedToPINResponse" message="tns:ICryptxService_NeedToPIN_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/GetGroupUsers" message="tns:ICryptxService_GetGroupUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/GetGroupUsersResponse" message="tns:ICryptxService_GetGroupUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCertificates">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/AddCertificates" message="tns:ICryptxService_AddCertificates_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/AddCertificatesResponse" message="tns:ICryptxService_AddCertificates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FileBinarySend">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/FileBinarySend" message="tns:ICryptxService_FileBinarySend_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/FileBinarySendResponse" message="tns:ICryptxService_FileBinarySend_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMyCertificates">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/GetMyCertificates" message="tns:ICryptxService_GetMyCertificates_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/GetMyCertificatesResponse" message="tns:ICryptxService_GetMyCertificates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRecipientCertificates">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/GetRecipientCertificates" message="tns:ICryptxService_GetRecipientCertificates_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/GetRecipientCertificatesResponse" message="tns:ICryptxService_GetRecipientCertificates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDecryptCertificates">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/GetDecryptCertificates" message="tns:ICryptxService_GetDecryptCertificates_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/GetDecryptCertificatesResponse" message="tns:ICryptxService_GetDecryptCertificates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DAVGetDecryptCertificates">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/DAVGetDecryptCertificates" message="tns:ICryptxService_DAVGetDecryptCertificates_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/DAVGetDecryptCertificatesResponse" message="tns:ICryptxService_DAVGetDecryptCertificates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCertificatesBySearchString">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/GetCertificatesBySearchString" message="tns:ICryptxService_GetCertificatesBySearchString_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/GetCertificatesBySearchStringResponse" message="tns:ICryptxService_GetCertificatesBySearchString_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRecipientCertificate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/AddRecipientCertificate" message="tns:ICryptxService_AddRecipientCertificate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/AddRecipientCertificateResponse" message="tns:ICryptxService_AddRecipientCertificate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRecipientCertificateByThumbprint">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/AddRecipientCertificateByThumbprint" message="tns:ICryptxService_AddRecipientCertificateByThumbprint_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/AddRecipientCertificateByThumbprintResponse" message="tns:ICryptxService_AddRecipientCertificateByThumbprint_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeFriendlyName">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/ChangeFriendlyName" message="tns:ICryptxService_ChangeFriendlyName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/ChangeFriendlyNameResponse" message="tns:ICryptxService_ChangeFriendlyName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMyCertificateFriendlyName">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/ChangeMyCertificateFriendlyName" message="tns:ICryptxService_ChangeMyCertificateFriendlyName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/ChangeMyCertificateFriendlyNameResponse" message="tns:ICryptxService_ChangeMyCertificateFriendlyName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetMyCertPIN">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/SetMyCertPIN" message="tns:ICryptxService_SetMyCertPIN_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/SetMyCertPINResponse" message="tns:ICryptxService_SetMyCertPIN_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMyCertPIN">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/ChangeMyCertPIN" message="tns:ICryptxService_ChangeMyCertPIN_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/ChangeMyCertPINResponse" message="tns:ICryptxService_ChangeMyCertPIN_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMyCertPIN">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/DeleteMyCertPIN" message="tns:ICryptxService_DeleteMyCertPIN_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/DeleteMyCertPINResponse" message="tns:ICryptxService_DeleteMyCertPIN_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRecipientRelation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/DeleteRecipientRelation" message="tns:ICryptxService_DeleteRecipientRelation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/DeleteRecipientRelationResponse" message="tns:ICryptxService_DeleteRecipientRelation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SignIsAttached">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/SignIsAttached" message="tns:ICryptxService_SignIsAttached_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/SignIsAttachedResponse" message="tns:ICryptxService_SignIsAttached_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCertificate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/GetCertificate" message="tns:ICryptxService_GetCertificate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/GetCertificateResponse" message="tns:ICryptxService_GetCertificate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFileInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/GetFileInfo" message="tns:ICryptxService_GetFileInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/GetFileInfoResponse" message="tns:ICryptxService_GetFileInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RefreshStore">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/RefreshStore" message="tns:ICryptxService_RefreshStore_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/RefreshStoreResponse" message="tns:ICryptxService_RefreshStore_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SignOperation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/SignOperation" message="tns:ICryptxService_SignOperation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/SignOperationResponse" message="tns:ICryptxService_SignOperation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DAVSignOperation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/DAVSignOperation" message="tns:ICryptxService_DAVSignOperation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/DAVSignOperationResponse" message="tns:ICryptxService_DAVSignOperation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DAVListSignOperation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/DAVListSignOperation" message="tns:ICryptxService_DAVListSignOperation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/DAVListSignOperationResponse" message="tns:ICryptxService_DAVListSignOperation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SignVerify">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/SignVerify" message="tns:ICryptxService_SignVerify_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/SignVerifyResponse" message="tns:ICryptxService_SignVerify_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DAVSignVerify">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/DAVSignVerify" message="tns:ICryptxService_DAVSignVerify_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/DAVSignVerifyResponse" message="tns:ICryptxService_DAVSignVerify_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DAVListSignVerify">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/DAVListSignVerify" message="tns:ICryptxService_DAVListSignVerify_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/DAVListSignVerifyResponse" message="tns:ICryptxService_DAVListSignVerify_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EncryptOperation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/EncryptOperation" message="tns:ICryptxService_EncryptOperation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/EncryptOperationResponse" message="tns:ICryptxService_EncryptOperation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DAVEncryptOperation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/DAVEncryptOperation" message="tns:ICryptxService_DAVEncryptOperation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/DAVEncryptOperationResponse" message="tns:ICryptxService_DAVEncryptOperation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DAVListEncryptOperation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/DAVListEncryptOperation" message="tns:ICryptxService_DAVListEncryptOperation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/DAVListEncryptOperationResponse" message="tns:ICryptxService_DAVListEncryptOperation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DecryptOperation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/DecryptOperation" message="tns:ICryptxService_DecryptOperation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/DecryptOperationResponse" message="tns:ICryptxService_DecryptOperation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DAVDecryptOperation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/DAVDecryptOperation" message="tns:ICryptxService_DAVDecryptOperation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/DAVDecryptOperationResponse" message="tns:ICryptxService_DAVDecryptOperation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DAVListDecryptOperation">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/DAVListDecryptOperation" message="tns:ICryptxService_DAVListDecryptOperation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/DAVListDecryptOperationResponse" message="tns:ICryptxService_DAVListDecryptOperation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizationUrl">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICryptxService/GetVisualizationUrl" message="tns:ICryptxService_GetVisualizationUrl_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICryptxService/GetVisualizationUrlResponse" message="tns:ICryptxService_GetVisualizationUrl_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSHttpBinding_ICryptxService" type="tns:ICryptxService">
+    <wsp:PolicyReference URI="#WSHttpBinding_ICryptxService_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetContact">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/GetContact" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateContact">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/CreateContact" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserCertificates">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/GetUserCertificates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactCertificates">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/GetContactCertificates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditContact">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/EditContact" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteContact">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/DeleteContact" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCertificateFromContact">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/DeleteCertificateFromContact" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAddressBook">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/GetAddressBook" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCertificatesToContact">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/AddCertificatesToContact" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileGroupCreate">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/FileGroupCreate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileGroupFiles">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/GetFileGroupFiles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileGroupSend">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/FileGroupSend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileGroupReceive">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/FileGroupReceive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RejectFileGroupReceive">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/RejectFileGroupReceive" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProfile">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/GetProfile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserProfiles">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/GetUserProfiles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProfileTooltip">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/GetProfileTooltip" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveNewProfile">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/SaveNewProfile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetProfileAsDefault">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/SetProfileAsDefault" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveProfile">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/SaveProfile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBlankProfile">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/GetBlankProfile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDefaultProfile">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/GetDefaultProfile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteProfile">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/DeleteProfile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NeedToPIN">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/NeedToPIN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupUsers">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/GetGroupUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCertificates">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/AddCertificates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FileBinarySend">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/FileBinarySend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyCertificates">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/GetMyCertificates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecipientCertificates">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/GetRecipientCertificates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDecryptCertificates">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/GetDecryptCertificates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DAVGetDecryptCertificates">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/DAVGetDecryptCertificates" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCertificatesBySearchString">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/GetCertificatesBySearchString" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRecipientCertificate">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/AddRecipientCertificate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRecipientCertificateByThumbprint">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/AddRecipientCertificateByThumbprint" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeFriendlyName">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/ChangeFriendlyName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMyCertificateFriendlyName">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/ChangeMyCertificateFriendlyName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetMyCertPIN">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/SetMyCertPIN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeMyCertPIN">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/ChangeMyCertPIN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMyCertPIN">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/DeleteMyCertPIN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRecipientRelation">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/DeleteRecipientRelation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SignIsAttached">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/SignIsAttached" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCertificate">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/GetCertificate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileInfo">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/GetFileInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RefreshStore">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/RefreshStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SignOperation">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/SignOperation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DAVSignOperation">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/DAVSignOperation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DAVListSignOperation">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/DAVListSignOperation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SignVerify">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/SignVerify" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DAVSignVerify">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/DAVSignVerify" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DAVListSignVerify">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/DAVListSignVerify" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EncryptOperation">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/EncryptOperation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DAVEncryptOperation">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/DAVEncryptOperation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DAVListEncryptOperation">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/DAVListEncryptOperation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DecryptOperation">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/DecryptOperation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DAVDecryptOperation">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/DAVDecryptOperation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DAVListDecryptOperation">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/DAVListDecryptOperation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizationUrl">
+      <soap12:operation soapAction="http://tempuri.org/ICryptxService/GetVisualizationUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CryptxService">
+    <wsdl:port name="WSHttpBinding_ICryptxService" binding="tns:WSHttpBinding_ICryptxService">
+      <soap12:address location="http://localhost:61159/CryptxService.svc" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://localhost:61159/CryptxService.svc</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

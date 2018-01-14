@@ -1,0 +1,45 @@
+/******************************************************************/
+/*                           STATUSBAR STYLES                     */
+/******************************************************************/
+
+
+/* statusbar container */
+.elfinder-statusbar {
+    border-bottom: 0 solid transparent;
+    border-left: 0 solid transparent;
+    border-right: 0 solid transparent;
+    font-weight: normal;
+    padding: .2em .5em;
+    text-align: center;
+}
+
+.elfinder-statusbar a { text-decoration: none; }
+
+
+
+/* path in statusbar */
+
+.elfinder-path {
+    -o-text-overflow: ellipsis;
+    max-width: 30%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.elfinder-ltr .elfinder-path { float: left; }
+
+.elfinder-rtl .elfinder-path { float: right; }
+
+/* total/selected size in statusbar */
+
+.elfinder-stat-size { white-space: nowrap; }
+
+.elfinder-ltr .elfinder-stat-size { float: right; }
+
+.elfinder-rtl .elfinder-stat-size { float: left; }
+
+.elfinder-stat-selected {
+    overflow: hidden;
+    white-space: nowrap;
+}

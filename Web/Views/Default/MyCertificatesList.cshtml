@@ -1,0 +1,617 @@
+﻿@using CryptxOnline.Web.AuthorizeService
+@model CryptxOnline.Web.Models.ProfileModel
+
+
+<script src="@Url.Content("/Assets/libjs/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+
+<script>
+    var certificates = @Html.Raw(Model.certList.JsonFormat);
+
+    var requests2 = {"requests":[
+        {"ExtensionData":{},"CreationTime":"\/Date(1437608924837)\/","EGRUL":'1234124124',"Email":"konstantin.akushev1@gmail.com","Error":null,"ID":"f4655be2-8fab-428a-9684-01533f3a4a53","Name":"ТестовыйАбонент Петрович1","Passport":null,"PaymentID":"","SNILS":"05695317392","Status":"ожидается подтверждение","StatusCode":1},
+        {"ExtensionData":{},"CreationTime":"\/Date(1437608924837)\/","EGRUL":'1234124124',"Email":"konstantin.akushev1@gmail.com","Error":null,"ID":"f4655be2-8fab-428a-9684-01533f3a4a53","Name":"ТестовыйАбонент Петрович2","Passport":null,"PaymentID":"","SNILS":"05695317392","Status":"ожидается подтверждение","StatusCode":2},
+        {"ExtensionData":{},"CreationTime":"\/Date(1437608924837)\/","EGRUL":'1234124124',"Email":"konstantin.akushev1@gmail.com","Error":null,"ID":"f4655be2-8fab-428a-9684-01533f3a4a53","Name":"ТестовыйАбонент Петрович3","Passport":null,"PaymentID":"","SNILS":"05695317392","Status":"ожидание ответа от УЦ","StatusCode":3},
+        {"ExtensionData":{},"CreationTime":"\/Date(1437608924837)\/","EGRUL":'1234124124',"Email":"konstantin.akushev1@gmail.com","Error":null,"ID":"f4655be2-8fab-428a-9684-01533f3a4a53","Name":"ТестовыйАбонент Петрович4","Passport":null,"PaymentID":"","SNILS":"05695317392","Status":"действующий","StatusCode":4},
+        {"ExtensionData":{},"CreationTime":"\/Date(1437608924837)\/","EGRUL":'1234124124',"Email":"konstantin.akushev1@gmail.com","Error":null,"ID":"f4655be2-8fab-428a-9684-01533f3a4a53","Name":"ТестовыйАбонент Петрович5","Passport":null,"PaymentID":"","SNILS":"05695317392","Status":"ошибка","StatusCode":5},
+        {"ExtensionData":{},"CreationTime":"\/Date(1437608924837)\/","EGRUL":'1234124124',"Email":"konstantin.akushev1@gmail.com","Error":null,"ID":"f4655be2-8fab-428a-9684-01533f3a4a53","Name":"ТестовыйАбонент Петрович6","Passport":null,"PaymentID":"","SNILS":"05695317392","Status":"ошибка","StatusCode":6}
+    ],"JsonFormat":null,"Sort":0};
+    var requests = @Html.Raw(Model.certRequestList.JsonFormat);
+        console.log(requests)
+
+</script>
+
+<script src="@Url.Content("/Assets/js/dialogs/Crypt.Dialog.ConfirmRequest.js")" type="text/javascript"></script>
+<script src="@Url.Content("/Assets/js/dialogs/Crypt.Dialog.ConfirmRequestPin.js")" type="text/javascript"></script>
+<script src="@Url.Content("/Assets/js/dialogs/Crypt.Dialog.RequestCongratulation.js")" type="text/javascript"></script>
+<script src="@Url.Content("/Assets/js/Crypt.MyCertificateList.js")" type="text/javascript"></script>
+
+
+<div id="myCertificateList" class="profile">
+    <div id="delete-confirm" class="subModal hidden">
+        <div class="sub-dialog-cancel js-sub-dialog-cancel">
+            <div class="sub-title">Удаление запроса</div>
+            <div class="descr">
+                Вы уверены, что хотите удалить запрос?
+            </div>
+            <div class="actions">
+                <span class="act-btn decline js-cancel-decline">Нет</span>
+                <span class="act-btn confirm js-confirm-decline">Да</span>
+            </div>
+        </div>
+    </div>
+    <div class="filter">
+        <div class="title">
+            Мои сертификаты
+        </div>
+        <div class="tabs">
+            <ul class="js-tabs">
+                <li class="active" data-val="all"><span class="item">Все сертификаты</span></li>
+                <li data-val="active"><span class="item">Действующие</span></li>
+                <li data-val="requests" class="js-request-list"><span class="item">Запросы на сертификаты</span> </li>
+            </ul>
+        </div>
+        <div class="marker-activation">
+            <a href="#" class="marker-get-btn js-get-marker">Получить маркер</a>
+            @if (CurrentUser.Status == UserStatuses.Confirmed) {
+                <a href="#" class="marker-activation-btn js-start-marker-activation ">Активировать маркер</a>
+            } 
+        </div>
+    </div>
+    <div class="sort">
+        <label class="col"> Сортировать: </label>
+        <div class="col2 js-sort-select i-certificates">
+            <select class="style-select" data-val="true" data-val-required="The Sort field is required." id="sel-sort-certs" name="certList.Sort">
+                <option value="MyCertificate.FriendlyName_ASC">По названию (А-Я)</option>
+                <option value="MyCertificate.FriendlyName_DESC">По названию (Я-А)</option>
+                <option value="NotBefore_DESC">По сроку (новые сначала)</option>
+                <option value="NotBefore_ASC">По сроку (старые сначала)</option>
+                <option value="SubjectName_ASC">По владельцу (А-Я)</option>
+                <option value="SubjectName_DESC">По владельцу (Я-А)</option>
+            </select>
+        </div>
+        <div class="col2 js-sort-select i-requests hidden">
+            <select class="style-select" id="sel-sort-requests" data-val="true" data-val-required="The Sort field is required." name="requestList.Sort">
+                <option value="">По умолчанию</option>
+                <option value="Name_ASC">По ФИО (А-Я)</option>
+                <option value="Name_DESC">По ФИО (Я-А)</option>
+                <option value="CreationTime_DESC">По дате заявки (сначала новые)</option>
+                <option value="CreationTime_ASC">По дате заявки (сначала старые)</option>
+            </select>
+        </div>
+        <div class="pin pull-right js-chb-sort">
+            <label> @Html.CheckBoxFor(m => m.certList.WhithPin, new { @id = "chb-withpin" }) <span>С пин-кодом</span> </label>
+            <label> @Html.CheckBoxFor(m => m.certList.WhithPin, new { @id = "chb-test" }) <span>Тестовые</span> </label>
+        </div>
+    </div>
+    <div class="scroll-wrap js-scrollList">
+        <div class="scroller">
+            <div id="certificats-list">
+                <div class="certificats-list">
+
+                </div>
+            </div>
+        </div>
+        <div class="scroller__bar-wrapper">
+            <div class="scroller__bar">
+            </div>
+        </div>
+    </div>
+    <div class="empty-certificates js-emptyCertificates hidden">
+    <!--
+        <div class="info">
+            Нет установленных сертификатов!<br>
+            Обратитесь в УЦ для получения маркера.<br>
+            <br>
+            Для активации маркера нажмите сюда
+        </div>
+        <hr>
+    -->
+        <div class="info">
+            Нет установленных сертификатов!<br><br>
+        </div>
+        <div class="info">
+            Вы  можете<br>
+            <a class="btn btn-blue js-createTestCertificate" href="#">Выпустить тестовый сертификат</a><br>
+            для того, чтобы предварительно оценить<br>
+            весь функционал нашей системы<br>
+        </div>
+
+    </div>
+
+</div>
+
+<div id="modal" style="display: none">
+    <div class="window alert modal-window change-pin" id="change-pin" style="display: none">
+        <input type="hidden" value="" id="change-pin-hidden" />
+        <div class="title">
+            Задать пин-код для ключа
+            <div class="close" onclick=" hideModal('change-pin') "></div>
+        </div>
+        <form action="" autocomplete="off" method="post">
+            <div class="row">
+                <label class="col">
+                    Введите пин-код для ключа:
+                </label>
+                <div class="value col">
+                    <input id="setPin" type="password" />
+                    <span class="info error">Пин-код может содержать только цифры</span>
+                </div>
+            </div>
+            <div class="row sbmt pull-right">
+                <a class="close" href="#" onclick=" hideModal('change-pin') ">Отмена</a>
+                <input class="btn btn-green" type="button" onclick=" setPinMethod(this) " value="Применить" />
+            </div>
+        </form>
+    </div>
+    <div class="window alert modal-window" id="attention" style="display: none">
+        <div class="title">
+            Внимание!
+            <div class="close" onclick=" hideModal('attention') "></div>
+        </div>
+        <form action="" autocomplete="off" method="post">
+            <div class="row">
+                <div class="mess-box">
+                    <div class="info">
+                        <span> Изменения успешно сохранены. </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row sbmt pull-right">
+                <input class="btn btn-green" type="button" onclick=" hideModal('attention') " value="Закрыть" />
+            </div>
+        </form>
+    </div>
+    <div class="window alert modal-window" id="change-pin2" style="display: none">
+        <input type="hidden" value="" id="change-pin2-hidden" />
+        <div class="title">
+            Сменить пин-код
+            <div class="close" onclick=" hideModal('change-pin2') "></div>
+        </div>
+        <form action="" autocomplete="off" method="post">
+            <div class="row">
+                <label class="col">
+                    Введите старый пин-код:
+                </label>
+                <div class="value col">
+                    <input id="oldPin" type="password" />
+                    <span class="info error">Неверно указан старый пин</span>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col">
+                    Введите новый пин-код:
+                </label>
+                <div class="value col">
+                    <input id="newPin" type="password" />
+                    <span class="info error">Пин-код может содержать только цифры</span>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col">
+                    Повторите новый пин-код:
+                </label>
+                <div class="value col">
+                    <input id="newPinConfirm" type="password" />
+                    <span class="info error">Пин-коды не совпадают</span>
+                </div>
+            </div>
+            <div class="row sbmt pull-right">
+                <a class="clear" href="#" onclick=" clearPinFields() ">Очистить</a>
+                <a class="close" href="#" onclick=" hideModal('change-pin2') ">Отмена</a>
+                <input class="btn btn-green" type="button" value="Применить" onclick=" changePin(this) " />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script id="tpl-certListItem" type="text/html">
+    <% _.each(Items, function(Item, Index) { %>
+        <div class="certificat">
+            <div class="col1">
+                <% if (Item.MyCertificate != null) { %>
+                    <div class="title"> Название сертификата </div>
+                <% } else { %>
+                    <div class="title error"> Ошибка получения сертификата </div>
+                <% } %>
+                <div class="name">
+                    <% if (Item.IsTest) { %>
+                        <span class="test-certificate-icon js-test-certificate-tip" id="testTip-<%- Item.MyCertificate.Id %>" ></span>
+                    <% } %>
+                    <a href="/Default/GetCertificate?thumbPrint=<%- Item.Thumbprint %>"><%- Item.SubjectName %></a>
+                </div>
+                <div class="cert">
+                    <% if (Date(Item.NotBefore) > Date.now()) { %>
+                        <span class="expire">Недействителен до <%- Crypt.Helpers.ruDate( Item.NotBefore ) %></span>
+                    <% } else if ( Date(Item.NotAfter)  < Date.now()) { %>
+                        <span class="expire">Недействителен c <%- Crypt.Helpers.ruDate( Item.NotAfter ) %></span>
+                    <% } else { %>
+                        <span class="active">Действителен до <%- Crypt.Helpers.ruDate( Item.NotAfter ) %></span>
+                    <% } %>
+                </div>
+            </div>
+            <div class="col2">
+                <div class="new-title">
+                <% if (Item.MyCertificate != null) { %>
+                    <input data-val="true" data-val-required="The Id field is required." id="cert_MyCertificate_Id" name="cert.MyCertificate.Id" type="hidden" value="<%- Item.MyCertificate.Id %>">
+                    <input id="cert_MyCertificate_FriendlyName" maxlength="24" name="cert.MyCertificate.FriendlyName" placeholder="Введите короткое название для сертификата" type="text" value="<%- Item.MyCertificate.FriendlyName %>">
+                    <a class="small-text" href="#">Изменить</a>
+                <% } %>
+                </div>
+                <div class="col">
+                    <div class="company">
+                        <% Item.Organization %>
+                        <% if (Item.INN) { %>
+                            <span>ИНН: <%- Item.INN %></span>
+                        <% } %>
+                    </div>
+                    <div class="key">
+                        Отпечаток: <%- Item.Thumbprint %>
+                    </div>
+                </div>
+                <div class="down col">
+                    <a href="/Default/GetCertificate?thumbPrint=<%- Item.Thumbprint %>"><i class="icon download"></i></a>
+                </div>
+                <div class="pin-box">
+                <% if (Item.MyCertificate == null) { %>
+                    <div class="col"></div>
+                <% } else { %>
+                    <% if (Item.MyCertificate.HasPIN) { %>
+                        <div class="col">
+                        <a class="btn btn-blue small-text" href="#" onclick=" deletePin('<%- Item.MyCertificate.Id %>') ">Сбросить пин-код</a>
+                        </div>
+                    <% } else { %>
+                        <div class="col">
+                            <a class="btn btn-blue small-text" href="#" onclick=" showSetPinModal('change-pin', '<%- Item.MyCertificate.Id %>');return false; ">Задать пин-код</a>
+                        </div>
+                    <% } %>
+                <% } %>
+                </div>
+            </div>
+            <div class="test-certificate <%= !Item.IsTest ? 'hidden' : '' %>"></div>
+            <hr />
+        </div>
+    <% }); %>
+
+</script>
+
+<script id="tpl-requestListItem" type="text/html">
+    <% _.each(Items, function(Item, Index) { %>
+        <% if (Item.Status != 1) { %>
+        <div class="request js-item" data-id="<%- Item.ID %>">
+            <div class="col1">
+                <div class="name"><%- Item.Name %></div>
+                <div class="email"><%- Item.Email %></div>
+
+                <ul class="request-data">
+                    <!--<li><%- Item.EGRUL %></li>-->
+                    <!--<li>ЕГРЮЛ</li>-->
+                    <li><%- Item.SNILS %></li>
+                    <li>СНИЛС</li>
+                    <!--<li><%- Item.Passport %></li>-->
+                    <!--<li>Паспорт</li>-->
+                </ul>
+
+                <div class="download">
+                    <a class="download-request" target="_blank" href="/MarkerActivation/GetRequestData?requestId=<%- Item.ID %>&filename=<%- Item.ID %>.req">Скачать запрос<i class="ico-6-2-download ib-ico ico"></i></a>
+                    <i class="icon description js-tip-download-request"></i>
+                </div>
+
+            </div>
+            <div class="col2">
+                <div class="request-status-data">
+                    <div class="field">Статус: </div>
+                    <div class="value">
+                        <% if (Item.StatusCode == 2) { %>
+                            <span class="label waiting">ожидание ответа от УЦ</span>
+                        <% } %>
+                        <% if (Item.StatusCode == 3) { %>
+                            <span class="label info">запрос обрабатывается УЦ</span>
+                        <% } %>
+                        <% if (Item.StatusCode == 4) { %>
+                            <span class="label waiting ">ожидает подтверждения пользователем</span>
+                        <% } %>
+                        <% if (Item.StatusCode == 5) { %>
+                            <span class="label wrong">запрос на сертификат отклонен</span>
+                            &nbsp;&nbsp;
+                            <a href="#" class="btn-soft-cancel js-canceled-more">Подробнее</a>
+                        <% } %>
+                        <% if (Item.StatusCode == 6) { %>
+                            <span class="label active">действующий</span>
+                        <% } %>
+                    </div>
+                    <br>
+                    <div class="field">Дата заявки: </div>
+                    <div class="value">
+                        <span class="label info"><%- Crypt.Helpers.ruDate( Item.CreationTime ) %></span>
+                    </div>
+                    <br>
+                    <!--<div class="field">Идентификатор оплаты: </div>-->
+                    <!--<div class="value">-->
+                        <!--<% if (Item.PaymentID) { %>-->
+                            <!--<span class="label info"><%- Item.PaymentID %></span>-->
+                        <!--<% } %>-->
+                    <!--</div>-->
+                    <br>
+                    <div class="actions js-request-actions">
+                        <% if (Item.StatusCode == 4) { %>
+                            <a class="btn-confirm js-confirm-request"  href="#">Подтвердить выпуск</a>
+                        <% } %>
+                        <% if  (Item.StatusCode == 2 || Item.StatusCode == 3) { %>
+                            <!--<a class="btn-cancel js-cancel-request" href="#">Отменить заявку</a>-->
+                        <% } %>
+                        <% if (Item.StatusCode == 5) { %>
+                            <a class="btn-soft-cancel js-cancel-request" href="#">Удалить запрос</a>
+                            &nbsp;&nbsp;
+                            <a class="btn-resend js-request-resend" href="#">Отправить запрос повторно</a>
+                        <% } %>
+
+                    </div>
+                </div>
+            </div>
+            <% if (Item.Status == 6) { %>
+                <div class="complete-request"></div>
+            <% } %>
+
+        </div>
+    <% } %>
+    <% }); %>
+
+</script>
+
+<script id="tpl-requestConfirmPin" type="text/html">
+    <div class="modal-requestConfirmPin">
+        <div class="modal-title js-dialog-title">
+            <div class="title">Ввод пин-кода</div>
+        </div>
+        <div class="modal-body js-dialog-body">
+
+            <form action="" method="post" autocomplete="off">
+
+                <div class="row row-condensed" >
+                    Для выполнения криптооперации, пожалуйста, введите ПИН-код,<br>заданный Вами на этапе активации маркера.
+                </div>
+
+                <div class="row row-condensed row-padded">
+                    <label class="col" style="cursor: default"> Пин-код: </label>
+                    <div class="value col">
+                        @Html.TextBox("pin", null, new { maxlength = 8, @class = "js-pin" })
+                    </div>
+                </div>
+
+                <div class="row sbmt">
+                    <div class="action text-right">
+                        <a class="close js-close" href="#">Отмена</a>
+                        <input class="btn btn-blue js-submit" type="button" value="Продолжить" />
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</script>
+
+<script id="tpl-RequestCongratulation" type="text/html">
+    <div class="modal-RequestCongratulation modal-blankCentered">
+        <div class="modal-title js-dialog-title text-center">
+            <div class="title">Сертификат успешно установлен! </div>
+            <div class="description">
+                Поздравляем, сертификат был успешно установлен в хранилище «Действующие».<br>
+                Теперь Вы можете проводить криптографические операции с данным сертификатом
+            </div>
+        </div>
+
+        <div class="row sbmt">
+            <div class="text-center">
+                <input class="btn btn-green" type="button" value="OK" onclick=" $.fancybox.close(); " />
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<script id="tpl-NewTestCertificateModal" type="text/html">
+    <div class="modal-newTestCertificateModal">
+        <div class="modal-title js-dialog-title text-center">
+            <div class="title">Задайте ПИН-код для контейнера<br>закрытого ключа.</div>
+        </div>
+        <div class="modal-body js-dialog-body">
+            <div class="field">
+                <input type="password" name="pin" class="js-pinCode" value="" maxlength="8" placeholder="Введите ПИН-код">
+                <div class="eye js-eye"></div>
+                <div class="error js-error"></div>
+            </div>
+            <div class="info">
+                Внимание! Запомните или запишите<br>
+                данный ПИН-код и никому его не<br>
+                показывайте. Ввод ПИН-кода будет<br>
+                необходим при проведении<br>
+                криптографических операций и является<br>
+                дополнительным элементом Вашей<br>
+                безопасности. Мы не сможем<br>
+                восстановить его, если Вы его забудете.
+            </div>
+        </div>
+        <div class="row sbmt">
+            <div class="text-center">
+                <input class="btn btn-blue js-submit" type="button" value="Продолжить" />
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tpl-NewCertificateLoader" type="text/html">
+    <div class="modal-newCertificateLoader">
+        <div class="modal-title js-dialog-title text-center"> </div>
+        <div class="modal-body js-dialog-body">
+            <div class="info">
+                Отправка запроса на сертификат...
+            </div>
+            <div class="loader">
+                <div class="block">
+                    <div class="fill"></div>
+                </div>
+            </div>
+            <div class="timer"> 00:00 </div>
+        </div>
+        <div class="row sbmt">
+            <div class="text-center">
+                <a href="#" class="js-cancel" type="button">Отмена</a>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="tpl-NewCertificateCongratulations" type="text/html">
+    <div class="modal-newCertificateCongratulations">
+        <div class="modal-title js-dialog-title text-center">
+            <div class="title">Сертификат успешно добавлен!</div>
+            <div class="description">По клику на «Ок» произойдет автоматическая процедура разавторизации.<br>
+                Вам нужно будет повторно войти в систему, после чего весь функционал<br>
+                «Cryptogramm» будет доступен в полном объеме.</div>
+        </div>
+
+        <div class="modal-body js-dialog-body">
+            <div class="info">
+                Внимание!<br>
+                <br>
+                Выпущенный Вами сертификат является <a class="congrat-tip-link js-congrat-test-tip" href="#">тестовым</a> и работать<br>
+                с ним Вы можете только в рамках нашего сервиса.<br>
+                Уже очень скоро мы реализуем выпуск полноценных<br>
+                квалифицированных сертификатов!<br>
+                Следите за новостями!<br>
+            </div>
+        </div>
+        <div class="row sbmt">
+            <div class="pull-right">
+                <input class="btn btn-blue" type="button" value="OK" onclick=" $.fancybox.close(); " />
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<script id="tpl-blankInfo" type="text/html">
+    <div class="modal-blankInfo">
+        <div class="modal-title js-dialog-title">
+            <div class="title">Внимание!</div>
+        </div>
+        <div class="modal-body js-dialog-body">
+
+            <div class="row">
+                <div class="mess-box">
+                    <div class="info js-error"><span><%= text %></span></div>
+                </div>
+            </div>
+
+            <div class="row sbmt pull-right">
+                <input class="btn btn-green" type="button" value="Закрыть" onclick=" $.fancybox.close(); " />
+            </div>
+
+        </div>
+    </div>
+</script>
+<script id="tpl-blankInfo2" type="text/html">
+    <div class="modal-blankInfo">
+        <div class="modal-title js-dialog-title">
+            <div class="title">Внимание!</div>
+        </div>
+        <div class="modal-body js-dialog-body">
+
+            <div class="row">
+                <div class="mess-box">
+                    <div class="info js-error"><span><%= text %></span></div>
+                </div>
+            </div>
+
+            <div class="row sbmt pull-right">
+                <input class="btn btn-green" type="button" value="OK" onclick=" $.fancybox.close(); " />
+            </div>
+
+        </div>
+    </div>
+</script>
+<script id="tpl-blankInfo3" type="text/html">
+    <div class="modal-blankInfo">
+        <div class="modal-title js-dialog-title">
+            <div class="title">Внимание!</div>
+        </div>
+        <div class="modal-body js-dialog-body">
+
+            <div class="row">
+                <div class="mess-box">
+                    <div class="info js-error"><span><%= text %></span></div>
+                </div>
+            </div>
+            <div class="row" style="padding: 0 0 0 70px;margin: 10px 0 20px">
+                <input id="requestConfirmHide" name="request" type="checkbox" value="true" style="vertical-align: text-bottom;" /> Больше не отображать
+            </div>
+            <div class="row sbmt pull-right">
+                <input class="btn btn-green" type="button" value="OK" onclick=" $.fancybox.close(); " />
+            </div>
+
+        </div>
+    </div>
+</script>
+
+<script id="tpl-blankError" type="text/html">
+    <div class="modal-blankError">
+        <div class="modal-title js-dialog-title">
+            <div class="title">Внимание!</div>
+        </div>
+        <div class="modal-body js-dialog-body">
+
+            <div class="row">
+                <div class="mess-box">
+                    <div class="error js-error"><span><%= text %></span></div>
+                </div>
+            </div>
+
+            <div class="row sbmt pull-right">
+                <input class="btn btn-green" type="button" value="Закрыть" onclick=" $.fancybox.close(); " />
+            </div>
+
+        </div>
+    </div>
+</script>
+
+
+<script id="tpl-smsReauestConfirm" type="text/html">
+    <div class="modal-regPhone">
+        <div class="modal-title js-dialog-title">
+            <div class="title">Подтверждение через смс</div>
+            <div class="time js-time">00:00</div>
+        </div>
+        <div class="modal-body js-dialog-body">
+
+            <form action="" method="post" autocomplete="off">
+
+                <div class="row">
+                    <div class="value-row success-mess text-center">
+                        На мобильный телефон, указанный Вами в удостоверяющем центре при получении маркера, <br />выслано SMS-сообщение с кодом подтверждения
+                    </div>
+                </div>
+
+                <div class="row text-center row-condensed">
+                    Если сообщение не было получено в течение минуты, нажмите на кнопку "Запросить код повторно".
+                </div>
+
+                <div class="row row-condensed row-padded text-center">
+                    <label class="col" style="cursor: default"> Полученный код: </label>
+                    <div class="value col">
+                        @Html.TextBox("pinCode2", null, new { maxlength = 10, @class = "js-pin" })
+                        <span class="error js-error"></span>
+                    </div>
+                </div>
+
+                <div class="row sbmt">
+                    <div class="action text-right">
+                        <a class="close js-close" href="#">Отмена</a>
+                        <input class="btn btn-blue js-resend" type="button" value="Запросить код повторно" disabled="disabled" />
+                        <input class="btn btn-blue js-submit" type="button" value="Продолжить" />
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    </script>

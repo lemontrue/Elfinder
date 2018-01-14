@@ -1,0 +1,53 @@
+<div class="content">
+    <header>
+        <a href="#" can-click="exit_app" class="logo"></a>
+        <div class="dropdown">
+            <a data-toggle="dropdown" class="user_title" href="javascript:void(0);" title="{{&pool.settings.load.user.name}}">{{&text_trim pool.settings.load.user.name 41 " ..."}}<span class="caret"></span></a>
+
+            <ul class="dropdown-menu">
+                <li>
+                    <a can-click="event.myProfile" href="#"><span class="ico-4-2-profile ib-ico ico"></span>Мой профиль</a>
+                </li>
+                <li>
+                    <a can-click="event.addressBook" href="#"><span class="ico-4-2-addressbook ib-ico ico"></span>Адресная книга</a>
+                </li>
+                <li>
+                    <a can-click="event.settings" href="#"><span class="ico-4-2-template-settings ib-ico ico"></span>Шаблоны настроек</a>
+                </li>
+                {{#if isAdmin}}
+                    <li>
+                        <a can-click="event.administration" href="#"><span class="ico-4-2-administration ib-ico ico"></span>Администрирование</a>
+                    </li>
+                {{/if}}
+                <li>
+                    <a href="/Account/LogOff"><span class="ico-4-2-logout ib-ico ico"></span>Выход</a>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="templates dropdown">
+            Шаблон:
+            <a {{#if tplock}}style="color: #8F9396;"{{/if}} data-toggle="dropdown" class="show_template" href="javascript:void(0);">{{template.current.Name}}</a>
+            {{#if tplock}}
+            {{else}}
+                <ul class="dropdown-menu profile">
+                    {{#each template.data}}
+                        <li><a href="javascript:void(0)" can-click="event.template_click">{{Name}}</a></li>
+                    {{/each}}
+                </ul>
+            {{/if}}
+
+        </div>
+        <a can-click="backFiles" href="javascript:void(0);" class="prev">Вернуться в каталог файлов</a>
+    </header>
+
+    <div app></div>
+    <div result></div>
+    <div loader></div>
+    <div information_process></div>
+    <div error>Возникла ошибка! <span onclick="window.location.reload();">Обновите страницу</span></div>
+	<div class="helpLink">
+		<a href="/Assets/files/master.pdf" target="_blank"></a>
+	</div>
+</div>

@@ -1,0 +1,92 @@
+﻿@using CryptxOnline.Web.CryptxService
+@model List<CryptxOnline.Web.CryptxService.CertificateInfo>
+<div class="certificats-list">
+    @foreach (CertificateInfo cert in Model)
+    {
+        <div class="certificat">
+            <div class="col1">
+                @if (cert.MyCertificate != null)
+                {
+                    <div class="title">
+                        Название сертификата
+                    </div>
+                }
+                else
+                {
+                    <div class="title error">
+                        Ошибка получения сертификата
+                    </div>
+                }
+                <div class="name">
+                    <a href="@Url.Action("GetCertificate", new {thumbPrint = cert.Thumbprint})">@cert.SubjectName</a>
+                </div>
+                <div class="cert">
+                    @if (cert.NotBefore > DateTime.Now)
+                    {
+                        <span class="expire">Недействителен до @cert.NotBefore.ToString("dd MMMM yyyy")</span>
+                    }
+                    else if (cert.NotAfter < DateTime.Now)
+                    {
+                        <span class="expire">Недействителен c @cert.NotAfter.ToString("dd MMMM yyyy")</span>
+                    }
+                    else
+                    {
+                        <span class="active">Действителен до @cert.NotAfter.ToString("dd MMMM yyyy")</span>
+                    }
+                </div>
+            </div>
+            <div class="col2">
+                <div class="new-title">
+                    @if (cert.MyCertificate != null)
+                    {
+                        @Html.HiddenFor(m => cert.MyCertificate.Id)
+                        @Html.TextBoxFor(m => cert.MyCertificate.FriendlyName, new
+                        {
+                            placeholder = "Введите короткое название для сертификата",
+                            maxlength = "24",
+                            disabled = "disabled"
+                        })
+                        <a class="small-text" href="#">Изменить</a>
+                    }
+                </div>
+                <div class="col">
+                    <div class="company">
+                        @cert.Organization
+                        @if (!String.IsNullOrEmpty(@cert.INN))
+                        {
+                            @:ИНН: @cert.INN
+                        }
+                    </div>
+                    <div class="key">
+                        Отпечаток: @cert.Thumbprint
+                    </div>
+                </div>
+                <div class="down col">
+                    <a href="@Url.Action("GetCertificate", new {thumbPrint = cert.Thumbprint})"><i class="icon download"></i></a>
+                </div>
+                <div class="pin-box">
+                    @if (cert.MyCertificate == null)
+                    {
+                        <div class="col"></div>
+                    }
+                    else
+                    {
+                        if (cert.MyCertificate.HasPIN)
+                        {
+                            <div class="col">
+                                <a class="btn btn-blue small-text" href="#" onclick=" deletePin('@cert.MyCertificate.Id') ">Сбросить пин-код</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col">
+                                <a class="btn btn-blue small-text" href="#" onclick=" showSetPinModal('change-pin', '@cert.MyCertificate.Id');return false; ">Задать пин-код</a>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <hr />
+        </div>
+    }
+</div>

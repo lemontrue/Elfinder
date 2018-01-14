@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1dcca8d3-f4a2-4b81-aa87-1bb4ab1f4915" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://api.cryptogramm.ru:5656/AuthorizeService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="AuthorizeService.wsdl" MetadataType="Wsdl" ID="18a52337-23dc-46c9-aa56-9f66687ce127" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/AuthorizeService.svc?wsdl" />
+    <MetadataFile FileName="AuthorizeService.xsd" MetadataType="Schema" ID="6c989aae-3ea2-427f-b455-04d999faae07" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/AuthorizeService.svc?xsd=xsd7" />
+    <MetadataFile FileName="AuthorizeService1.xsd" MetadataType="Schema" ID="4ef430fb-c634-45f4-aca3-7655132b294d" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/AuthorizeService.svc?xsd=xsd0" />
+    <MetadataFile FileName="AuthorizeService2.xsd" MetadataType="Schema" ID="bb9a61f3-6f89-48e4-8d35-9fb716964222" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/AuthorizeService.svc?xsd=xsd2" />
+    <MetadataFile FileName="AuthorizeService3.xsd" MetadataType="Schema" ID="f80c40e9-be41-4615-bfcc-b0a10eedb43a" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/AuthorizeService.svc?xsd=xsd1" />
+    <MetadataFile FileName="AuthorizeService4.xsd" MetadataType="Schema" ID="62d9b936-b153-4391-acf3-5ec6c3f29f9c" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/AuthorizeService.svc?xsd=xsd6" />
+    <MetadataFile FileName="AuthorizeService5.xsd" MetadataType="Schema" ID="2b0639c5-90b7-4246-83c1-4745780ab0bb" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/AuthorizeService.svc?xsd=xsd5" />
+    <MetadataFile FileName="AuthorizeService.disco" MetadataType="Disco" ID="b4b94a89-581e-4c71-a388-937e58daa5a1" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/AuthorizeService.svc?disco" />
+    <MetadataFile FileName="AuthorizeService6.xsd" MetadataType="Schema" ID="cf272eef-3ae7-4649-abed-fb78fea18fd6" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/AuthorizeService.svc?xsd=xsd3" />
+    <MetadataFile FileName="AuthorizeService7.xsd" MetadataType="Schema" ID="24804c7a-ea36-4e57-8228-4d8f85aca7d3" SourceId="1" SourceUrl="http://api.cryptogramm.ru:5656/AuthorizeService.svc?xsd=xsd4" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

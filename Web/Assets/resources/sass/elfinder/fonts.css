@@ -1,0 +1,79 @@
+@font-face {
+    font-family: mp-bold;
+    src: url('../fonts/MyriadPro-Bold.otf');
+}
+
+@font-face {
+    font-family: mp-bold-cond;
+    src: url('../fonts/MyriadPro-BoldCond.otf');
+}
+
+@font-face {
+    font-family: mp-bold-cond-it;
+    src: url('../fonts/MyriadPro-BoldCondIt.otf');
+}
+
+@font-face {
+    font-family: mp-it;
+    src: url('../fonts/MyriadPro-It.otf');
+}
+
+@font-face {
+    font-family: mp-bold-it;
+    src: url('../fonts/MyriadPro-BoldIt.otf');
+}
+
+@font-face {
+    font-family: mp-regular;
+    src: url('../fonts/MyriadPro-Regular.otf');
+}
+
+@font-face {
+    font-family: mp-semibold;
+    src: url('../fonts/MyriadPro-Semibold.otf');
+}
+
+@font-face {
+    font-family: mp-semibold-it;
+    src: url('../fonts/MyriadPro-SemiboldIt.otf');
+}
+
+.elfinder-contextmenu .elfinder-contextmenu-item span { font-size: .76em; }
+
+.elfinder-cwd-view-icons .elfinder-cwd-filename { font-size: .7em; }
+
+.elfinder-cwd-view-list td { font-size: .7em; }
+
+.std42-dialog .ui-dialog-titlebar { font-size: .82em; }
+
+.std42-dialog .ui-dialog-content { font-size: .72em; }
+
+.std42-dialog .ui-dialog-buttonpane { font-size: .76em; }
+
+.elfinder-info-tb { font-size: .9em; }
+
+.elfinder-upload-dropbox { font-size: 1.2em; }
+
+.elfinder-upload-dialog-or { font-size: 1.2em; }
+
+.dialogelfinder .dialogelfinder-drag { font-size: .9em; }
+
+.elfinder .elfinder-navbar { font-size: .72em; }
+
+.elfinder-place-drag .elfinder-navbar-dir { font-size: .9em; }
+
+.elfinder-quicklook-title { font-size: .7em; }
+
+.elfinder-quicklook-info-data { font-size: .72em; }
+
+.elfinder-quicklook-preview-text-wrapper { font-size: .9em; }
+
+.elfinder-button-menu-item { font-size: .72em; }
+
+.elfinder-button-search input { font-size: .8em; }
+
+.elfinder-statusbar div { font-size: .7em; }
+
+.elfinder-drag-num { font-size: 12px; }
+
+

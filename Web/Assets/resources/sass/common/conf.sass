@@ -1,0 +1,7 @@
+$imgPath: '/Assets/i'
+$imgVer: '1'
+
+@function img($path, $type, $color)
+  @return #{$color + ' url('+$imgPath + $path + '?v=' + $imgVer+') ' + $type}
+
+

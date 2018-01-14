@@ -1,0 +1,264 @@
+*, :after, :before
+  box-sizing: border-box
+  outline: none !important
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video
+  border: 0
+  margin: 0
+  padding: 0
+  vertical-align: baseline
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section
+  display: block
+
+ul, li, h1, h2, h3, h4, h5
+  margin: 0
+  padding: 0
+
+body
+  font: 12px Verdana, sans-serif
+  color: #000
+
+ul, li
+  list-style: none
+
+
+blockquote, q
+  quotes: none
+
+blockquote
+  &:before, &:after
+    content: none
+
+q
+  &:before, &:after
+    content: none
+
+table
+  border-collapse: collapse
+  border-spacing: 0
+th
+  font-weight: 400 !important
+html
+  input[disabled]
+    color: #666
+    cursor: default
+    background-color: rgb(235, 235, 228)
+
+.small-text
+  font-size: 10px
+
+.hidden
+  display: none !important
+
+.text-center
+  text-align: center !important
+
+.text-right
+  text-align: right !important
+
+.pull-right
+  float: right
+
+.pull-left
+  float: left
+
+.el-preloader-layout
+  width: 100%
+  height: 100%
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 50
+  background: rgba(255, 255, 255, .9) url('/Assets/i/preloader2.gif') center no-repeat
+  cursor: wait
+
+.test-certificate-icon
+  cursor: pointer
+  display: inline-block
+  width: 13px
+  height: 13px
+  margin: 0 4px 0 -20px
+  background: img('/test-sertificate-icon.png', 'top center no-repeat' ,'')
+  vertical-align: middle
+  &.no-padding
+    margin-left: 0
+  &.float
+    position: absolute
+    left: 0
+    top: 6px
+    margin: 0
+
+.fake-test-certificate-icon
+  width: 13px
+  height: 13px
+  margin: 0 4px 0 -20px
+  &.no-padding
+    width: 13px
+    height: 30px
+    display: inline-block
+    float: left
+    margin-left: 0
+  &.float
+    position: absolute
+    left: 0
+    top: 6px
+    margin: 0
+
+.test-certificate-icon:hover
+  background-position: bottom center
+
+input[disabled]
+  color: #666
+
+input[type=email], input[type=password], input[type=text]
+  -webkit-border-radius: 3px
+  border: 1px solid #c9c9c9
+  border-radius: 3px
+  height: 28px
+  padding: 0 5px
+  width: 100%
+
+input[type=text]::-webkit-input-placeholder
+  color: #222
+  font-size: 11px
+  font-style: italic
+
+
+.text-placeholder
+  color: #222
+  font-size: 11px !important
+  font-style: italic !important
+
+
+input[type=text]::-o-input-placeholder
+  color: #222
+  font-size: 11px
+  font-style: italic
+
+
+input[type=text]::-moz-placeholder
+  color: #222
+  font-size: 11px
+  font-style: italic
+
+.radio
+  background: img('/old/radio.png', 'no-repeat' ,'')
+  cursor: pointer
+  height: 16px
+  vertical-align: middle
+  width: 14px
+  &.checked
+    background-position: -14px 0
+  &.disabled
+    background-position: 0 -16px
+  &.checked.disabled
+    background-position: -14px -16px
+  &.focused
+    background-position: 0 -32px
+  &.checked.focused
+    background-position: -14px -32px
+
+.col
+  display: inline-block
+  vertical-align: top
+
+.clearfix
+  &:after, &:before
+    content: " "
+    display: table
+  &:after
+    clear: both
+
+input::-ms-clear
+ display: none
+
+input::-ms-reveal
+  display: none
+
+.clear
+  clear: both
+
+.el-preloader-layout
+  width: 100%
+  height: 100%
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 50
+  background: img('/old/preloader2.gif', 'center no-repeat' ,'rgba(255, 255, 255, .9)')
+  cursor: wait
+
+// commonStyle
+#mask
+  background-color: #000
+  display: none
+  left: 0
+  position: absolute
+  top: 0
+  z-index: 9000
+
+#dialogEditRecip, #dialogSignPin, #dialogDecrPin, #sendFileByte
+  background-color: #ffffff
+  height: 130px
+  padding: 10px
+  position: fixed
+  width: 375px
+
+#boxes
+  .window
+    display: none
+    height: 130px
+    left: 50% !important
+    margin: -100px 0 0 -200px
+    padding: 20px
+    position: absolute
+    top: 50% !important
+    width: 440px
+    z-index: 9999
+  #dialog, #dialogDelRecip
+    background-color: #ffffff
+    height: 130px
+    padding: 10px
+    position: fixed
+    width: 375px
+  #fileAnalyzing, #dialogRecip
+    background-color: #ffffff
+    height: 130px
+    padding: 10px
+    position: fixed
+    width: 375px
+  #dialog1
+    height: 130px
+    width: 375px
+  #dialog2
+    background: img('/old/notice.png', 'no-repeat 0 0 transparent' ,'')
+    height: 229px
+    padding: 50px 0 20px 25px
+    width: 326px
+
+#dialog1
+  .d-header
+    background: img('/old/login-header.png', 'no-repeat 0 0 transparent' ,'')
+    height: 130px
+    width: 375px
+    input
+      border: 3px solid #cccccc
+      font-size: 15px
+      height: 22px
+      left: 100px
+      margin-top: 4px
+      padding: 5px
+      position: relative
+      top: 60px
+      width: 200px
+  .d-blank
+    background: img('/old/login-blank.png', 'no-repeat 0 0 transparent' ,'')
+    float: left
+    height: 53px
+    width: 267px
+  .d-login
+    float: left
+    height: 53px
+    width: 108px
+

@@ -1,0 +1,50 @@
+﻿<div id="restore">
+    <div id="sms-timer">
+        {{parseTime timer}}
+    </div>
+    <h1>
+        Восстановление пароля
+    </h1>
+    <div class="box">
+        <div class="restore-area">
+            <div class="form">
+                <div class="row message">
+                    <div class="success-mess text-center">
+						На мобильный номер, который привязан к вашему профилю,<br />отправлено sms-сообщение с кодом.<br />Данный код необходимо ввести в форму ниже."
+                    </div>
+                </div>
+                <div class="row restored-center">
+                    Если сообщение не было получено в течение минуты, нажмите
+                    <br />  на кнопку "Запросить код повторно".
+                </div>
+                <div class="row enter">
+                    <label class="col">
+                        Полученный код:
+                    </label>
+                    <div class="value col">
+                        <input {{focusEl}} can-value="codeValue" required="required" type="text" />
+                    </div>
+                </div>
+                <div class="row sbmt">
+                    <a can-click="event.cancel" class="btn btn-cancel" href="#">
+                        Отмена
+                    </a>
+
+                    <input can-click="event.newCode" {{#inverse newCodeActive}}disabled{{/inverse}} class="btn {{#if newCodeActive}}btn-blue{{else}}btn-grey{{/if}} btn-resend" type="submit" style="padding:0 20px;text-align:center !important;width: {{#if newCodeActive}}225{{else}}210{{/if}}px;" value="Запросить код повторно" />
+                    <input can-click="event.enter" {{#inverse enterCodeActive}}disabled{{/inverse}} class="btn {{#if enterCodeActive}}btn-blue{{else}}btn-grey{{/if}}" type="submit" value="Далее" />
+                </div>
+            </div>
+        </div>
+        <div class="row bottom text-right">
+            <a href="#">
+                Техническая поддержка
+            </a>
+        </div>
+    </div>
+
+</div>
+{{#if error}}
+		<div class="error-mess">
+			{{error.message}}
+		</div>
+{{/if}}

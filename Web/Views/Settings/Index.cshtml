@@ -1,0 +1,290 @@
+﻿@using CryptxOnline.Web.Controllers
+@using CryptxOnline.Web.CryptxService
+@model List<CryptxOnline.Web.CryptxService.UserProfileListElement>
+@{
+    ViewBag.Title = "Шаблоны настроек";
+    Layout = "~/Views/Shared/_LayoutCryptogramm.cshtml";
+}
+
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8" />
+        <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+        <meta name="format-detection" content="telephone=no" />
+
+        <link href="/Assets/resources/sass/profile/tpl.css" rel="stylesheet" />
+
+    </head>
+    <body>
+        @using (Html.BeginForm())
+        {
+            @Html.Hidden("userId", (Guid) ViewBag.UserId)
+            <div class="tpl content" style="padding: 0">
+                <div class="tpl-head">
+                    <div class="title col">
+                        @if (ViewBag.name != null)
+                        {
+                            @Html.Hidden("name", (Name) ViewBag.name)
+                            if (((Name) ViewBag.name) == Name.ASC)
+                            {
+                                <a href="javascript:name('DESC')">Название шаблона</a>
+                                <img src="@Url.Content("~/Assets/i/old/arrow-down.png")" />
+                            }
+                            if (((Name) ViewBag.name) == Name.DESC)
+                            {
+                                <a href="javascript:name('ASC')">Название шаблона</a>
+                                <img src="@Url.Content("~/Assets/i/old/arrow-top1.png")" />
+                            }
+                        }
+                        else
+                        {
+                            @Html.Hidden("name")
+                            <a href="javascript:name('ASC')">Название шаблона</a>
+                        }
+                    </div>
+                    <div class="sign col">
+                        @if (ViewBag.signText != null)
+                        {
+                            @Html.Hidden("signText", (Name) ViewBag.signText)
+                            if (((SignText) ViewBag.signText) == SignText.ASC)
+                            {
+                                <a href="javascript:signText('DESC')">Подпись</a>
+                                <img src="@Url.Content("~/Assets/i/old/arrow-down.png")" />
+                            }
+                            if (((SignText) ViewBag.signText) == SignText.DESC)
+                            {
+                                <a href="javascript:signText('ASC')">Подпись</a>
+                                <img src="@Url.Content("~/Assets/i/old/arrow-top1.png")" />
+                            }
+                        }
+                        else
+                        {
+                            @Html.Hidden("signText")
+                            <a href="javascript:signText('ASC')">Подпись</a>
+                        }
+                    </div>
+
+                    <div class="encrypt col">
+                        @if (ViewBag.encText != null)
+                        {
+                            @Html.Hidden("encText", (Name) ViewBag.encText)
+                            if (((EncText) ViewBag.encText) == EncText.ASC)
+                            {
+                                <a href="javascript:encText('DESC')">Шифрование</a>
+                                <img src="@Url.Content("~/Assets/i/old/arrow-down.png")" />
+                            }
+                            if (((EncText) ViewBag.encText) == EncText.DESC)
+                            {
+                                <a href="javascript:encText('ASC')">Шифрование</a>
+                                <img src="@Url.Content("~/Assets/i/old/arrow-top1.png")" />
+                            }
+                        }
+                        else
+                        {
+                            @Html.Hidden("encText")
+                            <a href="javascript:encText('ASC')">Шифрование</a>
+                        }
+                    </div>
+
+                    <div class="create">
+                        <a class="btn btn-green" href="@Url.Action("Edit", new {userId = (Guid) ViewBag.UserId})">
+                            Создать новый
+                            шаблон
+                        </a>
+                    </div>
+                </div>
+
+                <div class="scroll-wrap">
+                    <div class="scroller">
+                        <div class="template-list">
+                            @foreach (UserProfileListElement elem in Model)
+                            {
+                                <div class="template">
+                                    <div class="title col">
+                                        @if (!string.IsNullOrEmpty(elem.Name))
+                                        {
+                                            if (elem.Name.Length > 22)
+                                            {
+                                                if ((Guid) ViewBag.UserId != Guid.Empty)
+                                                {
+                                                    <a href="@Url.Action("Edit", new {Id = elem.ID, userId = (Guid) ViewBag.UserId})" title="@elem.Name">@elem.Name.Substring(0, 22)</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="@Url.Action("Edit", new {Id = elem.ID})" title="@elem.Name">@elem.Name.Substring(0, 22)</a>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if ((Guid) ViewBag.UserId != Guid.Empty)
+                                                {
+                                                    <a href="@Url.Action("Edit", new {Id = elem.ID, userId = (Guid) ViewBag.UserId})">@elem.Name</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="@Url.Action("Edit", new {Id = elem.ID})">@elem.Name</a>
+                                                }
+                                            }
+                                        }
+                                    </div>
+                                    <div class="sign col">
+                                        @if (!string.IsNullOrEmpty(elem.SignText))
+                                        {
+                                            if (elem.SignText.Length > 22)
+                                            {
+                                                <a title="@elem.SignText">@elem.SignText.Substring(0, 22) ...</a>
+                                            }
+                                            else
+                                            {
+                                                <a>@elem.SignText</a>
+                                            }
+                                        }
+                                    </div>
+                                    <div class="encrypt col">
+                                        @if (!string.IsNullOrEmpty(elem.EncryptionText))
+                                        {
+                                            if (elem.EncryptionText.Length > 34)
+                                            {
+                                                <a title="@elem.EncryptionText">@elem.EncryptionText.Substring(0, 34) ...</a>
+                                            }
+                                            else
+                                            {
+                                                <a>@elem.EncryptionText</a>
+                                            }
+                                        }
+                                    </div>
+                                    <div class="actions col">
+                                        <a href="@Url.Action("Edit", new {Id = elem.ID, userId = (Guid) ViewBag.UserId})">
+                                            <i class="icon edit">
+
+                                            </i>
+                                        </a>
+                                        @if (Model.Count != 1)
+                                        {
+                                            <a href="javascript:DeleteSettingsModal('@elem.ID')">
+                                                <i class="icon delete"></i>
+                                            </a>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                            <div class="scroller__bar-wrapper">
+                                <div class="scroller__bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cert-control">
+                <div class="backlink">
+                    @if ((Guid) ViewBag.UserId != Guid.Empty)
+                    {
+                        <a href="@Url.Action("Index", "Administration")"><i class="icon backarrow"></i>Вернуться к разделу администрирование</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("WebDavBrowser", "Default")"><i class="icon backarrow"></i>Вернуться на главную страницу</a>
+                    }
+                </div>
+            </div>
+
+            <div class="hidden">
+
+                <div class="modal-window" id="deleteProfile">
+                    <div class="title">
+                        Внимание!
+                    </div>
+
+                    <div class="row">
+                        <div class="mess-box">
+                            <div class="attention">
+                                <span>
+                                    Хотите удалить шаблон?
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row sbmt pull-right">
+                        <a class="close" href="#">Отмена</a>
+                        <input class="btn btn-green" type="button" value="Да" onclick=" deleteSettings() " />
+                    </div>
+                </div>
+
+                <div class="modal-window" id="info">
+                    <div class="title">
+                        Внимание!
+                    </div>
+
+                    <div class="row">
+                        <div class="mess-box">
+                            <div class="attention" id="infoPlacer">
+                                <span>
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row sbmt pull-right">
+                        <input class="btn btn-green" type="button" value="Закрыть" onclick=" $.fancybox.close(); " />
+                    </div>
+                </div>
+            </div>
+        }
+    </body>
+</html>
+<script>
+    function name(type) {
+        $('#name').val(type);
+        $('#signText').val(null);
+        $('#encText').val(null);
+        $('form').submit();
+    }
+
+    function signText(type) {
+        $('#name').val(null);
+        $('#signText').val(type);
+        $('#encText').val(null);
+        $('form').submit();
+    }
+
+    function encText(type) {
+        $('#name').val(null);
+        $('#signText').val(null);
+        $('#encText').val(type);
+        $('form').submit();
+    }
+
+    function infoModal(text) {
+        $('#infoPlacer span').html(text);
+        $.fancybox('#info');
+    }
+
+    window.deletingSettingsId = "";
+
+    function DeleteSettingsModal(id) {
+        window.deletingSettingsId = id;
+        $.fancybox('#deleteProfile');
+        @*        if (confirm('Хотите удалить шаблон?')) {
+            location.href = '@Url.Action("DeleteSettings")' + '?Id=' + id;
+        }*@
+    }
+
+    function deleteSettings() {
+        var deletePost = $.post('@Url.Action("DeleteSettings")', { Id: window.deletingSettingsId, userId: $('#userId').val() },
+            function(data) {
+                if (data.Status == "logoff")
+                    location.href = '@Url.Action("LogOff", "Account")';
+            if (data.response != null) {
+                if (data.response.Message != undefined && data.response.Message != null && data.response.Message != "") {
+                    infoModal(data.response.Message);
+                    //location.href = location.href;
+                } else {
+                    location.href = location.href;
+                }
+            }
+        });
+    }
+</script>

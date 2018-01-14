@@ -1,0 +1,965 @@
+
+.base-modal
+  .modal-regPhone
+    width: 550px
+  .modal-window
+    color: #161616
+    line-height: normal
+    width: 500px
+    .modal-title
+      margin-bottom: 20px
+    .modal-body
+      .success-mess
+        background: #daf5da
+        border: 1px solid #c1efc0
+        color: black
+        padding: 7px 15px
+        text-align: center
+        border-radius: 5px
+        -webkit-border-radius: 5px
+      .row
+        margin: 20px 0 0
+      .row-condensed
+        padding: 0 30px 10px
+      .row-padded
+
+      .error
+        color: #f00
+        display: block
+        font-size: 12px
+        padding-top: 10px
+        text-align: right
+        height: 20px
+    .time
+      display: inline-block
+      font-size: 13px
+      height: 15px
+      line-height: 15px
+      overflow: hidden
+      padding: 0 1px
+      position: absolute
+      right: 15px
+      top: 3px
+    .descr
+      font-size: 13px
+      margin: 15px 0 30px
+    label
+      line-height: 26px
+      margin-right: 3px
+      text-align: left
+    .value
+      position: relative
+      width: 370px
+    .sbmt
+      margin-top: 20px
+      .action
+        input
+          margin-left: 15px
+          max-width: 200px
+          min-width: 130px
+          padding-left: 10px
+          padding-right: 10px
+          text-align: center
+        .close
+          color: #010101
+
+.modal-requestConfirmPin
+  .forget
+    line-height: 34px
+    font-size: 11px
+  .row-condensed
+    padding: 0 0 10px !important
+    line-height: 1.6
+    width: 460px
+    label.col
+      width: 80px
+    .value
+      width: 370px
+
+.blank-centered
+  .modal-blankCentered
+    width: 610px
+  .modal-window
+    color: #161616
+    line-height: normal
+    width: 1000px
+    .modal-title
+      .title
+        border-bottom: 0
+        height: 50px
+        padding-top: 10px
+        text-align: center
+      margin-bottom: 20px
+    .modal-body
+      font-size: 13px
+      .row
+        margin-bottom: 50px
+        &.sbmt
+          margin-bottom: 0px
+
+.modal-blankError
+  width: 465px
+.error-modal
+  line-height: normal
+  width: 465px
+  .row.sbmt
+    margin-bottom: 0
+  .mess-box
+    margin: 26px 0
+    .warning
+      background: img('/old/message-error.png', 'left center no-repeat' ,'')
+      color: #161616
+      min-height: 45px
+      padding-left: 70px
+    .error
+      background: img('/old/message-error.png', 'left no-repeat' ,'')
+      color: #161616
+      min-height: 38px
+      padding: 0 0 0 70px
+    .warning span, .attention span, .info span
+      display: table-cell
+      height: 45px
+      line-height: normal
+      vertical-align: middle
+    .warning span, .error span, .attention span
+      display: table-cell
+      height: 38px
+      min-height: 80px
+      vertical-align: middle
+.modal-blankInfo
+  width: 465px
+.info-modal
+  line-height: normal
+  width: 465px
+  .row.sbmt
+    margin-bottom: 0
+  .mess-box
+    margin: 26px 0
+    .warning
+      background: img('/old/message-error.png', 'left center no-repeat' ,'')
+      color: #161616
+      min-height: 45px
+      padding-left: 70px
+    .info
+      background: img('/message-info.png', 'left no-repeat' ,'')
+      color: #161616
+      min-height: 38px
+      padding: 0 0 0 70px
+    .warning span, .attention span, .info span
+      display: table-cell
+      height: 45px
+      line-height: normal
+      vertical-align: middle
+    .warning span, .error span, .attention span
+      display: table-cell
+      height: 38px
+      min-height: 80px
+      vertical-align: middle
+
+.styled-modal
+  .fancybox-skin
+    padding: 0 !important
+    margin: 0 !important
+    border: 0 !important
+    border-radius: 5px
+    overflow: hidden
+    .fancybox-close
+      background: img('/fb-close.png', 'no-repeat' ,'')
+.modal-welcomeModal
+  width: 680px
+  position: relative
+  height: 600px
+  .modal-title
+    border-radius: 2px
+    height: 224px
+    background: img('/styled-modal-header.png', 'no-repeat' ,'')
+    color: #fff
+    padding-top: 60px
+    .title
+      color: #fff
+      font-weight: 700
+      font-size: 20px
+      border: 0
+    .description
+      line-height: normal
+  .sbmt
+    clear: left
+    position: absolute
+    bottom: 0
+    width: 100%
+    height: 90px
+    background: #f9f9f9
+    border-top: 1px solid #e5e5e5
+    padding: 25px 25px 0
+    .hideModal
+      width: 180px
+      label
+        width: 300px
+        display: inline-block
+        padding-top: 7px
+    .btn
+      width: 170px
+  .modal-body
+    padding-top: 35px
+    position: relative
+    .step-box
+      width: 50%
+      float: left
+      padding: 90px 0 70px
+      position: relative
+      text-align: center
+      .step-title
+        font-weight: 700
+        font-size: 14px
+        margin-bottom: 20px
+      .step-text
+        font-size: 13px
+        line-height: normal
+      .step-num
+        position: absolute
+        top: 0
+        left: 30%
+        background: #1799ec
+        color: #fff
+        font-size: 12px
+        width: 24px
+        height: 24px
+        border-radius: 12px
+        line-height: 24px
+        text-align: center
+      &.email
+        background: img('/welcome-send-email.png', 'top center no-repeat' ,'')
+      &.cert
+        background: img('/welcome-cert.png', 'top center no-repeat' ,'')
+    .need
+      position: absolute
+      top: 60px
+      width: 100%
+      text-align: center
+    &.i-single
+      .step-box
+        float: none
+        margin: 0 auto
+        .step-num
+          display: none
+      .need
+        display: none
+.modal-newCertificateCongratulations
+  width: 680px
+  position: relative
+  .modal-title
+    border-radius: 2px
+    height: 224px
+    background: img('/styled-modal-header.png', 'no-repeat' ,'')
+    color: #fff
+    padding-top: 60px
+    .title
+      color: #fff
+      font-weight: 700
+      font-size: 20px
+      border: 0
+    .description
+      line-height: 1.5
+      padding: 0 40px
+  .sbmt
+    height: 90px
+    background: #f9f9f9
+    border-top: 1px solid #e5e5e5
+    padding: 25px 25px 0
+    .btn
+      width: 170px
+  .modal-body
+    padding-top: 70px
+    position: relative
+    .info
+      height: 225px
+      text-align: center
+      line-height: 1.6
+      font-size: 14px
+      .congrat-tip-link
+        color: #1ac316
+        text-decoration: none
+        border-bottom: 1px dashed #1ac316
+
+
+.thin-modal
+  .fancybox-skin
+    border: 0 !important
+    padding: 20px 35px !important
+    border-radius: 5px
+    overflow: hidden
+
+.modal-newTestCertificateModal
+  width: 260px
+  position: relative
+  .modal-title
+    .title
+      font-size: 14px
+      font-weight: 400
+      border-bottom: 0
+      height: auto
+      line-height: 1.4
+  .modal-body
+    padding-top: 20px
+    .field
+      height: 70px
+      position: relative
+      ::-webkit-input-placeholder
+        color: #a0a0a0 !important
+        font-style: normal !important
+        font: 13px/33px Verdana !important
+      ::-moz-placeholder
+        color: #a0a0a0 !important
+        font-style: normal !important
+        font: 13px/33px Verdana !important
+      \:-moz-placeholder
+        color: #a0a0a0 !important
+        font-style: normal !important
+        font: 13px/33px Verdana !important
+      \:-ms-input-placeholder
+        color: #a0a0a0 !important
+        font-style: normal !important
+        font: 13px/33px Verdana !important
+      input
+        height: 32px
+        line-height: 30px
+        text-align: center
+      .eye
+        background: img('/eye.png', 'top center no-repeat' ,'')
+        position: absolute
+        top: 11px
+        right: 10px
+        width: 18px
+        height: 10px
+        cursor: pointer
+        &.i-visible
+          background-position: bottom center
+      .error
+        line-height: 38px
+        color: #ff2841
+        text-align: center
+    .info
+      text-align: center
+      line-height: 1.4
+      padding-bottom: 25px
+
+.modal-newCertificateLoader
+  width: 260px
+  height: 130px
+  position: relative
+  text-align: center
+  .modal-body
+    .info
+      height: 40px
+    .loader
+      width: 260px
+      height: 25px
+      .block
+        height: 22px
+        border: 1px solid #1ac316
+        background: img('/new-cert-loader.png', 'repeat-x' ,'')
+    .timer
+      font-size: 11px
+      margin-bottom: 20px
+  .sbmt
+    a
+      color: #000
+
+
+.modern-modal
+  .fancybox-skin
+    border: 0 !important
+    padding: 0 !important
+    border-radius: 5px
+    .fancybox-close
+      background: img('/fb-close-black.png', 'no-repeat' ,'')
+      width: 11px
+      height: 11px
+      top: 10px
+      right: 10px
+  .fancybox-inner
+    overflow: visible !important
+
+
+.modal-feedback
+  width: 440px
+  height: 480px
+  position: relative
+  text-align: center
+  background: img('/landing/registration-bg.png', 'no-repeat' ,'')
+  padding: 20px 45px 25px
+  .title
+    font-size: 18px !important
+    border: 0 !important
+    height: 55px !important
+  .modal-body
+    line-height: 1.4
+    .info
+      margin-bottom: 30px
+    .row-padded
+      width: 320px
+      margin: 0 auto 15px
+      position: relative
+      input
+        width: 100%
+        height: 35px
+        line-height: 33px
+        font: 13px Verdana
+        text-align: left
+        color: #000
+        border: 1px solid #c9c9c9
+        border-radius: 3px
+        padding: 0 15px
+        &.error
+          background: #ffeef1
+          border: 1px solid #f3aab7
+      label.error
+        position: absolute
+        left: 410px
+        top: 0
+        min-width: 240px
+        min-height: 30px
+        text-align: center
+        color: #ff002a
+        padding: 8px
+        font-size: 11px
+        background: #fff
+        border-radius: 2px
+        &:before
+          background: img('/arrow-left.png', 'left bottom no-repeat' ,'')
+          width: 5px
+          height: 20px
+          position: absolute
+          left: -5px
+          top: -1px
+          content: ""
+      textarea
+        width: 100%
+        height: 95px
+        line-height: 1.3
+        font: 13px Verdana
+        text-align: left
+        color: #000
+        border: 1px solid #c9c9c9
+        border-radius: 3px
+        padding: 10px 15px
+        &.error
+          background: #ffeef1
+          border: 1px solid #f3aab7
+      ::-webkit-input-placeholder,input[type=password]::-webkit-input-placeholder
+        color: #86898d
+        font-size: 13px
+        font-style: normal
+        line-height: 1.2
+
+  .sbmt
+    padding-top: 15px
+    .btn
+      font-size: 14px
+      border: 0
+      border-radius: 3px
+      color: #fff !important
+      cursor: pointer
+      display: inline-block
+      font-weight: 700
+      height: 38px
+      line-height: 36px
+      text-decoration: none
+      background: #8dc63f
+      width: 230px
+      text-align: center
+      &.i-disabled
+        background: #aab8c0
+
+.modal-baseTemporary
+  width: 300px
+  font-size: 14px
+  .row
+    margin: 20px 0 !important
+
+
+.empty-modal
+  .fancybox-skin
+    padding: 0 !important
+    margin: 0 !important
+    border: 0 !important
+    border-radius: 5px
+    overflow: hidden
+    .fancybox-close
+      background: img('/fb/fancybox_close.png', 'no-repeat' ,'')
+
+.modal-markerActivation
+  width: 680px
+  .modal-title
+    height: 135px
+    background: #f9f9f9
+    border-bottom: 1px solid #d9d9d9
+    padding-top: 25px
+    ul
+      text-align: center
+      background: img('/marker-tabs-bg-blank.png','147px 29px no-repeat', '')
+      &.step1
+        background: img('/marker-tabs-bg-left.png','147px 29px no-repeat', '')
+      &.step2
+        background: img('/marker-tabs-bg.png','147px 29px no-repeat', '')
+      &.step3
+        background: img('/marker-tabs-bg-right.png','147px 29px no-repeat', '')
+
+      li
+        display: inline-block
+        vertical-align: top
+        text-align: center
+        &:nth-child(1)
+          padding-right: 85px
+        &:nth-child(2)
+          padding-right: 42px
+        &.done
+          .num
+            .val
+              width: 20px
+              height: 14px
+              background: img('/marker-step-success.png', 'no-repeat' ,'') !important
+        .text
+          padding-top: 8px
+          display: block
+          color: #aaaaaa
+        .num
+          display: inline-block
+          width: 58px
+          height: 58px
+          border-radius: 29px
+          border: 1px solid #d9d9d9
+          background: #fff
+          text-align: center
+          padding: 21px 0
+          cursor: pointer
+          margin: 0 auto
+          .val
+            display: inline-block
+            width: 12px
+            height: 15px
+            background: img('/marker-steps.png', 'no-repeat' ,'')
+
+          .val1
+            background-position: top left
+          .val2
+            background-position: top center
+          .val3
+            background-position: top right
+        &.active
+         .text
+           color: #3598db
+         .num
+           background: #3598db
+           border: 1px solid #3598db
+           .val1
+             background-position: bottom left
+           .val2
+             background-position: bottom center
+           .val3
+             background-position: bottom right
+  .modal-body
+    padding: 25px 30px 15px
+    min-height: 325px
+    position: relative
+    .sub-dialog-cancel
+      position: absolute
+      left: 60px
+      top: 45px
+      width: 560px
+      min-height: 230px
+      padding: 30px 20px 30px
+      border-radius: 4px
+      border: 1px solid #e3e3e3
+      background: #fff
+      box-shadow: 5px 5px 10px rgba(0,0,0,.15)
+      text-align: center
+      z-index: 99
+      .sub-title
+        font-size: 16px
+        font-weight: 700
+      .descr
+        padding-top: 20px
+      .actions
+        padding-top: 30px
+        .act-btn
+          display: inline-block
+          width: 170px
+          height: 34px
+          line-height: 32px
+          text-transform: uppercase
+          font-size: 13px
+          font-weight: 700
+          margin: 0 5px
+          cursor: pointer
+
+        .decline
+          background: #1ac316
+          border: 1px solid #1ac316
+          color: #fff
+          &:hover
+            background: #1dda19
+        .confirm
+          background: #fff
+          border: 1px solid #a9a9a9
+          color: #000
+          &:hover
+            background: #ececec
+    .markerSuccess
+      padding-top: 110px
+      text-align: center
+      .titleSuccess
+        font-weight: 700
+      .text
+        padding-top: 20px
+    .error
+      color: #f83548
+      font-size: 13px
+    .intro-text
+      display: inline-block
+      padding-bottom: 20px
+      font-size: 13px
+    .tab-login
+      .pincode-form
+        height: 80px
+        .confirm-text
+          margin-bottom: 15px
+          font-size: 13px
+        .column-form
+          display: inline-block
+          width: 390px
+          position: relative
+          .label
+            display: inline-block
+            width: 100px
+            text-align: right
+            padding-right: 10px
+            color: #3b3b3b
+          .input
+            width: 285px
+          .time
+            position: absolute
+            right: 0
+            top: 32px
+        .column-actions
+          display: inline-block
+          width: 160px
+          padding-left: 7px
+          .marker-resend-link
+            font-size: 11px
+      .login-form
+        padding-bottom: 30px
+        .column-form
+          display: inline-block
+          vertical-align: top
+          width: 390px
+          .row
+            margin-bottom: 9px
+          .label
+            display: inline-block
+            width: 65px
+            text-align: right
+            padding-right: 10px
+            color: #3b3b3b
+          .input
+            width: 320px
+        .column-actions
+          display: inline-block
+          vertical-align: top
+          width: 160px
+          height: 63px
+          position: relative
+          .small-loader
+            width: 100%
+            height: 100%
+            position: absolute
+            top: 0
+            left: 0
+            z-index: 50
+            background: img('/small-preloader.gif', 'center no-repeat', 'rgba(255, 255, 255, 1)')
+            cursor: wait
+          .change-marker
+            display: inline-block
+            margin: 11px 0
+            height: 41px
+            line-height: 41px
+            padding-left: 43px
+            font-size: 11px
+            background: img('/marker-change.png', 'bottom left no-repeat','')
+            &.lock
+              background-position: top left
+    .tab-confirm
+      padding-bottom: 0px
+      .scroll-wrap
+        height: 225px
+        margin: 0 -35px
+      .cert-info-confirm
+        margin: 0 auto 10px
+        width: 480px
+        background: #f9f9f9
+        border: 1px solid #d9d9d9
+        border-radius: 3px
+        padding: 25px 0 20px
+        dl
+          font-size: 13px
+          padding-bottom: 15px
+          dt
+            display: inline-block
+            vertical-align: top
+            text-align: right
+            padding-right: 8px
+            width: 145px
+            padding-top: 5px
+            &:last-child
+              padding-bottom: 5px
+          dd
+            display: inline-block
+            width: 280px
+            background: #d2e6f3
+            padding: 5px 8px 0
+            overflow: hidden
+            &:last-child
+              padding-bottom: 5px
+        .print-btn
+          text-decoration: none
+          color: #3598db
+          background: img('/print-icon.png','right center no-repeat', '')
+          padding: 0 20px 0 180px
+    .tab-pin
+      .intro-text
+        padding-bottom: 10px
+      .new-pin-form
+        .pin-row
+          padding-bottom: 35px
+          .label
+            display: inline-block
+            width: 70px
+            text-align: right
+            padding-right: 10px
+            color: #3b3b3b
+          .input
+            width: 320px
+          div.error
+            padding-top: 2px
+            padding-left: 75px
+        .row
+          .save-pin
+            margin-bottom: 10px
+            .save-pin-select
+              display: inline-block
+              vertical-align: middle
+              width: 285px
+            .intro-text
+              display: block
+          .checkbox-row
+            padding: 5px 0
+            *
+              vertical-align: middle
+
+  .modal-footer
+    background: #f9f9f9
+    border-top: 1px solid #d9d9d9
+    padding: 20px 40px
+    height: 73px
+    &.disabled
+      .cancel-btn
+        color: #aaaaaa
+        text-decoration: none !important
+      .btn
+        background: #aab8c0
+    .cancel-btn
+      color: #010101
+      font-size: 13px
+    .prev-block
+      display: inline-block
+      width: 49%
+      text-align: left
+    .next-block
+      display: inline-block
+      width: 49%
+      text-align: right
+      .btn
+        text-align: center
+        width: auto
+        min-width: 130px
+        padding: 0 20px
+        font-size: 13px
+        &.disabled
+          background: #aab8c0
+
+.modal-confirmRequestSend
+  width: 530px
+  .modal-title
+    height: 145px
+    background: #f9f9f9
+    border-bottom: 1px solid #d9d9d9
+    padding: 30px 50px 20px
+    text-align: center
+  .modal-body
+    padding: 30px 35px
+    position: relative
+    .sub-dialog-cancel
+      position: absolute
+      left: 20px
+      top: 45px
+      width: 490px
+      min-height: 230px
+      padding: 30px 20px 30px
+      border-radius: 4px
+      border: 1px solid #e3e3e3
+      background: #fff
+      box-shadow: 5px 5px 10px rgba(0,0,0,.15)
+      text-align: center
+      z-index: 99
+      .sub-title
+        font-size: 16px
+        font-weight: 700
+      .descr
+        padding-top: 20px
+      .actions
+        padding-top: 30px
+        .act-btn
+          display: inline-block
+          width: 170px
+          height: 34px
+          line-height: 32px
+          text-transform: uppercase
+          font-size: 13px
+          font-weight: 700
+          margin: 0 5px
+          cursor: pointer
+        .decline
+          background: #1ac316
+          border: 1px solid #1ac316
+          color: #fff
+          &:hover
+            background: #1dda19
+        .confirm
+          background: #fff
+          border: 1px solid #a9a9a9
+          color: #000
+          &:hover
+            background: #ececec
+    .tab-content
+      padding-bottom: 20px
+      .cert-info-confirm
+        margin: 0 auto
+        width: 450px
+        background: #f9f9f9
+        border: 1px solid #d9d9d9
+        border-radius: 3px
+        padding: 25px 0 20px
+        dl
+          font-size: 13px
+          dt
+            display: inline-block
+            vertical-align: top
+            text-align: right
+            padding-right: 8px
+            width: 145px
+            padding-top: 5px
+            &:last-child
+              padding-bottom: 5px
+          dd
+            display: inline-block
+            width: 280px
+            overflow: hidden
+            background: #d2e6f3
+            padding: 5px 8px 0
+            &:last-child
+              padding-bottom: 5px
+        .print-btn
+          text-decoration: none
+          color: #3598db
+          background: img('/print-icon.png','right center no-repeat', '')
+          padding: 0 20px 0 180px
+    .tab-pin
+      .intro-text
+        padding-bottom: 10px
+      .new-pin-form
+        .pin-row
+          padding-bottom: 35px
+          .label
+            display: inline-block
+            width: 70px
+            text-align: right
+            padding-right: 10px
+            color: #3b3b3b
+          .input
+            width: 320px
+          div.error
+            padding-top: 2px
+            padding-left: 75px
+        .row
+          .save-pin
+            margin-bottom: 10px
+            .save-pin-select
+              display: inline-block
+              vertical-align: middle
+              width: 285px
+            .intro-text
+              display: block
+          .checkbox-row
+            padding: 5px 0
+            *
+              vertical-align: middle
+  .modal-footer
+    background: #f9f9f9
+    border-top: 1px solid #d9d9d9
+    padding: 26px 40px
+    height: 85px
+    &.disabled
+      .cancel-btn
+        color: #aaaaaa
+        text-decoration: none !important
+      .btn
+        background: #aab8c0
+    .cancel-btn
+      color: #010101
+      font-size: 13px
+    .prev-block
+      display: inline-block
+      width: 49%
+      text-align: left
+    .next-block
+      display: inline-block
+      width: 49%
+      text-align: right
+      .btn
+        text-align: center
+        width: auto
+        min-width: 130px
+        padding: 0 20px
+        font-size: 13px
+        &.disabled
+          background: #aab8c0
+               
+
+.inform-modal
+    .fancybox-skin
+      padding: 50px 60px 40px !important
+      margin: 0 !important
+      border: 0 !important
+      border-radius: 5px
+      overflow: hidden
+      .fancybox-close
+        background: img('/fb/close-inform.png', 'no-repeat' ,'')
+.modal-window
+  .modal-blankInform
+    color: #161616
+    line-height: normal
+    width: 520px
+    .modal-title
+      .title
+        border-bottom: 0
+        font-weight: 700
+        font-size: 24px
+        height: auto
+        text-align: center
+      margin-bottom: 20px
+    .modal-body
+      font-size: 13px
+      .row
+        margin-bottom: 50px
+        &.sbmt
+          margin-bottom: 0

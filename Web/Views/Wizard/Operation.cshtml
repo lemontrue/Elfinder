@@ -1,0 +1,668 @@
+﻿@using CryptxOnline.Web.CryptxService
+@using CryptxOnline.Web.Helpers
+@using CryptxOnline.Web.Models
+@model CryptxOnline.Web.Models.WizardModel
+
+@{
+    ViewBag.Title = Model.WizardName + "- Завершение операции";
+    Layout = "~/Views/Shared/_LayoutWizardPage.cshtml";
+}
+
+
+<script src="@Url.Content("~/Assets/libjs/jquery-2.0.3.js")" type="text/javascript"></script>
+<link href="@Url.Content("~/Content/CustomStyle.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Assets/libjs/jquery-ui-1.10.3.js")" type="text/javascript"></script>
+
+
+<script>
+    if ('@(Model.Type == OperationType.Decrypt || Model.Type == OperationType.SignVerify)' == 'True') {
+        if ('@(Model.EmailSendMessage != null)' == 'True') {
+            alert('@Model.EmailSendMessage');
+            @((Model.Type == OperationType.Decrypt || Model.Type == OperationType.SignVerify) ? (Model.EmailSendMessage = null) : null);
+        }
+    }
+</script>
+
+@Html.ValidationSummary(true)
+@Html.Hidden("wizardId")  
+@Html.Hidden("deletingFileUri")
+@using (Html.BeginForm())
+{
+    <div class="wizard-right-top">
+        <a style="font-size: 19px; font-weight: bold">Завершение работы</a>
+        <table style="width: 60%">
+            <tr>
+                <td>
+                    Операция
+                </td>
+                <td>
+                    @Model.OperationName
+                </td>
+            </tr>
+            @if (ViewBag.certSubjName != null)
+            {
+                <tr>
+                    <td>
+                        Сертификат
+                    </td>
+                    <td>
+                        @ViewBag.certSubjName
+                    </td>
+                </tr>
+            }
+            @if (Model.Type != OperationType.SignVerify)
+            {
+                <tr>
+                    <td colspan="2">
+                        <table border="1" style="width: 100%">
+                            <tr>
+                                <td>
+                                    @switch (Model.Type)
+                                    {
+                                        case OperationType.Sign:
+                                        {
+                                            <a>Исходный файл</a>
+                                            break;
+                                        }
+                                        case OperationType.Encrypt:
+                                        {
+                                            <a>Исходный файл</a>
+                                            break;
+                                        }
+                                        case OperationType.Decrypt:
+                                        {
+                                            <a>Шифрованные данные</a>
+                                            break;
+                                        }
+                                        case OperationType.SignVerify:
+                                        {
+                                            <a>Подпись</a>
+                                            break;
+                                        }
+                                        default:
+                                        {
+                                            break;
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @switch (Model.Type)
+                                    {
+                                        case OperationType.Sign:
+                                        {
+                                            <a>Подпись</a>
+                                            break;
+                                        }
+                                        case OperationType.Encrypt:
+                                        {
+                                            <a>Шифрованные данные</a>
+                                            break;
+                                        }
+                                        case OperationType.Decrypt:
+                                        {
+                                            <a>Исходный файл</a>
+                                            break;
+                                        }
+                                        case OperationType.SignVerify:
+                                        {
+                                            <a>Исходный файл</a>
+                                            break;
+                                        }
+                                        default:
+                                        {
+                                            break;
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                            @foreach (DataOperationResult operationResult in Model.OperatedFilesInfo)
+                            {
+                                var srcFile = new FileInfo(operationResult.SourceFile);
+                                if (operationResult.Exception == null)
+                                {
+                                    var opFile = new FileInfo(operationResult.OperatedFile);
+                                    <tr>
+                                        <td>
+                                            @if (Helper.FileExist(operationResult.SourceFile, (Guid) ViewBag.token))
+                                            {
+                                                <table style="width: 100%">
+                                                    <tr style="border: 2px solid black">
+                                                        <td style="word-break: break-all">
+                                                            @Html.ActionLink(srcFile.Name, "DownloadFile", new {wizardId = Model.Id, downloadedFileUri = operationResult.SourceFile})
+                                                        </td>
+                                                        <td style="width: 40px; word-break: break-all">
+                                                            <img align="absmiddle" style="cursor: pointer;" title="Скачать" name="download" src="@Url.Content("~/Assets/i/old/down_7073.png")" onclick=" location.href = '@Url.Action("DownloadFile", "Wizard", new {wizardId = Model.Id, downloadedFileUri = operationResult.SourceFile})' "/>
+                                                            
+                                                            @*<img align="absmiddle" style="cursor: pointer; " title="Отправить файл" name="sendEmail" src="@Url.Content("~/Assets/i/old/send_5332.png")" onclick=" clickOpenModal('@operationResult.SourceFile')"/>*@
+
+                                                            <img align="absmiddle"  style="cursor: pointer;" title="Удалить" name="delete" src="@Url.Content("~/Assets/i/old/remove_5729.png")" onclick=" deleteFilePost('@operationResult.SourceFile') "/>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            }
+                                            else
+                                            {
+                                                <a>@srcFile.Name</a>
+                                            }
+                                        </td>
+                                            
+                                        <td>
+                                            @if (operationResult.Exception == null)
+                                            {
+                                                if (Helper.FileExist(operationResult.OperatedFile, (Guid) ViewBag.token))
+                                                {
+                                                    <table style="width: 100%">
+                                                        <tr>
+                                                            <td style="word-break: break-all">
+                                                                @Html.ActionLink(opFile.Name, "DownloadFile", new {wizardId = Model.Id, downloadedFileUri = operationResult.OperatedFile})
+                                                            </td>
+                                                            
+                                                            
+                                                            @if (Model.Type == OperationType.Decrypt)
+                                                            {
+                                                                <td style="width: 60px; word-break: break-all">
+                                                                    <img align="absmiddle"  style="cursor: pointer;" title="Скачать" name="download" src="@Url.Content("~/Assets/i/old/down_7073.png")" onclick=" location.href = '@Url.Action("DownloadFile", "Wizard", new {wizardId = Model.Id, downloadedFileUri = operationResult.OperatedFile})' "/>
+                                                                
+                                                                    <img align="absmiddle" style="cursor: pointer;" title="Отправить в сообщении" name="sendEmail" src="@Url.Content("~/Assets/i/old/send_5332.png")" onclick=" clickOpenModal('@operationResult.OperatedFile') "/>
+                                                                
+                                                                    <img align="absmiddle"  style="cursor: pointer;" title="Удалить" name="delete" src="@Url.Content("~/Assets/i/old/remove_5729.png")" onclick=" deleteFilePost('@operationResult.OperatedFile') "/>
+                                                                </td>
+                                                            }
+                                                            else
+                                                            {
+                                                                <td style="width: 40px; word-break: break-all">
+                                                                    <img align="absmiddle"  style="cursor: pointer;" title="Скачать" name="download" src="@Url.Content("~/Assets/i/old/down_7073.png")" onclick=" location.href = '@Url.Action("DownloadFile", "Wizard", new {wizardId = Model.Id, downloadedFileUri = operationResult.OperatedFile})' "/>
+                                                                
+                                                                    
+                                                                
+                                                                    <img align="absmiddle"  style="cursor: pointer;" title="Удалить" name="delete" src="@Url.Content("~/Assets/i/old/remove_5729.png")" onclick=" deleteFilePost('@operationResult.OperatedFile') "/>
+                                                                </td>
+                                                            }
+                                                        </tr>
+                                                    </table>
+                                                }
+                                                else
+                                                {
+                                                    <a>@opFile.Name</a>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <a>@operationResult.Exception.Message</a>
+                                            }
+                                
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <a style="color: green">Обработано успешно</a>
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td>
+                                            @srcFile.Name
+                                        </td>
+                                        <td>
+                                            
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" >
+                                            Ошибка: <a style="color: red">@operationResult.Exception.Message</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </table>
+                    </td>
+                </tr>
+            }
+        
+            <tr>
+                <td colspan="2" > 
+                    @if (Model.Type == OperationType.SignVerify)
+                    {
+                        foreach (SignVerificationResult signVerificationResult in Model.SignVerificationOptions.SignVerificationResults)
+                        {
+                            var srcFile = new FileInfo(signVerificationResult.SourceFile);
+                            FileInfo srcDataFile = (string.IsNullOrEmpty(signVerificationResult.DataSourceFile) ? null : (new FileInfo(signVerificationResult.DataSourceFile)));
+                            <fieldset>
+                                <legend>Файл @(Model.SignVerificationOptions.SignVerificationResults.IndexOf(signVerificationResult) + 1) </legend>
+                                @if (!string.IsNullOrEmpty(signVerificationResult.DataSourceFile))
+                                {
+                                    <br/>
+                                    <a>Тип: @(signVerificationResult.Detached ? "Отсоединенная" : "Присоединенная") </a>
+                                    <br/>
+
+                                    <table style="width: 100%" border="1">
+                                        <tr>
+                                            <td>
+                                                Подпись
+                                            </td>
+                                            <td>
+                                                Исходный файл
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td  style="word-break: break-all">
+                                                @if (Helper.FileExist(signVerificationResult.SourceFile, (Guid) ViewBag.token))
+                                                {
+                                                    <table style="width: 100%">
+                                                        <tr>
+                                                            <td style="word-break: break-all">
+                                                                @Html.ActionLink(srcFile.Name, "DownloadFile", new {wizardId = Model.Id, downloadedFileUri = signVerificationResult.SourceFile})
+                                                            </td>
+                                                            <td style="width: 40px; word-break: break-all">
+                                                                <img align="absmiddle"  style="cursor: pointer" title="Скачать" name="download" src="@Url.Content("~/Assets/i/old/down_7073.png")" onclick=" location.href = '@Url.Action("DownloadFile", "Wizard", new {wizardId = Model.Id, downloadedFileUri = signVerificationResult.SourceFile})' " />
+                                                                <img align="absmiddle" style="cursor: pointer" title="Удалить" name="delete" src="@Url.Content("~/Assets/i/old/remove_5729.png")" onclick=" deleteFilePost('@signVerificationResult.SourceFile') " />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                }
+                                                else
+                                                {
+                                                    <a style="word-break: break-all">@srcFile.Name</a>
+                                                }
+                                            </td>
+                                            <td  style="word-break: break-all">
+                                                @if (Helper.FileExist(signVerificationResult.DataSourceFile, (Guid) ViewBag.token))
+                                                {
+                                                    <table style="width: 100%">
+                                                        <tr>
+                                                            <td style="word-break: break-all">
+                                                                <a href='@Url.Action("DownloadFile", "Wizard", new {wizardId = Model.Id, downloadedFileUri = signVerificationResult.DataSourceFile})'>@srcDataFile.Name</a>
+                                                            </td>
+                                                            <td style="width: 60px; word-break: break-all">
+                                                                <img align="absmiddle"  style="cursor: pointer;" title="Скачать" name="download" src="@Url.Content("~/Assets/i/old/down_7073.png")" onclick=" location.href = '@Url.Action("DownloadFile", "Wizard", new {wizardId = Model.Id, downloadedFileUri = signVerificationResult.DataSourceFile})' "/>
+                                                                <img align="absmiddle" style="cursor: pointer;" title="Отправить в сообщении" name="sendEmail" src="@Url.Content("~/Assets/i/old/send_5332.png")" onclick=" clickOpenModal('@signVerificationResult.DataSourceFile') "/>
+
+                                                                <img align="absmiddle"  style="cursor: pointer;" title="Удалить" name="delete" src="@Url.Content("~/Assets/i/old/remove_5729.png")" onclick=" deleteFilePost('@signVerificationResult.DataSourceFile') "/>
+                                                        
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                }
+                                                else
+                                                {
+                                                    if (signVerificationResult.Exception == null)
+                                                    {
+                                                        <a style="word-break: break-all">@srcDataFile.Name</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a>@signVerificationResult.Exception.Message</a>
+                                                    }
+                                                }
+                                                <br/>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                }
+
+                                @if (signVerificationResult.Exception == null)
+                                {
+                                    <fieldset>
+                                        <legend>Результат проверки</legend>
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td style="width: 40%">
+                                                    Статус
+                                                </td>
+                                                <td>
+                                                    @signVerificationResult.MainStatus
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </fieldset>
+                                    foreach (CertificateStatus certificateStatus in signVerificationResult.CertifictaesWithStatus)
+                                    {
+                                        <fieldset>
+                                            <legend>ЭП @(signVerificationResult.CertifictaesWithStatus.IndexOf(certificateStatus) + 1)</legend>
+                                            <table>
+
+                                                <tr>
+                                                    <td colspan="2">
+                                        
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        Статус: @certificateStatus.Status
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                    
+                                                    </td>
+                                                    <td>
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    Отпечаток
+                                                                </td>
+                                                                <td>
+                                                                    @certificateStatus.CertificateInfo.Thumbprint
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    Получатель
+                                                                </td>
+                                                                <td>
+                                                                    @certificateStatus.CertificateInfo.SubjectName
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    Издатель
+                                                                </td>
+                                                                <td>
+                                                                    @certificateStatus.CertificateInfo.IssureName
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    Действителен
+                                                                </td>
+                                                                <td>
+                                                                    с @certificateStatus.CertificateInfo.NotBefore по @certificateStatus.CertificateInfo.NotAfter
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </fieldset>
+                                    }
+                                }
+                                else
+                                {
+                                    <a>Файл: @srcFile.Name</a>
+                                    <br/>
+                                    <a style="color: red">@signVerificationResult.Exception.Message</a>
+                                }
+                            </fieldset>
+                        }
+                    }
+
+                </td>
+            </tr>
+        </table>
+        @if (Model.Type == OperationType.Sign || Model.Type == OperationType.Encrypt)
+        {
+            <table style="width: 60%">
+                <tr>
+                    <td style="width: 10%">
+                        <input type="submit" id="sendEmail" name="sendEmail" value="Отправить" class="button" onclick=" return checkEmail() "/>            
+                    </td>
+                    <td style="width: 10%">
+                        E-mail: 
+                    </td>
+                    <td>
+                        @Html.TextBox("emails", Model.Settings._MainSettings.Email, new {style = "width:100%", title = "Возможен ввод нескольких адресов E-mail разделенных точкой с запятой"})
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="font-size: 17px; width: 100%;">
+                        @if (Model.EmailSendMessage != null)
+                        {
+                            if ((Model.EmailSendMessage).Contains("Ошибка"))
+                            {
+                                <a style="color: red; font-size: x-large">@Model.EmailSendMessage</a>
+                            }
+                            else
+                            {
+                                <a style="color: green">@Model.EmailSendMessage</a>
+                            }
+                        }
+                    </td>
+                </tr>
+            </table>
+        }@*     @if (Model.Type == OperationType.Decrypt)
+     {
+         if (Model.EmailSendMessage != null)
+         {
+             if ((Model.EmailSendMessage).Contains("Ошибка"))
+             {
+                 <a style="color: red; font-size: x-large">@Model.EmailSendMessage</a>
+             }
+             else
+             {
+                 <a style="color: green">@Model.EmailSendMessage</a>
+             }
+         }
+     }*@</div>
+    <div class="wizard-right-bottom">
+        <div class="buttons">
+            <input type="submit" name="repeat" class="button" value="Повторить операцию" />
+            <input type="submit" class="button" name="cancelButton" value="Завершить"  />
+        </div>
+    </div>
+
+    <div id="boxes">
+        <div id="dialogDelRecip" class="window">
+            @Html.Hidden("curElement")
+            <table style="width: 100%">
+                
+                <tr style="height: 100px">
+                    <td style="text-align: center; vertical-align: central;">
+                        Подтвердите удаление файла "<a id="displayname"></a>"<img href="#" class="close" style="position: absolute; right: 5px; top: 5px;" src="@Url.Content("~/Assets/i/old/dialog-close_7593.png")" width="32" height="32" border="0" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="left: 10px; position: absolute; text-align: left">
+                        <input type="button" name="delButton" value="Удалить файл" class="button" onclick=" deleteFile() " />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="sendFileByte" class="window">
+            @Html.Hidden("curFileName")
+            <table style="width: 100%">
+                <tr>
+                    <td style="font-size: 10px; font-style: italic; text-align: left;">
+                        Укажите E-mail <img href="#" class="close" style="position: absolute; right: 5px; top: 5px;" src="@Url.Content("~/Assets/i/old/dialog-close_7593.png")" width="32" height="32" border="0" />
+                    </td>
+                </tr>
+                <tr style="height: 80px">
+                    <td>
+                        @Html.TextBox("emails", Model.Settings._MainSettings.Email, new {@style = "width:100%", @maxlength = "40", title = "Возможен ввод нескольких адресов E-mail разделенных точкой с запятой"})
+                    </td>
+                </tr>
+                <tr>
+                    <td style="left: 10px; position: absolute; text-align: left">
+                        <input type="submit" id="sendEmail" name="sendEmail" value="Отправить" class="button" onclick=" return checkEmail() "/>  
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div id="mask"></div>
+}
+<script>
+
+
+    function deleteFilePost(fileName) {
+        var confirmText = "Удалить файл " + '"' + fileName + '"' + " ?";
+        if (confirm(confirmText)) {
+            var wizardid = $('#wizardId').val();
+            location.href = '@Url.Action("DeleteFile", "Wizard")' + '?wizardId=' + wizardid + '&deletingFileUri=' + fileName;
+        }
+
+    }
+
+    function deleteFile() {
+        var fileName = $('#deletingFileUri').val();
+        var wizardId = $('#wizardId').val();
+        $.ajax({
+            url: '@Url.Action("DeleteFile", "Wizard")',
+            async: false,
+            type: "POST",
+            data: { wizardId: wizardId, deletingFileUri: fileName },
+            success: function(result) {
+                var elemId = "#div" + $('#curElement').val();
+                $(elemId).hide();
+                closeModal();
+                alert(result.message);
+            },
+            error: function(request, error, result) {
+
+            }
+        });
+    }
+
+    function checkEmail() {
+        var re = new RegExp(/^([a-z0-9_-]+\.)*[a-z0-9_-]+@@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/);
+        var emails = $("#emails").val();
+        var emailArr = emails.split(';');
+        if (emails == null || emails == "") {
+            alert('Необходимо заполнить поле E-mail');
+            //e.preventDefault();
+            return false;
+        }
+
+        for (var i = 0; i < emailArr.length; i++) {
+            if (emailArr[i] == "" || !re.test(emailArr[i])) {
+                alert("Не корректный E-mail.\r\nВозможен ввод нескольких адресов E-mail разделенных точкой с запятой");
+                return false;
+            }
+        }
+
+    }
+
+    function retToIndex(parameters) {
+        location = '@Url.Action("Index", "Default")';
+    }
+
+    $(document).ready(function() {
+        //$('#sendEmail').click(function (e) {
+        //    var emailval = $('#emails').val();
+        //    if (emailval == null || emailval == "") {
+        //        alert('Необходимо заполнить поле E-mail');
+        //        e.preventDefault();
+        //    } else {
+        //        return true;
+        //    }
+        //});
+
+    });
+
+</script>
+
+<script>
+    function closeModal() {
+        //$(".validation-summary-errors").remove();
+        $('#mask, .window').hide();
+        $(".validation-summary-errors").remove();
+    };
+
+    function clickOpenModal(thumbprint, friendlyName) {
+        //Cancel the link behavior
+        //e.preventDefault();
+        //Get the A tag
+        $("#curThumbprint").val(thumbprint);
+        var id = '#dialog';
+        if (event.srcElement.name == "delete") {
+            id = "#dialogDelRecip";
+            $('#displayname').text(friendlyName);
+            $('#deletingFileUri').val(friendlyName);
+
+            $('#curElement').val(event.srcElement.id);
+        }
+        if (event.srcElement.name == "edit") {
+            $("#curfName").val(friendlyName);
+            id = "#dialogEditRecip";
+        }
+
+        if (event.srcElement.name == "sendEmail") {
+            $('#curFileName').val(thumbprint);
+            //$('#emails').val('');
+            id = "#sendFileByte";
+        }
+        //Get the screen height and width
+        var maskHeight = $(document).height();
+        var maskWidth = $(window).width();
+
+        //Set heigth and width to mask to fill up the whole screen
+        $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+        $('#mask').css({ 'position': 'fixed' });
+
+        //transition effect		
+        $('#mask').fadeIn(1000);
+        $('#mask').fadeTo("slow", 0.8);
+
+        //Get the window height and width
+        var winH = $(window).height();
+        var winW = $(window).width();
+
+        //Set the popup window to center
+        $(id).css('top', winH / 2 - $(id).height() / 2);
+        $(id).css('left', winW / 2 - $(id).width() / 2);
+        $(id).css('position', 'fixed');
+
+        //transition effect
+        $(id).fadeIn(2000);
+        $("#pinCode").focus();
+    };
+
+    $(document).ready(function() {
+        $("#curThumbprint").val('');
+        $("#sendFileByte").keydown(function(e) {
+            if (e.keyCode == 13) {
+                $("#sendEmail").trigger("click");
+                e.preventDefault();
+            }
+        });
+
+        //select all the a tag with name equal to modal
+        $('input[name=modal]').click(function(e) {
+            //Cancel the link behavior
+            e.preventDefault();
+            //Get the A tag
+            var id = $(this).attr('href');
+
+            //Get the screen height and width
+            var maskHeight = $(document).height();
+            var maskWidth = $(window).width();
+
+            //Set heigth and width to mask to fill up the whole screen
+            $('#mask').css({ 'width': maskWidth, 'height': maskHeight });
+
+            //transition effect		
+            $('#mask').fadeIn(1000);
+            $('#mask').fadeTo("slow", 0.8);
+
+            //Get the window height and width
+            var winH = $(window).height();
+            var winW = $(window).width();
+
+            //Set the popup window to center
+            $(id).css('top', winH / 2 - $(id).height() / 2);
+            $(id).css('left', winW / 2 - $(id).width() / 2);
+
+            //transition effect
+            $(id).fadeIn(2000);
+
+        });
+
+        //if close button is clicked
+        $('.window .close').click(function(e) {
+            //location.href = location.href;
+            //Cancel the link behavior
+            e.preventDefault();
+            $('#mask, .window').hide();
+        });
+
+        //if mask is clicked
+        $('#mask').click(function() {
+            //$(this).hide();
+            //$('.window').hide();
+        });
+
+    });
+</script>

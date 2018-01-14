@@ -1,0 +1,25 @@
+﻿@model CryptxOnline.Web.Models.RegistrationResponseModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Регистрация</title>
+    </head>
+    <body>
+        <div>
+              @using (Html.BeginForm())
+              {
+                  @Html.EditorFor(m=>m.Model.FIO)
+                  @Html.EditorFor(m => m.Model.Email)
+                  @Html.EditorFor(m => m.Model.Phone)
+                  @Html.EditorFor(m => m.Model.Password)
+                  @Html.EditorFor(m => m.Model.City)
+              }
+        </div>
+    </body>
+</html>

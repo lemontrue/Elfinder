@@ -1,0 +1,17 @@
+input[type="checkbox"] { display: block }
+
+input[type="checkbox"] + label { display: none }
+
+input[type="checkbox"] + label span {
+    background: url(../img/checkbox-sheet.png) left top no-repeat;
+    cursor: pointer;
+    display: inline-block;
+    height: 12px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    width: 12px;
+}
+
+input[type="checkbox"]:checked + label span { background: url(../img/checkbox-sheet.png) -12px top no-repeat; }
+
+input[type=text], input[type=email], input[type=password] { line-height: 28px !important; }

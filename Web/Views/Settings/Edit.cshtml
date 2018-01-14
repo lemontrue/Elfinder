@@ -1,0 +1,769 @@
+﻿@using CryptxOnline.Web.CryptxService
+@using CryptxOnline.Web.Helpers
+@model CryptxOnline.Web.CryptxService.Settings
+
+@{
+    if (!string.IsNullOrEmpty(Model._MainSettings.Name))
+    {
+        ViewBag.Title = @Model._MainSettings.Name;
+    }
+    Layout = "~/Views/Shared/_LayoutCryptogramm.cshtml";
+}
+<link href="../../Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<script src="/Assets/libjs/jquery-ui-1.11.4.min.js"></script>
+<script src="/Assets/libjs/opentip.js"></script>
+<link href="../../Content/CSS/New/tpl2.css" rel="stylesheet" />
+<link href="../../Content/opentip.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{
+    @Html.Hidden("userId", (Guid) ViewBag.UserId)
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.Id)
+    <div style="padding-bottom: 50px;">
+        <div class="tpl-view content" style="padding: 0">
+            <div class="tpl-head">
+
+                <div class="row">
+                    <div class="view">
+                        <span>Вид:</span>
+
+                        <div class="toggle col">
+                            <div class="element col active" id="simple">
+                                Обычный
+                            </div><div class="element col " id="extend">
+                                      Подробный
+                                  </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="label col" style="padding-top: 7px;">
+                        Название шаблона настроек:
+                    </div>
+
+                    <div class="value col" style="width: 516px">
+                        @Html.TextBoxFor(m => m._MainSettings.Name, new {@id = "name", @maxlength = 24, @placeholder = "Введите название шаблона"})
+                        <span id="wrongName" style="color: red; display: none">Введите новое название шаблона из букв и цифр. Допустимая длина названия - до 24 символов</span>
+                    </div>
+                </div>
+
+                <div class="row descr">
+                    <div class="label">
+                        Описание шаблона:
+                    </div>
+
+                    <div class="description">
+                        @Html.TextAreaFor(m => m._MainSettings.Description, new {@style = "width:100%;height:100%;border:0", @placeholder = "Введите удобное и понятное описание для шаблона"})
+                    </div>
+                </div>
+            </div>
+
+            <div class="sign-settings">
+                <div class="title">
+                    Настройки подписи
+                </div>
+
+
+                <div class="row">
+                    <div class="label col">
+                        Сертификат для подписи:
+                    </div>
+
+                    <div class="value col">
+                        <input id="signCert" type="text" disabled="true" />
+                        @Html.HiddenFor(m => m._SignatureSettings.SignerCertificate1, new {@id = "SignerCertificate1"})
+                        <div id="signCertModaL">
+
+                        </div>
+                        <div class="small-text">
+                            <a href="javascript:addSignCertToEnc()">Использовать данный сертификат для остальных криптографических функций</a>
+                        </div>
+                    </div>
+
+                    <div class="edit-sign col">
+                        <a class="col" href="#">
+                            <i id="signCertIcon" class="icon edit">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div class="more" style="display: none">
+                    <div class="row">
+                        <div class="label top col">
+                            Способ хранения подписи:
+                        </div>
+
+                        <div class="value col">
+                            <div class="row">
+                                <label>
+                                    @Html.CheckBox("attached", !Model._SignatureSettings.Detached)
+
+                                    @*<input class="styled" checked="true" name="sposob" type="radio" />*@
+                                    Хранить подпись совместно с данными
+                                </label>
+                            </div>
+                            <div class="row">
+                                <label>
+                                    @Html.CheckBox("zip", Model._SignatureSettings.ZipType != ZipTypeEnum.NoZip)
+                                    @*<input class="styled" checked="true" name="sposob" type="radio" />*@
+                                    Сжимать подпись с данными
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="label col">
+                            Формат файла с подписью:
+                        </div>
+
+                        <div class="value selection col">
+                            @Html.DropDownListFor(x => x._SignatureSettings._EncodingType, new SelectList(Helper.GetEncodingTypesList(), "Value", "Text", (int) Model._SignatureSettings._EncodingType), new {@class = "style-select", @id = "SignEncType"})
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="encrypt-settings">
+                <div class="title">
+                    Настройки шифрования
+                </div>
+
+                @Html.HiddenFor(m => m._EncryptionSettings.RecipientCertificates1, new {@id = "RecipientCertificates1"})
+
+                <div class="row">
+                    <div class="label col">
+                        Сертификаты получателей:
+                    </div>
+
+                    <div class="value col">
+                        <div class="scroll-wrap">
+                            <div class="scroller">
+                                <div class="template-list" id="encCertList">
+                                </div>
+                            </div>
+
+                            <div class="scroller__bar-wrapper">
+                                <div class="scroller__bar"></div>
+                            </div>
+                        </div>
+                        <a class="add-cert" href="javascript:findCertClick(null,'enc')">Добавить сертификат</a>
+                        <input id="file" type="file" style="opacity: 0;width: 0;height:0" accept=".cer" multiple />
+                        <a class="add-cert" href="javascript:addFromFile()">Добавить сертификат из файла</a>
+                    </div>
+                </div>
+
+                <div class="row" onclick="">
+                    <label>
+                        <input type="checkbox" id="encToMe" />
+                        <span>
+                            Шифровать данные для себя (добавление личных сертификатов)
+                        </span>
+                    </label>
+                </div>
+                <div id="MyEncCertDiv" style="display: none">
+                    <div class="row">
+                        <div class="label col">
+                            Личные сертификаты для шифрования:
+                        </div>
+
+                        <div class="value col">
+                            <div class="scroll-wrap">
+                                <div class="scroller">
+                                    <div class="template-list" id="EncMyCertList">
+                                    </div>
+                                </div>
+
+                                <div class="scroller__bar-wrapper">
+                                    <div class="scroller__bar"></div>
+                                </div>
+                            </div>
+                            <a class="add-cert" href="javascript:findMyCertToEnc()">Добавить сертификат</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="more" style="display: none">
+                    <div class="row">
+                        <div class="label col">
+                            Формат зашифрованных данных:
+                        </div>
+
+                        <div class="value col">
+                            <div class="selection">
+                                @Html.DropDownListFor(x => x._EncryptionSettings._EncodingType, new SelectList(Helper.GetEncodingTypesList(), "Value", "Text", (int) Model._SignatureSettings._EncodingType), new {@class = "style-select", @id = "EncryprEncType"})
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tpl-control" style="padding-top: 20px">
+            <div class="backlink col">
+                @if ((Guid) ViewBag.UserId != Guid.Empty)
+                {
+                    <a href="@Url.Action("Index", new {userId = (Guid) ViewBag.UserId})"><i class="icon backarrow"></i>К списку шаблонов</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Index")"><i class="icon backarrow"></i>К списку шаблонов</a>
+                }
+
+            </div>
+
+            @if (ViewBag.canDelete)
+            {
+                <div class="delete col">
+                    <a href="javascript:deleteSettingsModal()">Удалить шаблон</a>
+                </div>
+            }
+            <div class="controls pull-right">
+                <div class="sbmt pull-right">
+                    @if ((Guid) ViewBag.UserId != Guid.Empty)
+                    {
+                        <a class="cancel " href="@Url.Action("Index", new {userId = (Guid) ViewBag.UserId})">Отмена</a>
+                    }
+                    else
+                    {
+                        <a class="cancel" href="@Url.Action("Index")">Отмена</a>
+                    }
+                    @if (Model.Id == null || Model.Id == Guid.Empty)
+                    {
+                        <input class="btn btn-green" type="submit" value="Сохранить" onclick=" return submitCheck() " />
+                    }
+                    else
+                    {
+                        <input class="btn btn-green" type="submit" value="Сохранить" onclick=" return submitCheck() " />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="SearchCertificateDiv" sandbox="allow-same-origin || allow-top-navigation || allow-forms || allow-scripts" style="overflow: hidden; padding: 0;">
+        <iframe id="SearchCertificateFrame" width="100%" height="100%" marginheight="0" marginwidth="0" frameborder="0"></iframe>
+    </div>
+
+    <div class="hidden">
+        <div class="modal-window" id="info">
+            <div class="title">
+                Внимание!
+            </div>
+
+            <div class="row">
+                <div class="mess-box">
+                    <div class="attention" id="infoPlacer">
+                        <span>
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row sbmt pull-right">
+                <input class="btn btn-green" type="button" value="Закрыть" onclick=" $.fancybox.close(); " />
+            </div>
+        </div>
+
+        <div class="modal-window" id="error">
+            <div class="title">
+                Внимание!
+            </div>
+            <div class="row">
+                <div class="mess-box">
+                    <div class="error" id="errorPlacer"><span></span></div>
+                </div>
+            </div>
+
+            <div class="row sbmt pull-right">
+                <input class="btn btn-green" type="button" value="Закрыть" onclick=" $.fancybox.close(); " />
+            </div>
+        </div>
+
+        <div class="modal-window" id="deleteProfile">
+            <div class="title">
+                Внимание!
+            </div>
+
+            <div class="row">
+                <div class="mess-box">
+                    <div class="attention">
+                        <span>
+                            Хотите удалить шаблон?
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row sbmt pull-right">
+                <a class="close" href="#">Отмена</a>
+                <input class="btn btn-green" type="button" value="Да" onclick=" deleteSettings() " />
+            </div>
+        </div>
+
+    </div>
+}
+<script>
+    jQuery.ajaxSettings.traditional = true;
+    window.EncryptCertificates = [];
+    window.EncryptMyCertificates = [];
+
+    function deleteSettings() {
+
+        $.post("@Html.Raw(Url.Action("DeleteSettings", new {Model.Id, userId = (Guid) ViewBag.UserId}))",
+            function(data) {
+                if (data.response.Exception != null) {
+                    errorModal(data.response.Exception);
+                    return;
+                }
+                if (data.response.Message != null) {
+                    errorModal(data.response.Message);
+                    return;
+                }
+                if ($('#userId').val() != '@((Guid) ViewBag.UserId)') {
+                    location.href = '@Url.Action("Index", new {userId = (Guid) ViewBag.UserId})';
+                } else {
+                    location.href = '@Url.Action("Index")';
+            }
+        });
+    }
+
+    function deleteSettingsModal() {
+        $.fancybox('#deleteProfile');
+    }
+
+    function errorModal(text) {
+        $('#errorPlacer span').html(text);
+        $.fancybox('#error');
+    }
+
+    function infoModal(text) {
+        $('#infoPlacer span').html(text);
+        $.fancybox('#info');
+    }
+
+    function addSignCertToEnc() {
+        var certThmbprnt = $('#SignerCertificate1').val();
+
+        if (certThmbprnt != "") {
+            var certs = [];
+            certs.push(certThmbprnt);
+            $.ajax({
+                url: '@Url.Action("GetCertificatesInfo", "Helper")',
+                async: false,
+                type: "POST",
+                data: { thumbprints: certs, userId: '@((Guid) ViewBag.UserId)' },
+                success: function(result) {
+                    if (result.Status == "ok") {
+                        $.each(result.certificates, function() {
+                            populateEncMyCert(this);
+                        });
+
+                    }
+                    if (result.Status == "logoff") {
+                        location.href = '@Url.Action("LogOff", "Account")';
+                    }
+                },
+                error: function(request, error, result) {
+                }
+            });
+        }
+
+    }
+
+
+    function addFromFile() {
+        $('#file').click();
+    }
+
+    function nameCheck(val) {
+        var re = /^[а-яА-Яё_Ёa-zA-Z0-9-\s]+$/;
+        var nameField = $('#name');
+        var errorSpan = $('#wrongName');
+        if (val == undefined)
+            val = nameField.val();
+
+        if (val == '' || val == undefined || !re.test(val)||val.trim()=='') {
+            //nameField.css('color', 'red');
+            //nameField.css('border-color', 'red');
+            nameField.addClass('error');
+            errorSpan.css('display', 'block');
+            return false;
+        }
+        //nameField.css('color', 'black');
+        //nameField.css('border-color', '#d5d5d5');
+        nameField.removeClass('error');
+        errorSpan.css('display', 'none');
+        return true;
+    }
+
+
+    function UpdateNavPane(navHtmlString) {
+        $('#breadcrumbs').html(navHtmlString);
+    }
+
+    function disposeSearchCertFrame(contactId) {
+        $("#SearchCertificateDiv").dialog("close");
+        $("#SearchCertificateFrame").contents().empty();
+    }
+
+    function findCertClick(contactId, returnType) {
+        $('#SearchCertificateFrame').attr('src', '@Url.Action("FindCertificate", "Helper")' + '?returnType=' + returnType + '&userId=' + $('userId').val());
+        $("#SearchCertificateDiv").dialog("open");
+        $("#SearchCertificateDiv").dialog("option", "height", 200);
+        $("#SearchCertificateFrame").css("height", '150px');
+    }
+
+    function findMyCertToEnc() {
+        $.post("@Url.Action("MyCertificates", "Helper", new {})" + "?modalDivId=signCertModaL&multi=true&userId=" + $('#userId').val(), function(data) {
+            $('#signCertModaL').html(data);
+            $('#signCertModaL').dialog('open');
+        });
+    }
+
+    function addSignerCertificate(data) {
+        $('#SignerCertificate1').val(data.Thumbprint);
+        var val = (data.FriendlyName == null ? "" : data.FriendlyName + " - ") + (data.Organization == null ? "" : (data.Organization + ' - ')) + data.SubjectName + ' - ' + data.TimeMessage;
+        $('#signCert').attr("title", val);
+        $('#signCert').val(val);
+        if (data.IsTest) {
+            $('#signCert').parent().prepend('<span class="test-certificate-icon float js-test-certificate-tip" id="testTip-'+data.Thumbprint+'" ></span>');
+
+            var regTipOptions = {
+                tipJoint: "left",
+                background: '#fff5d2',
+                borderRadius: 4,
+                borderWidth: 1,
+                borderColor: '#fee8ae'
+            };
+            $(".js-test-certificate-tip").each(function(i,el){
+                new Opentip($(el), 'Сертификат выпущен без участия<br>аккредитованного Удостоверяющего<br>Центра и не имеет юридической силы.', '', regTipOptions);
+            });
+        }
+    }
+
+    function showFoundedCerts() {
+        $("#SearchCertificateDiv").dialog("option", "height", 580);
+        $("#SearchCertificateFrame").css("height", '550px');
+    }
+
+    function hideFoundedCerts() {
+        $("#SearchCertificateDiv").dialog("option", "height", 500);
+        $("#SearchCertificateFrame").css("height", 'auto');
+    }
+
+    function populateEncCert(certificate) {
+        var hasSimilarCert = false;
+        $.each(window.EncryptCertificates, function() {
+            if (this.Thumbprint == certificate.Thumbprint) {
+                hasSimilarCert = true;
+            }
+        });
+        if (!hasSimilarCert) {
+
+            window.EncryptCertificates.push(certificate);
+            var istest =  certificate.IsTest ? '<span class="test-certificate-icon float js-test-certificate-tip" id="testTip-' + certificate.Thumbprint + '"></span>' : '<span class="fake-test-certificate-icon float"></span>';
+            var val = ((certificate.FriendlyName == null || certificate.FriendlyName == "") ? "" : (certificate.FriendlyName + " - ")) + (certificate.Organization == null ? "" : (certificate.Organization + ' - ')) + certificate.SubjectName + ' - ' + certificate.TimeMessage;
+            var html = '<div class="template" id="' + certificate.Thumbprint + '">' +
+                '<div class="row-title col">' +
+                istest +
+                '<input type="text" disabled=true title="' + val + '" value="' + val + '" />' +
+                '</div>' +
+                '<div class="actions col">' +
+                '<a style="cursor:pointer" onclick="deleteEncCert(\'' + certificate.Thumbprint + '\')"><i class="icon delete"></i></a>' +
+                '</div>' +
+                '</div>';
+            var encCertList = $('#encCertList');
+            encCertList.append(html);
+            var regTipOptions = {
+                tipJoint: "left",
+                background: '#fff5d2',
+                borderRadius: 4,
+                borderWidth: 1,
+                borderColor: '#fee8ae'
+            };
+            $(".js-test-certificate-tip").each(function(i,el){
+                new Opentip($(el), 'Сертификат выпущен без участия<br>аккредитованного Удостоверяющего<br>Центра и не имеет юридической силы.', '', regTipOptions);
+            });
+        }
+
+        if (scroll.update != undefined) {
+            scroll.update();
+            scroll.update();
+        }
+    }
+
+    function populateEncMyCert(certificate) {
+        if ($('#encToMe').attr('checked') != 'checked')
+            $('#encToMe').trigger('click');
+        var hasSimilarCert = false;
+        $.each(window.EncryptMyCertificates, function() {
+            if (this.Thumbprint == certificate.Thumbprint) {
+                hasSimilarCert = true;
+            }
+        });
+        if (!hasSimilarCert) {
+            window.EncryptMyCertificates.push(certificate);
+            var istest =  certificate.IsTest ? '<span class="test-certificate-icon float js-test-certificate-tip" id="testTip-' + certificate.Thumbprint + '"></span>' : '<span class="fake-test-certificate-icon float"></span>';
+            var val = (certificate.Organization == null ? "" : (certificate.Organization + ' - ')) + certificate.SubjectName + ' - ' + certificate.TimeMessage;
+            var html = '<div class="template" id="' + certificate.Thumbprint + '">' +
+                '<div class="row-title col">' +
+                istest +
+                '<input type="text" disabled=true title="' + val + '" value="' + val + '" />' +
+                '</div>' +
+                '<div class="actions col">' +
+                '<a style="cursor:pointer" onclick="deleteMyEncCert(\'' + certificate.Thumbprint + '\')"><i class="icon delete"></i></a>' +
+                '</div>' +
+                '</div>';
+            var encCertList = $('#EncMyCertList');
+            encCertList.append(html);
+
+            var regTipOptions = {
+                tipJoint: "left",
+                background: '#fff5d2',
+                borderRadius: 4,
+                borderWidth: 1,
+                borderColor: '#fee8ae'
+            };
+            $(".js-test-certificate-tip").each(function(i,el){
+                new Opentip($(el), 'Сертификат выпущен без участия<br>аккредитованного Удостоверяющего<br>Центра и не имеет юридической силы.', '', regTipOptions);
+            });
+        }
+        if (scroll.update != undefined) {
+            scroll.update();
+            scroll.update();
+        }
+    }
+
+    function deleteEncCert(deletingEncCertId) {
+        var deletingDiv = $('#' + deletingEncCertId);
+        deletingDiv.remove();
+        window.EncryptCertificates = jQuery.grep(window.EncryptCertificates, function(value) {
+            return value.Thumbprint != deletingEncCertId;
+        });
+        scroll.update();
+    }
+
+    function deleteMyEncCert(deletingMyEncCertId) {
+        var deletingDiv = $('#' + deletingMyEncCertId);
+        deletingDiv.remove();
+        window.EncryptMyCertificates = jQuery.grep(window.EncryptMyCertificates, function(value) {
+            return value.Thumbprint != deletingMyEncCertId;
+        });
+        scroll.update();
+    }
+
+    function submitCheck() {
+
+        if (!nameCheck($('#name').val())) {
+            return false;
+        }
+
+
+        var encCertsStr = [];
+        $.each(window.EncryptCertificates, function() {
+            encCertsStr.push(this.Thumbprint);
+        });
+        if ($('#encToMe').prop('checked')) {
+            $.each(window.EncryptMyCertificates, function() {
+                encCertsStr.push(this.Thumbprint);
+            });
+        }
+
+        $('#RecipientCertificates1').val(encCertsStr);
+        return true;
+    }
+
+    function submitPreparation() {
+        var encCertsStr = [];
+        $.each(window.EncryptCertificates, function() {
+            encCertsStr.push(this.Thumbprint);
+        });
+        if ($('#encToMe').prop('checked')) {
+            $.each(window.EncryptMyCertificates, function() {
+                encCertsStr.push(this.Thumbprint);
+            });
+        }
+
+        $('#RecipientCertificates1').val(encCertsStr);
+        if (nameCheck())
+            $('form').submit();
+    }
+</script>
+<script>
+    $(document).ready(function() {
+        jQuery.ajaxSettings.traditional = true;
+
+        $('#simple').click(function() {
+            $('#simple').attr('class', 'element col active');
+            $('#extend').attr('class', 'element col');
+            $('.more').css('display', 'none');
+        });
+
+        $('#extend').click(function() {
+            $('#simple').attr('class', 'element col');
+            $('#extend').attr('class', 'element col active');
+            $('.more').css('display', 'block');
+        });
+
+        $('#file').change(function(e) {
+            var fileInput = document.getElementById('file');
+            var files = fileInput.files;
+            for (var i = 0; i < files.length; i++) {
+                if (files[i].size < 1048576) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', '@Url.Action("AddCertificateToContact", "AddressBook", new {userId = (Guid) ViewBag.UserId})', false);
+                    xhr.setRequestHeader('Content-type', 'multipart/form-data');
+                    //Appending file information in Http headers
+                    // xhr.setRequestHeader('X-File-Name', encodeURIComponent(files[i].name));
+                    xhr.setRequestHeader('X-File-Type', files[i].type);
+                    xhr.setRequestHeader('X-File-Size', files[i].size);
+
+
+                    xhr.addEventListener("load", function(evt) { UploadComplete(evt); }, false);
+                    //Sending file in XMLHttpRequest
+                    xhr.send(fileInput.files[i]);
+                    var retrievedData = "";
+                } else {
+                    errorModal("Файл не соответствует требованиям к сертификатам, используемым в Cryptogramm. Загрузка невозможна.");
+                }
+            }
+
+            function UploadComplete(evt) {
+                if (evt.target.status == 200) {
+                    retrievedData = jQuery.parseJSON(xhr.responseText);
+                    if (retrievedData.Status == "ok") {
+                        populateEncCert(retrievedData);
+                    } else {
+                        if (retrievedData.Status == "logoff") {
+                            location.href = '@Url.Action("LogOff", "Account")';
+                            return;
+                        }
+                        errorModal(retrievedData.Status);
+                    }
+
+                } else
+                    errorModal("Файл не соответствует требованиям к сертификатам, используемым в Cryptogramm. Загрузка невозможна.");
+            }
+
+        });
+
+
+        $('#encToMe').change(function(e) {
+            if (e.target.checked) {
+                $('#MyEncCertDiv').css('display', 'block');
+            } else {
+                $('#MyEncCertDiv').css('display', 'none');
+            }
+            //scroll.update();
+        });
+
+
+        if ('@(!string.IsNullOrEmpty(Model._SignatureSettings.SignerCertificate1))' == 'True') {
+            var certThmbprnt = '@(Model._SignatureSettings.SignerCertificate1 ?? "")';
+            var certs = [];
+            certs.push(certThmbprnt);
+            $.ajax({
+                url: '@Url.Action("GetCertificatesInfo", "Helper")',
+                async: false,
+                type: "POST",
+                data: { thumbprints: certs, userId: '@((Guid) ViewBag.UserId)' },
+                success: function(result) {
+                    if (result.Status == "ok") {
+                        $.each(result.certificates, function() {
+                            addSignerCertificate(this);
+                        });
+
+                    }
+                    if (result.Status == "logoff") {
+                        location.href = '@Url.Action("LogOff", "Account")';
+                    }
+                },
+                error: function(request, error, result) {
+                }
+            });
+        }
+
+        if ('@((Model._EncryptionSettings.RecipientCertificates1 != null && Model._EncryptionSettings.RecipientCertificates1.Count != 0))' == 'True') {
+            certs = [];
+            var objs = '@(Model._EncryptionSettings.RecipientCertificates1 == null ? "" : String.Join(",", Model._EncryptionSettings.RecipientCertificates1))'.split(',');
+            $.each(objs, function() {
+                certs.push(this);
+            });
+            jQuery.ajaxSettings.traditional = true;
+            $.ajax({
+                url: '@Url.Action("GetCertificatesInfo", "Helper")',
+                async: false,
+                type: "POST",
+                data: { thumbprints: certs, userId: '@((Guid) ViewBag.UserId)' },
+                success: function(result) {
+                    if (result.Status == "ok") {
+                        $.each(result.certificates, function() {
+                            if (this.IsMyCert) {
+                                populateEncMyCert(this);
+                            } else {
+                                populateEncCert(this);
+                            }
+                            //addSignerCertificate(this);
+                        });
+                    }
+                    if (result.Status == "logoff") {
+                        location.href = '@Url.Action("LogOff", "Account")';
+                    }
+                },
+                error: function(request, error, result) {
+                }
+            });
+
+        }
+
+        $('#name').keyup(function(evt) {
+            var val = $(evt.target).val();
+            var charCode = typeof evt.which == "number" ? evt.which : evt.keyCode;
+            if (charCode != 46 && charCode != 8)
+                val += (String.fromCharCode(charCode));
+            nameCheck(val);
+        });
+        $('#name').blur(function(evt) {
+            var val = $(evt.target).val();
+            nameCheck(val);
+        });
+
+
+        $('#signCertIcon').click(function() {
+            $.post("@Html.Raw(Url.Action("MyCertificates", "Helper", new {modalDivId = "signCertModaL", userId = (Guid) ViewBag.UserId}))", function(data) {
+                $('#signCertModaL').html(data);
+                $('#signCertModaL').dialog('open');
+            });
+            @*            $('#signCertModaL').load("@Url.Action("MyCertificates", "Helper", new {modalDivId = "#signCertModaL"})", function () {
+                $(this).dialog('open');
+            });*@
+            return false;
+        });
+        $('#signCertModaL').dialog({
+            resizable: false,
+            autoOpen: false,
+            height: 440,
+            width: 973,
+            modal: true,
+            create: function(event, ui) {
+                $(".ui-widget-header").hide();
+            }
+        });
+        $('#SearchCertificateDiv').dialog({
+            resizable: false,
+            autoOpen: false,
+            height: 654,
+            width: 694,
+            modal: true,
+            create: function(event, ui) {
+                $(".ui-widget-header").hide();
+            }
+        });
+    });
+</script>

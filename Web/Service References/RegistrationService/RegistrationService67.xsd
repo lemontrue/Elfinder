@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/DSS.Service.Response" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DSS.Service.Response" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://localhost:44300/RegistrationService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="https://localhost:44300/RegistrationService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Error" />
+  <xs:import schemaLocation="https://localhost:44300/RegistrationService.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="https://localhost:44300/RegistrationService.svc?xsd=xsd1" namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:complexType name="RegistrationModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FIO" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RegistrationModel" nillable="true" type="tns:RegistrationModel" />
+  <xs:complexType name="RegistrationResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthToken" type="ser:guid" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/DSS.Service.Error" minOccurs="0" name="Error" nillable="true" type="q1:RegistrationServiceError" />
+      <xs:element minOccurs="0" name="RoleChangeDateTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SmsConfirmationToken" type="ser:guid" />
+      <xs:element minOccurs="0" name="Status" type="tns:RegistrationResponse.RegistrationStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RegistrationResponse" nillable="true" type="tns:RegistrationResponse" />
+  <xs:simpleType name="RegistrationResponse.RegistrationStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Success" />
+      <xs:enumeration value="Fail" />
+      <xs:enumeration value="PhoneNumberBusy" />
+      <xs:enumeration value="ConfirmationNotFoundInDB" />
+      <xs:enumeration value="SmsConfirmationExpire" />
+      <xs:enumeration value="WrongSmsPIN" />
+      <xs:enumeration value="SmsAttemptCountOverFlow" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="RegistrationResponse.RegistrationStatus" nillable="true" type="tns:RegistrationResponse.RegistrationStatus" />
+  <xs:complexType name="GetCityListResponse">
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Cities" nillable="true" type="q2:ArrayOfstring" />
+      <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="Error" nillable="true" type="q3:Exception" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetCityListResponse" nillable="true" type="tns:GetCityListResponse" />
+</xs:schema>

@@ -1,0 +1,13 @@
+﻿.elfiner-button-filter label { margin-top: 3px; }
+
+.elfinder-button-text { display: block; }
+
+.elfiner-button-more .elfinder-button-text { display: inline-block; }
+
+.elfinder .elfinder-button { height: 38px !important; }
+
+.selectblock .selectinfo .titleblock .title { word-break: break-all; }
+
+.ui-elfinder-button-first.ui-elfinder-button-green .elfinder-button { width: 155px !important; }
+
+.selectblock .selectinfo .titleblock .title { width: 300px; }

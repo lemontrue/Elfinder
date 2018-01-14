@@ -1,0 +1,50 @@
+﻿<div id="restore">
+    <h1>
+        Восстановление пароля
+    </h1>
+    <div class="box">
+        <div class="restore-area">
+            <div class="form">
+                <div class="row message">
+                    <div class="success-mess">
+                        В качестве дополнительной меры безопасности была указана
+                        <br />  необходимость ввода номера мобильного телефона.
+                        <br />  Отключить данную опцию можно в Вашем профиле.
+                    </div>
+                </div>
+                <div class="row info">
+                    Укажите номер мобильного телефона, заданный Вами в профиле.
+                </div>
+                <div class="row phone">
+                    <label class="col">
+                        Мобильный телефон:
+                    </label>
+                    <div class="city-code col">
+                        +7
+                    </div>
+                    <div class="value col">
+                        <input {{focusEl}} class="js-phone" name="phoneValue" can-value="phoneValue" maxlength="11" required="required" type="text" />
+                    </div>
+					<div class="error-phone js-error-phone" style="color: red"></div>
+
+                </div>
+                <div class="row sbmt">
+                    <a can-click="event.cancel" class="btn btn-cancel" href="#">
+                        Отмена
+                    </a>
+                    <input can-click="event.enter" class="btn btn-blue" type="submit" value="Далее" />
+                </div>
+            </div>
+        </div>
+        <div class="row bottom text-right">
+            <a href="#">
+                Техническая поддержка
+            </a>
+        </div>
+    </div>
+    {{#if error}}
+        <div class="error-mess">
+            {{error.message}}
+        </div>
+    {{/if}}
+</div>

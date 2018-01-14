@@ -1,0 +1,187 @@
+body {
+    color: #000;
+    font: 12px Verdana, serif;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#container {
+    margin: 0 auto;
+}
+
+
+#header {
+    height: 85px;
+    text-align: center;
+    box-shadow:  0 3px 3px rgba(0,0,0,.2);
+    margin-bottom: 40px;
+}
+
+#header  .logo {
+    background: url(../i/logo-large.png) no-repeat center bottom ;
+    height: 65px;
+    width: 255px;
+    margin: 0 auto
+}
+
+#content {
+    height: 305px;
+    position: relative;
+}
+#content .pattern {
+    position: absolute;
+    height: 205px;
+    width: 100%;
+    top: 55px;
+    background: url(../i/pattern.png)  ;
+    z-index: 1;
+}
+#content .form {
+    color: #fff;
+    position: relative;
+    width: 440px;
+    height: 305px;
+    background: #0d81cc;
+    margin: 0 auto;
+    z-index: 99;
+    box-shadow:  0 0 3px rgba(0,0,0,.2);
+    border-radius: 3px;
+}
+#content .form .title {
+    font-size: 18px;
+    font-weight: 700;
+    height: 75px;
+    line-height: 75px;
+    text-align: center;
+}
+#content .form .descr {
+    font-size: 13px;
+    height: 80px;
+    text-align: center;
+    padding: 0 30px;
+    line-height: 18px;
+
+}
+#content .form .field {
+    width: 320px;
+    margin: 0 auto 0;
+}
+#content .form .error-box {
+    height: 32px;
+    padding: 9px 0;
+}
+#content .form .error {
+    margin: 0 auto;
+    height: 32px;
+    color: #ff002a;
+    background: #fff;
+    border-radius: 3px;
+    width: 265px;
+    font-size: 11px;
+    text-align: center;
+    line-height: 30px;
+    position: relative;
+}
+#content .form .error:before {
+    width: 10px;
+    height: 4px;
+    position: absolute;
+    top: 32px;
+    left: 130px;
+    background: url(../i/arrow-down.png) no-repeat  ;
+    content: ""
+}
+
+#content .form .error2 {
+    margin: 0 auto;
+    height: 32px;
+    color: #ff002a;
+    background: #fff;
+    border-radius: 3px;
+    width: 265px;
+    font-size: 11px;
+    text-align: center;
+    line-height: 30px;
+    position: relative;
+}
+#content .form .error2:before {
+    width: 10px;
+    height: 4px;
+    position: absolute;
+    top: -4px;
+    left: 130px;
+    background: url(../i/arrow-up.png) no-repeat  ;
+    content: ""
+}
+#content .form .field {
+    position: relative;
+}
+#content .form .field input[type=text] {
+    -webkit-border-radius: 3px;
+    border: 1px solid #c9c9c9;
+    border-radius: 3px;
+    height: 28px;
+    padding: 0 5px;
+    width: 308px;
+    text-align: center;
+    color: #000
+}
+
+#content .form .field .description {
+    background: url(../i/descr-icon-white.png) center no-repeat;
+    display: inline-block;
+    height: 16px;
+    vertical-align: middle;
+    width: 16px;
+    position: absolute;
+    top: 6px;
+    left: 325px;
+}
+
+#content .form .submit {
+    text-align: center;
+}
+#content .form .submit button {
+    -webkit-border-radius: 3px;
+    font-size: 14px;
+    border: 0;
+    border-radius: 3px;
+    color: #FFF;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 700;
+    height: 40px;
+    line-height: 38px;
+    text-decoration: none;
+    background: #0cca66;
+    width: 230px;
+}
+
+.mobile-app {
+    margin: 35px auto 0;
+    width: 440px;
+}
+.mobile-app .title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 34px;
+    text-align: center;
+}
+.mobile-app .desc img {
+    float: left;
+}
+.mobile-app .desc img + span {
+    float: left;
+    margin: 0 0 0 20px;
+    text-align: justify;
+    width: 320px;
+    line-height: 18px;
+}
+.mobile-app .store {
+    clear: both;
+    padding: 25px 15px 15px;
+    text-align: center;
+}
+

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/DSS.Service.Settings" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DSS.Service.Settings" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:61159/CryptxService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:61159/CryptxService.svc?xsd=xsd9" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="Settings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="Silent" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Version" type="xs:int" />
+      <xs:element minOccurs="0" name="_CertificateVerificationSettings" nillable="true" type="tns:CertificateVerificationSettings" />
+      <xs:element minOccurs="0" name="_DecryptionSettings" nillable="true" type="tns:DecryptionSettings" />
+      <xs:element minOccurs="0" name="_EncryptionSettings" nillable="true" type="tns:EncryptionSettings" />
+      <xs:element minOccurs="0" name="_MainSettings" nillable="true" type="tns:MainSettings" />
+      <xs:element minOccurs="0" name="_SignatureSettings" nillable="true" type="tns:SignatureSettings" />
+      <xs:element minOccurs="0" name="_SignatureVerificationSettings" nillable="true" type="tns:SignatureVerificationSettings" />
+      <xs:element minOccurs="0" name="_TimestampSettings" nillable="true" type="tns:TimestampSettings" />
+      <xs:element minOccurs="0" name="_TimestampVerificationSettings" nillable="true" type="tns:TimestampVerificationSettings" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Settings" nillable="true" type="tns:Settings" />
+  <xs:complexType name="CertificateVerificationSettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UrlRetrievalTimeout" type="xs:int" />
+      <xs:element minOccurs="0" name="VerifyFlags" type="xs:unsignedByte" />
+      <xs:element minOccurs="0" name="_RevocationFlag" type="tns:RevocationFlag" />
+      <xs:element minOccurs="0" name="_RevocationMode" type="tns:RevocationMode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CertificateVerificationSettings" nillable="true" type="tns:CertificateVerificationSettings" />
+  <xs:simpleType name="RevocationFlag">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EndCertificateOnly">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ExcludeRoot">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EntireChain">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="RevocationFlag" nillable="true" type="tns:RevocationFlag" />
+  <xs:simpleType name="RevocationMode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NoCheck">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Online">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Offline">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="RevocationMode" nillable="true" type="tns:RevocationMode" />
+  <xs:complexType name="DecryptionSettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DecryptCertificate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="KeysetPassword" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DecryptionSettings" nillable="true" type="tns:DecryptionSettings" />
+  <xs:complexType name="EncryptionSettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="KeysetPassword" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="RecipientCertificates1" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="RecipientCertificates2" nillable="true" type="q2:ArrayOfbase64Binary" />
+      <xs:element minOccurs="0" name="ZipType" type="tns:ZipTypeEnum" />
+      <xs:element minOccurs="0" name="_CertificateVerificationSettings" nillable="true" type="tns:CertificateVerificationSettings" />
+      <xs:element minOccurs="0" name="_EncodingType" type="tns:EncodingType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EncryptionSettings" nillable="true" type="tns:EncryptionSettings" />
+  <xs:simpleType name="ZipTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NoZip" />
+      <xs:enumeration value="ZipBefore" />
+      <xs:enumeration value="ZipAfter" />
+      <xs:enumeration value="ZipBeforeAndAfter" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ZipTypeEnum" nillable="true" type="tns:ZipTypeEnum" />
+  <xs:simpleType name="EncodingType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DefaultEncoding" />
+      <xs:enumeration value="Base64" />
+      <xs:enumeration value="Base64WithHeaders" />
+      <xs:enumeration value="Binary" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EncodingType" nillable="true" type="tns:EncodingType" />
+  <xs:complexType name="MainSettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsDefault" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MainSettings" nillable="true" type="tns:MainSettings" />
+  <xs:complexType name="SignatureSettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CertificateVerificationSettings" nillable="true" type="tns:CertificateVerificationSettings" />
+      <xs:element minOccurs="0" name="Detached" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IncludeSignerCertificate" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IncludeTimestamp" type="xs:boolean" />
+      <xs:element minOccurs="0" name="KeysetPassword" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SignerCertificate1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZipType" type="tns:ZipTypeEnum" />
+      <xs:element minOccurs="0" name="_EncodingType" type="tns:EncodingType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SignatureSettings" nillable="true" type="tns:SignatureSettings" />
+  <xs:complexType name="SignatureVerificationSettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CertificateVerifyDateTime" type="tns:VerificationDateTime" />
+      <xs:element minOccurs="0" name="CertificateVerifySettings" nillable="true" type="tns:CertificateVerificationSettings" />
+      <xs:element minOccurs="0" name="TimestampRequired" type="xs:boolean" />
+      <xs:element minOccurs="0" name="VerifyFlag" type="tns:SignatureVerificationFlags" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SignatureVerificationSettings" nillable="true" type="tns:SignatureVerificationSettings" />
+  <xs:simpleType name="VerificationDateTime">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CurrentDateTime">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DateTimeFromTimestamp">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DateTimeFromSignature">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="VerificationDateTime" nillable="true" type="tns:VerificationDateTime" />
+  <xs:simpleType name="SignatureVerificationFlags">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SignatureOnly">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SignatureAndCertificate">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SignatureVerificationFlags" nillable="true" type="tns:SignatureVerificationFlags" />
+  <xs:complexType name="TimestampSettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IncludeTsaCertificate" type="xs:boolean" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="TsaAddress" nillable="true" type="q3:ArrayOfstring" />
+      <xs:element minOccurs="0" name="UseNonce" type="xs:boolean" />
+      <xs:element minOccurs="0" name="VerifyOnReceive" type="xs:boolean" />
+      <xs:element minOccurs="0" name="_EncodingType" type="tns:EncodingType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TimestampSettings" nillable="true" type="tns:TimestampSettings" />
+  <xs:complexType name="TimestampVerificationSettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="VerifyFlag" type="tns:SignatureVerificationFlags" />
+      <xs:element minOccurs="0" name="_CertificateVerificationSettings" nillable="true" type="tns:CertificateVerificationSettings" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TimestampVerificationSettings" nillable="true" type="tns:TimestampVerificationSettings" />
+</xs:schema>

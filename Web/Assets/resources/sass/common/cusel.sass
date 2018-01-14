@@ -1,0 +1,135 @@
+.cusel, .cuselFrameRight, .jScrollPaneDrag, .jScrollArrowUp, .jScrollArrowDown
+  background-image: img('/old/qs/select-bg.png', '' ,'') !important
+
+.cusel
+  background-position: left top
+  cursor: pointer
+  display: inline-block
+  height: 28px
+  position: relative
+  width: 100% !important
+  z-index: 1
+
+.cuselFrameRight
+  background-position: right top
+  height: 100%
+  position: absolute
+  right: 0
+  top: 0
+  width: 42px
+  z-index: 2
+
+.cuselText
+  cursor: pointer
+  height: 28px
+  left: 0
+  line-height: 28px
+  overflow: hidden
+  padding: 0 7px
+  position: absolute
+  top: 0
+  z-index: 1
+
+.cusel
+  span
+    cursor: pointer
+    display: block
+    height: 24px
+    line-height: 24px
+    padding: 0 13px
+    white-space: nowrap
+    zoom: 1
+    &:hover
+      background: #1899f4
+      color: #fff
+      cursor: default
+  .cuselOptHover
+    background: #1899f4
+    color: #fff
+    cursor: default
+  &:hover, &:focus
+    background-image: img('/old/qs/selects-focus.png', '' ,'')
+    .cuselFrameRight
+      background-image: img('/old/qs/selects-focus.png', '' ,'')
+.cuselFocus
+  background-image: img('/old/qs/selects-focus.png', '' ,'')
+  .cuselFrameRight
+    background-image: img('/old/qs/selects-focus.png', '' ,'')
+
+.cuselOpen
+  z-index: 999
+
+.classDisCusel
+  background-image: img('/old/selects-2-dis.png', '' ,'') !important
+  color: #ccc
+  cursor: default
+  .cuselFrameRight
+    background-image: img('/old/selects-2-dis.png', '' ,'') !important
+    color: #ccc
+    cursor: default
+  .cuselText
+    cursor: default
+
+.cusel
+  .cusel-scroll-wrap
+    background-color: #FFF
+    border: 1px solid #C9C9C9
+    border-radius: 3px
+    display: block
+    left: 0
+    min-width: 100%
+    overflow: hidden
+    padding: 7px 0
+    position: absolute
+    top: 30px
+    visibility: hidden
+    width: auto
+    z-index: 5
+  .jScrollPaneContainer
+    background-color: #fff
+    border-radius: 3px
+    overflow: hidden
+    z-index: 5
+  .jScrollPaneTrack
+    background: #ccc
+    height: 100%
+    position: absolute
+    right: 4px
+    top: 0
+    width: 7px !important
+  .jScrollPaneDrag
+    background-position: -40px -26px
+    cursor: pointer
+    height: 27px !important
+    position: absolute
+    right: -4px
+    width: 15px !important
+  .jScrollPaneDragTop
+    left: 0
+    overflow: hidden
+    position: absolute
+    top: 0
+  .jScrollPaneDragBottom
+    bottom: 0
+    left: 0
+    overflow: hidden
+    position: absolute
+  .jScrollArrowUp
+    background-position: -2px -26px
+    cursor: pointer
+    height: 12px
+    overflow: hidden
+    position: absolute
+    right: 2px
+    top: 0
+    width: 26px
+  .jScrollArrowDown
+    background-position: -21px -26px
+    bottom: 0
+    cursor: pointer
+    height: 12px
+    overflow: hidden
+    position: absolute
+    right: 3px
+    top: auto
+    width: 25px

@@ -161,8 +161,8 @@ namespace ElFinder
         public FileSystemDriver(string server, Guid token)
         {
             this.token = token;
-            DirectoryInfo thumbsStorage = new DirectoryInfo(Server.MapPath("~/Files"));
-            this.AddRoot(new Root(new DirectoryInfo(@"C:\Program Files"))
+            DirectoryInfo thumbsStorage = new DirectoryInfo("~/Files");
+            this.AddRoot(new Root(new DirectoryInfo(@"~/Files/MyDir"))
             {
                 IsLocked = true,
                 IsReadOnly = true,

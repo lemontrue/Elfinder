@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Mvc;
 using System.Web.Security;
 using CryptxOnline.Web.AuthorizeService;
 using CryptxOnline.Web.Identity;
@@ -13,6 +12,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 //using StackExchange.Profiling;
 using Helper = CryptxOnline.Web.Helpers.Helper;
+using System.Web.Mvc;
 
 namespace CryptxOnline.Web.Controllers
 {

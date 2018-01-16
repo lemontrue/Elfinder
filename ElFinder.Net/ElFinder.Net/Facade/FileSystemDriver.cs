@@ -216,50 +216,6 @@ namespace ElFinder
             return Json(answer);
         }
 
-        JsonResult Init(string target)
-        {
-            FullPath fullPath;
-            if (string.IsNullOrEmpty(target))
-            {
-                Root root = _roots.FirstOrDefault(r => r.StartPath != null);
-                if (root == null)
-                    root = _roots.First();
-                fullPath = new FullPath(root, root.StartPath ?? root.Directory);
-            }
-            else
-            {
-                fullPath = ParsePath(target);
-            }
-            InitResponse answer = new InitResponse(DTOBase.Create(fullPath.Directory, fullPath.Root), new Options(fullPath));
-
-            foreach (FileInfo item in fullPath.Directory.GetFiles())
-            {
-                if ((item.Attributes & FileAttributes.Hidden) != FileAttributes.Hidden)
-                    answer.Files.Add(DTOBase.Create(item, fullPath.Root));
-            }
-            foreach (DirectoryInfo item in fullPath.Directory.GetDirectories())
-            {
-                if ((item.Attributes & FileAttributes.Hidden) != FileAttributes.Hidden)
-                    answer.Files.Add(DTOBase.Create(item, fullPath.Root));
-            }
-            foreach (Root item in _roots)
-            {
-                answer.Files.Add(DTOBase.Create(item.Directory, item));
-            }
-            if (fullPath.Root.Directory.FullName != fullPath.Directory.FullName)
-            {
-                foreach (DirectoryInfo item in fullPath.Root.Directory.GetDirectories())
-                {
-                    if ((item.Attributes & FileAttributes.Hidden) != FileAttributes.Hidden)
-                        answer.Files.Add(DTOBase.Create(item, fullPath.Root));
-                }
-            }
-            if (fullPath.Root.MaxUploadSize.HasValue)
-            {
-                answer.UploadMaxSize = fullPath.Root.MaxUploadSizeInKb.Value + "K";
-            }
-            return Json(answer);
-        }
         ActionResult IDriver.File(string target, bool download)
         {
             FullPath fullPath = ParsePath(target);
@@ -337,7 +293,7 @@ namespace ElFinder
             if (fullPath.Directory != null)
             {
                 string newPath = Path.Combine(fullPath.Directory.Parent.FullName, name);
-                System.IO.Directory.Move(fullPath.Directory.FullName, newPath);
+                Directory.Move(fullPath.Directory.FullName, newPath);
                 answer.Added.Add(DTOBase.Create(new DirectoryInfo(newPath), fullPath.Root));
             }
             else
@@ -358,7 +314,7 @@ namespace ElFinder
                 RemoveThumbs(fullPath);
                 if (fullPath.Directory != null)
                 {
-                    System.IO.Directory.Delete(fullPath.Directory.FullName, true);
+                    Directory.Delete(fullPath.Directory.FullName, true);
                 }
                 else
                 {
@@ -433,7 +389,7 @@ namespace ElFinder
             }
             return Json(response);
         }
-        JsonResult IDriver.Upload(string target, System.Web.HttpFileCollectionBase targets, bool addWithNewIndex)
+        JsonResult IDriver.Upload(string target, HttpFileCollectionBase targets, bool addWithNewIndex)
         {
             FullPath dest = ParsePath(target);
             var response = new AddResponse();
@@ -602,9 +558,24 @@ namespace ElFinder
 
         #endregion IDriver
 
+        #region IDriverExtensions
         JsonResult IDriver.Encrypt(IEnumerable<string> targets)
         {
-            throw new NotImplementedException();
+            var output = new CryptoOperationResponse();
+            foreach (var target in targets)
+            {
+                FullPath fullPath = ParsePath(target);
+
+                var oldFileName = fullPath.File.Name;
+                var enc = service.DAVEncryptOperation(target, null, token);
+
+                output.OperationResult = enc.OperationResult;
+
+                var newFile = new FileInfo(Path.Combine(fullPath.Directory.Name, oldFileName));
+                //output.OperatedFile = newFile.;
+            }
+
+            return Json(output);
         }
 
         JsonResult IDriver.Decrypt(IEnumerable<string> targets)
@@ -637,17 +608,12 @@ namespace ElFinder
             throw new NotImplementedException();
         }
 
-        FullPath IDriver.ParsePath(string target)
-        {
-            throw new NotImplementedException();
-        }
-
         JsonResult IDriver.CryptInfo(string target)
         {
             throw new NotImplementedException();
         }
 
-        ActionResult IDriver.CertDownload(string thumb)
+        public ActionResult CertDownload(string thumb)
         {
             throw new NotImplementedException();
         }
@@ -679,86 +645,6 @@ namespace ElFinder
                 this._roots.FirstOrDefault(x => x.Directory.Name == Upload) :
                 this._roots.FirstOrDefault(x => x.Directory.Name == Recived);
             if (lroot == null) throw new ArgumentNullException(string.Format("Не найдена ожидаемая папка({0} или {1})", Upload, Recived));
-
-
-            //string mytarget = lroot.Directory.RelPath;
-            //if (!string.IsNullOrEmpty(retTarget))
-            //{
-            //    lroot = GetRoot(retTarget);
-            //    mytarget = GetCorectTarget(retTarget);
-            //    mytarget = DecodeTarget(mytarget);
-            //}
-            //List<DirInfo> filesFormWebFav = client.GetDirectories(mytarget, true);
-            //if (filesFormWebFav == null)
-            //    return null;
-
-            //List<DirInfo> directories = filesFormWebFav.FindAll(d => d.IsDirectory);
-
-            //DirInfo targetDirInfo = directories[0];
-            ////var parent = getParent(targetDirInfo);
-            //targetDirInfo.HasSubDirectories = filesFormWebFav != null && directories != null && directories.Count > 1;
-
-            //Options options = new Options
-            //{
-            //    Path = mytarget,
-            //    ThumbnailsUrl = "Thumbnails/"
-            //};
-
-            //var curDir = lroot.DTO;
-
-            //if (!string.IsNullOrEmpty(retTarget))
-            //{
-            //    DirInfo parentDirInfo = this.GetParent(targetDirInfo);
-            //    curDir = DTOBase.Create(targetDirInfo, parentDirInfo, lroot);
-            //}
-            ////curDir = lroot.DTO;
-
-            //InitResponse answer = new InitResponse(curDir, options);
-            //if (filesFormWebFav != null)
-            //{
-            //    filesFormWebFav.Remove(targetDirInfo);
-            //    foreach (DirInfo dirInfo in filesFormWebFav)
-            //    {
-            //        dirInfo.HasSubDirectories = IsConstainsChild(dirInfo);
-            //        answer.Files.Add(DTOBase.Create(dirInfo, targetDirInfo, lroot));
-            //    }
-            //}
-
-
-            //foreach (WebDavRoot item in this.roots)
-            //{
-            //    answer.Files.Add(item.DTO);
-            //}
-
-
-
-            //List<DTOBase> filteredFiles = new List<DTOBase>();
-            //foreach (DTOBase dtoBase in answer.Files)
-            //{
-            //    string fileName = (dtoBase.Name);
-            //    string ext = Path.GetExtension(fileName);
-            //    if (isModal != "1")
-            //    {
-            //        //поиск по неподписан и не зашифрован
-            //        if (ext != ".sig" && ext != ".enc")
-            //        {
-            //            filteredFiles.Add(dtoBase);
-            //        }
-            //        //filteredFiles.Add(dtoBase);
-            //    }
-            //    else
-            //    {
-            //        filteredFiles.Add(dtoBase);
-            //    }
-
-            //}
-            //answer.Files.Clear();
-            //answer.Files.AddRange(filteredFiles);
-            //var answer1 = new InitResponse(answer.Files[0], options);
-            //answer1.Files.AddRange(answer.Files);
-
-
-            //return Json(answer);
             return null;
         }
 
@@ -769,9 +655,11 @@ namespace ElFinder
         }
 
 
-        ActionResult IDriver.Download(IEnumerable<string> targets)
+        public ActionResult Download(IEnumerable<string> targets)
         {
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }

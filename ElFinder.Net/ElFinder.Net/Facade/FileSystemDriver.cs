@@ -570,40 +570,28 @@ namespace ElFinder
         #region IDriverExtensions
         JsonResult IDriver.Encrypt(IEnumerable<string> targets)
         {
-            var output = new DAVListCryptoOperationResponse();
-            foreach (var target in targets)
-            {
-                FullPath fullPath = ParsePath(target);
-                var fileName = fullPath.File.Name;
-
-                output.OperationResults.Add(File.ReadAllBytes(fileName));
-            }
+            DAVListCryptoOperationResponse output = service.DAVListEncryptOperation(GetFileNamesFromTargets(targets), null, token);
 
             return Json(output);
         }
 
         JsonResult IDriver.Decrypt(IEnumerable<string> targets)
         {
-            var output = new CryptoOperationResponse();
-            foreach (var target in targets)
-            {
-                FullPath fullPath = ParsePath(target);
-                var fileName = fullPath.File.Name;
-
-                output.OperationResult = service.DAVEncryptOperation(fileName, null, token).OperationResult;
-                output.OperatedFile = File.ReadAllBytes(fileName);
-            }
+            DAVListCryptoOperationResponse output = service.DAVListDecryptOperation(GetFileNamesFromTargets(targets), null,null, token);
 
             return Json(output);
         }
 
         JsonResult IDriver.Sign(IEnumerable<string> targets)
         {
-            throw new NotImplementedException();
+            DAVListCryptoOperationResponse response = service.DAVListSignOperation(GetFileNamesFromTargets(targets), null, null, token);
+
+            return Json(response);
         }
 
         JsonResult IDriver.CheckSign(IEnumerable<string> targets)
         {
+            var response = service.DAVSignVerify();
             throw new NotImplementedException();
         }
 
@@ -619,7 +607,7 @@ namespace ElFinder
 
         JsonResult IDriver.Add(IEnumerable<string> targets)
         {
-            var response = new AddResponse();
+            var response = service.dav
 
 
             return Json(response);
@@ -627,12 +615,14 @@ namespace ElFinder
 
         JsonResult IDriver.CryptInfo(string target)
         {
-            throw new NotImplementedException();
+            service.GetFileInfo(target, token);
         }
 
         public ActionResult CertDownload(string thumb)
         {
+            //TODO
             var response = new CertificateResponse();
+            service.AddRecipientCertificateByThumbprint(thumb, null, Guid.Empty, token);
 
             return Json(response);
         }
@@ -653,7 +643,7 @@ namespace ElFinder
 
         JsonResult IDriver.GetAddressBook()
         {
-            throw new NotImplementedException();
+            service.GetAddressBook();
         }
 
         JsonResult IDriver.Send(IEnumerable<string> targets, string emailList)
@@ -669,7 +659,7 @@ namespace ElFinder
 
         JsonResult IDriver.GetReceivedMailFiles(Guid fileGroupSendId)
         {
-            throw new NotImplementedException();
+            service.file
         }
 
 
@@ -681,5 +671,17 @@ namespace ElFinder
         }
 
         #endregion
+
+        private List<string> GetFileNamesFromTargets(IEnumerable<string> targets)
+        {
+            List<string> fullPaths = new List<string>();
+            foreach (var target in targets)
+            {
+                FullPath fullPath = ParsePath(target);
+                fullPaths.Add(fullPath.File.FullName);
+            }
+
+            return fullPaths;
+        }
     }
 }

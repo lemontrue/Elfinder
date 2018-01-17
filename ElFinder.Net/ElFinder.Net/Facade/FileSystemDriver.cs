@@ -161,15 +161,15 @@ namespace ElFinder
         public FileSystemDriver(string server, Guid token)
         {
             this.token = token;
-            DirectoryInfo thumbsStorage = new DirectoryInfo("~/Files");
-            this.AddRoot(new Root(new DirectoryInfo(@"~/Files/MyDir"))
-            {
-                IsLocked = true,
-                IsReadOnly = true,
-                IsShowOnly = true,
-                ThumbnailsStorage = thumbsStorage,
-                ThumbnailsUrl = "Thumbnails/"
-            });
+            //DirectoryInfo thumbsStorage = new DirectoryInfo(server + "~/Files/");
+            //this.AddRoot(new Root(new DirectoryInfo(@"~/Files/MyDir"))
+            //{
+            //    IsLocked = true,
+            //    IsReadOnly = true,
+            //    IsShowOnly = true,
+            //    ThumbnailsStorage = thumbsStorage,
+            //    ThumbnailsUrl = "Thumbnails/"
+            //});
             //this.AddRoot(new Root(new DirectoryInfo(Server.MapPath("~/Files")), "/Files/")
             //{
             //    Alias = "My documents",
@@ -199,6 +199,15 @@ namespace ElFinder
         #endregion public
 
         #region   IDriver
+        JsonResult IDriver.Init(string retTarget, string isModal, bool initReceivedFolder)
+        {
+            Root lroot = !initReceivedFolder ?
+                this._roots.FirstOrDefault(x => x.Directory.Name == Upload) :
+                this._roots.FirstOrDefault(x => x.Directory.Name == Recived);
+            if (lroot == null) throw new ArgumentNullException(string.Format("Не найдена ожидаемая папка({0} или {1})", Upload, Recived));
+            return null;
+        }
+
         JsonResult IDriver.Open(string target, bool tree)
         {
             FullPath fullPath = ParsePath(target);
@@ -561,18 +570,13 @@ namespace ElFinder
         #region IDriverExtensions
         JsonResult IDriver.Encrypt(IEnumerable<string> targets)
         {
-            var output = new CryptoOperationResponse();
+            var output = new DAVListCryptoOperationResponse();
             foreach (var target in targets)
             {
                 FullPath fullPath = ParsePath(target);
+                var fileName = fullPath.File.Name;
 
-                var oldFileName = fullPath.File.Name;
-                var enc = service.DAVEncryptOperation(target, null, token);
-
-                output.OperationResult = enc.OperationResult;
-
-                var newFile = new FileInfo(Path.Combine(fullPath.Directory.Name, oldFileName));
-                //output.OperatedFile = newFile.;
+                output.OperationResults.Add(File.ReadAllBytes(fileName));
             }
 
             return Json(output);
@@ -580,7 +584,17 @@ namespace ElFinder
 
         JsonResult IDriver.Decrypt(IEnumerable<string> targets)
         {
-            throw new NotImplementedException();
+            var output = new CryptoOperationResponse();
+            foreach (var target in targets)
+            {
+                FullPath fullPath = ParsePath(target);
+                var fileName = fullPath.File.Name;
+
+                output.OperationResult = service.DAVEncryptOperation(fileName, null, token).OperationResult;
+                output.OperatedFile = File.ReadAllBytes(fileName);
+            }
+
+            return Json(output);
         }
 
         JsonResult IDriver.Sign(IEnumerable<string> targets)
@@ -605,7 +619,10 @@ namespace ElFinder
 
         JsonResult IDriver.Add(IEnumerable<string> targets)
         {
-            throw new NotImplementedException();
+            var response = new AddResponse();
+
+
+            return Json(response);
         }
 
         JsonResult IDriver.CryptInfo(string target)
@@ -615,12 +632,23 @@ namespace ElFinder
 
         public ActionResult CertDownload(string thumb)
         {
-            throw new NotImplementedException();
+            var response = new CertificateResponse();
+
+            return Json(response);
         }
 
         JsonResult IDriver.Filter(string target, string query)
         {
-            throw new NotImplementedException();
+            FullPath fullPath = ParsePath(target);
+            ListResponse answer = new ListResponse();
+            foreach (var item in fullPath.Directory.GetFileSystemInfos())
+            {
+                if (item.Name.Contains(query))
+                {
+                    answer.List.Add(item.Name);
+                }
+            }
+            return Json(answer);
         }
 
         JsonResult IDriver.GetAddressBook()
@@ -639,16 +667,6 @@ namespace ElFinder
         }
 
 
-        JsonResult IDriver.Init(string retTarget, string isModal, bool initReceivedFolder)
-        {
-            Root lroot = !initReceivedFolder ?
-                this._roots.FirstOrDefault(x => x.Directory.Name == Upload) :
-                this._roots.FirstOrDefault(x => x.Directory.Name == Recived);
-            if (lroot == null) throw new ArgumentNullException(string.Format("Не найдена ожидаемая папка({0} или {1})", Upload, Recived));
-            return null;
-        }
-
-
         JsonResult IDriver.GetReceivedMailFiles(Guid fileGroupSendId)
         {
             throw new NotImplementedException();
@@ -657,7 +675,9 @@ namespace ElFinder
 
         public ActionResult Download(IEnumerable<string> targets)
         {
-            throw new NotImplementedException();
+            var response = new DAVListCryptoOperationResponse();
+
+            return Json(response);
         }
 
         #endregion

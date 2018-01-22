@@ -591,7 +591,6 @@ namespace ElFinder
 
         JsonResult IDriver.CheckSign(IEnumerable<string> targets)
         {
-            var response = service.DAVSignVerify();
             throw new NotImplementedException();
         }
 
@@ -607,15 +606,17 @@ namespace ElFinder
 
         JsonResult IDriver.Add(IEnumerable<string> targets)
         {
-            var response = service.dav
+            var fileNames = GetFileNamesFromTargets(targets);
+            fileNames.ForEach(x =>
+            {
 
-
-            return Json(response);
+            });
+            throw new NotImplementedException();
         }
 
         JsonResult IDriver.CryptInfo(string target)
         {
-            service.GetFileInfo(target, token);
+            throw new NotImplementedException();
         }
 
         public ActionResult CertDownload(string thumb)
@@ -643,7 +644,7 @@ namespace ElFinder
 
         JsonResult IDriver.GetAddressBook()
         {
-            service.GetAddressBook();
+            throw new NotImplementedException();
         }
 
         JsonResult IDriver.Send(IEnumerable<string> targets, string emailList)
@@ -659,7 +660,7 @@ namespace ElFinder
 
         JsonResult IDriver.GetReceivedMailFiles(Guid fileGroupSendId)
         {
-            service.file
+            throw new NotImplementedException();
         }
 
 

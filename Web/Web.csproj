@@ -1208,6 +1208,7 @@
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Properties\DataSources\ElFinder.CryptxService.OldServiceResponse.datasource" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -2577,75 +2578,12 @@
     <Content Include="Service References\AuthorizeService\CryptxOnline.Web.AuthorizeService.GetUserNotificationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\AuthorizeService\CryptxOnline.Web.AuthorizeService.OldServiceResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <None Include="Service References\AuthorizeService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Service References\CryptxService\configuration91.svcinfo" />
     <None Include="Service References\CryptxService\configuration.svcinfo" />
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.AddRecipientResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.AdminInfoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.CertificateResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.CertificatesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.Contact.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.ContactCertificateRelationship.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.CryptoOperationResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.CustomFileInfo.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.DAVListCryptoOperationResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.GetVisualizationResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.NeedToPINResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.OldServiceResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.OperationFile.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.ProfileResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.ProfileTooltipResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.SearchResultResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.SignAttachmentResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.SignVerifyResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.UserAddressBookResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\CryptxService\CryptxOnline.Web.CryptxService.UserProfilesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <None Include="Service References\CryptxService\CryptxService.wsdl" />
     <None Include="Service References\CryptxService\CryptxService.xsd">
       <SubType>Designer</SubType>

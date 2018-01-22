@@ -234,7 +234,7 @@ namespace CryptxOnline.Web.AuthorizeService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="AuthorizeServiceError", Namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Error")]
     [System.SerializableAttribute()]
-    public partial class AuthorizeServiceError : CryptxOnline.Web.AuthorizeService.ServiceError {
+    public partial class AuthorizeServiceError : ElFinder.CryptxService.ServiceError {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -249,68 +249,6 @@ namespace CryptxOnline.Web.AuthorizeService {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Kobil = 2,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceError", Namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Error")]
-    [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CryptxOnline.Web.AuthorizeService.AuthorizeServiceError))]
-    public partial class ServiceError : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int CodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MessageField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Code {
-            get {
-                return this.CodeField;
-            }
-            set {
-                if ((this.CodeField.Equals(value) != true)) {
-                    this.CodeField = value;
-                    this.RaisePropertyChanged("Code");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message {
-            get {
-                return this.MessageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
-                    this.MessageField = value;
-                    this.RaisePropertyChanged("Message");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -817,68 +755,20 @@ namespace CryptxOnline.Web.AuthorizeService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OldServiceResponse", Namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Response")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="KobilAuthResponse", Namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Response")]
     [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CryptxOnline.Web.AuthorizeService.UserInfoResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CryptxOnline.Web.AuthorizeService.AccountResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CryptxOnline.Web.AuthorizeService.KobilAuthResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.SystemException))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.NullReferenceException))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Runtime.InteropServices.ExternalException))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(System.Runtime.InteropServices.COMException))]
-    public partial class OldServiceResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+    public partial class KobilAuthResponse : ElFinder.CryptxService.OldServiceResponse {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Exception ExceptionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MessageField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
+        private CryptxOnline.Web.AuthorizeService.KobilStatus StatusField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Exception Exception {
+        public CryptxOnline.Web.AuthorizeService.KobilStatus Status {
             get {
-                return this.ExceptionField;
+                return this.StatusField;
             }
             set {
-                if ((object.ReferenceEquals(this.ExceptionField, value) != true)) {
-                    this.ExceptionField = value;
-                    this.RaisePropertyChanged("Exception");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message {
-            get {
-                return this.MessageField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
-                    this.MessageField = value;
-                    this.RaisePropertyChanged("Message");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                this.StatusField = value;
             }
         }
     }
@@ -887,7 +777,7 @@ namespace CryptxOnline.Web.AuthorizeService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="UserInfoResponse", Namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Response")]
     [System.SerializableAttribute()]
-    public partial class UserInfoResponse : CryptxOnline.Web.AuthorizeService.OldServiceResponse {
+    public partial class UserInfoResponse : ElFinder.CryptxService.OldServiceResponse {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private CryptxOnline.Web.AuthorizeService.UserInfo UserField;
@@ -907,10 +797,7 @@ namespace CryptxOnline.Web.AuthorizeService {
                 return this.UserField;
             }
             set {
-                if ((object.ReferenceEquals(this.UserField, value) != true)) {
-                    this.UserField = value;
-                    this.RaisePropertyChanged("User");
-                }
+                this.UserField = value;
             }
         }
         
@@ -920,10 +807,7 @@ namespace CryptxOnline.Web.AuthorizeService {
                 return this.UserRootField;
             }
             set {
-                if ((object.ReferenceEquals(this.UserRootField, value) != true)) {
-                    this.UserRootField = value;
-                    this.RaisePropertyChanged("UserRoot");
-                }
+                this.UserRootField = value;
             }
         }
         
@@ -933,10 +817,7 @@ namespace CryptxOnline.Web.AuthorizeService {
                 return this.WebDavDirField;
             }
             set {
-                if ((object.ReferenceEquals(this.WebDavDirField, value) != true)) {
-                    this.WebDavDirField = value;
-                    this.RaisePropertyChanged("WebDavDir");
-                }
+                this.WebDavDirField = value;
             }
         }
         
@@ -946,56 +827,7 @@ namespace CryptxOnline.Web.AuthorizeService {
                 return this.WebDavRootDirField;
             }
             set {
-                if ((object.ReferenceEquals(this.WebDavRootDirField, value) != true)) {
-                    this.WebDavRootDirField = value;
-                    this.RaisePropertyChanged("WebDavRootDir");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AccountResponse", Namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Response")]
-    [System.SerializableAttribute()]
-    public partial class AccountResponse : CryptxOnline.Web.AuthorizeService.OldServiceResponse {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private CryptxOnline.Web.AuthorizeService.Account AccountField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public CryptxOnline.Web.AuthorizeService.Account Account {
-            get {
-                return this.AccountField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AccountField, value) != true)) {
-                    this.AccountField = value;
-                    this.RaisePropertyChanged("Account");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="KobilAuthResponse", Namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Response")]
-    [System.SerializableAttribute()]
-    public partial class KobilAuthResponse : CryptxOnline.Web.AuthorizeService.OldServiceResponse {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private CryptxOnline.Web.AuthorizeService.KobilStatus StatusField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public CryptxOnline.Web.AuthorizeService.KobilStatus Status {
-            get {
-                return this.StatusField;
-            }
-            set {
-                if ((this.StatusField.Equals(value) != true)) {
-                    this.StatusField = value;
-                    this.RaisePropertyChanged("Status");
-                }
+                this.WebDavRootDirField = value;
             }
         }
     }
@@ -1156,6 +988,26 @@ namespace CryptxOnline.Web.AuthorizeService {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Deleted = 4,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AccountResponse", Namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Response")]
+    [System.SerializableAttribute()]
+    public partial class AccountResponse : ElFinder.CryptxService.OldServiceResponse {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CryptxOnline.Web.AuthorizeService.Account AccountField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CryptxOnline.Web.AuthorizeService.Account Account {
+            get {
+                return this.AccountField;
+            }
+            set {
+                this.AccountField = value;
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1584,13 +1436,14 @@ namespace CryptxOnline.Web.AuthorizeService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ServiceResponse", Namespace="http://schemas.datacontract.org/2004/07/DSS.Service.Response")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CryptxOnline.Web.AuthorizeService.AuthorizeServiceError))]
     public partial class ServiceResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private CryptxOnline.Web.AuthorizeService.ServiceError ErrorField;
+        private ElFinder.CryptxService.ServiceError ErrorField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private CryptxOnline.Web.AuthorizeService.ServiceResponse.ServiceStatus StatusField;
@@ -1606,7 +1459,7 @@ namespace CryptxOnline.Web.AuthorizeService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CryptxOnline.Web.AuthorizeService.ServiceError Error {
+        public ElFinder.CryptxService.ServiceError Error {
             get {
                 return this.ErrorField;
             }
@@ -1812,7 +1665,14 @@ namespace CryptxOnline.Web.AuthorizeService {
         CryptxOnline.Web.AuthorizeService.ResendPinResponse ResendPIN(System.Guid token);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorizeService/SendTestSMS", ReplyAction="http://tempuri.org/IAuthorizeService/SendTestSMSResponse")]
-        CryptxOnline.Web.AuthorizeService.OldServiceResponse SendTestSMS(System.Guid userId, System.Guid token);
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CryptxOnline.Web.AuthorizeService.UserInfoResponse))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CryptxOnline.Web.AuthorizeService.AccountResponse))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CryptxOnline.Web.AuthorizeService.KobilAuthResponse))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.SystemException))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.NullReferenceException))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Runtime.InteropServices.ExternalException))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Runtime.InteropServices.COMException))]
+        ElFinder.CryptxService.OldServiceResponse SendTestSMS(System.Guid userId, System.Guid token);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorizeService/GetUserData", ReplyAction="http://tempuri.org/IAuthorizeService/GetUserDataResponse")]
         CryptxOnline.Web.AuthorizeService.UserInfoResponse GetUserData(System.Guid token);
@@ -1827,7 +1687,14 @@ namespace CryptxOnline.Web.AuthorizeService {
         bool SaveAccount(CryptxOnline.Web.AuthorizeService.Account account, System.Guid userId, System.Guid token);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorizeService/ChangePassword", ReplyAction="http://tempuri.org/IAuthorizeService/ChangePasswordResponse")]
-        CryptxOnline.Web.AuthorizeService.OldServiceResponse ChangePassword(string oldPwd, string newPwd, System.Guid userId, System.Guid token);
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CryptxOnline.Web.AuthorizeService.UserInfoResponse))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CryptxOnline.Web.AuthorizeService.AccountResponse))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(CryptxOnline.Web.AuthorizeService.KobilAuthResponse))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.SystemException))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.NullReferenceException))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Runtime.InteropServices.ExternalException))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Runtime.InteropServices.COMException))]
+        ElFinder.CryptxService.OldServiceResponse ChangePassword(string oldPwd, string newPwd, System.Guid userId, System.Guid token);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthorizeService/UniqueEmail", ReplyAction="http://tempuri.org/IAuthorizeService/UniqueEmailResponse")]
         bool UniqueEmail(string email, System.Guid token);
@@ -1925,7 +1792,7 @@ namespace CryptxOnline.Web.AuthorizeService {
             return base.Channel.ResendPIN(token);
         }
         
-        public CryptxOnline.Web.AuthorizeService.OldServiceResponse SendTestSMS(System.Guid userId, System.Guid token) {
+        public ElFinder.CryptxService.OldServiceResponse SendTestSMS(System.Guid userId, System.Guid token) {
             return base.Channel.SendTestSMS(userId, token);
         }
         
@@ -1945,7 +1812,7 @@ namespace CryptxOnline.Web.AuthorizeService {
             return base.Channel.SaveAccount(account, userId, token);
         }
         
-        public CryptxOnline.Web.AuthorizeService.OldServiceResponse ChangePassword(string oldPwd, string newPwd, System.Guid userId, System.Guid token) {
+        public ElFinder.CryptxService.OldServiceResponse ChangePassword(string oldPwd, string newPwd, System.Guid userId, System.Guid token) {
             return base.Channel.ChangePassword(oldPwd, newPwd, userId, token);
         }
         

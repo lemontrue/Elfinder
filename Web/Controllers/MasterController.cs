@@ -10,13 +10,13 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using CryptxOnline.Web.AuthorizeService;
-using CryptxOnline.Web.CryptxService;
 using CryptxOnline.Web.Helpers;
 using CryptxOnline.Web.Models;
 using CryptxOnline.Web.Models.MasterOperation;
+using ElFinder.CryptxService;
 using NLog;
 using WebDav;
-using OperationType = CryptxOnline.Web.CryptxService.OperationType;
+using OperationType = ElFinder.CryptxService.OperationType;
 
 namespace CryptxOnline.Web.Controllers
 {

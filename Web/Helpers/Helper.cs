@@ -12,10 +12,10 @@ using System.Web.Security;
 using System.Web.UI.WebControls;
 using CryptxOnline.Web.AuthorizeService;
 using CryptxOnline.Web.Controllers;
-using CryptxOnline.Web.CryptxService;
 using CryptxOnline.Web.Identity;
 using CryptxOnline.Web.Models;
 using Microsoft.AspNet.Identity;
+using ElFinder.CryptxService;
 using Microsoft.AspNet.Identity.EntityFramework;
 using WebDav;
 

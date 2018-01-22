@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using CryptxOnline.Web.CryptxService;
+using ElFinder.CryptxService;
 
 namespace CryptxOnline.Web.Models
 {

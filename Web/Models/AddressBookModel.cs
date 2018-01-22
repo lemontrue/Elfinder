@@ -1,7 +1,7 @@
-﻿using System;
+﻿using ElFinder.CryptxService;
+using System;
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
-using CryptxOnline.Web.CryptxService;
 
 namespace CryptxOnline.Web.Models
 {
@@ -84,10 +84,10 @@ namespace CryptxOnline.Web.Models
                     listItems.Add(new ListItem {Text = "Показать все", Value = type.ToString()});
                 if (type.Equals(CertificateFilter.Active))
                     listItems.Add(new ListItem {Text = "Показать действующие", Value = type.ToString()});
-                if (type.Equals(CertificateFilter.WithTestCert))
-                    listItems.Add(new ListItem { Text = "Показывать только тестовые сертификаты", Value = type.ToString() });
-                if (type.Equals(CertificateFilter.WithoutTestCert))
-                    listItems.Add(new ListItem { Text = "Показывать все, кроме тестовых сертификатов", Value = type.ToString() });
+                //if (type.Equals(CertificateFilter.WithTestCert))
+                //    listItems.Add(new ListItem { Text = "Показывать только тестовые сертификаты", Value = type.ToString() });
+                //if (type.Equals(CertificateFilter.WithoutTestCert))
+                //    listItems.Add(new ListItem { Text = "Показывать все, кроме тестовых сертификатов", Value = type.ToString() });
             }
             return listItems;
         }
@@ -128,10 +128,10 @@ namespace CryptxOnline.Web.Models
                     listItems.Add(new ListItem {Text = "Показать контакты с сертификатами", Value = type.ToString()});
                 if (type.Equals(AddressBookFilter.WithoutCert))
                     listItems.Add(new ListItem {Text = "Показать контакты без сертификатов", Value = type.ToString()});
-                if (type.Equals(AddressBookFilter.WithTestCert))
-                    listItems.Add(new ListItem { Text = "Показать контакты с тестовыми сертификатами", Value = type.ToString() });
-                if (type.Equals(AddressBookFilter.WithoutTestCert))
-                    listItems.Add(new ListItem { Text = "Показать контакты без тестовых сертификатов", Value = type.ToString() });
+                //if (type.Equals(AddressBookFilter.WithTestCert))
+                //    listItems.Add(new ListItem { Text = "Показать контакты с тестовыми сертификатами", Value = type.ToString() });
+                //if (type.Equals(AddressBookFilter.WithoutTestCert))
+                //    listItems.Add(new ListItem { Text = "Показать контакты без тестовых сертификатов", Value = type.ToString() });
             }
             return listItems;
         }

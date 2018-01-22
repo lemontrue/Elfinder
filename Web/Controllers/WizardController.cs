@@ -5,12 +5,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using CryptxOnline.Web.AuthorizeService;
-using CryptxOnline.Web.CryptxService;
 using CryptxOnline.Web.Helpers;
 using CryptxOnline.Web.Models;
+using ElFinder.CryptxService;
 using NLog;
 using WebDav;
+using OperationType = ElFinder.CryptxService.OperationType;
 
 //using Profile = CryptxOnline.Web.CryptxService.Profile;
 
@@ -818,7 +818,7 @@ namespace CryptxOnline.Web.Controllers
                 _modelString = wizardId.ToString();
                 _fileString = wizardId + "_fileDownloaded";
                 if (Session[_modelString] == null)
-                    Model = new WizardModel(new Guid(_modelString), _cryptxService, _authService, token);
+                    Model = new Models.WizardModel(new Guid(_modelString), _cryptxService, _authService, token);
 
                 var operStep = new CustomWizardStep
                 {

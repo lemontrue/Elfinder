@@ -10,14 +10,13 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Web.Security;
 using CryptxOnline.Web.AuthorizeService;
-using CryptxOnline.Web.CryptxService;
 using CryptxOnline.Web.Helpers;
-using CryptxOnline.Web.MarkerActivationService;
 using CryptxOnline.Web.Models;
 using ElFinder.DTO;
 using Newtonsoft.Json;
-using CertificateInfo = CryptxOnline.Web.CryptxService.CertificateInfo;
+using CertificateInfo = ElFinder.CryptxService.CertificateInfo;
 using File = ElFinder.WebDav.File;
+using ElFinder.CryptxService;
 
 
 //using OldServiceResponse = CryptxOnline.Web.AuthorizeService.OldServiceResponse;
@@ -279,7 +278,7 @@ namespace CryptxOnline.Web.Controllers
             if (recipCertResponse.Exception == null)
             {
                 var list = new List<SelectListItem>();
-                foreach (CertificateInfo certificateInfo in recipCertResponse.Certificates)
+                foreach (var certificateInfo in recipCertResponse.Certificates)
                 {
                     var selectListItem = new SelectListItem();
                     if (certificateInfo.RecipientCertificate != null &&
@@ -310,7 +309,7 @@ namespace CryptxOnline.Web.Controllers
             CertificatesResponse certificatesResponse = _cryptxService.GetMyCertificates(userId, token);
             if (certificatesResponse.Exception == null)
             {
-                foreach (CertificateInfo certificateInfo in certificatesResponse.Certificates)
+                foreach (ElFinder.CryptxService.CertificateInfo certificateInfo in certificatesResponse.Certificates)
                 {
                     listItems.Add(new SelectListItem
                     {
@@ -614,7 +613,7 @@ namespace CryptxOnline.Web.Controllers
             CertificatesResponse respCert = _cryptxService.GetMyCertificates(activeUserId, token);
             if (respCert.Exception != null)
                 throw new Exception("Ошибка получения своих сертификатов", respCert.Exception);
-            GetMyCertificatesRequestsResponse certRequests = _markerService.GetMyCertificatesRequests(GetMyCertificatesRequestsResponse.Sort.NameASC, activeUserId, token);
+            var certRequests = _markerService.GetMyCertificatesRequests(MarkerActivationService.GetMyCertificatesRequestsResponse.Sort.NameASC, activeUserId, token);
             if (certRequests.Error != null)
                 throw new Exception("Ошибка получения списка запросов на сертификаты " + certRequests.Error.Message);
 
@@ -674,7 +673,7 @@ namespace CryptxOnline.Web.Controllers
                 _cryptxService.GetMyCertificates((userId == null ? Guid.Empty : (Guid)userId), token);
             if (response.Exception != null)
                 throw new Exception("Ошибка получения своих сертификатов", response.Exception);
-            List<CertificateInfo> filterCert = FilterCertificates(response.Certificates, model.Filter, model.Sort,
+            List<ElFinder.CryptxService.CertificateInfo> filterCert = FilterCertificates(response.Certificates, model.Filter, model.Sort,
                 model.WhithPin);
             return PartialView("_partialCertificatesList", filterCert);
         }
@@ -720,7 +719,7 @@ namespace CryptxOnline.Web.Controllers
 
             try
             {
-                AuthorizeService.OldServiceResponse response = _authService.SendTestSMS((userId == null ? Guid.Empty : (Guid)userId),
+                OldServiceResponse response = _authService.SendTestSMS((userId == null ? Guid.Empty : (Guid)userId),
                     token);
                 if (response.Exception == null) result = true;
             }
@@ -796,7 +795,7 @@ namespace CryptxOnline.Web.Controllers
             {
                 if (user2Cert != null && user2Cert != Guid.Empty)
                 {
-                    CryptxService.OldServiceResponse response = _cryptxService.SetMyCertPIN((Guid)user2Cert, newPin,
+                    OldServiceResponse response = _cryptxService.SetMyCertPIN((Guid)user2Cert, newPin,
                         (userId == null ? Guid.Empty : (Guid)userId), token);
                     if (response.Exception == null) result = true;
                 }
@@ -831,7 +830,7 @@ namespace CryptxOnline.Web.Controllers
             {
                 if (user2Cert != null && user2Cert != Guid.Empty)
                 {
-                    CryptxService.OldServiceResponse response = _cryptxService.DeleteMyCertPIN((Guid)user2Cert,
+                    ElFinder.CryptxService.OldServiceResponse response = _cryptxService.DeleteMyCertPIN((Guid)user2Cert,
                         (userId == null ? Guid.Empty : (Guid)userId), token);
                     if (response.Exception != null) return Json(new { success = false, errorOldPin = true });
                     result = true;
@@ -867,7 +866,7 @@ namespace CryptxOnline.Web.Controllers
             {
                 if (user2Cert != null && user2Cert != Guid.Empty)
                 {
-                    CryptxService.OldServiceResponse response = _cryptxService.ChangeMyCertPIN((Guid)user2Cert, oldPin,
+                    OldServiceResponse response = _cryptxService.ChangeMyCertPIN((Guid)user2Cert, oldPin,
                         newPin, (userId == null ? Guid.Empty : (Guid)userId), token);
                     if (response.Exception != null) return Json(new { success = false, errorOldPin = true });
                     result = true;
@@ -893,7 +892,7 @@ namespace CryptxOnline.Web.Controllers
         public ActionResult ChangePass(string newPass, string oldPass, Guid? userId)
         {
             Guid token = CheckSessionAuthState(CurrentUser, _authService);
-            AuthorizeService.OldServiceResponse operRes;
+            OldServiceResponse operRes;
             bool result = false;
             if (token == Guid.Empty)
             {

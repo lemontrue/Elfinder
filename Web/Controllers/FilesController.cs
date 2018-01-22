@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Web.Mvc;
 using CryptxOnline.Web.AuthorizeService;
-using CryptxOnline.Web.CryptxService;
 using ElFinder;
+using ElFinder.CryptxService;
 using ElFinder.DTO;
 using ElFinder.InternalException;
 using ElFinder.WebDav;

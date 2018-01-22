@@ -6,9 +6,9 @@ using System.Security.Cryptography.X509Certificates;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using CryptxOnline.Web.AuthorizeService;
-using CryptxOnline.Web.CryptxService;
 using CryptxOnline.Web.Helpers;
 using CryptxOnline.Web.Models;
+using ElFinder.CryptxService;
 using Newtonsoft.Json;
 
 
@@ -50,7 +50,7 @@ namespace CryptxOnline.Web.Controllers
                 return View(new AddressBookModel {Status = status});
             }
 
-            UserAddressBookResponse response = _cryptxService.GetAddressBook(contacts.SearchString, contacts.Sort,
+            ElFinder.CryptxService.UserAddressBookResponse response = _cryptxService.GetAddressBook(contacts.SearchString, contacts.Sort,
                 contacts.Filter, (userId == null ? Guid.Empty : (Guid) userId), token, 0);
             var model = new AddressBookModel(response);
             model.Status = status;

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using CryptxOnline.Web.AuthorizeService;
-using CryptxOnline.Web.CryptxService;
 using CryptxOnline.Web.MarkerActivationService;
-using CertificateInfo = CryptxOnline.Web.CryptxService.CertificateInfo;
+using ElFinder.CryptxService;
 
 namespace CryptxOnline.Web.Models
 {
@@ -146,7 +145,7 @@ namespace CryptxOnline.Web.Models
 
     public class MyCertificateListModel
     {
-        public IList<CertificateInfo> certs;
+        public IList<MarkerActivationService.CertificateInfo> certs;
         public CertificateFilter Filter { get; set; }
         public bool SaveState { get; set; }
         public Sort Sort { get; set; }

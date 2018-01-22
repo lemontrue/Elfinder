@@ -14,35 +14,6 @@ namespace ElFinder
 {
     using ElFinder.CryptxService;
 
-    //[DataContract]
-    //public class File
-    //{
-    //    [DataMember(Name = "path")]
-    //    public string path;
-    //    [DataMember(Name = "lastChange")]
-    //    public DateTime lastChange;
-    //    [DataMember(Name = "name")]
-    //    public string name;
-    //    [DataMember(Name = "mime")]
-    //    public string mime;
-    //}
-    //[DataContract]
-    //public class ReceivedFile : WebDav.File
-    //{
-    //    [DataMember(Name = "type")]
-    //    public OperationType Type;
-    //}
-
-    //[DataContract]
-    //public class MasterData
-    //{
-    //    [DataMember(Name = "Files")]
-    //    public List<WebDav.File> Files;
-    //    [DataMember(Name = "Type")]
-    //    public OperationType Type;
-    //}
-
-
     /// <summary>
     /// Represents a driver for local file system
     /// </summary>
@@ -55,7 +26,7 @@ namespace ElFinder
         private readonly Guid token;
         private readonly CryptxServiceClient service = new CryptxServiceClient();
         private const string Recived = "Полученные";
-        private const string Upload = "Загруженные";
+        private const string Uploaded = "Загруженные";
 
         private JsonResult Json(object data)
         {
@@ -199,16 +170,16 @@ namespace ElFinder
         #endregion public
 
         #region   IDriver
-        JsonResult IDriver.Init(string retTarget, string isModal, bool initReceivedFolder)
+        public JsonResult Init(string retTarget, string isModal, bool initReceivedFolder)
         {
             Root lroot = !initReceivedFolder ?
-                this._roots.FirstOrDefault(x => x.Directory.Name == Upload) :
+                this._roots.FirstOrDefault(x => x.Directory.Name == Uploaded) :
                 this._roots.FirstOrDefault(x => x.Directory.Name == Recived);
-            if (lroot == null) throw new ArgumentNullException(string.Format("Не найдена ожидаемая папка({0} или {1})", Upload, Recived));
+            if (lroot == null) throw new ArgumentNullException(string.Format("Не найдена ожидаемая папка({0} или {1})", Uploaded, Recived));
             return null;
         }
 
-        JsonResult IDriver.Open(string target, bool tree)
+        public JsonResult Open(string target, bool tree)
         {
             FullPath fullPath = ParsePath(target);
             OpenResponse answer = new OpenResponse(DTOBase.Create(fullPath.Directory, fullPath.Root), fullPath);
@@ -236,7 +207,7 @@ namespace ElFinder
                 return new HttpStatusCodeResult(403, "Access denied. Volume is for show only");
             return new DownloadFileResult(fullPath.File, download);
         }
-        JsonResult IDriver.Parents(string target)
+        public JsonResult Parents(string target)
         {
             FullPath fullPath = ParsePath(target);
             TreeResponse answer = new TreeResponse();
@@ -259,7 +230,7 @@ namespace ElFinder
             }
             return Json(answer);
         }
-        JsonResult IDriver.Tree(string target)
+        public JsonResult Tree(string target)
         {
             FullPath fullPath = ParsePath(target);
             TreeResponse answer = new TreeResponse();
@@ -270,7 +241,7 @@ namespace ElFinder
             }
             return Json(answer);
         }
-        JsonResult IDriver.List(string target)
+        public JsonResult List(string target)
         {
             FullPath fullPath = ParsePath(target);
             ListResponse answer = new ListResponse();
@@ -280,20 +251,20 @@ namespace ElFinder
             }
             return Json(answer);
         }
-        JsonResult IDriver.MakeDir(string target, string name)
+        public JsonResult MakeDir(string target, string name)
         {
             FullPath fullPath = ParsePath(target);
             DirectoryInfo newDir = Directory.CreateDirectory(Path.Combine(fullPath.Directory.FullName, name));
             return Json(new AddResponse(newDir, fullPath.Root));
         }
-        JsonResult IDriver.MakeFile(string target, string name)
+        public JsonResult MakeFile(string target, string name)
         {
             FullPath fullPath = ParsePath(target);
             FileInfo newFile = new FileInfo(Path.Combine(fullPath.Directory.FullName, name));
             newFile.Create().Close();
             return Json(new AddResponse(newFile, fullPath.Root));
         }
-        JsonResult IDriver.Rename(string target, string name)
+        public JsonResult Rename(string target, string name)
         {
             FullPath fullPath = ParsePath(target);
             var answer = new ReplaceResponse();
@@ -314,7 +285,7 @@ namespace ElFinder
             return Json(answer);
         }
 
-        JsonResult IDriver.Remove(IEnumerable<string> targets)
+        public JsonResult Remove(IEnumerable<string> targets)
         {
             RemoveResponse answer = new RemoveResponse();
             foreach (string item in targets)
@@ -333,7 +304,7 @@ namespace ElFinder
             }
             return Json(answer);
         }
-        JsonResult IDriver.Get(string target)
+        public JsonResult Get(string target)
         {
             FullPath fullPath = ParsePath(target);
             GetResponse answer = new GetResponse();
@@ -343,7 +314,7 @@ namespace ElFinder
             }
             return Json(answer);
         }
-        JsonResult IDriver.Put(string target, string content)
+        public JsonResult Put(string target, string content)
         {
             FullPath fullPath = ParsePath(target);
             ChangedResponse answer = new ChangedResponse();
@@ -354,7 +325,7 @@ namespace ElFinder
             answer.Changed.Add((FileDTO)DTOBase.Create(fullPath.File, fullPath.Root));
             return Json(answer);
         }
-        JsonResult IDriver.Paste(string source, string dest, IEnumerable<string> targets, bool isCut, IList<int> dublicateIndexes = null)
+        public JsonResult Paste(string source, string dest, IEnumerable<string> targets, bool isCut, IList<int> dublicateIndexes = null)
         {
             FullPath destPath = ParsePath(dest);
             ReplaceResponse response = new ReplaceResponse();
@@ -398,7 +369,7 @@ namespace ElFinder
             }
             return Json(response);
         }
-        JsonResult IDriver.Upload(string target, HttpFileCollectionBase targets, bool addWithNewIndex)
+        public JsonResult Upload(string target, HttpFileCollectionBase targets, bool addWithNewIndex)
         {
             FullPath dest = ParsePath(target);
             var response = new AddResponse();
@@ -458,7 +429,7 @@ namespace ElFinder
             }
             return Json(response);
         }
-        JsonResult IDriver.Duplicate(IEnumerable<string> targets)
+        public JsonResult Duplicate(IEnumerable<string> targets)
         {
             AddResponse response = new AddResponse();
             foreach (var target in targets)
@@ -516,7 +487,7 @@ namespace ElFinder
             }
             return Json(response);
         }
-        JsonResult IDriver.Thumbs(IEnumerable<string> targets)
+        public JsonResult Thumbs(IEnumerable<string> targets)
         {
             ThumbsResponse response = new ThumbsResponse();
             foreach (string target in targets)
@@ -526,13 +497,13 @@ namespace ElFinder
             }
             return Json(response);
         }
-        JsonResult IDriver.Dim(string target)
+        public JsonResult Dim(string target)
         {
             FullPath path = ParsePath(target);
             DimResponse response = new DimResponse(path.Root.GetImageDimension(path.File));
             return Json(response);
         }
-        JsonResult IDriver.Resize(string target, int width, int height)
+        public JsonResult Resize(string target, int width, int height)
         {
             FullPath path = ParsePath(target);
             RemoveThumbs(path);
@@ -541,7 +512,7 @@ namespace ElFinder
             output.Changed.Add((FileDTO)DTOBase.Create(path.File, path.Root));
             return Json(output);
         }
-        JsonResult IDriver.Crop(string target, int x, int y, int width, int height)
+        public JsonResult Crop(string target, int x, int y, int width, int height)
         {
             FullPath path = ParsePath(target);
             RemoveThumbs(path);
@@ -550,7 +521,7 @@ namespace ElFinder
             output.Changed.Add((FileDTO)DTOBase.Create(path.File, path.Root));
             return Json(output);
         }
-        JsonResult IDriver.Rotate(string target, int degree)
+        public JsonResult Rotate(string target, int degree)
         {
             FullPath path = ParsePath(target);
             RemoveThumbs(path);
@@ -560,7 +531,7 @@ namespace ElFinder
             return Json(output);
         }
 
-        JsonResult IDriver.TestOperation(string target)
+        public JsonResult TestOperation(string target)
         {
             return Json(new Object());
         }
@@ -568,67 +539,117 @@ namespace ElFinder
         #endregion IDriver
 
         #region IDriverExtensions
-        JsonResult IDriver.Encrypt(IEnumerable<string> targets)
+        public JsonResult Encrypt(IEnumerable<string> targets)
         {
-            DAVListCryptoOperationResponse output = service.DAVListEncryptOperation(GetFileNamesFromTargets(targets), null, token);
+            Settings settings = new Settings()
+            {
+                _EncryptionSettings = new EncryptionSettings() { _EncodingType = EncodingType.Base64 }
+            };
+            DAVListCryptoOperationResponse output = service.DAVListEncryptOperation(GetFileNamesFromTargets(targets), settings, token);
 
             return Json(output);
         }
 
-        JsonResult IDriver.Decrypt(IEnumerable<string> targets)
+        public JsonResult Decrypt(IEnumerable<string> targets)
         {
-            DAVListCryptoOperationResponse output = service.DAVListDecryptOperation(GetFileNamesFromTargets(targets), null,null, token);
+            Settings settings = new Settings()
+            {
+                _SignatureVerificationSettings = new SignatureVerificationSettings() { VerifyFlag = SignatureVerificationFlags.SignatureOnly }
+            };
+            PINSettings pinSettings = new PINSettings()
+            {
+                NeedToPIN = false
+            };
+            DAVListCryptoOperationResponse output = service.DAVListDecryptOperation(GetFileNamesFromTargets(targets), settings, pinSettings, token);
 
             return Json(output);
         }
 
-        JsonResult IDriver.Sign(IEnumerable<string> targets)
+        public JsonResult Sign(IEnumerable<string> targets)
         {
-            DAVListCryptoOperationResponse response = service.DAVListSignOperation(GetFileNamesFromTargets(targets), null, null, token);
+            Settings settings = new Settings()
+            {
+                _SignatureVerificationSettings = new SignatureVerificationSettings() { VerifyFlag = SignatureVerificationFlags.SignatureOnly }
+            };
+            PINSettings pinSettings = new PINSettings()
+            {
+                NeedToPIN = false
+            };
+            DAVListCryptoOperationResponse response = service.DAVListSignOperation(GetFileNamesFromTargets(targets), settings, pinSettings, token);
 
             return Json(response);
         }
 
-        JsonResult IDriver.CheckSign(IEnumerable<string> targets)
+        public JsonResult CheckSign(IEnumerable<string> targets)
         {
-            throw new NotImplementedException();
-        }
-
-        JsonResult IDriver.SignAndEncrypt(IEnumerable<string> targets)
-        {
-            throw new NotImplementedException();
-        }
-
-        JsonResult IDriver.DecryptAndCheckSign(IEnumerable<string> targets)
-        {
-            throw new NotImplementedException();
-        }
-
-        JsonResult IDriver.Add(IEnumerable<string> targets)
-        {
-            var fileNames = GetFileNamesFromTargets(targets);
-            fileNames.ForEach(x =>
+            Settings settings = new Settings()
             {
+                _SignatureVerificationSettings = new SignatureVerificationSettings() { VerifyFlag = SignatureVerificationFlags.SignatureOnly }
+            };
+            DAVListCryptoOperationResponse response = service.DAVListSignVerify(GetFileNamesFromTargets(targets), settings, true, token);
 
-            });
-            throw new NotImplementedException();
+            return Json(response);
         }
 
-        JsonResult IDriver.CryptInfo(string target)
+        public JsonResult SignAndEncrypt(IEnumerable<string> targets)
         {
-            throw new NotImplementedException();
+            Settings settings = new Settings()
+            {
+                _SignatureSettings = new SignatureSettings() { _EncodingType = EncodingType.Base64 }
+            };
+            PINSettings pinSettings = new PINSettings()
+            {
+                NeedToPIN = false
+            };
+            DAVListCryptoOperationResponse response = service.DAVListSignOperation(GetFileNamesFromTargets(targets), settings, pinSettings, token);
+
+            return Json(response);
+        }
+
+        public JsonResult DecryptAndCheckSign(IEnumerable<string> targets)
+        {
+            Settings settings = new Settings()
+            {
+                _SignatureVerificationSettings = new SignatureVerificationSettings() { VerifyFlag = SignatureVerificationFlags.SignatureOnly },
+                _DecryptionSettings = new DecryptionSettings() {  }
+            };
+
+            PINSettings pinSettings = new PINSettings()
+            {
+                NeedToPIN = false
+            };
+
+            var response = service.DAVListDecryptOperation(GetFileNamesFromTargets(targets), settings, pinSettings, token);
+
+            return Json(response);
+        }
+
+        public JsonResult Add(IEnumerable<string> targets)
+        {
+            var response = new AddRecipientResponse();
+            var fileNames = GetFileNamesFromTargets(targets);
+            foreach (var target in targets)
+            {
+                FullPath fullPath = ParsePath(target);
+                service.AddRecipientCertificate(File.ReadAllBytes(fullPath.File.Name), string.Empty, Guid.Empty, token);
+            }
+        }
+
+        public JsonResult CryptInfo(string target)
+        {
+            var response = service.GetFileInfo(target, token);
+
+            return Json(response);
         }
 
         public ActionResult CertDownload(string thumb)
         {
-            //TODO
-            var response = new CertificateResponse();
-            service.AddRecipientCertificateByThumbprint(thumb, null, Guid.Empty, token);
+            CertificateResponse response = service.GetCertificate(thumb, Guid.Empty, token);
 
             return Json(response);
         }
 
-        JsonResult IDriver.Filter(string target, string query)
+        public JsonResult Filter(string target, string query)
         {
             FullPath fullPath = ParsePath(target);
             ListResponse answer = new ListResponse();
@@ -639,34 +660,65 @@ namespace ElFinder
                     answer.List.Add(item.Name);
                 }
             }
+
             return Json(answer);
         }
 
-        JsonResult IDriver.GetAddressBook()
+        public JsonResult GetAddressBook()
         {
-            throw new NotImplementedException();
+            var response = service.GetAddressBook(String.Empty, AddressBookSort.ContactNameASC, AddressBookFilter.All, Guid.Empty, token, 25);
+
+            return Json(response);
         }
 
-        JsonResult IDriver.Send(IEnumerable<string> targets, string emailList)
+        public JsonResult Send(IEnumerable<string> targets, string emailList)
         {
-            throw new NotImplementedException();
+            var response = service.FileGroupSend(Guid.Empty, string.Empty, emailList, string.Empty, false, token, false);
+
+            return Json(response);
         }
 
-        JsonResult IDriver.GetUri(IEnumerable<string> targets, OperationType type)
+        public JsonResult GetUri(IEnumerable<string> targets, OperationType type)
         {
-            throw new NotImplementedException();
+            switch (type)
+            {
+                case OperationType.Decrypt:
+                    return Json(this.Decrypt(targets));
+                case OperationType.DecryptSignverify:
+                    return Json(this.DecryptAndCheckSign(targets));
+                case OperationType.Encrypt:
+                    return Json(this.Encrypt(targets));
+                case OperationType.GetDecryptCertificates:
+                    return Json(this.CertDownload(string.Empty)); // ?
+                case OperationType.IsSignAttached:
+                    return Json(this.Sign(targets)); // ?
+                case OperationType.SignVerify:
+                    return Json(this.CheckSign(targets));
+                case OperationType.SignEncrypt:
+                    return Json(this.SignAndEncrypt(targets));
+                case OperationType.SendFiles:
+                    return Json(this.); //?
+                case OperationType.Sign:
+                    return Json(this.Sign(targets));
+                case OperationType.RefreshStore:
+                    return Json(this.Decrypt(targets)); // ?
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
 
-        JsonResult IDriver.GetReceivedMailFiles(Guid fileGroupSendId)
+        public JsonResult GetReceivedMailFiles(Guid fileGroupSendId)
         {
-            throw new NotImplementedException();
+            var response = service.FileGroupReceive(fileGroupSendId, token);
+
+            return Json(response);
         }
 
 
         public ActionResult Download(IEnumerable<string> targets)
         {
-            var response = new DAVListCryptoOperationResponse();
+            //var response = service.
 
             return Json(response);
         }
